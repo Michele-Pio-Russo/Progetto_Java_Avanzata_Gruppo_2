@@ -1,0 +1,139 @@
+@startuml CD_02_Server_Detail
+!theme plain
+skinparam backgroundColor #FAFAFA
+skinparam class {
+    BackgroundColor #EAFAF1
+    BorderColor #1E8449
+    FontColor #1A252F
+    ArrowColor #1A5276
+    HeaderBackgroundColor #1E8449
+    HeaderFontColor #FFFFFF
+}
+skinparam package {
+    BackgroundColor #F9FBFB
+    BorderColor #85929E
+}
+
+title <b>CD-02 – Class Diagram: Package Server – Dettaglio</b>\n<i>GuessTheWord | Corso JA26 – A.A. 2025/2026</i>
+
+package "server.network" {
+    class ServerApp {
+        - serverSocket : ServerSocket
+        - port : int
+        - challengeManager : ChallengeManager
+        + start(stage: Stage) : void
+        - startAcceptLoop() : void
+    }
+
+    class ClientHandler implements Runnable {
+        - socket : Socket
+        - in : ObjectInputStream
+        - out : ObjectOutputStream
+        - authenticatedUser : User
+        + run() : void
+        + sendMessage(msg: Message) : void
+        + isAuthenticated() : boolean
+    }
+}
+
+package "server.game" {
+    class ChallengeManager {
+        - {static} instance : ChallengeManager
+        - pendingHandler : ClientHandler
+        - activeAnalysis : Map<String, Double>
+        + getInstance() : ChallengeManager
+        + onClientAuthenticated(h: ClientHandler) : void
+        - launchChallenge(h1: ClientHandler, h2: ClientHandler) : void
+    }
+
+    class ChallengeSession {
+        - handler1 : ClientHandler
+        - handler2 : ClientHandler
+        - data : ChallengeData
+        - answered : AtomicBoolean
+        + start() : void
+        + submitAnswer(handler: ClientHandler, guess: String) : void
+        - onTimeout() : void
+        - declareResult(winner: ClientHandler) : void
+    }
+
+    class ChallengeBuilder {
+        - analysisMap : Map<String, Double>
+        + build() : ChallengeData
+        - extractExcerpt(fullText: String) : String
+        - selectWordByTF(excerpt: String) : String
+    }
+
+    class CaesarCipher {
+        + {static} encrypt(word: String, shift: int) : String
+        + {static} decrypt(word: String, shift: int) : String
+        + {static} generateShift() : int
+    }
+}
+
+package "server.analysis" {
+    class DocumentService <<Service>> {
+        + createTask() : Task<Map<String,Double>>
+        + save(path: String, map: Map<String,Double>) : void
+        + load(path: String) : Map<String, Double>
+    }
+
+    class TFAnalysisTask <<Task>> {
+        - files : List<File>
+        + call() : Map<String, Double>
+    }
+
+    class TFCalculator {
+        + {static} compute(text: String) : Map<String, Double>
+        - tokenize(text: String) : Stream<String>
+        - normalize(word: String) : String
+    }
+}
+
+package "server.auth" {
+    class AuthService {
+        + authenticate(u: String, p: String) : Optional<User>
+        + register(u: String, p: String) : boolean
+        - hash(password: String) : String
+    }
+}
+
+package "server.persistence" {
+    class DBManager <<Singleton>> {
+        - {static} instance : DBManager
+        - conn : Connection
+        + getInstance() : DBManager
+        + initSchema() : void
+        + findUserByUsername(u: String) : Optional<User>
+        + createUser(user: User) : boolean
+        + saveChallenge(data: ChallengeData) : int
+        + saveResult(r: Result) : void
+        + queryLeaderboard() : List<UserStats>
+        + queryUserHistory(userId: int) : List<Result>
+    }
+
+    class UserStats {
+        + username : String
+        + wins : int
+        + gamesPlayed : int
+        + avgResponseMs : double
+    }
+}
+
+' === RELAZIONI ===
+ServerApp "1" *-- "*" ClientHandler : gestisce
+ServerApp "1" --> "1" ChallengeManager
+ClientHandler --> AuthService
+ClientHandler --> ChallengeManager
+
+ChallengeManager "1" --> "*" ChallengeSession : crea
+ChallengeSession --> ChallengeBuilder : costruisce sfida
+ChallengeSession --> DBManager : salva esito
+ChallengeBuilder --> CaesarCipher : cifra parola
+
+DocumentService --> TFAnalysisTask : crea
+TFAnalysisTask --> TFCalculator : delega
+AuthService --> DBManager
+DBManager ..> UserStats : produce
+
+@enduml

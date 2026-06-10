@@ -1,0 +1,88 @@
+@startuml ER_Database
+!theme plain
+skinparam backgroundColor #FAFAFA
+skinparam entity {
+    BackgroundColor #F4ECF7
+    BorderColor #7D3C98
+    FontColor #1A252F
+    HeaderBackgroundColor #7D3C98
+    HeaderFontColor #FFFFFF
+}
+skinparam arrow {
+    Color #2C3E50
+}
+
+title <b>E-R – Schema del Database SQLite</b>\n<i>GuessTheWord | Corso JA26 – A.A. 2025/2026</i>
+
+entity "users" as USR {
+    * user_id : INTEGER <<PK, AUTOINCREMENT>>
+    --
+    * username : TEXT <<UNIQUE, NOT NULL>>
+    * password_hash : TEXT <<NOT NULL>>
+    * role : TEXT <<'admin' | 'player'>>
+    * created_at : DATETIME <<DEFAULT now>>
+}
+
+entity "challenges" as CHG {
+    * challenge_id : INTEGER <<PK, AUTOINCREMENT>>
+    --
+    * played_at : DATETIME <<NOT NULL>>
+      text_excerpt : TEXT
+      encrypted_word : TEXT
+      original_word : TEXT
+      caesar_shift : INTEGER
+}
+
+entity "results" as RES {
+    * result_id : INTEGER <<PK, AUTOINCREMENT>>
+    --
+    * challenge_id : INTEGER <<FK → challenges>>
+    * user_id : INTEGER <<FK → users>>
+    * outcome : TEXT <<'win' | 'loss' | 'draw'>>
+      response_time_ms : INTEGER
+}
+
+' === RELAZIONI ===
+USR ||--o{ RES : "partecipa a"
+CHG ||--|{ RES : "genera"
+CHG }o--|| USR : "giocata da\n(amministratore\nvede storico)"
+
+note bottom of USR
+  RF-DB-01 [MUST]:
+  Almeno: user_id, username (UNIQUE),
+  password_hash, role.
+  RF-DB-05: 1 admin + 2 player precaricati.
+end note
+
+note bottom of CHG
+  RF-DB-02 [MUST]:
+  Almeno: challenge_id, played_at,
+  text_excerpt (opzionale).
+  caesar_shift conservato per debug.
+end note
+
+note bottom of RES
+  RF-DB-03 [MUST]:
+  Almeno: riferimento a challenge e user,
+  outcome (win/loss/draw),
+  response_time_ms (opzionale).
+  RF-DB-04: supporta query statistiche.
+end note
+
+note right of RES
+  Query statistiche (RF-DB-04):
+  ─────────────────────────────
+  Vittorie per utente:
+    SELECT username, COUNT(*) AS wins
+    FROM results JOIN users ...
+    WHERE outcome='win'
+    GROUP BY user_id ORDER BY wins DESC
+
+  Tempo medio risposta:
+    SELECT username,
+    AVG(response_time_ms)
+    FROM results JOIN users ...
+    GROUP BY user_id
+end note
+
+@enduml

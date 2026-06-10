@@ -1,0 +1,114 @@
+@startuml SEQ_04_Sfida_Completa
+!theme plain
+skinparam backgroundColor #FAFAFA
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #7D3C98
+    ActorBackgroundColor #F5EEF8
+    ParticipantBorderColor #8E44AD
+    ParticipantBackgroundColor #F4ECF7
+    LifeLineBorderColor #BDC3C7
+}
+
+title <b>SEQ-04 – Partecipazione alla Sfida – Flusso Completo (UC-G04)</b>\n<i>GuessTheWord | Corso JA26 – A.A. 2025/2026</i>
+
+actor "Giocatore 1" as P1
+actor "Giocatore 2" as P2
+participant "Client 1\n(JavaFX)" as C1
+participant "Client 2\n(JavaFX)" as C2
+participant "Server\n(ChallengeManager)" as Server
+participant "ChallengeBuilder" as Builder
+participant "CaesarCipher" as Cipher
+database "DB SQLite\n(challenges, results)" as DB
+
+== Attesa connessione (UC-G03) ==
+
+C1 -> Server : [già autenticato] in attesa
+C2 -> Server : [già autenticato] in attesa
+
+Server -> Server : verifica: entrambi i client\nautenticati e connessi
+
+== Preparazione Sfida ==
+
+Server -> Builder : preparaSfida(documentiAnalizzati)
+activate Builder
+
+Builder -> Builder : seleziona documento\nanalizzato (da Map TF)
+Builder -> Builder : estrae estratto testuale
+
+Builder -> Cipher : cifra(parola, shiftCasuale)
+activate Cipher
+note right of Cipher
+  1 ≤ shift ≤ 25, scelto random.
+  E(c) = (c - 'A' + k) mod 26 + 'A'
+end note
+Cipher --> Builder : parolaCifrata
+deactivate Cipher
+
+Builder --> Server : ChallengeData\n{estratto, parolaCifrata,\nparolaOriginale, shift, timeout}
+deactivate Builder
+
+Server -> DB : INSERT INTO challenges\n(played_at, text_excerpt,\nencrypted_word, original_word,\ncaesar_shift)
+activate DB
+DB --> Server : challenge_id
+deactivate DB
+
+== Invio ai Client (RF-SRV-13) ==
+
+Server -> C1 : CHALLENGE_START\n{text_excerpt, encrypted_words,\ntimeout_seconds}
+Server -> C2 : CHALLENGE_START\n{text_excerpt, encrypted_words,\ntimeout_seconds}
+
+activate C1
+activate C2
+
+C1 --> P1 : mostra testo cifrato\navvia timer countdown
+C2 --> P2 : mostra testo cifrato\navvia timer countdown
+
+== Fase di Risposta ==
+
+par Giocatori rispondono (in parallelo)
+    P1 -> C1 : inserisce risposta\npreme "Invia"
+    C1 -> Server : CHALLENGE_ANSWER\n{word_guess: "parola1"}
+    activate Server
+
+    P2 -> C2 : inserisce risposta\npreme "Invia"
+    C2 -> Server : CHALLENGE_ANSWER\n{word_guess: "parola2"}
+end
+
+== Validazione e Dichiarazione Vincitore (RF-SRV-14) ==
+
+Server -> Server : confronta risposte\ncon parolaOriginale\n(case-insensitive)
+
+alt Giocatore 1 risponde corretto per primo
+    Server -> Server : vincitore = Giocatore1
+    Server -> DB : INSERT INTO results\n(challenge_id, user_id=P1,\noutcome='win', response_time_ms)
+    activate DB
+    DB --> Server : OK
+    Server -> DB : INSERT INTO results\n(challenge_id, user_id=P2,\noutcome='loss', response_time_ms)
+    DB --> Server : OK
+    deactivate DB
+
+    Server -> C1 : CHALLENGE_RESULT\n{winner="Giocatore1",\ncorrect_word, outcome="win"}
+    Server -> C2 : CHALLENGE_RESULT\n{winner="Giocatore1",\ncorrect_word, outcome="loss"}
+
+    C1 --> P1 : mostra "HAI VINTO!"
+    C2 --> P2 : mostra "HAI PERSO\nParola corretta: ..."
+
+else nessuno risponde entro il timeout
+    Server -> DB : INSERT INTO results\n(outcome='draw') per entrambi
+    activate DB
+    DB --> Server : OK
+    deactivate DB
+
+    Server -> C1 : CHALLENGE_RESULT\n{outcome="draw", correct_word}
+    Server -> C2 : CHALLENGE_RESULT\n{outcome="draw", correct_word}
+
+    C1 --> P1 : mostra "PAREGGIO"
+    C2 --> P2 : mostra "PAREGGIO"
+end
+
+deactivate Server
+deactivate C1
+deactivate C2
+
+@enduml

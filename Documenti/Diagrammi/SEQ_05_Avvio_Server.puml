@@ -1,0 +1,82 @@
+@startuml SEQ_05_Avvio_Server
+!theme plain
+skinparam backgroundColor #FAFAFA
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #922B21
+    ActorBackgroundColor #FADBD8
+    ParticipantBorderColor #C0392B
+    ParticipantBackgroundColor #FDEDEC
+    LifeLineBorderColor #BDC3C7
+}
+
+title <b>SEQ-05 – Avvio e Inizializzazione del Server (RF-SRV-01, 02, 03)</b>\n<i>GuessTheWord | Corso JA26 – A.A. 2025/2026</i>
+
+actor "Amministratore\n/ Revisore" as Admin
+participant "JVM\n(java -jar server.jar)" as JVM
+participant "ServerApp\n(JavaFX Application)" as App
+participant "ConfigLoader" as Config
+participant "DBInitializer" as DBInit
+participant "ServerSocket" as SS
+participant "AdminController\n(FXML)" as UI
+database "server.properties" as Props
+database "DB SQLite" as DB
+database "File .ser\n(analisi)" as SerFile
+
+Admin -> JVM : java -jar server.jar
+activate JVM
+JVM -> App : launch()
+activate App
+
+App -> Config : leggi(server.properties)
+activate Config
+Config -> Props : legge server.port
+activate Props
+Props --> Config : port=5000
+deactivate Props
+Config --> App : porta configurata
+deactivate Config
+
+App -> DBInit : inizializza()
+activate DBInit
+DBInit -> DB : verifica esistenza schema\n(CREATE TABLE IF NOT EXISTS\nusers, challenges, results)
+activate DB
+DB --> DBInit : OK
+DBInit -> DB : verifica account predefiniti\n(INSERT IF NOT EXISTS\n1 admin + 2 player)
+DB --> DBInit : OK
+deactivate DB
+DBInit --> App : DB pronto
+deactivate DBInit
+
+App -> SerFile : esiste analisi serializzata?
+activate SerFile
+alt file .ser presente
+    SerFile --> App : carica Map<String,Double>
+    App -> App : ripristina risultati analisi
+else file assente
+    SerFile --> App : non trovato
+    App -> App : analisi non ancora eseguita
+end
+deactivate SerFile
+
+App -> SS : new ServerSocket(porta)
+activate SS
+SS --> App : socket aperto su porta 5000
+App -> SS : avvia thread di ascolto\n(accept loop)
+
+App -> UI : carica AdminController.fxml
+activate UI
+UI --> Admin : mostra interfaccia admin
+deactivate UI
+
+note right of SS
+  RF-SRV-02 [MUST]:
+  Il ServerSocket rimane
+  in ascolto continuo di
+  nuove connessioni client.
+end note
+
+deactivate App
+deactivate JVM
+
+@enduml

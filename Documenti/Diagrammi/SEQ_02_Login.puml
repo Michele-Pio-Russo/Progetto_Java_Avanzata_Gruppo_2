@@ -1,0 +1,64 @@
+@startuml SEQ_02_Login
+!theme plain
+skinparam backgroundColor #FAFAFA
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #1A5276
+    ActorBackgroundColor #D6EAF8
+    ParticipantBorderColor #2980B9
+    ParticipantBackgroundColor #EBF5FB
+    LifeLineBorderColor #BDC3C7
+}
+
+title <b>SEQ-02 – Login Giocatore / Amministratore (UC-G02, UC-A01)</b>\n<i>GuessTheWord | Corso JA26 – A.A. 2025/2026</i>
+
+actor "Utente\n(Giocatore o Admin)" as User
+participant "Client\n(JavaFX/FXML)" as Client
+participant "Socket TCP" as Socket
+participant "Server\n(SocketHandler)" as Server
+participant "AuthService" as Auth
+database "DB SQLite\n(users)" as DB
+
+User -> Client : inserisce credenziali\npreme "Login"
+activate Client
+
+Client -> Client : valida input lato client
+Client -> Socket : LOGIN_REQUEST\n{username, password}
+activate Socket
+Socket -> Server : trasmette richiesta
+activate Server
+
+Server -> Auth : autentica(username, password)
+activate Auth
+Auth -> DB : SELECT role, password_hash\nFROM users WHERE username = ?
+activate DB
+DB --> Auth : record utente (o null)
+deactivate DB
+
+Auth -> Auth : verifica hash password
+
+alt credenziali errate / utente non trovato
+    Auth --> Server : esito = FAIL
+    Server -> Socket : LOGIN_RESPONSE\n{fail, "Credenziali non valide"}
+    Socket --> Client : risposta
+    Client --> User : mostra errore
+else credenziali corrette, ruolo = admin
+    Auth --> Server : esito = SUCCESS, role = admin
+    deactivate Auth
+    Server -> Socket : LOGIN_RESPONSE\n{success, role="admin"}
+    Socket --> Client : risposta
+    deactivate Socket
+    Client --> User : apre Interfaccia Admin\n(JavaFX FXML)
+else credenziali corrette, ruolo = player
+    Auth --> Server : esito = SUCCESS, role = player
+    deactivate Auth
+    Server -> Socket : LOGIN_RESPONSE\n{success, role="player"}
+    Socket --> Client : risposta
+    deactivate Socket
+    Client --> User : mostra schermata\n"In attesa dell'avversario"
+end
+
+deactivate Server
+deactivate Client
+
+@enduml

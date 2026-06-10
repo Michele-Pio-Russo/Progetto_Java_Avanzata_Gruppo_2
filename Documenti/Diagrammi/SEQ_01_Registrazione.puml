@@ -1,0 +1,68 @@
+@startuml SEQ_01_Registrazione
+!theme plain
+skinparam backgroundColor #FAFAFA
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #1A5276
+    ActorBackgroundColor #D6EAF8
+    ParticipantBorderColor #2980B9
+    ParticipantBackgroundColor #EBF5FB
+    LifeLineBorderColor #BDC3C7
+    BoxBackgroundColor #F4F6F7
+    BoxBorderColor #BDC3C7
+}
+
+title <b>SEQ-01 – Registrazione Giocatore (UC-G01)</b>\n<i>GuessTheWord | Corso JA26 – A.A. 2025/2026</i>
+
+actor "Giocatore" as Player
+participant "Client\n(JavaFX/FXML)" as Client
+participant "Socket\nTCP" as Socket
+participant "Server\n(SocketHandler)" as Server
+participant "AuthService" as Auth
+database "DB SQLite\n(users)" as DB
+
+Player -> Client : inserisce username e password\npreme pulsante "Registrazione"
+activate Client
+
+Client -> Client : valida input\n(campi non vuoti, caratteri validi)
+
+alt input non valido
+    Client --> Player : mostra messaggio errore UI
+end
+
+Client -> Socket : REGISTER_REQUEST\n{username, password}
+activate Socket
+Socket -> Server : trasmette richiesta
+activate Server
+
+Server -> Auth : registra(username, password)
+activate Auth
+
+Auth -> DB : SELECT * FROM users\nWHERE username = ?
+activate DB
+DB --> Auth : risultato query
+deactivate DB
+
+alt username già esistente
+    Auth --> Server : esito = FAIL\n"Username già in uso"
+    Server -> Socket : REGISTER_RESPONSE\n{fail, "Username già in uso"}
+    Socket --> Client : risposta
+    Client --> Player : mostra errore "Username già in uso"
+else username disponibile
+    Auth -> Auth : hash della password
+    Auth -> DB : INSERT INTO users\n(username, password_hash, role='player')
+    activate DB
+    DB --> Auth : OK
+    deactivate DB
+    Auth --> Server : esito = SUCCESS
+    deactivate Auth
+    Server -> Socket : REGISTER_RESPONSE\n{success, "Registrazione completata"}
+    Socket --> Client : risposta
+    deactivate Socket
+    Client --> Player : mostra conferma\ne reindirizza al Login
+end
+
+deactivate Server
+deactivate Client
+
+@enduml
