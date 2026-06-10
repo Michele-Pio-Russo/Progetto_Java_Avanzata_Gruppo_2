@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="guesstheword.server.controller.ServerController"
+            styleClass="root-pane"
+            stylesheets="@../css/server.css">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox styleClass="top-bar" alignment="CENTER_LEFT" spacing="10">
+            <padding><Insets top="12" right="20" bottom="12" left="20"/></padding>
+            <Label text="🎮 GuessTheWord — Pannello Amministratore" styleClass="title-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="statusLabel" text="⚫ Server non avviato" styleClass="status-label"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER: split pane -->
+    <center>
+        <SplitPane dividerPositions="0.55" orientation="HORIZONTAL">
+
+            <!-- LEFT: Document + Analysis -->
+            <VBox spacing="15" styleClass="panel">
+                <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
+                <Label text="📄 Documenti e Analisi" styleClass="section-title"/>
+
+                <!-- Document list -->
+                <VBox spacing="6">
+                    <Label text="File selezionati:" styleClass="label-small"/>
+                    <ListView fx:id="documentListView" prefHeight="120" styleClass="list-view"/>
+                    <HBox spacing="8">
+                        <Button fx:id="selectFilesBtn" text="📂 Seleziona file TXT"
+                                onAction="#handleSelectFiles" styleClass="btn-secondary"/>
+                        <Button fx:id="clearFilesBtn" text="🗑 Rimuovi" onAction="#handleClearFiles"
+                                styleClass="btn-danger"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Analysis controls -->
+                <Separator/>
+                <Label text="Analisi Term Frequency" styleClass="section-title"/>
+                <HBox spacing="8">
+                    <Button fx:id="analyzeBtn" text="▶ Avvia Analisi"
+                            onAction="#handleAnalyze" styleClass="btn-primary"/>
+                    <Button fx:id="saveAnalysisBtn" text="💾 Salva" onAction="#handleSaveAnalysis"
+                            styleClass="btn-secondary" disable="true"/>
+                    <Button fx:id="loadAnalysisBtn" text="📥 Carica" onAction="#handleLoadAnalysis"
+                            styleClass="btn-secondary"/>
+                </HBox>
+                <ProgressBar fx:id="progressBar" maxWidth="Infinity" progress="0" styleClass="progress-bar"/>
+                <Label fx:id="progressLabel" text="" styleClass="label-small" wrapText="true"/>
+
+                <!-- TF results table -->
+                <Label text="Risultati (parola → frequenza):" styleClass="label-small"/>
+                <TableView fx:id="tfTableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="wordColumn" text="Parola" prefWidth="180"/>
+                        <TableColumn fx:id="freqColumn" text="Frequenza (TF)" prefWidth="140"/>
+                    </columns>
+                </TableView>
+
+                <Separator/>
+                <!-- Leaderboard -->
+                <Label text="🏆 Classifica Utenti" styleClass="section-title"/>
+                <Button fx:id="refreshStatsBtn" text="🔄 Aggiorna Classifica"
+                        onAction="#handleRefreshStats" styleClass="btn-secondary"/>
+                <TableView fx:id="statsTableView" prefHeight="160" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="statUserCol" text="Utente" prefWidth="110"/>
+                        <TableColumn fx:id="statWinsCol" text="Vinte" prefWidth="60"/>
+                        <TableColumn fx:id="statGamesCol" text="Giocate" prefWidth="70"/>
+                        <TableColumn fx:id="statAvgCol" text="Tempo medio (ms)" prefWidth="140"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- RIGHT: Log & Server control -->
+            <VBox spacing="12" styleClass="panel">
+                <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
+                <Label text="🖥 Controllo Server" styleClass="section-title"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Porta:" styleClass="label-small"/>
+                    <Label fx:id="portLabel" text="5000" styleClass="label-small"/>
+                </HBox>
+                <HBox spacing="8">
+                    <Button fx:id="startServerBtn" text="▶ Avvia Server"
+                            onAction="#handleStartServer" styleClass="btn-primary"/>
+                    <Button fx:id="stopServerBtn" text="⏹ Ferma Server"
+                            onAction="#handleStopServer" styleClass="btn-danger" disable="true"/>
+                </HBox>
+
+                <Separator/>
+                <Label text="📋 Log di Sistema" styleClass="section-title"/>
+                <TextArea fx:id="logArea" VBox.vgrow="ALWAYS"
+                          editable="false" wrapText="true" styleClass="log-area"/>
+                <Button text="🗑 Pulisci Log" onAction="#handleClearLog" styleClass="btn-secondary"/>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>

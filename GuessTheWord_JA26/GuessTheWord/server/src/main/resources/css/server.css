@@ -1,0 +1,153 @@
+/* ===== GuessTheWord Server CSS ===== */
+
+.root-pane {
+    -fx-background-color: #1a1a2e;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+/* Top bar */
+.top-bar {
+    -fx-background-color: #16213e;
+    -fx-border-color: #0f3460;
+    -fx-border-width: 0 0 2 0;
+}
+
+.title-label {
+    -fx-text-fill: #e94560;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.status-label {
+    -fx-text-fill: #a8b2d8;
+    -fx-font-size: 13px;
+}
+
+/* Panels */
+.panel {
+    -fx-background-color: #16213e;
+}
+
+.section-title {
+    -fx-text-fill: #e94560;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.label-small {
+    -fx-text-fill: #a8b2d8;
+    -fx-font-size: 12px;
+}
+
+/* Buttons */
+.btn-primary {
+    -fx-background-color: #e94560;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18 8 18;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #c73652;
+}
+
+.btn-secondary {
+    -fx-background-color: #0f3460;
+    -fx-text-fill: #a8b2d8;
+    -fx-padding: 8 14 8 14;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #1a5276;
+}
+
+.btn-danger {
+    -fx-background-color: #6c2a2a;
+    -fx-text-fill: #ff9999;
+    -fx-padding: 8 14 8 14;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-danger:hover {
+    -fx-background-color: #922b21;
+}
+
+/* Lists / Tables */
+.list-view, .table-view {
+    -fx-background-color: #0f1e35;
+    -fx-border-color: #0f3460;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.list-view .list-cell, .table-view .table-cell {
+    -fx-text-fill: #ccd6f6;
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:selected, .table-row-cell:selected {
+    -fx-background-color: #0f3460;
+}
+
+.table-view .column-header {
+    -fx-background-color: #16213e;
+    -fx-border-color: #0f3460;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #e94560;
+    -fx-font-weight: bold;
+}
+
+/* Progress bar */
+.progress-bar .bar {
+    -fx-background-color: #e94560;
+    -fx-background-radius: 4;
+}
+
+.progress-bar .track {
+    -fx-background-color: #0f1e35;
+    -fx-background-radius: 4;
+}
+
+/* Log area */
+.log-area {
+    -fx-control-inner-background: #0f1e35;
+    -fx-text-fill: #64ffda;
+    -fx-font-family: "Consolas", "Monospace";
+    -fx-font-size: 11px;
+    -fx-border-color: #0f3460;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+/* TextField */
+.text-field {
+    -fx-background-color: #0f1e35;
+    -fx-text-fill: #ccd6f6;
+    -fx-border-color: #0f3460;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 6;
+}
+
+/* SplitPane */
+.split-pane {
+    -fx-background-color: #1a1a2e;
+    -fx-padding: 10;
+}
+
+.split-pane-divider {
+    -fx-background-color: #0f3460;
+    -fx-padding: 0 1 0 1;
+}
+
+/* Separator */
+.separator .line {
+    -fx-border-color: #0f3460;
+}
