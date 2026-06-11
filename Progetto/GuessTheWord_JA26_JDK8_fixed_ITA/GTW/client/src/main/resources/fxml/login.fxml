@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="guesstheword.client.controller.LoginController"
+      alignment="CENTER" spacing="0"
+      stylesheets="@../css/client.css"
+      styleClass="login-root">
+
+    <!-- Header -->
+    <VBox alignment="CENTER" spacing="6" styleClass="login-header">
+        <padding><Insets top="30" right="40" bottom="24" left="40"/></padding>
+        <Label text="GuessTheWord" styleClass="app-title"/>
+        <Label text="Indovina la parola cifrata!" styleClass="app-subtitle"/>
+    </VBox>
+
+    <!-- Card form -->
+    <VBox alignment="CENTER" spacing="14" styleClass="login-card">
+        <padding><Insets top="28" right="36" bottom="28" left="36"/></padding>
+
+        <Label fx:id="formTitle" text="Accedi al gioco" styleClass="card-title"/>
+
+        <VBox spacing="4">
+            <Label text="Username" styleClass="field-label"/>
+            <TextField fx:id="usernameField"
+                       promptText="Inserisci il tuo username"
+                       styleClass="input-field"/>
+        </VBox>
+
+        <VBox spacing="4">
+            <Label text="Password" styleClass="field-label"/>
+            <PasswordField fx:id="passwordField"
+                           promptText="Inserisci la password"
+                           styleClass="input-field"/>
+        </VBox>
+
+        <!-- Visibile solo in modalita' registrazione -->
+        <VBox fx:id="confirmBox" spacing="4" visible="false" managed="false">
+            <Label text="Conferma Password" styleClass="field-label"/>
+            <PasswordField fx:id="confirmField"
+                           promptText="Ripeti la password"
+                           styleClass="input-field"/>
+        </VBox>
+
+        <Label fx:id="errorLabel" text="" styleClass="error-label"
+               wrapText="true" maxWidth="340"/>
+
+        <VBox spacing="8" alignment="CENTER">
+            <Button fx:id="primaryBtn" text="Accedi"
+                    onAction="#handlePrimary"
+                    maxWidth="Infinity" styleClass="btn-login"/>
+            <Button fx:id="switchBtn"
+                    text="Non hai un account? Registrati"
+                    onAction="#handleSwitch" styleClass="btn-switch"/>
+        </VBox>
+    </VBox>
+
+    <Label fx:id="connectionLabel" text="Non connesso al server"
+           styleClass="connection-label" alignment="CENTER"
+           maxWidth="Infinity">
+        <VBox.margin><Insets top="10" bottom="10"/></VBox.margin>
+    </Label>
+
+</VBox>

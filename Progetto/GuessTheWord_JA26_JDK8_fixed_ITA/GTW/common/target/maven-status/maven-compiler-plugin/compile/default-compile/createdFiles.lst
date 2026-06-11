@@ -1,0 +1,10 @@
+guesstheword\common\AuthResponse.class
+guesstheword\common\AuthPayload.class
+guesstheword\common\ChallengeResult$Outcome.class
+guesstheword\common\Message.class
+guesstheword\common\CaesarCipher.class
+guesstheword\common\ChallengePayload.class
+guesstheword\common\Message$Type.class
+guesstheword\common\HistoryEntry.class
+guesstheword\common\ChallengeResult$1.class
+guesstheword\common\ChallengeResult.class

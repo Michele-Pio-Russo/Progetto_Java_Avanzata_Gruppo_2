@@ -1,0 +1,19 @@
+La matematica è il linguaggio universale della scienza. Attraverso numeri, formule e dimostrazioni gli esseri umani hanno imparato a descrivere con precisione le leggi che governano il mondo fisico. Dalla geometria euclidea al calcolo infinitesimale, ogni passo ha aperto nuove frontiere alla comprensione della realtà.
+
+L'algebra fornisce gli strumenti per risolvere problemi mediante simboli e relazioni. Un'equazione esprime una relazione di uguaglianza tra due espressioni e risolverla significa trovare i valori delle incognite che la rendono vera. I polinomi, le funzioni e le trasformazioni sono concetti centrali dell'algebra moderna.
+
+La statistica studia la raccolta, l'analisi e l'interpretazione dei dati numerici. Concetti come la media, la varianza e la deviazione standard descrivono le proprietà di una distribuzione. La probabilità fornisce un modello matematico per ragionare sull'incertezza e prevedere la frequenza di eventi casuali.
+
+La logica è la disciplina che studia le regole del ragionamento valido. I connettivi logici come la congiunzione, la disgiunzione e la negazione permettono di costruire proposizioni complesse a partire da proposizioni semplici. La logica booleana è alla base del funzionamento dei circuiti digitali e dei calcolatori elettronici.
+
+La teoria dei grafi modella sistemi di relazioni tra oggetti. Un grafo è composto da nodi e archi che li collegano. Gli algoritmi su grafi hanno applicazioni in campi diversissimi: dalla pianificazione di percorsi alla gestione delle reti sociali, dalla compilazione dei programmi all'ottimizzazione logistica.
+
+La complessità computazionale studia le risorse necessarie per risolvere problemi algoritmici. La classe dei problemi trattabili in tempo polinomiale è distinta da quella dei problemi per cui non si conoscono algoritmi efficienti. Problemi come la fattorizzazione dei numeri interi hanno implicazioni dirette sulla sicurezza crittografica.
+
+La geometria studia le proprietà delle figure nello spazio. La geometria euclidea descrive il mondo attraverso punti, rette e piani. Le geometrie non euclidee, scoperte nel diciannovesimo secolo, hanno dimostrato che è possibile costruire sistemi coerenti con assiomi diversi da quelli di Euclide, aprendo la strada alla relatività generale di Einstein.
+
+L'analisi matematica fornisce gli strumenti per studiare le funzioni continue e differenziabili. Il calcolo differenziale permette di calcolare la velocità di variazione di una grandezza, mentre il calcolo integrale calcola le aree e i volumi. Questi strumenti sono indispensabili in fisica, ingegneria ed economia.
+
+La topologia studia le proprietà delle figure che si conservano sotto trasformazioni continue. Due oggetti sono topologicamente equivalenti se uno può essere deformato nell'altro senza strappi o incollature. La topologia ha applicazioni inaspettate in biologia molecolare, fisica quantistica e analisi dei dati.
+
+I numeri hanno affascinato i matematici fin dall'antichità. I numeri primi, divisibili solo per uno e per se stessi, sono la struttura atomica dell'aritmetica. Il teorema fondamentale dell'aritmetica afferma che ogni intero positivo maggiore di uno si può scomporre in modo unico come prodotto di numeri primi.
