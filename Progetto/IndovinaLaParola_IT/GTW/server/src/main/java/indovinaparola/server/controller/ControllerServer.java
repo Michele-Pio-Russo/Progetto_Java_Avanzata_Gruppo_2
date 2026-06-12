@@ -105,7 +105,7 @@ public class ControllerServer implements Initializable {
             db.connetti();
             log("Database connesso.");
         } catch (Exception e) {
-            log("ERRORE Database: " + e.getMessaggio());
+            log("ERRORE Database: " + e.getMessage());
             LOGGER.log(Level.SEVERE, "Errore connessione DB", e);
         }
 
@@ -159,7 +159,7 @@ public class ControllerServer implements Initializable {
         analysisService.setOnFailed(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
-                log("ERRORE analisi: " + event.getSource().getException().getMessaggio());
+                log("ERRORE analisi: " + event.getSource().getException().getMessage());
                 analyzeBtn.setDisable(false);
             }
         });
@@ -184,7 +184,7 @@ public class ControllerServer implements Initializable {
             stopServerBtn.setDisable(false);
             log("Server avviato sulla porta " + serverPort + ".");
         } catch (IOException e) {
-            log("ERRORE avvio server: " + e.getMessaggio());
+            log("ERRORE avvio server: " + e.getMessage());
         }
     }
 
@@ -277,7 +277,7 @@ public class ControllerServer implements Initializable {
                 currentAnalyzer.saveToFile(f.getPath());
                 log("Analisi salvata in: " + f.getName());
             } catch (IOException e) {
-                log("ERRORE salvataggio analisi: " + e.getMessaggio());
+                log("ERRORE salvataggio analisi: " + e.getMessage());
             }
         }
     }
@@ -302,7 +302,7 @@ public class ControllerServer implements Initializable {
                 saveAnalysisBtn.setDisable(false);
                 log("Analisi caricata: " + currentAnalyzer.getTermFrequency().size() + " parole.");
             } catch (Exception e) {
-                log("ERRORE caricamento analisi: " + e.getMessaggio());
+                log("ERRORE caricamento analisi: " + e.getMessage());
             }
         }
     }
