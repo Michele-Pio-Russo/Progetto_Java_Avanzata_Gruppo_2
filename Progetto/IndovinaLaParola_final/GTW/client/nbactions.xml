@@ -15,7 +15,7 @@
                 <exec.appArgs></exec.appArgs>
                 <exec.mainClass>indovinaparola.client.ApplicazioneClient</exec.mainClass>
                 <exec.executable>java</exec.executable>
-                <exec.workingdir>C:\Users\miche\Desktop\fine\IndovinaLaParola_final\GTW\run</exec.workingdir>
+                <exec.workingdir>C:\Users\miche\Documents\GitHub\Progetto_Java_Avanzata_Gruppo_2\Progetto\IndovinaLaParola_final\GTW\run</exec.workingdir>
             </properties>
         </action>
         <action>
@@ -34,7 +34,7 @@
                 <exec.mainClass>indovinaparola.client.ApplicazioneClient</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
-                <exec.workingdir>C:\Users\miche\Desktop\fine\IndovinaLaParola_final\GTW\run</exec.workingdir>
+                <exec.workingdir>C:\Users\miche\Documents\GitHub\Progetto_Java_Avanzata_Gruppo_2\Progetto\IndovinaLaParola_final\GTW\run</exec.workingdir>
             </properties>
         </action>
         <action>
@@ -52,7 +52,7 @@
                 <exec.mainClass>indovinaparola.client.ApplicazioneClient</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <exec.appArgs></exec.appArgs>
-                <exec.workingdir>C:\Users\miche\Desktop\fine\IndovinaLaParola_final\GTW\run</exec.workingdir>
+                <exec.workingdir>C:\Users\miche\Documents\GitHub\Progetto_Java_Avanzata_Gruppo_2\Progetto\IndovinaLaParola_final\GTW\run</exec.workingdir>
             </properties>
         </action>
     </actions>
