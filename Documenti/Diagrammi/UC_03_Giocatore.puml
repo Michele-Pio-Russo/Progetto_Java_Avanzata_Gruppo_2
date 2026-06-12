@@ -6,34 +6,34 @@ skinparam usecase {
   BorderColor SteelBlue
 }
 
-title Diagramma 3 — Casi d'Uso: Giocatore
+title Casi d'Uso - Giocatore
 
 actor "Giocatore" as Player
 actor "Sistema\n(Server)" as Server
 
 rectangle "Applicazione Client — IndovinaLaParola" {
 
-  usecase "UC-G01\nRegistrazione" as G01
+  usecase "Registrazione" as G01
   usecase "Invio REGISTER_REQUEST\nal server" as G01a
   usecase "Verifica unicita'\nnomeUtente" as G01b
 
-  usecase "UC-G02\nLogin" as G02
+  usecase "Login" as G02
   usecase "Invio LOGIN_REQUEST\nal server" as G02a
   usecase "Ricezione LOGIN_RESPONSE\ne navigazione" as G02b
 
-  usecase "UC-G03\nAttesa avversario" as G03
-  usecase "Ricezione WAITING\n(1/2 → 2/2)" as G03a
+  usecase "Attesa avversario" as G03
+  usecase "Ricezione WAITING" as G03a
 
-  usecase "UC-G04\nPartecipazione sfida" as G04
+  usecase "Partecipazione sfida" as G04
   usecase "Visualizzazione\ntesto cifrato" as G04a
-  usecase "Timer countdown\n(Timeline JavaFX)" as G04b
+  usecase "Timer countdown\n(Timeline)" as G04b
   usecase "Inserimento e invio\nrisposta (CHALLENGE_ANSWER)" as G04c
 
-  usecase "UC-G05\nVisualizzazione esito\n(CHALLENGE_RESULT)" as G05
+  usecase "Visualizzazione esito" as G05
 
-  usecase "UC-G06\nStorico partite\npersonali" as G06
+  usecase "Storico partite\npersonali" as G06
 
-  usecase "UC-G07\nNuova partita\n(REQUEUE_REQUEST)" as G07
+  usecase "Nuova partita" as G07
 }
 
 Player --> G01
@@ -65,17 +65,14 @@ G05 ..> G07 : <<extend>>\npulsante "Nuova partita"
 G05 ..> G06 : <<extend>>\npulsante "Vedi storico"
 
 note right of G04b
-  RF-CLT-07 [MUST]:
-  Timeline con KeyFrame ogni secondo
-  sul FX Application Thread.
-  Ultimi 10s visualizzati in rosso.
+  Il timer countdown è gestito tramite una
+  Timeline JavaFX con KeyFrame ogni secondo.
+  Gli ultimi 10 secondi vengono colorati in rosso.
 end note
 
 note bottom of G07
-  REQUEUE_REQUEST inviato sulla
-  stessa connessione TCP gia' aperta.
-  Il server chiama
-  CoordinatoreGioco.gestisciNuovaRichiesta()
+  La richiesta di nuova partita viene inviata sulla
+  stessa connessione TCP aperta, senza dover rieseguire il login.
 end note
 
 @enduml

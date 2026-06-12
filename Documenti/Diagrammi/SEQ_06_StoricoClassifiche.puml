@@ -2,7 +2,7 @@
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
-title SEQ-06 — Visualizzazione Storico e Classifiche (UC-A06, UC-G06)\n(Flusso Admin: classifiche | Flusso Giocatore: storico personale)
+title Diagramma di Sequenza - Storico e Classifiche
 
 actor "Amministratore" as Admin
 actor "Giocatore" as Player
@@ -14,7 +14,7 @@ participant "ConnessioneServer\n(TCP)" as Conn
 participant "CoordinatoreGioco\n(server)" as Coord
 database "SQLite\n(users, results, challenges)" as SQLite
 
-== Flusso Amministratore: Visualizzazione Classifiche (UC-A06) ==
+== Flusso Amministratore: Visualizzazione Classifiche ==
 
 Admin -> AdminCtrl : preme "Aggiorna Classifiche"\n(handleRefreshStats)
 activate AdminCtrl
@@ -34,7 +34,7 @@ AdminCtrl --> Admin : mostra tabella classifiche\n(colonne: utente, vittorie, pa
 
 deactivate AdminCtrl
 
-== Flusso Giocatore: Storico Personale (UC-G06) ==
+== Flusso Giocatore: Storico Personale ==
 
 Player -> GC : preme "Vedi storico"\n(dopo CHALLENGE_RESULT)
 activate GC
@@ -43,7 +43,7 @@ GC -> GC : gestisciVisualizzaStorico()\nFXMLLoader.load("/fxml/history.fxml")
 GC -> SC : hc.init(nomeUtente, connessione, stage, root)
 activate SC
 
-SC -> SC : configuraTabella()\nimposta CellValueFactory lambda (Modulo 4)\ne CellFactory per colorazione esito
+SC -> SC : configuraTabella()\nimposta CellValueFactory e\nCellFactory per colorazione esito
 SC -> Conn : connessione.setMessageCallback\n(msg -> gestisciMessaggio(msg))
 SC -> Conn : connessione.invia(HISTORY_REQUEST, null)
 activate Conn

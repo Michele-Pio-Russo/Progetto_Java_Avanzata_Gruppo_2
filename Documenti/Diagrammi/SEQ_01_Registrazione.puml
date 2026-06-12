@@ -2,7 +2,7 @@
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
-title SEQ-01 — Registrazione Giocatore (UC-G01)\n(Flusso Principale + Alternativo A — Username gia' esistente)
+title Diagramma di Sequenza - Registrazione Giocatore
 
 actor "Giocatore" as Player
 participant "ControllerAccesso\n(login.fxml)" as Ctrl

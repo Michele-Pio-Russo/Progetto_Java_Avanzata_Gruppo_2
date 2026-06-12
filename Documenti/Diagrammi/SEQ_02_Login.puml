@@ -2,7 +2,7 @@
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
-title SEQ-02 — Login e Navigazione alla Schermata di Gioco (UC-G02)\n(Flusso Principale: giocatore + Admin)
+title Diagramma di Sequenza - Login
 
 actor "Utente\n(Giocatore o Admin)" as User
 participant "ControllerAccesso\n(login.fxml)" as Ctrl
@@ -60,11 +60,11 @@ else ruolo = "player"
   Conn -> Ctrl : callbackMessaggio WAITING
 
   note right of Conn
-    Fix race condition (ControllerAccesso):
-    alla ricezione di WAITING la callback
-    viene sostituita con un buffer ConcurrentLinkedQueue
-    che accoda eventuali CHALLENGE_START in arrivo
-    prima che ControllerGioco si registri.
+    Per evitare race condition in ControllerAccesso:
+    se si riceve WAITING, i messaggi successivi
+    (es. CHALLENGE_START) vengono accodati in una
+    ConcurrentLinkedQueue temporanea finché non viene
+    mostrata e inizializzata la schermata di gioco.
   end note
 
   Conn -> Ctrl : naviga a game.fxml\n(vaiAGioco con pendingMessages)

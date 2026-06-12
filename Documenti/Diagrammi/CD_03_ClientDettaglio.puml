@@ -11,7 +11,7 @@ skinparam package {
   BorderColor #85929E
 }
 
-title Class Diagram 3 — Dettaglio Package Client\nIndovinaLaParola | Corso JA26 — A.A. 2025/2026
+title Diagramma delle Classi - Dettaglio Package Client
 
 package "client.app" {
   class ApplicazioneClient <<Application>> {
@@ -95,7 +95,7 @@ package "client.util" {
   }
 }
 
-' === RELAZIONI ===
+' --- Relazioni ---
 ApplicazioneClient ..> ControllerAccesso  : carica login.fxml
 ControllerAccesso "1" --> "1" ConnessioneServer  : crea e usa
 ControllerAccesso "1" --> "1" ConfigurazioneClient : legge config
@@ -109,33 +109,22 @@ ControllerStorico "1" --> "1" ConnessioneServer : usa
 ControllerStorico ..> ControllerGioco : naviga a (indietro)
 
 note right of ConnessioneServer
-  Ordine obbligatorio (Modulo 7 - Networking):
-  1. ObjectOutputStream (+ flush())
-  2. ObjectInputStream
-  Evita deadlock tra costruttori OOS/OIS.
-  Thread daemon di lettura (avviaThreadLettura):
-  non blocca la JVM alla chiusura.
-  out.reset() dopo ogni writeObject:
-  evita object caching di OOS.
-  invia() e' synchronized: thread-safe.
+  Inizializza prima l'ObjectOutputStream (con flush) e poi l'ObjectInputStream per evitare deadlock.
+  La lettura avviene in un thread daemon separato per non bloccare la chiusura dell'applicazione.
+  Usa out.reset() per evitare la memorizzazione in cache dei messaggi inviati.
+  Il metodo invia() è synchronized per prevenire accessi concorrenti.
 end note
 
 note right of ControllerGioco
-  Timer con Timeline (Modulo JavaFX):
-  - KeyFrame ogni 1 secondo sul FX Thread
-  - Thread-safe per la GUI
-  - Ultimi 10s in rosso (#f85149)
-  Fix race condition WAITING/CHALLENGE_START:
-  ControllerAccesso usa ConcurrentLinkedQueue
-  (pending) per bufferare messaggi in transizione.
+  Gestisce il timer di gioco con la Timeline di JavaFX (1 tick al secondo).
+  Colora il testo in rosso negli ultimi 10 secondi.
+  Utilizza una ConcurrentLinkedQueue temporanea per evitare perdite di messaggi
+  durante il passaggio dalla schermata di login a quella di gioco.
 end note
 
 note bottom of ControllerStorico
-  CellFactory per colorazione esito:
-  "Vinto"    → verde (#3fb950)
-  "Perso"    → rosso (#f85149)
-  "Pareggio" → giallo (#e3b341)
-  CellValueFactory con lambda (Modulo 4).
+  Colora le righe dello storico in base al risultato (verde per vittoria, rosso per sconfitta, giallo per pareggio).
+  Usa espressioni lambda per popolare le colonne della TableView.
 end note
 
 @enduml

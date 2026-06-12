@@ -6,31 +6,31 @@ skinparam usecase {
   BorderColor SteelBlue
 }
 
-title Diagramma 7 — Casi d'Uso: Protocollo di Comunicazione Client ↔ Server\n(Appendice B — SRS JA26)
+title Casi d'Uso - Protocollo di Comunicazione
 
 actor "Client\n(ConnessioneServer)" as Client
 actor "Server\n(GestoreClient)" as Server
 
-rectangle "Flusso Messaggi — Classe Messaggio (enum Tipo)" {
+rectangle "Flusso Messaggi — Classe Messaggio" {
 
-  usecase "COM-01\nInvio LOGIN_REQUEST\n{PayloadAutenticazione:\n nomeUtente, password}" as COM01
-  usecase "COM-02\nRicezione LOGIN_RESPONSE\n{RispostaAutenticazione:\n successo, messaggio, ruolo}" as COM02
+  usecase "Invio LOGIN_REQUEST\n{PayloadAutenticazione:\n nomeUtente, password}" as COM01
+  usecase "Ricezione LOGIN_RESPONSE\n{RispostaAutenticazione:\n successo, messaggio, ruolo}" as COM02
 
-  usecase "COM-03\nInvio REGISTER_REQUEST\n{PayloadAutenticazione:\n nomeUtente, password}" as COM03
-  usecase "COM-04\nRicezione REGISTER_RESPONSE\n{RispostaAutenticazione:\n successo, messaggio}" as COM04
+  usecase "Invio REGISTER_REQUEST\n{PayloadAutenticazione:\n nomeUtente, password}" as COM03
+  usecase "Ricezione REGISTER_RESPONSE\n{RispostaAutenticazione:\n successo, messaggio}" as COM04
 
-  usecase "COM-05\nRicezione WAITING\n{String: messaggio attesa\n es. 'In attesa (1/2)'}" as COM05
+  usecase "Ricezione WAITING\n{messaggio di attesa}" as COM05
 
-  usecase "COM-06\nRicezione CHALLENGE_START\n{PayloadSfida:\n idSfida, estrattoTesto,\n paroleCifrate, secondiTimeout}" as COM06
+  usecase "Ricezione CHALLENGE_START\n{PayloadSfida:\n idSfida, estrattoTesto,\n paroleCifrate, secondiTimeout}" as COM06
 
-  usecase "COM-07\nInvio CHALLENGE_ANSWER\n{String: risposta giocatore}" as COM07
+  usecase "Invio CHALLENGE_ANSWER\n{risposta giocatore}" as COM07
 
-  usecase "COM-08\nRicezione CHALLENGE_RESULT\n{RisultatoSfida:\n nomeUtenteVincitore,\n parolaCorretta, esito}" as COM08
+  usecase "Ricezione CHALLENGE_RESULT\n{RisultatoSfida:\n nomeUtenteVincitore,\n parolaCorretta, esito}" as COM08
 
-  usecase "COM-09\nInvio HISTORY_REQUEST\n{null}" as COM09
-  usecase "COM-10\nRicezione HISTORY_RESPONSE\n{List<VoceStorico>}" as COM10
+  usecase "Invio HISTORY_REQUEST" as COM09
+  usecase "Ricezione HISTORY_RESPONSE\n{List<VoceStorico>}" as COM10
 
-  usecase "COM-11\nInvio REQUEUE_REQUEST\n{null}" as COM11
+  usecase "Invio REQUEUE_REQUEST" as COM11
 }
 
 Client --> COM01
@@ -54,28 +54,19 @@ COM09 ..> COM10 : <<include>>\nserver legge DB
 COM11 ..> COM05 : <<include>>\nserver mette in lista attesa
 
 note right of COM06
-  PayloadSfida (Serializable):
-  - idSfida (int)
-  - estrattoTesto (String)
-    con parola cifrata tra [parentesi]
-  - paroleCifrate (List<String>)
-  - secondiTimeout (int) = 60
+  Contiene l'estratto di testo con
+  la parola cifrata tra parentesi quadre,
+  la lista di parole cifrate e il timeout.
 end note
 
 note right of COM08
-  RisultatoSfida.Esito (enum):
-  VITTORIA  → "Hai vinto!" 🏆
-  SCONFITTA → "Hai perso." 😞
-  PAREGGIO  → "Pareggio!"  🤝
-  (Modulo 2 — enum con comportamento)
+  Definisce il risultato finale:
+  vittoria, sconfitta o pareggio.
 end note
 
 note bottom of COM11
-  REQUEUE_REQUEST inviato dopo
-  CHALLENGE_RESULT dalla stessa
-  connessione TCP (senza nuovo login).
-  CoordinatoreGioco
-  .gestisciNuovaRichiesta(client)
+  Richiesta di rimessa in coda per una nuova partita
+  sulla connessione TCP già esistente, senza fare relogin.
 end note
 
 @enduml

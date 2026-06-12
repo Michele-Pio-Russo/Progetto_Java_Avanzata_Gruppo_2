@@ -6,7 +6,7 @@ skinparam usecase {
   BorderColor SteelBlue
 }
 
-title Diagramma 1 — Vista Generale del Sistema IndovinaLaParola
+title Casi d'Uso - Vista Generale del Sistema
 
 actor "Amministratore" as Admin
 actor "Giocatore"      as Player
@@ -64,11 +64,10 @@ UC_Result  ..> UC_Play   : <<include>>
 UC_Requeue ..> UC_Wait   : <<extend>>
 
 note right of Server
-  Il Server e' un attore secondario:
-  - coordina connessioni socket TCP
-  - gestisce autenticazione (GestoreDatabase)
-  - avvia e risolve le sfide (CoordinatoreGioco)
-  - accede esclusivamente al DB SQLite
+  Il Server:
+  - Gestisce le connessioni TCP dei client
+  - Gestisce il database SQLite (registrazione, login, storico)
+  - Gestisce le partite tramite il CoordinatoreGioco
 end note
 
 @enduml

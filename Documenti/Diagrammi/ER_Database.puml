@@ -10,7 +10,7 @@ skinparam arrow {
   Color #2C3E50
 }
 
-title Diagramma E-R — Schema Database SQLite\nIndovinaLaParola | Corso JA26 — A.A. 2025/2026
+title Schema Database SQLite (Diagramma E-R)
 
 entity "users" as USR {
   * user_id       : INTEGER  <<PK, AUTOINCREMENT>>
@@ -18,17 +18,17 @@ entity "users" as USR {
   * nomeUtente    : TEXT     <<UNIQUE, NOT NULL>>
   * password_hash : TEXT     <<NOT NULL>> (SHA-256)
   * ruolo         : TEXT     <<'admin' | 'player'>>
-    created_at    : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
+  * created_at    : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
 }
 
 entity "challenges" as CHG {
   * challenge_id  : INTEGER  <<PK, AUTOINCREMENT>>
   --
-    played_at     : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
-    text_excerpt  : TEXT
-    encrypted_word: TEXT
-    original_word : TEXT
-    caesar_shift  : INTEGER
+  * played_at     : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
+  * text_excerpt  : TEXT
+  * encrypted_word: TEXT
+  * original_word : TEXT
+  * caesar_shift  : INTEGER
 }
 
 entity "results" as RES {
@@ -37,51 +37,36 @@ entity "results" as RES {
   * challenge_id     : INTEGER <<FK → challenges.challenge_id>>
   * user_id          : INTEGER <<FK → users.user_id>>
   * esito            : TEXT    <<'win' | 'loss' | 'draw'>>
-    response_time_ms : INTEGER  (−1 se timeout/draw)
+  * response_time_ms : INTEGER  (−1 se timeout/draw)
 }
 
-' === RELAZIONI ===
+' --- Relazioni ---
 USR ||--o{ RES : "partecipa a\n(come vincitore\no perdente)"
 CHG ||--|{ RES : "genera\n(2 righe per sfida)"
 CHG }o--|| USR : "riferimento ai\npartecipanti\n(via results)"
 
 note bottom of USR
-  RF-DB-01 [MUST] e RF-DB-05 [MUST]:
-  Account predefiniti (seedAccounts):
-  • admin / admin123 (ruolo: admin)
-  • giocatore1 / pass1 (ruolo: player)
-  • giocatore2 / pass2 (ruolo: player)
-  Le password sono hashate SHA-256
-  prima di essere salvate nel DB.
+  Salva gli utenti registrati.
+  Le password sono salvate cifrate con SHA-256.
+  All'avvio del server vengono inseriti gli account di test:
+  - admin (password: admin123)
+  - giocatore1 (password: pass1)
+  - giocatore2 (password: pass2)
 end note
 
 note bottom of CHG
-  RF-DB-02 [MUST]:
-  La parola cifrata appare nell'estratto
-  tra [parentesi quadre].
-  caesar_shift conservato per debug
-  e verifica dell'algoritmo.
+  Salva i dati di ogni partita (l'estratto di testo, la parola cifrata, la parola originale e lo spostamento usato per il cifrario).
 end note
 
 note bottom of RES
-  RF-DB-03 [MUST]:
-  Per ogni sfida vengono inserite
-  sempre 2 righe in transazione
-  atomica JDBC (Modulo 8):
-  - vincitore: esito='win',
-    response_time_ms=tempoEffettivo
-  - perdente:  esito='loss',
-    response_time_ms=-1
-  - pareggio:  esito='draw'
-    response_time_ms=-1 per entrambi
+  Per ogni sfida vengono inserite due righe (una per giocatore) in una singola transazione.
+  L'esito può essere 'win', 'loss' o 'draw'.
+  Il tempo di risposta è in millisecondi (impostato a -1 in caso di sconfitta o pareggio).
 
-  RF-DB-04 [MUST] — Query statistiche:
-  ─────────────────────────────────
-  Vittorie: COUNT WHERE esito='win'
-  Partite:  COUNT(*)
-  Tempo medio: AVG(ms) WHERE ms >= 0
-  (Vedi GestoreDatabase.getAllStats()
-   e GestoreDatabase.getHistory())
+  Statistiche estratte:
+  - Numero di vittorie (COUNT con esito='win')
+  - Partite totali (COUNT(*))
+  - Tempo medio di risposta (AVG del tempo di risposta dove >= 0)
 end note
 
 @enduml

@@ -11,7 +11,7 @@ skinparam package {
   BorderColor #85929E
 }
 
-title Class Diagram 2 — Dettaglio Package Server\nIndovinaLaParola | Corso JA26 — A.A. 2025/2026
+title Diagramma delle Classi - Dettaglio Package Server
 
 package "server.model" {
   class ReteServer {
@@ -102,7 +102,7 @@ package "common" {
   }
 }
 
-' === RELAZIONI ===
+' --- Relazioni ---
 ReteServer "1" *-- "*" GestoreClient   : crea (1 per socket)
 ReteServer "1" --> "1" CoordinatoreGioco
 
@@ -115,33 +115,21 @@ CoordinatoreGioco ..> CifrarioCesare : usa cifra()
 ServizioAnalisi ..> AnalizzatoreDocumenti : crea
 
 note bottom of CoordinatoreGioco
-  Tutti i metodi pubblici sono synchronized.
-  Monitor: istanza di CoordinatoreGioco.
-  Timeout gestito con ScheduledExecutorService
-  (Modulo 6 — Concurrency API).
-  StatusCallback assegnata con lambda
-  (Modulo 4 — Consumer<String>).
+  I metodi pubblici sono synchronized per thread-safety.
+  Il timeout è gestito tramite ScheduledExecutorService.
+  Usa una callback (statusCallback) per inviare log alla GUI.
 end note
 
 note right of AnalizzatoreDocumenti
-  Stream API (Modulo 5):
-  Arrays.stream(tokens)
-    .filter(!empty && len>2)
-    .collect(groupingBy(t->t, counting()))
-    .entrySet().stream()
-    .collect(toMap(key, count/N))
-  Espone Collections.unmodifiableMap
-  per sicurezza multi-thread.
+  L'analisi dei file conta le frequenze delle parole con gli Stream.
+  La mappa delle frequenze è esposta come unmodifiableMap
+  per evitare modifiche concorrenti esterne.
 end note
 
 note right of GestoreDatabase
-  Pattern Singleton (lazy init).
-  Pattern DAO (Data Access Object).
-  Tutti i PreparedStatement
-  prevenono SQL Injection.
-  Transazioni esplicite JDBC
-  per saveChallengeWithResults.
-  (Modulo 8 — JDBC e DAO)
+  Classe Singleton che implementa il pattern DAO.
+  Usa PreparedStatement per evitare SQL Injection.
+  Il salvataggio di sfide e risultati usa transazioni JDBC.
 end note
 
 @enduml

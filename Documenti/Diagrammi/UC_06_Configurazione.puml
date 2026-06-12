@@ -6,7 +6,7 @@ skinparam usecase {
   BorderColor SteelBlue
 }
 
-title Diagramma 6 — Casi d'Uso: Configurazione e Avvio del Sistema
+title Casi d'Uso - Configurazione
 
 actor "Amministratore\n/ Revisore" as Admin
 actor "Giocatore" as Player
@@ -15,17 +15,17 @@ actor "JVM" as JVM
 rectangle "Avvio Server — ApplicazioneServer" {
   usecase "Avvio server\njava -jar server.jar" as UC_SrvStart
   usecase "Lettura\nserver.properties\n(server.porta)" as UC_SrvProp
-  usecase "GestoreDatabase\n.getInstance().connetti()\n(initSchema + seedAccounts)" as UC_DBInit
-  usecase "ReteServer.start()\napertura ServerSocket\nthread daemon di ascolto" as UC_Socket
-  usecase "Caricamento analisi .dat\n(AnalizzatoreDocumenti\n.loadFromFile — se presente)" as UC_LoadDat
-  usecase "Avvio ControllerServer\n(JavaFX FXML — server.fxml)" as UC_AdminUI
+  usecase "Inizializzazione database\n(schema e account di test)" as UC_DBInit
+  usecase "Apertura ServerSocket\nin ascolto continuo" as UC_Socket
+  usecase "Caricamento analisi .dat\n(se presente)" as UC_LoadDat
+  usecase "Avvio interfaccia grafica\n(server.fxml)" as UC_AdminUI
 }
 
 rectangle "Avvio Client — ApplicazioneClient" {
   usecase "Avvio client\njava -jar client.jar" as UC_CltStart
-  usecase "Lettura\nclient.properties\n(server.ip, server.porta)" as UC_CltProp
-  usecase "ConnessioneServer\n.connetti(ip, porta)\nthread daemon di lettura" as UC_Connect
-  usecase "Avvio ControllerAccesso\n(JavaFX FXML — login.fxml)" as UC_LoginUI
+  usecase "Lettura\nclient.properties\n(ip e porta)" as UC_CltProp
+  usecase "Apertura connessione\ne thread di ascolto" as UC_Connect
+  usecase "Avvio interfaccia login\n(login.fxml)" as UC_LoginUI
 }
 
 Admin  --> UC_SrvStart
@@ -45,34 +45,25 @@ UC_CltStart ..> UC_Connect  : <<include>>
 UC_CltStart ..> UC_LoginUI  : <<include>>
 
 note right of UC_SrvProp
-  RF-SRV-01 [MUST]:
-  CaricatoreConfigurazione
-  ("properties/server.properties")
-  chiave: server.porta = 5000
-  Percorso relativo (RNF-PRT-03).
+  Carica la porta del server dal file
+  "properties/server.properties"
+  (chiave: server.porta, valore di default 5000).
 end note
 
 note right of UC_CltProp
-  RF-CLT-01 [MUST]:
-  ConfigurazioneClient
-  ("properties/client.properties")
-  server.ip = 127.0.0.1
-  server.porta = 5000
+  Carica IP e porta a cui connettersi
+  dal file "properties/client.properties".
 end note
 
 note bottom of UC_Socket
-  RF-SRV-02 [MUST]:
-  ServerSocket in ascolto continuo.
-  Thread daemon: non blocca la JVM.
-  Ogni Socket accettato crea
-  un nuovo GestoreClient.
+  Apre la ServerSocket per ricevere connessioni.
+  Usa un thread daemon in background che
+  crea un GestoreClient per ogni client connesso.
 end note
 
 note bottom of UC_Connect
-  Ordine OOS prima di OIS + flush()
-  obbligatorio (Modulo 7 - Networking):
-  evita deadlock tra costruttori
-  ObjectInputStream/ObjectOutputStream.
+  Inizializza prima ObjectOutputStream (con flush)
+  e poi ObjectInputStream per evitare deadlock di rete.
 end note
 
 @enduml

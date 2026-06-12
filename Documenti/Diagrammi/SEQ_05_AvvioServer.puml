@@ -2,7 +2,7 @@
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
-title SEQ-05 — Avvio e Inizializzazione del Server\n(RF-SRV-01, RF-SRV-02, RF-SRV-03, RF-DB-05)
+title Diagramma di Sequenza - Avvio Server
 
 actor "Amministratore\n/ Revisore" as Admin
 participant "JVM\n(java -jar server.jar)" as JVM
@@ -47,7 +47,7 @@ deactivate DB
 
 Ctrl -> Coord : new CoordinatoreGioco(db, null)
 activate Coord
-Ctrl -> Coord : setStatusCallback(\n  msg -> Platform.runLater(\n    () -> logArea.appendText(msg)))\n[lambda Consumer<String> — Modulo 4]
+Ctrl -> Coord : setStatusCallback(\n  msg -> Platform.runLater(\n    () -> logArea.appendText(msg)))\n[callback tramite espressione lambda]
 deactivate Coord
 
 Ctrl -> Svc : new ServizioAnalisi()\nprogressBar.progressProperty().bind(...)\nanalysisService.messageProperty().addListener(...)

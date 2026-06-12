@@ -6,7 +6,7 @@ skinparam usecase {
   BorderColor SteelBlue
 }
 
-title Diagramma 5 — Casi d'Uso: Persistenza dei Dati (GestoreDatabase)
+title Casi d'Uso - Persistenza Dati
 
 actor "Server\n(GestoreDatabase)" as Server
 actor "Amministratore" as Admin
@@ -15,25 +15,25 @@ database "DB SQLite\n(database.db)" as DB
 
 rectangle "Strato di Persistenza — IndovinaLaParola" {
 
-  usecase "RF-DB-01\nGestione tabella users\n(user_id, nomeUtente,\npassword_hash, ruolo, created_at)" as DB_Users
+  usecase "Gestione tabella users\n(user_id, nomeUtente,\npassword_hash, ruolo, created_at)" as DB_Users
 
-  usecase "RF-DB-02\nGestione tabella challenges\n(challenge_id, played_at,\ntext_excerpt, encrypted_word,\noriginal_word, caesar_shift)" as DB_Chall
+  usecase "Gestione tabella challenges\n(challenge_id, played_at,\ntext_excerpt, encrypted_word,\noriginal_word, caesar_shift)" as DB_Chall
 
-  usecase "RF-DB-03\nGestione tabella results\n(result_id, challenge_id,\nuser_id, esito, response_time_ms)" as DB_Res
+  usecase "Gestione tabella results\n(result_id, challenge_id,\nuser_id, esito, response_time_ms)" as DB_Res
 
-  usecase "RF-DB-04\nEstrazione statistiche\n(getAllStats)" as DB_Stats
+  usecase "Estrazione statistiche" as DB_Stats
 
-  usecase "RF-DB-05\nAccount predefiniti\nall'avvio (seedAccounts)\n1 admin + 2 giocatori" as DB_Seed
+  usecase "Creazione account\npredefiniti all'avvio" as DB_Seed
 
-  usecase "Inizializzazione schema\n(initSchema — CREATE IF NOT EXISTS)" as DB_Init
+  usecase "Inizializzazione schema\n(CREATE IF NOT EXISTS)" as DB_Init
 
-  usecase "Autenticazione\n(autentica — SHA-256)" as DB_Auth
+  usecase "Autenticazione\n(hash SHA-256)" as DB_Auth
 
-  usecase "Registrazione utente\n(registraUtente)" as DB_RegU
+  usecase "Registrazione utente" as DB_RegU
 
-  usecase "Salvataggio sfida\nin transazione\n(saveChallengeWithResults)" as DB_SaveG
+  usecase "Salvataggio sfida\nin transazione" as DB_SaveG
 
-  usecase "Storico personale\n(getHistory)" as DB_Hist
+  usecase "Storico personale" as DB_Hist
 }
 
 Server --> DB_Init
@@ -63,28 +63,24 @@ DB_Chall ..> DB : <<accede>>
 DB_Res   ..> DB : <<accede>>
 
 note right of DB_Seed
-  RF-DB-05 [MUST]:
-  admin / admin123
-  giocatore1 / pass1
-  giocatore2 / pass2
-  Inseriti con INSERT IF NOT EXISTS
-  all'avvio (connetti → seedAccounts).
+  Account creati automaticamente all'avvio se non esistono:
+  - admin / admin123
+  - giocatore1 / pass1
+  - giocatore2 / pass2
 end note
 
 note bottom of DB_SaveG
-  Transazione esplicita JDBC
-  (Modulo 8 corso JA26):
-  setAutoCommit(false)
-  → insertChallenge(...)
-  → insertResult(winner, "win")
-  → insertResult(loser,  "loss")
-  → commit() / rollback()
+  Usa una transazione JDBC:
+  - setAutoCommit(false)
+  - inserisce la sfida
+  - inserisce i due risultati correlati
+  - esegue il commit (o rollback in caso di errore)
 end note
 
 note left of DB_Auth
-  Password salvate come hash SHA-256.
-  Nessuna password in chiaro nel DB.
-  (RNF-AFF-02 [MUST])
+  Le password vengono memorizzate
+  esclusivamente come hash SHA-256
+  per motivi di sicurezza.
 end note
 
 @enduml

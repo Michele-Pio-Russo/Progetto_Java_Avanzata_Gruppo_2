@@ -2,7 +2,7 @@
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
-title SEQ-04 — Partecipazione alla Sfida — Flusso Completo (UC-G04)\n(Flusso Principale + Alternativo A — Timeout/Pareggio)
+title Diagramma di Sequenza - Partecipazione alla Sfida
 
 actor "Giocatore 1" as P1
 actor "Giocatore 2" as P2
@@ -14,7 +14,7 @@ participant "CifrarioCesare" as Ciph
 participant "GestoreDatabase\n(transazione)" as DB
 database "SQLite\n(challenges, results)" as SQLite
 
-== Attesa connessione secondo client (UC-G03) ==
+== Attesa connessione secondo client ==
 
 P1 -> CG1 : [gia' autenticato — waitingPane visibile]
 P2 -> CG2 : completa login → WAITING ricevuto
@@ -22,9 +22,8 @@ P2 -> CG2 : completa login → WAITING ricevuto
 CG2 -> Coord : gestisciLogin → aggiungiInListaAttesa(client2)
 activate Coord
 note right of Coord
-  giocatoriInAttesa.size() == 2
-  → rimuove entrambi e avvia sfida
-  (tutti i metodi synchronized)
+  Quando ci sono 2 giocatori
+  in attesa, avvia la sfida.
 end note
 
 == Preparazione Sfida ==
@@ -34,13 +33,9 @@ activate Anal
 Anal --> Coord : estratto String (60 parole random)
 Coord -> Anal : selectWordFromExcerpt(excerpt, difficolta'=2)
 note right of Anal
-  Stream API (Modulo 5):
-  Arrays.stream(words)
-    .filter(len>=4 && TF contiene)
-    .sorted(Comparator TF crescente) ← lambda (Modulo 4)
-    .limit(5)
-    .collect(toList())
-  → scelta random tra top-5
+  Filtra le parole dell'estratto per lunghezza >= 4
+  e le ordina per Term Frequency (frequenza).
+  Prende le prime 5 e ne sceglie una a caso.
 end note
 Anal --> Coord : parolaSelezionata
 deactivate Anal
@@ -52,7 +47,7 @@ deactivate Ciph
 
 Coord -> Coord : textWithCipher = excerpt\n.replaceAll(parola, "[cifrata]")\nsfidaAttiva = true\ntempoInizioSfida = System.currentTimeMillis()
 
-== Invio ai Client (RF-SRV-13) ==
+== Invio ai Client ==
 
 Coord -> CG1 : GestoreClient1.invia(\n  CHALLENGE_START,\n  PayloadSfida(0, testo, [cifrata], 60))
 Coord -> CG2 : GestoreClient2.invia(\n  CHALLENGE_START,\n  PayloadSfida(0, testo, [cifrata], 60))
@@ -65,7 +60,7 @@ CG2 --> P2 : mostra testo cifrato + timer countdown
 
 == Fase di Risposta (in parallelo) ==
 
-Coord -> Coord : scheduler.schedule(timeout, 60s)\n[ScheduledExecutorService - Modulo 6]
+Coord -> Coord : Imposta un timer di timeout a 60 secondi
 
 par Giocatori rispondono in parallelo
   P1 -> CG1 : inserisce risposta\npreme "Invia"
@@ -75,7 +70,7 @@ par Giocatori rispondono in parallelo
   CG2 -> Coord : GestoreClient2.→\ngestisciRisposta(client2, "risposta2")
 end
 
-== Validazione (RF-SRV-14) ==
+== Validazione ==
 
 Coord -> Coord : guess.trim().equalsIgnoreCase\n(parolaOriginaleCorrente)
 
@@ -99,7 +94,7 @@ alt Giocatore 1 risponde corretto per primo
   CG1 --> P1 : pannelloRisultato\n"🏆 Hai vinto!\nLa parola era: ..."
   CG2 --> P2 : pannelloRisultato\n"😞 Hai perso.\ngiocatore1 ha risposto prima."
 
-else Timeout scaduto — nessuno ha risposto (Flusso Alt. A)
+else Timeout scaduto — nessuno ha risposto
   Coord -> Coord : [scheduler esegue il Runnable]\nterminaSfida(null, -1, true)
   Coord -> CG1 : invia(CHALLENGE_RESULT,\nRisultatoSfida(null, parola, PAREGGIO))
   Coord -> CG2 : invia(CHALLENGE_RESULT,\nRisultatoSfida(null, parola, PAREGGIO))

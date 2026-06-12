@@ -14,11 +14,9 @@ skinparam arrow {
   Color #2C3E50
 }
 
-title Class Diagram 1 — Architettura Generale del Sistema\nIndovinaLaParola | Corso JA26 — A.A. 2025/2026
+title Diagramma delle Classi - Architettura Generale del Sistema
 
-' =========================================================
-' PACKAGE COMMON
-' =========================================================
+' --- Classi Comuni ---
 package "indovinaparola.common" #E8F8F5 {
 
   class Messaggio <<Serializable>> {
@@ -112,9 +110,7 @@ package "indovinaparola.common" #E8F8F5 {
   RisultatoSfida --> Esito
 }
 
-' =========================================================
-' PACKAGE SERVER
-' =========================================================
+' --- Server ---
 package "indovinaparola.server" #EAF7EA {
 
   class ApplicazioneServer <<JavaFX Application>> {
@@ -240,9 +236,7 @@ package "indovinaparola.server" #EAF7EA {
   }
 }
 
-' =========================================================
-' PACKAGE CLIENT
-' =========================================================
+' --- Client ---
 package "indovinaparola.client" #FEF9E7 {
 
   class ApplicazioneClient <<JavaFX Application>> {
@@ -308,9 +302,7 @@ package "indovinaparola.client" #FEF9E7 {
   }
 }
 
-' =========================================================
-' RELAZIONI — SERVER
-' =========================================================
+' --- Relazioni Server ---
 ApplicazioneServer ..> ControllerServer : carica FXML
 ControllerServer "1" --> "1" GestoreDatabase    : usa
 ControllerServer "1" --> "1" CoordinatoreGioco  : crea e configura
@@ -335,9 +327,7 @@ GestoreDatabase ..> VoceStorico : produce
 
 ServizioAnalisi ..> AnalizzatoreDocumenti : crea e restituisce
 
-' =========================================================
-' RELAZIONI — CLIENT
-' =========================================================
+' --- Relazioni Client ---
 ApplicazioneClient ..> ControllerAccesso  : carica FXML
 ControllerAccesso  ..> ControllerGioco   : naviga a
 ControllerGioco    ..> ControllerStorico : naviga a
@@ -349,9 +339,7 @@ ControllerStorico  "1" --> "1" ConnessioneServer : usa
 
 ControllerAccesso ..> ConfigurazioneClient : legge config
 
-' =========================================================
-' RELAZIONI — COMMON
-' =========================================================
+' --- Relazioni Common ---
 GestoreClient ..> PayloadAutenticazione  : deserializza
 GestoreClient ..> PayloadSfida           : serializza
 GestoreClient ..> RisultatoSfida         : serializza
