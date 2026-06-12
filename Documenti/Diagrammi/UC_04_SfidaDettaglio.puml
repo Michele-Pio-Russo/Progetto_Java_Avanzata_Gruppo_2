@@ -1,0 +1,99 @@
+@startuml UC_04_SfidaDettaglio
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor LightCyan
+  BorderColor SteelBlue
+}
+
+title Diagramma 4 — UC-G04 Dettaglio: Partecipazione alla Sfida\n(Flusso Principale + Alternativo A — Timeout)
+
+actor "Giocatore 1" as P1
+actor "Giocatore 2" as P2
+actor "Sistema\n(Server)" as Server
+database "DB SQLite\n(challenges, results)" as DB
+
+rectangle "Flusso Sfida — CoordinatoreGioco" {
+
+  usecase "Selezione estratto\n(AnalizzatoreDocumenti\n.extractRandomExcerpt)" as UC_Select
+
+  usecase "Scelta parola per TF\n(.selectWordFromExcerpt\ndifficolta'=2)" as UC_Word
+
+  usecase "Cifratura con\nCifrario di Cesare\n(shift casuale 1-25)" as UC_Cipher
+
+  usecase "Invio CHALLENGE_START\na entrambi i client\n(PayloadSfida)" as UC_Send
+
+  usecase "Visualizzazione testo\ne avvio timer" as UC_Display
+
+  usecase "Inserimento e invio\nrisposta (CHALLENGE_ANSWER)" as UC_Answer
+
+  usecase "Validazione risposta\n(case-insensitive)" as UC_Validate
+
+  usecase "Dichiarazione vincitore\ne notifica CHALLENGE_RESULT" as UC_Winner
+
+  usecase "Salvataggio in\ntransazione DB\n(saveChallengeWithResults)" as UC_Save
+
+  usecase "Gestione timeout\n(ScheduledExecutorService\n60 secondi)" as UC_Timeout
+  usecase "Pareggio —\nCHALLENGE_RESULT\nesito PAREGGIO" as UC_Draw
+}
+
+Server --> UC_Select
+Server --> UC_Word
+Server --> UC_Cipher
+Server --> UC_Send
+Server --> UC_Validate
+Server --> UC_Winner
+Server --> UC_Save
+Server --> UC_Timeout
+
+P1 --> UC_Display
+P1 --> UC_Answer
+P2 --> UC_Display
+P2 --> UC_Answer
+
+UC_Select   ..> UC_Word   : <<include>>
+UC_Word     ..> UC_Cipher : <<include>>
+UC_Cipher   ..> UC_Send   : <<include>>
+UC_Send     ..> UC_Display : <<include>>
+UC_Answer   ..> UC_Validate : <<include>>
+UC_Validate ..> UC_Winner   : <<include>>\nrisposta corretta
+UC_Winner   ..> UC_Save     : <<include>>
+
+UC_Timeout ..> UC_Draw : <<extend>>\nnessuno risponde entro 60s
+UC_Draw    ..> UC_Save : <<include>>
+
+UC_Save ..> DB : <<usa>>
+
+note top of UC_Select
+  Pre-condizioni (SRS 6.4):
+  - Entrambi i giocatori autenticati
+  - analizzatore.hasResults() == true
+  (RF-SRV-10, RF-SRV-11)
+end note
+
+note right of UC_Cipher
+  RF-SRV-12 [MUST]:
+  CifrarioCesare.cifra(parola, shift)
+  shift = random.nextInt(25) + 1
+  Parola cifrata inserita tra [parentesi]
+  nell'estratto testuale.
+end note
+
+note bottom of UC_Save
+  Post-condizioni (SRS 6.4):
+  - Riga in challenges (estratto, parola, shift)
+  - Due righe in results (win/loss o draw/draw)
+  - Operazione atomica in transazione JDBC
+  (RF-SRV-16, RF-DB-02, RF-DB-03)
+end note
+
+note left of UC_Timeout
+  Flusso Alternativo A (SRS 6.4):
+  ScheduledExecutorService.schedule(
+    60, TimeUnit.SECONDS)
+  Se sfidaAttiva==true al timeout
+  → terminaSfida(null, -1, true)
+  outcome = "draw" per entrambi
+end note
+
+@enduml

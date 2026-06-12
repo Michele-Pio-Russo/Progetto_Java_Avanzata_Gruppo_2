@@ -1,0 +1,81 @@
+@startuml SEQ_03_AnalisiDocumenti
+skinparam actorStyle awesome
+skinparam sequenceMessageAlign center
+
+title SEQ-03 — Analisi Documenti e Salvataggio (UC-A02, UC-A03, UC-A04)\n(Flusso Principale: selezione → analisi asincrona → salvataggio)
+
+actor "Amministratore" as Admin
+participant "ControllerServer\n(server.fxml)" as Ctrl
+participant "ServizioAnalisi\n(JavaFX Service)" as Svc
+participant "Task<AnalizzatoreDocumenti>\n(thread background)" as Task
+participant "AnalizzatoreDocumenti\n(Stream API)" as Anal
+participant "CoordinatoreGioco" as Coord
+database "File System\n(.txt, .dat)" as FS
+
+Admin -> Ctrl : seleziona file .txt\n(FileChooser multi-selezione)
+activate Ctrl
+Ctrl -> FS : FileChooser.showOpenMultipleDialog()
+activate FS
+FS --> Ctrl : List<File> selezionati
+deactivate FS
+Ctrl -> Ctrl : selectedFiles.addAll(chosen)\naggiorna documentListView
+
+Admin -> Ctrl : preme "Analizza Documenti"
+Ctrl -> Svc : setFiles(selectedFiles)\nreset() + start()
+activate Svc
+
+note right of Svc
+  RF-SRV-08 [MUST]:
+  ServizioAnalisi estende
+  Service<AnalizzatoreDocumenti>.
+  createTask() crea un nuovo Task
+  ad ogni avvio — riusabile a
+  differenza di un semplice Task.
+end note
+
+Svc -> Task : createTask() — eseguito in background
+activate Task
+
+Task -> Task : updateMessage("Avvio analisi...")\nupdateProgress(0, n)
+Task --> Ctrl : binding progressBar.progressProperty()\naggiornamento automatico sul FX thread
+
+loop per ogni file i
+  Task -> Task : updateMessage("Lettura: file[i]")\nupdateProgress(i, n)
+  Task -> Task : Thread.sleep(50)\n(progresso visibile nella UI)
+end
+
+Task -> Anal : new AnalizzatoreDocumenti()\n.analyze(files)
+activate Anal
+
+Anal -> FS : Files.readAllBytes(f.toPath())\nper ogni file TXT
+FS --> Anal : testo grezzo (UTF-8)
+
+Anal -> Anal : tokenizza: toLowerCase()\n.replaceAll("[^a-zA-Z\\s]"," ")\n.split("\\s+")
+
+Anal -> Anal : Stream API (Modulo 5):\nArrays.stream(tokens)\n  .filter(!empty && len>2)\n  .collect(groupingBy(t->t, counting()))\n  .entrySet().stream()\n  .collect(toMap(key, count/totalWords))
+
+Anal --> Task : AnalizzatoreDocumenti\n(mappa TF pronta)
+deactivate Anal
+
+Task -> Task : updateMessage("Analisi completata:\nN parole uniche")
+Task --> Svc : return analizzatore (onSucceeded)
+deactivate Task
+
+Svc -> Ctrl : onSucceeded → getValue()
+deactivate Svc
+Ctrl -> Coord : coordinator.setAnalyzer(analizzatore)
+Ctrl -> Ctrl : populateTfTable(tf)\nsaveAnalysisBtn.setDisable(false)
+Ctrl --> Admin : mostra tabella TF\n(top 500 parole per frequenza)
+
+Admin -> Ctrl : preme "Salva Analisi"
+Ctrl -> FS : FileChooser.showSaveDialog()\nsceglie percorso .dat
+Ctrl -> Anal : analizzatore.saveToFile(path)\n(ObjectOutputStream serializza this)
+activate Anal
+Anal -> FS : scrive file .dat
+FS --> Anal : OK
+deactivate Anal
+Ctrl --> Admin : log "Analisi salvata in: analysis.dat"
+
+deactivate Ctrl
+
+@enduml

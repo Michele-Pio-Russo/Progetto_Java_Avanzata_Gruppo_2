@@ -1,0 +1,69 @@
+@startuml UC_02_Amministratore
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor LightCyan
+  BorderColor SteelBlue
+}
+
+title Diagramma 2 — Casi d'Uso: Amministratore
+
+actor "Amministratore" as Admin
+actor "Sistema\n(Server)" as Server
+
+rectangle "Interfaccia Amministratore — IndovinaLaParola" {
+
+  usecase "UC-A01\nLogin amministratore" as A01
+  usecase "Verifica credenziali\nnel database (SHA-256)" as A01s
+
+  usecase "UC-A02\nCaricamento file TXT\ndal filesystem" as A02
+  usecase "FileChooser\nmulti-selezione" as A02s
+
+  usecase "UC-A03\nAvvio analisi\nTerm Frequency" as A03
+  usecase "ServizioAnalisi\n(JavaFX Service)" as A03s
+  usecase "AnalizzatoreDocumenti\n(Stream API)" as A03t
+
+  usecase "UC-A04\nSalvataggio analisi\nserializzata (.dat)" as A04
+
+  usecase "UC-A05\nCaricamento analisi\nprecedentemente salvata" as A05
+
+  usecase "UC-A06\nVisualizzazione classifiche\ne statistiche utenti" as A06
+  usecase "GestoreDatabase\n.getAllStats()" as A06s
+}
+
+Admin --> A01
+Admin --> A02
+Admin --> A03
+Admin --> A04
+Admin --> A05
+Admin --> A06
+
+Server --> A01 : autentica
+
+A01 ..> A01s : <<include>>
+A02 ..> A02s : <<include>>
+A03 ..> A03s : <<include>>
+A03 ..> A03t : <<include>>
+A06 ..> A06s : <<include>>
+
+A04 ..> A03 : <<extend>>\nse analisi completata
+A05 ..> A03 : <<extend>>\nevita rielaborazione
+
+note right of A03s
+  RF-SRV-08 [MUST]:
+  ServizioAnalisi estende
+  JavaFX Service<AnalizzatoreDocumenti>.
+  La GUI rimane reattiva durante
+  l'elaborazione in background.
+end note
+
+note bottom of A03t
+  RF-SRV-07 [MUST]:
+  Calcolo TF con Stream API:
+  Arrays.stream(tokens)
+    .filter(...).collect(groupingBy(...))
+    .entrySet().stream()
+    .collect(toMap(..., count/total))
+end note
+
+@enduml

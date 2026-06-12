@@ -1,0 +1,147 @@
+@startuml CD_02_ServerDettaglio
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #EAFAF1
+  BorderColor #1E8449
+  HeaderBackgroundColor #1E8449
+  HeaderFontColor White
+}
+skinparam package {
+  BackgroundColor #F9FBFB
+  BorderColor #85929E
+}
+
+title Class Diagram 2 — Dettaglio Package Server\nIndovinaLaParola | Corso JA26 — A.A. 2025/2026
+
+package "server.model" {
+  class ReteServer {
+    - serverSocket : ServerSocket
+    - porta        : int
+    - coordinator  : CoordinatoreGioco
+    - running      : volatile boolean
+    + start()  : void
+    + stop()   : void
+  }
+
+  class GestoreClient implements Runnable {
+    - socket      : Socket
+    - out         : ObjectOutputStream
+    - in          : ObjectInputStream
+    - nomeUtente  : String
+    - ruolo       : String
+    - autenticato : boolean
+    + startListening()              : void
+    - cicloAscolto()                : void
+    - smistaMessaggio(msg:Messaggio): void
+    + invia(msg:Messaggio) : synchronized void
+    + close()              : void
+  }
+
+  class CoordinatoreGioco {
+    - db                      : GestoreDatabase
+    - analizzatore            : AnalizzatoreDocumenti
+    - giocatoriInAttesa       : List<GestoreClient>
+    - statusCallback          : Consumer<String>
+    - scheduler               : ScheduledExecutorService
+    - sfidaAttiva             : boolean
+    - giocatore1 / giocatore2 : GestoreClient
+    - parolaOriginaleCorrente : String
+    + {synchronized} gestisciLogin(...)            : void
+    + {synchronized} gestisciRegistrazione(...)    : void
+    - aggiungiInListaAttesa(client)                : void
+    - avviaSfida(p1,p2)                            : void
+    + {synchronized} gestisciRisposta(client,guess): void
+    - terminaSfida(winner, tempoMs, isDraw)        : void
+    + {synchronized} onClientDisconnesso(client)   : void
+    + {synchronized} gestisciRichiestaStorico(...)  : void
+    + {synchronized} gestisciNuovaRichiesta(...)   : void
+  }
+}
+
+package "server.service" {
+  class AnalizzatoreDocumenti <<Serializable>> {
+    - termFrequency  : Map<String,Double>
+    - aggregatedText : String
+    + analyze(files:List<File>) : void
+    + extractRandomExcerpt(n:int)                  : String
+    + selectWordFromExcerpt(ex:String, diff:int)   : String
+    + hasResults() : boolean
+    + saveToFile(path:String)   : void
+    + {static} loadFromFile(path:String) : AnalizzatoreDocumenti
+  }
+
+  class ServizioAnalisi <<Service<AnalizzatoreDocumenti>>> {
+    - files : List<File>
+    + setFiles(f:List<File>) : void
+    + createTask() : Task<AnalizzatoreDocumenti>
+  }
+}
+
+package "server.db" {
+  class GestoreDatabase <<Singleton, DAO>> {
+    - {static} instance  : GestoreDatabase
+    - connessione        : Connection
+    + {static} getInstance(path:String) : GestoreDatabase
+    + connetti()   : void
+    - initSchema() : void
+    - seedAccounts(): void
+    + autentica(u:String, p:String) : String
+    + registraUtente(u:String, p:String) : boolean
+    + getUserId(u:String) : int
+    + saveChallengeWithResults(...) : void
+    + getHistory(u:String) : List<VoceStorico>
+    + getAllStats() : List<UserStats>
+    + {static} hashPassword(p:String) : String
+  }
+}
+
+package "common" {
+  class CifrarioCesare <<utility>> {
+    + {static} cifra(parola:String, shift:int)   : String
+    + {static} decifra(parola:String, shift:int) : String
+  }
+}
+
+' === RELAZIONI ===
+ReteServer "1" *-- "*" GestoreClient   : crea (1 per socket)
+ReteServer "1" --> "1" CoordinatoreGioco
+
+GestoreClient "n" --> "1" CoordinatoreGioco : delega messaggi
+
+CoordinatoreGioco "1" --> "1" GestoreDatabase
+CoordinatoreGioco "1" --> "0..1" AnalizzatoreDocumenti
+CoordinatoreGioco ..> CifrarioCesare : usa cifra()
+
+ServizioAnalisi ..> AnalizzatoreDocumenti : crea
+
+note bottom of CoordinatoreGioco
+  Tutti i metodi pubblici sono synchronized.
+  Monitor: istanza di CoordinatoreGioco.
+  Timeout gestito con ScheduledExecutorService
+  (Modulo 6 — Concurrency API).
+  StatusCallback assegnata con lambda
+  (Modulo 4 — Consumer<String>).
+end note
+
+note right of AnalizzatoreDocumenti
+  Stream API (Modulo 5):
+  Arrays.stream(tokens)
+    .filter(!empty && len>2)
+    .collect(groupingBy(t->t, counting()))
+    .entrySet().stream()
+    .collect(toMap(key, count/N))
+  Espone Collections.unmodifiableMap
+  per sicurezza multi-thread.
+end note
+
+note right of GestoreDatabase
+  Pattern Singleton (lazy init).
+  Pattern DAO (Data Access Object).
+  Tutti i PreparedStatement
+  prevenono SQL Injection.
+  Transazioni esplicite JDBC
+  per saveChallengeWithResults.
+  (Modulo 8 — JDBC e DAO)
+end note
+
+@enduml

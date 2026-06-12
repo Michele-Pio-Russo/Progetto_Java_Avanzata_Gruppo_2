@@ -1,0 +1,141 @@
+@startuml CD_03_ClientDettaglio
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #EBF5FB
+  BorderColor #2471A3
+  HeaderBackgroundColor #2471A3
+  HeaderFontColor White
+}
+skinparam package {
+  BackgroundColor #F4F6F7
+  BorderColor #85929E
+}
+
+title Class Diagram 3 — Dettaglio Package Client\nIndovinaLaParola | Corso JA26 — A.A. 2025/2026
+
+package "client.app" {
+  class ApplicazioneClient <<Application>> {
+    + start(stage:Stage) : void
+    + {static} main(args:String[]) : void
+  }
+}
+
+package "client.controller" {
+  class ControllerAccesso <<FXML Controller, Initializable>> {
+    - isRegistrationMode : boolean
+    - connessione        : ConnessioneServer
+    - serverIp           : String
+    - serverPort         : int
+    + initialize(...)    : void
+    - tryConnect()       : void
+    - gestisciMessaggioServer(msg:Messaggio) : void
+    - gestisciRispostaLogin(r:RispostaAutenticazione) : void
+    - gestisciRispostaRegistrazione(r:RispostaAutenticazione) : void
+    - handlePrimary()    : void
+    - handleSwitch()     : void
+    - vaiAGioco(nomeUtente, conn, waitingMsg, pending) : void
+  }
+
+  class ControllerGioco <<FXML Controller>> {
+    - nomeUtente         : String
+    - connessione        : ConnessioneServer
+    - timelineTimer      : Timeline
+    - secondiRimanenti   : int
+    - tempoInizioSfida   : long
+    + init(nomeUtente, conn, waitingMsg) : void
+    + consegnaMessaggio(msg:Messaggio)  : void
+    - gestisciMessaggioServer(msg)      : void
+    - avviaSfida(carico:PayloadSfida)   : void
+    - avviaCountdown()                  : void
+    - mostraRisultato(r:RisultatoSfida) : void
+    - gestisciErroreServer(msg:String)  : void
+    - gestisciInvioRisposta()           : void
+    - gestisciVisualizzaStorico()       : void
+    - gestisciNuovaPartita()            : void
+    - mostraAttesa()                    : void
+    - mostraGioco()                     : void
+    - mostraPannelloRisultato()         : void
+  }
+
+  class ControllerStorico <<FXML Controller>> {
+    - connessione       : ConnessioneServer
+    - stageProprietario : Stage
+    - nomeUtente        : String
+    + init(nomeUtente, conn, owner, root) : void
+    - configuraTabella() : void
+    - gestisciMessaggio(msg:Messaggio)   : void
+    - gestisciIndietro()                 : void
+    - formatOutcome(esito:String)        : String
+  }
+}
+
+package "client.service" {
+  class ConnessioneServer {
+    - socket                : Socket
+    - out                   : ObjectOutputStream
+    - in                    : ObjectInputStream
+    - callbackMessaggio     : Consumer<Messaggio>
+    - callbackDisconnessione: Runnable
+    - connesso              : volatile boolean
+    + connetti(host:String, porta:int) : void
+    - avviaThreadLettura()             : void
+    + invia(msg:Messaggio) : synchronized void
+    + disconnetti()        : void
+    + isConnesso()         : boolean
+    + setMessageCallback(cb:Consumer<Messaggio>) : void
+    + setDisconnectCallback(cb:Runnable)         : void
+  }
+}
+
+package "client.util" {
+  class ConfigurazioneClient {
+    - props : Properties
+    + getServerIp()   : String
+    + getServerPort() : int
+  }
+}
+
+' === RELAZIONI ===
+ApplicazioneClient ..> ControllerAccesso  : carica login.fxml
+ControllerAccesso "1" --> "1" ConnessioneServer  : crea e usa
+ControllerAccesso "1" --> "1" ConfigurazioneClient : legge config
+ControllerAccesso ..> ControllerGioco    : naviga a (vaiAGioco)
+
+ControllerGioco "1" --> "1" ConnessioneServer : usa
+ControllerGioco ..> ControllerStorico : naviga a (storia)
+ControllerGioco ..> ControllerAccesso : [torna solo via stage]
+
+ControllerStorico "1" --> "1" ConnessioneServer : usa
+ControllerStorico ..> ControllerGioco : naviga a (indietro)
+
+note right of ConnessioneServer
+  Ordine obbligatorio (Modulo 7 - Networking):
+  1. ObjectOutputStream (+ flush())
+  2. ObjectInputStream
+  Evita deadlock tra costruttori OOS/OIS.
+  Thread daemon di lettura (avviaThreadLettura):
+  non blocca la JVM alla chiusura.
+  out.reset() dopo ogni writeObject:
+  evita object caching di OOS.
+  invia() e' synchronized: thread-safe.
+end note
+
+note right of ControllerGioco
+  Timer con Timeline (Modulo JavaFX):
+  - KeyFrame ogni 1 secondo sul FX Thread
+  - Thread-safe per la GUI
+  - Ultimi 10s in rosso (#f85149)
+  Fix race condition WAITING/CHALLENGE_START:
+  ControllerAccesso usa ConcurrentLinkedQueue
+  (pending) per bufferare messaggi in transizione.
+end note
+
+note bottom of ControllerStorico
+  CellFactory per colorazione esito:
+  "Vinto"    → verde (#3fb950)
+  "Perso"    → rosso (#f85149)
+  "Pareggio" → giallo (#e3b341)
+  CellValueFactory con lambda (Modulo 4).
+end note
+
+@enduml

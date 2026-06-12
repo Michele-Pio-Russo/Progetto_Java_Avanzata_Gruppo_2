@@ -1,64 +1,77 @@
 @startuml SEQ_02_Login
-!theme plain
-skinparam backgroundColor #FAFAFA
-skinparam sequence {
-    ArrowColor #2C3E50
-    ActorBorderColor #1A5276
-    ActorBackgroundColor #D6EAF8
-    ParticipantBorderColor #2980B9
-    ParticipantBackgroundColor #EBF5FB
-    LifeLineBorderColor #BDC3C7
-}
+skinparam actorStyle awesome
+skinparam sequenceMessageAlign center
 
-title <b>SEQ-02 – Login Giocatore / Amministratore (UC-G02, UC-A01)</b>\n<i>GuessTheWord | Corso JA26 – A.A. 2025/2026</i>
+title SEQ-02 — Login e Navigazione alla Schermata di Gioco (UC-G02)\n(Flusso Principale: giocatore + Admin)
 
 actor "Utente\n(Giocatore o Admin)" as User
-participant "Client\n(JavaFX/FXML)" as Client
-participant "Socket TCP" as Socket
-participant "Server\n(SocketHandler)" as Server
-participant "AuthService" as Auth
-database "DB SQLite\n(users)" as DB
+participant "ControllerAccesso\n(login.fxml)" as Ctrl
+participant "ConnessioneServer\n(TCP)" as Conn
+participant "GestoreClient\n(thread daemon)" as GC
+participant "CoordinatoreGioco" as Coord
+participant "GestoreDatabase" as DB
+database "SQLite\n(users)" as SQLite
 
-User -> Client : inserisce credenziali\npreme "Login"
-activate Client
+User -> Ctrl : inserisce nomeUtente e password\npreme "Accedi"
+activate Ctrl
 
-Client -> Client : valida input lato client
-Client -> Socket : LOGIN_REQUEST\n{username, password}
-activate Socket
-Socket -> Server : trasmette richiesta
-activate Server
+Ctrl -> Conn : invia(LOGIN_REQUEST,\nPayloadAutenticazione(nomeUtente, password))
+activate Conn
+Conn -> GC : trasmette sul socket TCP
+activate GC
 
-Server -> Auth : autentica(username, password)
-activate Auth
-Auth -> DB : SELECT role, password_hash\nFROM users WHERE username = ?
+GC -> GC : smistaMessaggio\n→ case LOGIN_REQUEST
+GC -> Coord : gestisciLogin(client, payload)
+activate Coord
+
+Coord -> DB : autentica(nomeUtente, password)
 activate DB
-DB --> Auth : record utente (o null)
-deactivate DB
+DB -> DB : hashPassword(password)
+DB -> SQLite : SELECT ruolo FROM users\nWHERE nomeUtente=? AND password_hash=?
+activate SQLite
+SQLite --> DB : record (o null)
+deactivate SQLite
 
-Auth -> Auth : verifica hash password
+alt credenziali non valide
+  DB --> Coord : return null
+  Coord -> GC : invia(LOGIN_RESPONSE,\nRispostaAutenticazione(false,\n"Credenziali non valide."))
+  GC -> Conn : socket → client
+  Conn -> Ctrl : callbackMessaggio
+  Ctrl --> User : mostra errore
 
-alt credenziali errate / utente non trovato
-    Auth --> Server : esito = FAIL
-    Server -> Socket : LOGIN_RESPONSE\n{fail, "Credenziali non valide"}
-    Socket --> Client : risposta
-    Client --> User : mostra errore
-else credenziali corrette, ruolo = admin
-    Auth --> Server : esito = SUCCESS, role = admin
-    deactivate Auth
-    Server -> Socket : LOGIN_RESPONSE\n{success, role="admin"}
-    Socket --> Client : risposta
-    deactivate Socket
-    Client --> User : apre Interfaccia Admin\n(JavaFX FXML)
-else credenziali corrette, ruolo = player
-    Auth --> Server : esito = SUCCESS, role = player
-    deactivate Auth
-    Server -> Socket : LOGIN_RESPONSE\n{success, role="player"}
-    Socket --> Client : risposta
-    deactivate Socket
-    Client --> User : mostra schermata\n"In attesa dell'avversario"
+else ruolo = "admin"
+  DB --> Coord : return "admin"
+  deactivate DB
+  Coord -> Coord : client.setNomeUtente / setRuolo\n/ setAutenticato(true)
+  Coord -> GC : invia(LOGIN_RESPONSE,\nRispostaAutenticazione(true,\n"Login effettuato.", "admin"))
+  GC -> Conn : socket → client
+  Conn -> Ctrl : callbackMessaggio
+  Ctrl --> User : apre ControllerServer\n(interfaccia admin)
+
+else ruolo = "player"
+  DB --> Coord : return "player"
+  deactivate DB
+  Coord -> Coord : client.setAutenticato(true)
+  Coord -> Coord : aggiungiInListaAttesa(client)
+  Coord -> GC : invia(LOGIN_RESPONSE, success)\n+ invia(WAITING, "In attesa (1/2)")
+  deactivate Coord
+  GC -> Conn : socket → client
+  deactivate GC
+  Conn -> Ctrl : callbackMessaggio WAITING
+
+  note right of Conn
+    Fix race condition (ControllerAccesso):
+    alla ricezione di WAITING la callback
+    viene sostituita con un buffer ConcurrentLinkedQueue
+    che accoda eventuali CHALLENGE_START in arrivo
+    prima che ControllerGioco si registri.
+  end note
+
+  Conn -> Ctrl : naviga a game.fxml\n(vaiAGioco con pendingMessages)
+  deactivate Conn
+  Ctrl --> User : mostra schermata di attesa\n"In attesa dell'avversario... (1/2)"
 end
 
-deactivate Server
-deactivate Client
+deactivate Ctrl
 
 @enduml

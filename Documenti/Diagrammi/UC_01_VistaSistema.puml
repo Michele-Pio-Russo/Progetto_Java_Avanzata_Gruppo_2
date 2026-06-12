@@ -1,0 +1,74 @@
+@startuml UC_01_VistaSistema
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor LightCyan
+  BorderColor SteelBlue
+}
+
+title Diagramma 1 — Vista Generale del Sistema IndovinaLaParola
+
+actor "Amministratore" as Admin
+actor "Giocatore"      as Player
+actor "Sistema\n(Server)" as Server
+
+rectangle "IndovinaLaParola" {
+
+  package "Gestione Accesso" {
+    usecase "Login"          as UC_Login
+    usecase "Registrazione"  as UC_Reg
+  }
+
+  package "Gestione Documenti (solo Admin)" {
+    usecase "Caricamento file TXT"          as UC_Load
+    usecase "Avvio analisi Term Frequency"  as UC_Analyze
+    usecase "Salvataggio analisi"           as UC_Save
+    usecase "Caricamento analisi salvata"   as UC_LoadAn
+  }
+
+  package "Gestione Sfida" {
+    usecase "Attesa avversario"    as UC_Wait
+    usecase "Partecipazione sfida" as UC_Play
+    usecase "Visualizzazione esito" as UC_Result
+    usecase "Nuova partita"        as UC_Requeue
+  }
+
+  package "Storico e Classifiche" {
+    usecase "Visualizzazione classifiche\n(interfaccia admin)" as UC_Stats
+    usecase "Visualizzazione storico\npersonale (client)"     as UC_History
+  }
+}
+
+Admin  -- UC_Login
+Admin  -- UC_Load
+Admin  -- UC_Analyze
+Admin  -- UC_Save
+Admin  -- UC_LoadAn
+Admin  -- UC_Stats
+
+Player -- UC_Reg
+Player -- UC_Login
+Player -- UC_Wait
+Player -- UC_Play
+Player -- UC_Result
+Player -- UC_Requeue
+Player -- UC_History
+
+Server --> UC_Login   : valida credenziali
+Server --> UC_Reg     : registra utente
+Server --> UC_Play    : coordina sfida
+Server --> UC_Result  : notifica esito
+
+UC_Play    ..> UC_Wait   : <<include>>
+UC_Result  ..> UC_Play   : <<include>>
+UC_Requeue ..> UC_Wait   : <<extend>>
+
+note right of Server
+  Il Server e' un attore secondario:
+  - coordina connessioni socket TCP
+  - gestisce autenticazione (GestoreDatabase)
+  - avvia e risolve le sfide (CoordinatoreGioco)
+  - accede esclusivamente al DB SQLite
+end note
+
+@enduml

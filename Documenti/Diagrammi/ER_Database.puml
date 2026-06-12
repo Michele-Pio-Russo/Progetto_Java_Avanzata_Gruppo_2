@@ -1,88 +1,87 @@
 @startuml ER_Database
-!theme plain
-skinparam backgroundColor #FAFAFA
+skinparam classAttributeIconSize 0
 skinparam entity {
-    BackgroundColor #F4ECF7
-    BorderColor #7D3C98
-    FontColor #1A252F
-    HeaderBackgroundColor #7D3C98
-    HeaderFontColor #FFFFFF
+  BackgroundColor #F4ECF7
+  BorderColor #7D3C98
+  HeaderBackgroundColor #7D3C98
+  HeaderFontColor White
 }
 skinparam arrow {
-    Color #2C3E50
+  Color #2C3E50
 }
 
-title <b>E-R – Schema del Database SQLite</b>\n<i>GuessTheWord | Corso JA26 – A.A. 2025/2026</i>
+title Diagramma E-R — Schema Database SQLite\nIndovinaLaParola | Corso JA26 — A.A. 2025/2026
 
 entity "users" as USR {
-    * user_id : INTEGER <<PK, AUTOINCREMENT>>
-    --
-    * username : TEXT <<UNIQUE, NOT NULL>>
-    * password_hash : TEXT <<NOT NULL>>
-    * role : TEXT <<'admin' | 'player'>>
-    * created_at : DATETIME <<DEFAULT now>>
+  * user_id       : INTEGER  <<PK, AUTOINCREMENT>>
+  --
+  * nomeUtente    : TEXT     <<UNIQUE, NOT NULL>>
+  * password_hash : TEXT     <<NOT NULL>> (SHA-256)
+  * ruolo         : TEXT     <<'admin' | 'player'>>
+    created_at    : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
 }
 
 entity "challenges" as CHG {
-    * challenge_id : INTEGER <<PK, AUTOINCREMENT>>
-    --
-    * played_at : DATETIME <<NOT NULL>>
-      text_excerpt : TEXT
-      encrypted_word : TEXT
-      original_word : TEXT
-      caesar_shift : INTEGER
+  * challenge_id  : INTEGER  <<PK, AUTOINCREMENT>>
+  --
+    played_at     : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
+    text_excerpt  : TEXT
+    encrypted_word: TEXT
+    original_word : TEXT
+    caesar_shift  : INTEGER
 }
 
 entity "results" as RES {
-    * result_id : INTEGER <<PK, AUTOINCREMENT>>
-    --
-    * challenge_id : INTEGER <<FK → challenges>>
-    * user_id : INTEGER <<FK → users>>
-    * outcome : TEXT <<'win' | 'loss' | 'draw'>>
-      response_time_ms : INTEGER
+  * result_id        : INTEGER <<PK, AUTOINCREMENT>>
+  --
+  * challenge_id     : INTEGER <<FK → challenges.challenge_id>>
+  * user_id          : INTEGER <<FK → users.user_id>>
+  * esito            : TEXT    <<'win' | 'loss' | 'draw'>>
+    response_time_ms : INTEGER  (−1 se timeout/draw)
 }
 
 ' === RELAZIONI ===
-USR ||--o{ RES : "partecipa a"
-CHG ||--|{ RES : "genera"
-CHG }o--|| USR : "giocata da\n(amministratore\nvede storico)"
+USR ||--o{ RES : "partecipa a\n(come vincitore\no perdente)"
+CHG ||--|{ RES : "genera\n(2 righe per sfida)"
+CHG }o--|| USR : "riferimento ai\npartecipanti\n(via results)"
 
 note bottom of USR
-  RF-DB-01 [MUST]:
-  Almeno: user_id, username (UNIQUE),
-  password_hash, role.
-  RF-DB-05: 1 admin + 2 player precaricati.
+  RF-DB-01 [MUST] e RF-DB-05 [MUST]:
+  Account predefiniti (seedAccounts):
+  • admin / admin123 (ruolo: admin)
+  • giocatore1 / pass1 (ruolo: player)
+  • giocatore2 / pass2 (ruolo: player)
+  Le password sono hashate SHA-256
+  prima di essere salvate nel DB.
 end note
 
 note bottom of CHG
   RF-DB-02 [MUST]:
-  Almeno: challenge_id, played_at,
-  text_excerpt (opzionale).
-  caesar_shift conservato per debug.
+  La parola cifrata appare nell'estratto
+  tra [parentesi quadre].
+  caesar_shift conservato per debug
+  e verifica dell'algoritmo.
 end note
 
 note bottom of RES
   RF-DB-03 [MUST]:
-  Almeno: riferimento a challenge e user,
-  outcome (win/loss/draw),
-  response_time_ms (opzionale).
-  RF-DB-04: supporta query statistiche.
-end note
+  Per ogni sfida vengono inserite
+  sempre 2 righe in transazione
+  atomica JDBC (Modulo 8):
+  - vincitore: esito='win',
+    response_time_ms=tempoEffettivo
+  - perdente:  esito='loss',
+    response_time_ms=-1
+  - pareggio:  esito='draw'
+    response_time_ms=-1 per entrambi
 
-note right of RES
-  Query statistiche (RF-DB-04):
-  ─────────────────────────────
-  Vittorie per utente:
-    SELECT username, COUNT(*) AS wins
-    FROM results JOIN users ...
-    WHERE outcome='win'
-    GROUP BY user_id ORDER BY wins DESC
-
-  Tempo medio risposta:
-    SELECT username,
-    AVG(response_time_ms)
-    FROM results JOIN users ...
-    GROUP BY user_id
+  RF-DB-04 [MUST] — Query statistiche:
+  ─────────────────────────────────
+  Vittorie: COUNT WHERE esito='win'
+  Partite:  COUNT(*)
+  Tempo medio: AVG(ms) WHERE ms >= 0
+  (Vedi GestoreDatabase.getAllStats()
+   e GestoreDatabase.getHistory())
 end note
 
 @enduml

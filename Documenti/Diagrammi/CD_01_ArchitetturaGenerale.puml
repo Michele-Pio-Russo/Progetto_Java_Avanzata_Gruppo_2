@@ -1,0 +1,360 @@
+@startuml CD_01_ArchitetturaGenerale
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #EBF5FB
+  BorderColor SteelBlue
+  HeaderBackgroundColor SteelBlue
+  HeaderFontColor White
+}
+skinparam package {
+  BackgroundColor #F4F6F7
+  BorderColor #85929E
+}
+skinparam arrow {
+  Color #2C3E50
+}
+
+title Class Diagram 1 — Architettura Generale del Sistema\nIndovinaLaParola | Corso JA26 — A.A. 2025/2026
+
+' =========================================================
+' PACKAGE COMMON
+' =========================================================
+package "indovinaparola.common" #E8F8F5 {
+
+  class Messaggio <<Serializable>> {
+    - tipo  : Tipo
+    - carico : Object
+    + getTipo()   : Tipo
+    + getCarico() : Object
+  }
+
+  enum "Messaggio.Tipo" as Tipo {
+    LOGIN_REQUEST
+    LOGIN_RESPONSE
+    REGISTER_REQUEST
+    REGISTER_RESPONSE
+    WAITING
+    CHALLENGE_START
+    CHALLENGE_ANSWER
+    CHALLENGE_RESULT
+    HISTORY_REQUEST
+    HISTORY_RESPONSE
+    REQUEUE_REQUEST
+    ERROR
+    DISCONNECT
+  }
+
+  class PayloadAutenticazione <<Serializable>> {
+    - nomeUtente : String
+    - password   : String
+    + getNomeUtente() : String
+    + getPassword()   : String
+  }
+
+  class RispostaAutenticazione <<Serializable>> {
+    - successo  : boolean
+    - messaggio : String
+    - ruolo     : String
+    + isSuccesso()    : boolean
+    + getMessaggio()  : String
+    + getRuolo()      : String
+  }
+
+  class PayloadSfida <<Serializable>> {
+    - idSfida        : int
+    - estrattoTesto  : String
+    - paroleCifrate  : List<String>
+    - secondiTimeout : int
+    + getIdSfida()        : int
+    + getEstrattoTesto()  : String
+    + getParoleCifrate()  : List<String>
+    + getSecondiTimeout() : int
+  }
+
+  class RisultatoSfida <<Serializable>> {
+    - nomeUtenteVincitore : String
+    - parolaCorretta      : String
+    - esito               : Esito
+    + getNomeUtenteVincitore() : String
+    + getParolaCorretta()      : String
+    + getEsito()               : Esito
+  }
+
+  enum "RisultatoSfida.Esito" as Esito {
+    VITTORIA
+    SCONFITTA
+    PAREGGIO
+    --
+    + toDisplayString() : String
+    + toEmoji()         : String
+  }
+
+  class VoceStorico <<Serializable>> {
+    - dataPartita     : String
+    - avversario      : String
+    - esito           : String
+    - tempoRispostaMs : long
+    - parolaCorretta  : String
+    + getDataPartita()     : String
+    + getAvversario()      : String
+    + getEsito()           : String
+    + getTempoRispostaMs() : long
+    + getParolaCorretta()  : String
+  }
+
+  class CifrarioCesare <<utility>> {
+    - {static} CifrarioCesare()
+    + {static} cifra(parola:String, spostamento:int) : String
+    + {static} decifra(parola:String, spostamento:int) : String
+  }
+
+  Messaggio --> Tipo
+  RisultatoSfida --> Esito
+}
+
+' =========================================================
+' PACKAGE SERVER
+' =========================================================
+package "indovinaparola.server" #EAF7EA {
+
+  class ApplicazioneServer <<JavaFX Application>> {
+    + start(stage:Stage) : void
+    + {static} main(args:String[]) : void
+  }
+
+  class ControllerServer <<FXML Controller>> {
+    - selectedFiles    : List<File>
+    - currentAnalyzer  : AnalizzatoreDocumenti
+    - db               : GestoreDatabase
+    - coordinator      : CoordinatoreGioco
+    - network          : ReteServer
+    - analysisService  : ServizioAnalisi
+    - serverPort       : int
+    + initialize(...)  : void
+    - handleStartServer()    : void
+    - handleStopServer()     : void
+    - handleSelectFiles()    : void
+    - handleAnalyze()        : void
+    - handleSaveAnalysis()   : void
+    - handleLoadAnalysis()   : void
+    - handleRefreshStats()   : void
+  }
+
+  class ReteServer {
+    - serverSocket : ServerSocket
+    - porta        : int
+    - coordinator  : CoordinatoreGioco
+    - running      : volatile boolean
+    + start()      : void
+    + stop()       : void
+    + isRunning()  : boolean
+  }
+
+  class GestoreClient implements Runnable {
+    - socket      : Socket
+    - out         : ObjectOutputStream
+    - in          : ObjectInputStream
+    - nomeUtente  : String
+    - ruolo       : String
+    - autenticato : boolean
+    - coordinator : CoordinatoreGioco
+    + startListening()     : void
+    + invia(msg:Messaggio) : synchronized void
+    + close()              : void
+    + getNomeUtente()      : String
+    + getRuolo()           : String
+    + isAutenticato()      : boolean
+  }
+
+  class CoordinatoreGioco {
+    - db                     : GestoreDatabase
+    - analizzatore           : AnalizzatoreDocumenti
+    - giocatoriInAttesa      : List<GestoreClient>
+    - statusCallback         : Consumer<String>
+    - scheduler              : ScheduledExecutorService
+    - giocatore1             : GestoreClient
+    - giocatore2             : GestoreClient
+    - parolaOriginaleCorrente : String
+    - parolaCifrataCorrente  : String
+    - spostamentoCorrente    : int
+    - estrattoCorrente       : String
+    - tempoInizioSfida       : long
+    - sfidaAttiva            : boolean
+    - taskTimeout            : ScheduledFuture<?>
+    + {synchronized} gestisciLogin(...)         : void
+    + {synchronized} gestisciRegistrazione(...) : void
+    + {synchronized} gestisciRisposta(...)      : void
+    + {synchronized} gestisciNuovaRichiesta(...)  : void
+    + {synchronized} onClientDisconnesso(...)   : void
+    + {synchronized} gestisciRichiestaStorico(...) : void
+    + setStatusCallback(cb:Consumer<String>)    : void
+    + {synchronized} setAnalyzer(...)           : void
+  }
+
+  class GestoreDatabase <<Singleton, DAO>> {
+    - {static} instance  : GestoreDatabase
+    - connessione        : Connection
+    - dbPath             : String
+    + {static} getInstance(path:String) : GestoreDatabase
+    + connetti()   : void
+    + disconnetti(): void
+    + autentica(nomeUtente:String, pwd:String) : String
+    + registraUtente(nomeUtente:String, pwd:String) : boolean
+    + getUserId(nomeUtente:String) : int
+    + saveChallengeWithResults(...) : void
+    + getHistory(nomeUtente:String) : List<VoceStorico>
+    + getAllStats() : List<UserStats>
+    + {static} hashPassword(pwd:String) : String
+  }
+
+  class "GestoreDatabase.UserStats" as UserStats {
+    + nomeUtente    : String
+    + wins          : int
+    + gamesPlayed   : int
+    + avgResponseMs : long
+  }
+
+  class AnalizzatoreDocumenti <<Serializable>> {
+    - termFrequency  : Map<String,Double>
+    - aggregatedText : String
+    + analyze(files:List<File>) : void
+    + getTermFrequency()        : Map<String,Double>
+    + getAggregatedText()       : String
+    + hasResults()              : boolean
+    + extractRandomExcerpt(n:int) : String
+    + selectWordFromExcerpt(excerpt:String, difficulty:int) : String
+    + saveToFile(path:String)   : void
+    + {static} loadFromFile(path:String) : AnalizzatoreDocumenti
+  }
+
+  class ServizioAnalisi <<JavaFX Service>> {
+    - files : List<File>
+    + setFiles(files:List<File>) : void
+    + createTask() : Task<AnalizzatoreDocumenti>
+  }
+
+  class CaricatoreConfigurazione {
+    - props : Properties
+    + get(key:String, def:String) : String
+    + getInt(key:String, def:int) : int
+  }
+}
+
+' =========================================================
+' PACKAGE CLIENT
+' =========================================================
+package "indovinaparola.client" #FEF9E7 {
+
+  class ApplicazioneClient <<JavaFX Application>> {
+    + start(stage:Stage) : void
+    + {static} main(args:String[]) : void
+  }
+
+  class ControllerAccesso <<FXML Controller>> {
+    - isRegistrationMode : boolean
+    - connessione        : ConnessioneServer
+    - serverIp           : String
+    - serverPort         : int
+    + initialize(...)    : void
+    - handlePrimary()    : void
+    - handleSwitch()     : void
+    - vaiAGioco(...)     : void
+  }
+
+  class ControllerGioco <<FXML Controller>> {
+    - nomeUtente         : String
+    - connessione        : ConnessioneServer
+    - timelineTimer      : Timeline
+    - secondiRimanenti   : int
+    - tempoInizioSfida   : long
+    + init(nomeUtente:String, conn:ConnessioneServer,\n  waitingMsg:String) : void
+    + consegnaMessaggio(msg:Messaggio) : void
+    - avviaSfida(carico:PayloadSfida)  : void
+    - avviaCountdown()   : void
+    - mostraRisultato(r:RisultatoSfida) : void
+    - gestisciInvioRisposta()           : void
+    - gestisciVisualizzaStorico()        : void
+    - gestisciNuovaPartita()            : void
+  }
+
+  class ControllerStorico <<FXML Controller>> {
+    - connessione       : ConnessioneServer
+    - stageProprietario : Stage
+    - nomeUtente        : String
+    + init(nomeUtente:String, conn:ConnessioneServer,\n  owner:Stage, root:Parent) : void
+    - configuraTabella() : void
+    - gestisciIndietro() : void
+  }
+
+  class ConnessioneServer {
+    - socket                : Socket
+    - out                   : ObjectOutputStream
+    - in                    : ObjectInputStream
+    - callbackMessaggio     : Consumer<Messaggio>
+    - callbackDisconnessione: Runnable
+    - connesso              : volatile boolean
+    + connetti(host:String, porta:int) : void
+    + invia(msg:Messaggio) : synchronized void
+    + disconnetti() : void
+    + isConnesso()  : boolean
+    + setMessageCallback(cb:Consumer<Messaggio>)  : void
+    + setDisconnectCallback(cb:Runnable)          : void
+  }
+
+  class ConfigurazioneClient {
+    - props : Properties
+    + getServerIp()   : String
+    + getServerPort() : int
+  }
+}
+
+' =========================================================
+' RELAZIONI — SERVER
+' =========================================================
+ApplicazioneServer ..> ControllerServer : carica FXML
+ControllerServer "1" --> "1" GestoreDatabase    : usa
+ControllerServer "1" --> "1" CoordinatoreGioco  : crea e configura
+ControllerServer "1" --> "1" ReteServer         : avvia/ferma
+ControllerServer "1" --> "1" ServizioAnalisi    : gestisce
+ControllerServer "1" --> "1" CaricatoreConfigurazione : legge config
+ControllerServer ..> AnalizzatoreDocumenti : usa risultati
+
+ReteServer "1" *-- "*" GestoreClient : crea per ogni socket
+ReteServer "1" --> "1" CoordinatoreGioco : riferimento
+
+GestoreClient "1" --> "1" CoordinatoreGioco : smista messaggi
+GestoreClient ..> Messaggio : invia/riceve
+
+CoordinatoreGioco "1" --> "1" GestoreDatabase : persiste esiti
+CoordinatoreGioco "1" --> "1" AnalizzatoreDocumenti : usa TF
+CoordinatoreGioco ..> CifrarioCesare : cifra parola
+CoordinatoreGioco "1" o-- "0..2" GestoreClient : gestisce sfida
+
+GestoreDatabase ..> UserStats : produce
+GestoreDatabase ..> VoceStorico : produce
+
+ServizioAnalisi ..> AnalizzatoreDocumenti : crea e restituisce
+
+' =========================================================
+' RELAZIONI — CLIENT
+' =========================================================
+ApplicazioneClient ..> ControllerAccesso  : carica FXML
+ControllerAccesso  ..> ControllerGioco   : naviga a
+ControllerGioco    ..> ControllerStorico : naviga a
+ControllerStorico  ..> ControllerGioco   : torna a
+
+ControllerAccesso  "1" --> "1" ConnessioneServer : usa
+ControllerGioco    "1" --> "1" ConnessioneServer : usa
+ControllerStorico  "1" --> "1" ConnessioneServer : usa
+
+ControllerAccesso ..> ConfigurazioneClient : legge config
+
+' =========================================================
+' RELAZIONI — COMMON
+' =========================================================
+GestoreClient ..> PayloadAutenticazione  : deserializza
+GestoreClient ..> PayloadSfida           : serializza
+GestoreClient ..> RisultatoSfida         : serializza
+ConnessioneServer ..> Messaggio          : serializza/deserializza
+
+@enduml
