@@ -1,0 +1,7 @@
+<map id="indovinaparola.client.controller.ControllerGioco.gestisciNuovaPartita" name="indovinaparola.client.controller.ControllerGioco.gestisciNuovaPartita">
+<area shape="rect" id="Node000001" title="Rimette il client in lista d&#39;attesa per una nuova partita." alt="" coords="5,5,242,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a643b1e5d31acfce71b9f374d724eae41" title="Mostra il pannello di attesa e nasconde gli altri." alt="" coords="290,5,490,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,24,277,27,272,27,242,29"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#aef0c643e7d1756b519308f9e7f7760a4" title="Imposta visibilità e managed di un pannello VBox." alt="" coords="538,5,740,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="490,24,525,27,520,27,490,29"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="indovinaparola.client.controller.ControllerAccesso.handleSwitch" name="indovinaparola.client.controller.ControllerAccesso.handleSwitch">
+<area shape="rect" id="Node000001" title="Alterna tra la modalità login e la modalità registrazione." alt="" coords="5,5,216,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#a8fcb93bd28221354d59b636d124c27a8" title="Nasconde il messaggio di errore pulendo il testo della label." alt="" coords="264,5,464,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,24,251,27,246,27,216,29"/>
+</map>

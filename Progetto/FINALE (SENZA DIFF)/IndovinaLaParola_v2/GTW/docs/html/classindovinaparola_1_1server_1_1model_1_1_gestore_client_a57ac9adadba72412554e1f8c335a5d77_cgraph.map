@@ -1,0 +1,11 @@
+<map id="indovinaparola.server.model.GestoreClient.cicloAscolto" name="indovinaparola.server.model.GestoreClient.cicloAscolto">
+<area shape="rect" id="Node000001" title="Loop di lettura messaggi dal client." alt="" coords="5,39,193,81"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1model_1_1_gestore_client.html#ad632e5329fc3af0ede5a3a2a2ee10380" title="Chiude la connessione socket con il client." alt="" coords="251,5,438,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,45,238,41,233,42,194,50"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1model_1_1_gestore_client.html#a851c4a5d10d767c9a64d90c3de477b9e" title="Smista il messaggio ricevuto al metodo appropriato del coordinatore,." alt="" coords="241,72,448,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,70,228,77,222,77,193,75"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1common_1_1_messaggio.html#a42d1e549994b4e59cf42f7707298f818" title="Restituisce il carico del messaggio." alt="" coords="508,43,756,85"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="448,80,496,78,491,78,449,85"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1common_1_1_messaggio.html#a5dab2d30f1c776e7822004c01ef271c2" title="Restituisce il tipo del messaggio." alt="" coords="496,109,768,136"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="449,101,483,107,478,107,449,107"/>
+</map>

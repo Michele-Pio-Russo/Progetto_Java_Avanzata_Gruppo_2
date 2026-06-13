@@ -1,0 +1,17 @@
+<map id="Grafico della gerarchia delle classi" name="Grafico della gerarchia delle classi">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,197,94,224"/>
+<area shape="rect" id="Node000001" href="$classindovinaparola_1_1common_1_1_messaggio.html" title=" " alt="" coords="142,5,367,32"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="56,181,67,149,85,111,109,73,140,42,163,31,160,35,143,46,113,77,89,113,72,151,61,183"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1common_1_1_payload_autenticazione.html" title=" " alt="" coords="150,56,359,99"/>
+<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="66,183,98,145,140,108,165,97,162,101,143,113,101,148,70,186"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1common_1_1_payload_sfida.html" title=" " alt="" coords="150,123,359,165"/>
+<area shape="poly" id="edge7_Node000000_Node000003" title=" " alt="" coords="100,189,141,175,179,164,175,168,143,180,103,194"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1common_1_1_risposta_autenticazione.html" title=" " alt="" coords="147,189,362,232"/>
+<area shape="poly" id="edge8_Node000000_Node000004" title=" " alt="" coords="108,208,149,209,144,212,111,213"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1common_1_1_risultato_sfida.html" title=" " alt="" coords="147,256,362,299"/>
+<area shape="poly" id="edge9_Node000000_Node000005" title=" " alt="" coords="101,227,143,241,180,254,175,256,141,247,102,232"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1common_1_1_voce_storico.html" title=" " alt="" coords="159,323,350,365"/>
+<area shape="poly" id="edge10_Node000000_Node000006" title=" " alt="" coords="68,234,101,273,143,308,166,322,161,323,140,313,98,277,68,239"/>
+<area shape="rect" id="Node000007" href="$classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html" title="Analizzatore di documenti testuali." alt="" coords="157,389,352,432"/>
+<area shape="poly" id="edge11_Node000000_Node000007" title=" " alt="" coords="59,237,73,270,90,307,114,344,143,375,162,389,156,389,140,379,109,347,86,310,68,272,59,242"/>
+</map>

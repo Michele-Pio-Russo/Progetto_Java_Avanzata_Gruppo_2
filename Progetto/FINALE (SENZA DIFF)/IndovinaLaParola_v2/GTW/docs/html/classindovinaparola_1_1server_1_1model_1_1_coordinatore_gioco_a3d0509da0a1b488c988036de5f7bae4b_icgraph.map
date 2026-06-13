@@ -1,0 +1,11 @@
+<map id="indovinaparola.server.model.CoordinatoreGioco.CoordinatoreGioco" name="indovinaparola.server.model.CoordinatoreGioco.CoordinatoreGioco">
+<area shape="rect" id="Node000001" title="Costruisce il coordinatore del gioco." alt="" coords="780,43,1022,85"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#a8bd8b81c9b3f5331c36fea260be105cf" title="Avvia una nuova sfida tra due giocatori." alt="" coords="538,43,732,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="762,64,733,67,733,61,768,64"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#a8086e340afb1a4ce81dc8993aa913cfd" title="Aggiunge un giocatore alla lista d&#39;attesa e avvia la sfida quando sono presenti esattamente due gioca..." alt="" coords="270,35,490,93"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="520,64,491,67,490,61,525,64"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#aba933d2e360705148082ee71b1efa5e2" title="Gestisce una richiesta di login da parte di un client." alt="" coords="9,5,218,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="252,47,219,44,219,39,257,46"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#ac326640683c670408d7c607e09422654" title="Gestisce la richiesta di un client già autenticato di rientrare in lista d&#39;attesa per una nuova parti..." alt="" coords="5,72,222,131"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="252,82,223,89,222,84,257,81"/>
+</map>

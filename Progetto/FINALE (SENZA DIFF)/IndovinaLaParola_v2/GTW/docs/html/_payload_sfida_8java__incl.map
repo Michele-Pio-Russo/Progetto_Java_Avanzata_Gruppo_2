@@ -1,0 +1,7 @@
+<map id="common/src/main/java/indovinaparola/common/PayloadSfida.java" name="common/src/main/java/indovinaparola/common/PayloadSfida.java">
+<area shape="rect" id="Node000001" title="Payload inviato dal server a entrambi i client all&#39;avvio di una sfida." alt="" coords="56,5,218,64"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,112,136,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,63,91,101,87,98,113,66"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="160,112,251,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="160,62,189,100,183,99,158,67"/>
+</map>

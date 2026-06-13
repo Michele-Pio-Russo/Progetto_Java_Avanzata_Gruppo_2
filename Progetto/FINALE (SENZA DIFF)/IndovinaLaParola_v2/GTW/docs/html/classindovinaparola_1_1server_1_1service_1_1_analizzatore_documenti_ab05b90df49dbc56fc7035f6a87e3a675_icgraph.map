@@ -1,0 +1,9 @@
+<map id="indovinaparola.server.service.AnalizzatoreDocumenti.getTermFrequency" name="indovinaparola.server.service.AnalizzatoreDocumenti.getTermFrequency">
+<area shape="rect" id="Node000001" title="Restituisce la mappa Term Frequency come vista non modificabile." alt="" coords="572,39,840,81"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1service_1_1_servizio_analisi.html#ae3d92fd76439f5add8b139bcdab0d3a7" title="Crea il Task che esegue l&#39;analisi in background." alt="" coords="309,5,504,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="554,43,504,40,504,35,559,43"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html#a445c10d30216078d3192eb981b345334" title="Carica un&#39;istanza di AnalizzatoreDocumenti precedentemente serializzata." alt="" coords="289,72,524,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="559,76,525,83,524,78,554,77"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1server_1_1controller_1_1_controller_server.html#a72cf7a86d6c4dcbea7f767b0d086ad83" title="Carica un&#39;analisi precedentemente salvata da file .dat." alt="" coords="5,72,241,115"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="270,93,241,96,241,91,275,93"/>
+</map>

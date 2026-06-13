@@ -1,0 +1,7 @@
+<map id="indovinaparola.client.controller.ControllerAccesso.handlePrimary" name="indovinaparola.client.controller.ControllerAccesso.handlePrimary">
+<area shape="rect" id="Node000001" title="Gestisce il click sul pulsante principale (Accedi o Registrati)." alt="" coords="5,39,221,81"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#a8fcb93bd28221354d59b636d124c27a8" title="Nasconde il messaggio di errore pulendo il testo della label." alt="" coords="272,5,472,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="221,43,259,41,254,42,222,49"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#ae3da773814520a9692f5a80eb0f0843a" title="Mostra un messaggio di errore nella label dedicata." alt="" coords="269,72,476,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,71,256,78,251,78,221,77"/>
+</map>

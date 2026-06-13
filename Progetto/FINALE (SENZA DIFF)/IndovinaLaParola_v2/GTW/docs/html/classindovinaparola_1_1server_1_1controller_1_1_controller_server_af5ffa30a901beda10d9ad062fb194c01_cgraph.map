@@ -1,0 +1,15 @@
+<map id="indovinaparola.server.controller.ControllerServer.initialize" name="indovinaparola.server.controller.ControllerServer.initialize">
+<area shape="rect" id="Node000001" title="Inizializza il controller dopo il caricamento del file FXML." alt="" coords="5,139,211,181"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a985bcb9d2127387591f1458b2ad868b7" title="Restituisce l&#39;istanza Singleton del GestoreDatabase." alt="" coords="268,5,463,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,136,190,97,257,58,274,53,270,56,260,62,193,101,138,140"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a75c91368af90799cfe3a7fa5b20f8406" title="Restituisce il valore di una proprietà come intero." alt="" coords="263,72,468,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,136,268,118,263,121,194,141"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1server_1_1controller_1_1_controller_server.html#ad38f24a29b85919f9215932d95f50f4d" title="Aggiunge una riga timestampata alla TextArea di log." alt="" coords="263,139,468,181"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="210,157,250,159,245,161,212,163"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1server_1_1controller_1_1_controller_server.html#ae530f120026da3427223b3f222d18884" title="Configura le colonne della TableView delle statistiche utenti." alt="" coords="259,205,472,248"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="193,179,268,200,263,202,193,185"/>
+<area shape="rect" id="Node000007" href="$classindovinaparola_1_1server_1_1controller_1_1_controller_server.html#a06e08dab867970e036653ccc191c684f" title="Configura le colonne della TableView dei risultati Term Frequency." alt="" coords="263,272,468,315"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="137,179,193,219,260,258,275,266,269,266,257,262,190,223,136,184"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a3b0290884041f2f0a16d869d9e8548da" title="Costruttore privato — pattern Singleton." alt="" coords="520,5,749,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="463,24,507,26,502,27,464,29"/>
+</map>

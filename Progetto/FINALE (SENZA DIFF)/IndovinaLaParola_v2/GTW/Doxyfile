@@ -1,0 +1,171 @@
+#---------------------------------------------------------------------------
+# Doxyfile per il progetto IndovinaLaParola (JA26 - A.A. 2025/2026)
+# Da posizionare nella ROOT del progetto Maven multi-modulo
+# (la cartella che contiene common/, server/, client/, pom.xml)
+#
+# Esecuzione:
+#   doxygen Doxyfile
+# Output:
+#   docs/html/index.html
+#---------------------------------------------------------------------------
+
+#---------------------------------------------------------------------------
+# Project related configuration
+#---------------------------------------------------------------------------
+DOXYFILE_ENCODING      = UTF-8
+PROJECT_NAME           = "IndovinaLaParola"
+PROJECT_NUMBER         = "1.0"
+PROJECT_BRIEF          = "Gioco Multiplayer Client-Server a Sfide in Tempo Reale - JA26"
+PROJECT_LOGO           =
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = NO
+OUTPUT_LANGUAGE        = Italian
+
+# Linguaggio: Java (NON C/C++)
+OPTIMIZE_OUTPUT_FOR_C  = NO
+OPTIMIZE_OUTPUT_JAVA   = YES
+OPTIMIZE_FOR_FORTRAN   = NO
+OPTIMIZE_OUTPUT_VHDL   = NO
+
+# Riconosce Javadoc senza dover ripetere @brief
+JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = NO
+MULTILINE_CPP_IS_BRIEF = NO
+
+TAB_SIZE               = 4
+MARKDOWN_SUPPORT       = YES
+AUTOLINK_SUPPORT       = YES
+
+#---------------------------------------------------------------------------
+# Build related configuration
+#---------------------------------------------------------------------------
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_PACKAGE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_LOCAL_METHODS  = YES
+
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+HIDE_SCOPE_NAMES       = NO
+
+SHOW_INCLUDE_FILES     = YES
+SORT_MEMBER_DOCS       = YES
+SORT_BRIEF_DOCS        = YES
+GENERATE_TODOLIST      = YES
+GENERATE_TESTLIST      = YES
+GENERATE_BUGLIST       = YES
+GENERATE_DEPRECATEDLIST= YES
+
+#---------------------------------------------------------------------------
+# Input related configuration
+#---------------------------------------------------------------------------
+# Punti d'ingresso: i 3 moduli Maven (common, server, client)
+INPUT                  = common/src/main/java \
+                         server/src/main/java \
+                         client/src/main/java
+
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.java
+RECURSIVE              = YES
+
+# Esclude build/output e risorse non-codice
+EXCLUDE                =
+EXCLUDE_SYMLINKS       = NO
+EXCLUDE_PATTERNS       = */target/* \
+                         */test/* \
+                         */.git/*
+
+EXCLUDE_SYMBOLS        =
+
+# Eventuali immagini/diagrammi da includere nelle pagine (opzionale)
+# IMAGE_PATH           = docs/images
+
+#---------------------------------------------------------------------------
+# Source browsing
+#---------------------------------------------------------------------------
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+STRIP_CODE_COMMENTS    = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+USE_HTAGS              = NO
+VERBATIM_HEADERS       = YES
+
+#---------------------------------------------------------------------------
+# Alphabetical index
+#---------------------------------------------------------------------------
+ALPHABETICAL_INDEX     = YES
+
+#---------------------------------------------------------------------------
+# HTML output
+#---------------------------------------------------------------------------
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+HTML_COLORSTYLE        = AUTO_LIGHT
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+HTML_DYNAMIC_SECTIONS  = NO
+
+#---------------------------------------------------------------------------
+# LaTeX output (non richiesto dal progetto)
+#---------------------------------------------------------------------------
+GENERATE_LATEX         = NO
+
+#---------------------------------------------------------------------------
+# Other output formats (non necessari)
+#---------------------------------------------------------------------------
+GENERATE_RTF           = NO
+GENERATE_MAN           = NO
+GENERATE_XML           = NO
+GENERATE_DOCBOOK       = NO
+
+#---------------------------------------------------------------------------
+# Preprocessor
+#---------------------------------------------------------------------------
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = NO
+SEARCH_INCLUDES        = YES
+
+#---------------------------------------------------------------------------
+# Dot/Graphviz - diagrammi UML automatici dal codice
+#---------------------------------------------------------------------------
+# Richiede Graphviz installato (apt install graphviz / brew install graphviz)
+HAVE_DOT               = YES
+DOT_NUM_THREADS        = 0
+UML_LOOK               = YES
+UML_LIMIT_NUM_FIELDS   = 10
+
+# Diagrammi di collaborazione e inclusione
+CLASS_DIAGRAMS         = YES
+COLLABORATION_GRAPH    = YES
+GROUP_GRAPHS           = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+
+# Call graph: utile per vedere flussi (es. CoordinatoreGioco -> GestoreClient)
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+
+DOT_IMAGE_FORMAT       = svg
+INTERACTIVE_SVG        = YES
+DOT_GRAPH_MAX_NODES    = 50
+MAX_DOT_GRAPH_DEPTH    = 0
+DOT_TRANSPARENT        = YES
+
+#---------------------------------------------------------------------------
+# Diagrams without Graphviz (fallback)
+#---------------------------------------------------------------------------
+CLASS_DIAGRAMS         = YES
+
+#---------------------------------------------------------------------------
+# Misc
+#---------------------------------------------------------------------------
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = NO

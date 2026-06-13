@@ -1,0 +1,13 @@
+<map id="indovinaparola.client.controller.ControllerAccesso.clearError" name="indovinaparola.client.controller.ControllerAccesso.clearError">
+<area shape="rect" id="Node000001" title="Nasconde il messaggio di errore pulendo il testo della label." alt="" coords="888,72,1089,115"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#aab40ce2d91dd549bdcde44e2d4b98513" title="Gestisce la risposta del server a una richiesta di login." alt="" coords="580,5,840,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="879,68,802,51,802,46,884,68"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#ae9f42d41255a64a325998af1c3637155" title="Gestisce il click sul pulsante principale (Accedi o Registrati)." alt="" coords="602,72,818,115"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="870,93,818,96,818,91,876,93"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#abaa63b185d80896df90172d2af27df22" title="Alterna tra la modalità login e la modalità registrazione." alt="" coords="605,139,815,181"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="884,118,803,141,802,135,879,119"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#ab7869d75ac66844317f2f181deade8c8" title="Smista i messaggi ricevuti dal server al metodo appropriato." alt="" coords="254,5,532,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="562,27,533,29,532,24,567,26"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#a253a19a80520ae73e6eedfef39705bdb" title="Porta del server letta dal file di configurazione." alt="" coords="5,5,206,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="236,28,207,29,206,24,241,26"/>
+</map>
