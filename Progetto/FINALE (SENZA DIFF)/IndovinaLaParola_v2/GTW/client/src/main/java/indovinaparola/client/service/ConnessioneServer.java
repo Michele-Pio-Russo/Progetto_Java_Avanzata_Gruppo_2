@@ -1,3 +1,18 @@
+/**
+ * @file ConnessioneServer.java
+ *
+ * @brief Gestisce la connessione socket TCP del client verso il server.
+ *
+ * I messaggi in ingresso vengono consegnati tramite una callback
+ * Consumer assegnata dal controller. Il thread di lettura è daemon
+ * e non impedisce la chiusura della JVM quando la finestra viene chiusa.
+ * L'ordine di inizializzazione degli stream è obbligatorio:
+ * ObjectOutputStream prima di ObjectInputStream, con flush() dopo OOS.
+ *
+ * @author Gruppo 2
+ *
+ * @version 1.0.0
+ */
 package indovinaparola.client.service;
 
 import indovinaparola.common.Messaggio;
@@ -8,6 +23,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+<<<<<<< Updated upstream
 /**
  * Gestisce la connessione socket TCP del client verso il server.
  *
@@ -21,15 +37,23 @@ import java.util.logging.Logger;
  * Ordine obbligatorio degli stream: {@link ObjectOutputStream}
  * prima di {@link ObjectInputStream}, con {@code flush()} dopo OOS.
  */
+=======
+>>>>>>> Stashed changes
 public class ConnessioneServer {
 
-    private static final Logger LOGGER = Logger.getLogger(ConnessioneServer.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ConnessioneServer.class.getName()); /// @brief Logger della classe per la registrazione degli errori
 
-    private Socket socket;
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
+    private Socket socket;           /// @brief Socket TCP verso il server
+    private ObjectOutputStream out;  /// @brief Stream di output per la serializzazione dei messaggi
+    private ObjectInputStream in;    /// @brief Stream di input per la deserializzazione dei messaggi
+
+    private Consumer<Messaggio> callbackMessaggio;    /// @brief Callback invocata ad ogni messaggio ricevuto dal server
+    private Runnable callbackDisconnessione;          /// @brief Callback invocata alla disconnessione dal server
+
+    private volatile boolean connesso = false; /// @brief Indica se la connessione con il server è attiva
 
     /**
+<<<<<<< Updated upstream
      * Callback invocata ad ogni messaggio ricevuto dal server.
      * Assegnata tramite lambda dal controller.
      */
@@ -45,33 +69,43 @@ public class ConnessioneServer {
 
     /**
      * Imposta la callback per i messaggi ricevuti dal server.
+=======
+     * @brief Imposta la callback per i messaggi ricevuti dal server.
+>>>>>>> Stashed changes
      *
-     * @param callback {@link Consumer}&lt;{@link Messaggio}&gt; invocato ad ogni messaggio
+     * @param[in] callback Consumer invocato ad ogni messaggio ricevuto
      */
     public void setMessageCallback(Consumer<Messaggio> callback) {
         this.callbackMessaggio = callback;
     }
 
     /**
-     * Imposta la callback invocata alla disconnessione dal server.
+     * @brief Imposta la callback invocata alla disconnessione dal server.
      *
-     * @param callback {@link Runnable} eseguito alla disconnessione
+     * @param[in] callback Runnable eseguito alla disconnessione
      */
     public void setDisconnectCallback(Runnable callback) {
         this.callbackDisconnessione = callback;
     }
 
     /**
-     * Apre la connessione TCP con il server e avvia il thread daemon di lettura.
+     * @brief Apre la connessione TCP con il server e avvia il thread daemon di lettura.
      *
-     * @param host indirizzo IP del server
-     * @param porta porta del server
+     * Inizializza gli stream nell'ordine obbligatorio: ObjectOutputStream
+     * prima di ObjectInputStream, con flush() dopo OOS per sbloccare
+     * il costruttore dell'OIS lato server.
+     *
+     * @param[in] host  indirizzo IP del server
+     * @param[in] porta porta del server
      * @throws IOException se la connessione non riesce
      */
     public void connetti(String host, int porta) throws IOException {
         socket = new Socket(host, porta);
 
+<<<<<<< Updated upstream
         // ORDINE OBBLIGATORIO: OOS prima di OIS + flush()
+=======
+>>>>>>> Stashed changes
         out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
         in = new ObjectInputStream(socket.getInputStream());
@@ -82,7 +116,10 @@ public class ConnessioneServer {
     }
 
     /**
-     * Avvia il thread daemon di lettura dei messaggi in ingresso.
+     * @brief Avvia il thread daemon di lettura dei messaggi in ingresso.
+     *
+     * Il thread legge continuamente oggetti dallo stream finché la connessione
+     * è attiva. Alla chiusura o in caso di errore invoca la callback di disconnessione.
      */
     private void avviaThreadLettura() {
         Thread t = new Thread(new Runnable() {
@@ -112,11 +149,13 @@ public class ConnessioneServer {
     }
 
     /**
-     * Invia un messaggio al server in modo thread-safe.
-     * Il metodo è {@code synchronized} per evitare interleaving
-     * se più thread dovessero scrivere contemporaneamente.
+     * @brief Invia un messaggio al server in modo thread-safe.
      *
-     * @param msg messaggio da inviare (non null)
+     * Il metodo è synchronized per evitare interleaving se più thread
+     * dovessero scrivere contemporaneamente. Dopo ogni invio viene chiamato
+     * reset() per evitare il caching degli oggetti da parte di ObjectOutputStream.
+     *
+     * @param[in] msg messaggio da inviare (non null)
      */
     public synchronized void invia(Messaggio msg) {
         if (!connesso) {
@@ -126,14 +165,20 @@ public class ConnessioneServer {
         try {
             out.writeObject(msg);
             out.flush();
+<<<<<<< Updated upstream
             out.reset(); // Evita object caching di ObjectOutputStream
+=======
+            out.reset();
+>>>>>>> Stashed changes
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "Errore invio messaggio", e);
         }
     }
 
     /**
-     * Chiude la connessione con il server.
+     * @brief Chiude la connessione con il server.
+     *
+     * Imposta il flag connesso a false e chiude il socket se ancora aperto.
      */
     public void disconnetti() {
         connesso = false;
@@ -147,9 +192,9 @@ public class ConnessioneServer {
     }
 
     /**
-     * Indica se la connessione è attiva.
+     * @brief Indica se la connessione con il server è attiva.
      *
-     * @return true se connesso al server
+     * @return true se connesso al server, false altrimenti
      */
     public boolean isConnesso() {
         return connesso;

@@ -1,3 +1,16 @@
+/**
+ * @file ControllerAccesso.java
+ *
+ * @brief Controller JavaFX per la schermata di login e registrazione del client.
+ *
+ * Gestisce la connessione iniziale al server in un thread separato,
+ * la modalità alternata login/registrazione e la navigazione alla schermata di gioco.
+ * La connessione avviene in un thread daemon per non bloccare il JavaFX Application Thread.
+ *
+ * @author Gruppo 2
+ *
+ * @version 1.0.0
+ */
 package indovinaparola.client.controller;
 
 import indovinaparola.client.service.ConnessioneServer;
@@ -23,6 +36,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+<<<<<<< Updated upstream
 /**
  * Controller JavaFX per la schermata di login e registrazione del client.
  *
@@ -34,31 +48,36 @@ import java.util.logging.Logger;
  * come interfaccia funzionale assegnata tramite anonymous class Java 8
  *.
  */
+=======
+>>>>>>> Stashed changes
 public class ControllerAccesso implements Initializable {
 
-    private static final Logger LOGGER = Logger.getLogger(ControllerAccesso.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ControllerAccesso.class.getName()); /// @brief Logger della classe per la registrazione degli errori
 
-    @FXML private Label formTitle;
-    @FXML private TextField campoNomeUtente;
-    @FXML private PasswordField passwordField;
-    @FXML private VBox confirmBox;
-    @FXML private PasswordField confirmField;
-    @FXML private Label errorLabel;
-    @FXML private Button pulsantePrincipale;
-    @FXML private Button switchBtn;
-    @FXML private Label connectionLabel;
+    @FXML private Label formTitle; ////// @brief Titolo del form (login o registrazione)
+    @FXML private TextField campoNomeUtente; /// @brief Campo di testo per l'inserimento del nome utente
+    @FXML private PasswordField passwordField; /// @brief Campo per l'inserimento della password
+    @FXML private VBox confirmBox; /// @brief Contenitore del campo di conferma password (visibile solo in modalità registrazione)
+    @FXML private PasswordField confirmField; /// @brief Campo per la conferma della password in fase di registrazione
+    @FXML private Label errorLabel; /// @brief Label per la visualizzazione dei messaggi di errore
+    @FXML private Button pulsantePrincipale; /// @brief Pulsante principale per confermare login o registrazione
+    @FXML private Button switchBtn; /// @brief Pulsante per alternare tra modalità login e registrazione
+    @FXML private Label connectionLabel; /// @brief Label che mostra lo stato della connessione al server
 
-    private boolean isRegistrationMode = false;
-    private ConnessioneServer connessione;
-    private String serverIp;
-    private int serverPort;
-
+    private boolean isRegistrationMode = false; /// @brief Indica se il form è in modalità registrazione (true) o login (false)
+    private ConnessioneServer connessione; /// @brief Oggetto che gestisce la connessione socket con il server
+    private String serverIp; /// @brief Indirizzo IP del server letto dal file di configurazione    
+    private int serverPort; /// @brief Porta del server letta dal file di configurazione
+ 
     /**
-     * Inizializza il controller dopo il caricamento FXML.
-     * Carica le properties e tenta la connessione al server.
+     * @brief Inizializza il controller dopo il caricamento FXML.
      *
-     * @param location  URL della risorsa (non usato)
-     * @param resources ResourceBundle (non usato)
+     * Carica la configurazione del server tramite {@code ConfigurazioneClient},
+     * imposta le callback per i messaggi e la disconnessione,
+     * e avvia il tentativo di connessione al server.
+     *
+     * @param[in] location  URL della risorsa FXML (non utilizzato)
+     * @param[in] resources ResourceBundle per la localizzazione (non utilizzato)
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -68,7 +87,10 @@ public class ControllerAccesso implements Initializable {
 
         connessione = new ConnessioneServer();
 
+<<<<<<< Updated upstream
         // Consumer<Messaggio> assegnato con lambda
+=======
+>>>>>>> Stashed changes
         connessione.setMessageCallback(new Consumer<Messaggio>() {
             @Override
             public void accept(Messaggio msg) {
@@ -76,7 +98,10 @@ public class ControllerAccesso implements Initializable {
             }
         });
 
+<<<<<<< Updated upstream
         // Runnable per la disconnessione
+=======
+>>>>>>> Stashed changes
         connessione.setDisconnectCallback(new Runnable() {
             @Override
             public void run() {
@@ -94,8 +119,11 @@ public class ControllerAccesso implements Initializable {
     }
 
     /**
-     * Tenta la connessione al server in un thread separato
-     * per non bloccare il JavaFX Application Thread.
+     * @brief Tenta la connessione al server in un thread separato.
+     *
+     * Avvia un thread daemon che esegue la connessione senza bloccare
+     * il JavaFX Application Thread. Aggiorna la label di stato al termine,
+     * sia in caso di successo che di errore.
      */
     private void tryConnect() {
         connectionLabel.setText("Connessione a " + serverIp + ":" + serverPort + "...");
@@ -129,27 +157,17 @@ public class ControllerAccesso implements Initializable {
         t.start();
     }
 
-    // ----------------------------------------------------------------
-    // Gestione messaggi dal server
-    // ----------------------------------------------------------------
-
     /**
-     * Smista i messaggi ricevuti dal server al metodo appropriato.
-     * Tutti gli aggiornamenti alla GUI passano per {@link Platform#runLater}.
+     * @brief Smista i messaggi ricevuti dal server al metodo appropriato.
      *
-     * @param msg messaggio ricevuto
+     * Tutti gli aggiornamenti alla GUI vengono eseguiti tramite {@code Platform.runLater}.
+     * In caso di messaggio {@code WAITING}, sostituisce immediatamente la callback
+     * con un buffer temporaneo per evitare la perdita di messaggi (es. {@code CHALLENGE_START})
+     * che potrebbero arrivare prima che {@code ControllerGioco} sia inizializzato.
+     *
+     * @param[in] msg messaggio ricevuto dal server
      */
     private void gestisciMessaggioServer(final Messaggio msg) {
-        // ATTENZIONE - fix race condition (vedi vaiAGioco):
-        // se il messaggio e' WAITING, il client potrebbe ricevere SUBITO DOPO
-        // (sullo stesso reader thread) anche un CHALLENGE_START, prima ancora
-        // che il thread JavaFX esegua la navigazione verso game.fxml e
-        // ControllerGioco possa registrare il proprio callbackMessaggio.
-        // In tal caso il CHALLENGE_START arriverebbe ancora qui e verrebbe
-        // perso (default: break). Per evitarlo, appena riceviamo WAITING
-        // sostituiamo SUBITO (sul reader thread, in modo sincrono) la callback
-        // con un buffer che accoda eventuali messaggi successivi, da
-        // "riconsegnare" a ControllerGioco una volta inizializzato.
         if (msg.getTipo() == Messaggio.Tipo.WAITING) {
             final java.util.Queue<Messaggio> pending = new java.util.concurrent.ConcurrentLinkedQueue<>();
             connessione.setMessageCallback(new Consumer<Messaggio>() {
@@ -194,28 +212,33 @@ public class ControllerAccesso implements Initializable {
     }
 
     /**
-     * Gestisce la risposta del server al login.
+     * @brief Gestisce la risposta del server a una richiesta di login.
      *
-     * @param resp risposta autenticazione
+     * In caso di successo aggiorna la label di connessione con il nome utente.
+     * La navigazione alla schermata di gioco avviene separatamente,
+     * alla ricezione del messaggio {@code WAITING}.
+     *
+     * @param[in] resp risposta di autenticazione ricevuta dal server
      */
     private void gestisciRispostaLogin(RispostaAutenticazione resp) {
         if (resp.isSuccesso()) {
             connectionLabel.setText("Autenticato come: " + campoNomeUtente.getText().trim());
             clearError();
-            // La navigazione avviene quando arriva il messaggio WAITING
         } else {
             mostraErrore(resp.getMessaggio());
         }
     }
 
     /**
-     * Gestisce la risposta del server alla registrazione.
+     * @brief Gestisce la risposta del server a una richiesta di registrazione.
      *
-     * @param resp risposta registrazione
+     * In caso di successo ripristina la modalità login e mostra un messaggio
+     * di conferma in verde. In caso di errore mostra il messaggio di errore.
+     *
+     * @param[in] resp risposta di registrazione ricevuta dal server
      */
     private void gestisciRispostaRegistrazione(RispostaAutenticazione resp) {
         if (resp.isSuccesso()) {
-            // Torna in modalità login con messaggio di successo
             isRegistrationMode = false;
             formTitle.setText("Accedi al gioco");
             pulsantePrincipale.setText("Accedi");
@@ -229,12 +252,12 @@ public class ControllerAccesso implements Initializable {
         }
     }
 
-    // ----------------------------------------------------------------
-    // Azioni FXML
-    // ----------------------------------------------------------------
-
     /**
-     * Gestisce il click sul pulsante principale (Accedi o Registrati).
+     * @brief Gestisce il click sul pulsante principale (Accedi o Registrati).
+     *
+     * Valida i campi inseriti dall'utente e, se la connessione è attiva,
+     * invia al server la richiesta di login o registrazione in base alla modalità corrente.
+     * Disabilita il pulsante per evitare invii multipli.
      */
     @FXML
     private void handlePrimary() {
@@ -277,7 +300,10 @@ public class ControllerAccesso implements Initializable {
     }
 
     /**
-     * Alterna tra modalità login e modalità registrazione.
+     * @brief Alterna tra la modalità login e la modalità registrazione.
+     *
+     * Aggiorna titolo, testo dei pulsanti e visibilità del campo
+     * di conferma password in base alla modalità attivata.
      */
     @FXML
     private void handleSwitch() {
@@ -298,21 +324,19 @@ public class ControllerAccesso implements Initializable {
         }
     }
 
-    // ----------------------------------------------------------------
-    // Navigazione
-    // ----------------------------------------------------------------
-
     /**
-     * Carica la schermata di gioco e vi naviga sostituendo la scena corrente.
+     * @brief Carica la schermata di gioco e vi naviga sostituendo la scena corrente.
      *
-     * @param nomeUtente   nomeUtente autenticato
-     * @param conn       connessione già aperta con il server
-     * @param waitingMsg messaggio di attesa iniziale
+     * Inizializza ControllerGioco tramite il metodo init e
+     * riconsegna eventuali messaggi accodati durante la fase di navigazione,
+     * per evitare che vadano persi prima che il nuovo controller sia pronto.
+     *
+     * @param[in] nomeUtente nome utente autenticato
+     * @param[in] conn connessione già aperta con il server
+     * @param[in] waitingMsg messaggio di attesa iniziale ricevuto dal server
+     * @param[in] pendingMessages coda di messaggi arrivati durante la navigazione
      */
-    private void vaiAGioco(final String nomeUtente,
-                                final ConnessioneServer conn,
-                                final String waitingMsg,
-                                final java.util.Queue<Messaggio> pendingMessages) {
+    private void vaiAGioco(final String nomeUtente, final ConnessioneServer conn, final String waitingMsg, final java.util.Queue<Messaggio> pendingMessages) {
         try {
             FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/fxml/game.fxml"));
@@ -320,9 +344,6 @@ public class ControllerAccesso implements Initializable {
             ControllerGioco gc = loader.getController();
             gc.init(nomeUtente, conn, waitingMsg);
 
-            // Riconsegna eventuali messaggi (es. CHALLENGE_START) arrivati
-            // sul reader thread mentre eravamo in fase di navigazione,
-            // prima che ControllerGioco registrasse il proprio callbackMessaggio.
             Messaggio m;
             while ((m = pendingMessages.poll()) != null) {
                 gc.consegnaMessaggio(m);
@@ -340,14 +361,12 @@ public class ControllerAccesso implements Initializable {
         }
     }
 
-    // ----------------------------------------------------------------
-    // Utility UI
-    // ----------------------------------------------------------------
-
     /**
-     * Mostra un messaggio di errore nella Label dedicata.
+     * @brief Mostra un messaggio di errore nella label dedicata.
      *
-     * @param msg messaggio di errore
+     * Imposta il testo in rosso e aggiorna il contenuto della label.
+     *
+     * @param[in] msg testo del messaggio di errore da visualizzare
      */
     private void mostraErrore(String msg) {
         errorLabel.setStyle("-fx-text-fill: #f85149;");
@@ -355,7 +374,7 @@ public class ControllerAccesso implements Initializable {
     }
 
     /**
-     * Nasconde il messaggio di errore.
+     * @brief Nasconde il messaggio di errore pulendo il testo della label.
      */
     private void clearError() {
         errorLabel.setText("");

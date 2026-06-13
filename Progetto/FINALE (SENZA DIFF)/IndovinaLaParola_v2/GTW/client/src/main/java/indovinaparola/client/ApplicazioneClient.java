@@ -1,3 +1,16 @@
+/**
+ * @file ApplicazioneClient.java
+ * 
+ * @brief Questa è la classe principale del lato client del gioco "Indovina la parola"
+ * basata su JavaFX 
+ * 
+ * Classe che carica la schermata di login e avvia la GUI.
+ * Questo è il primo componente ad essere eseguito quando si lancia l'applicazione client 
+ * 
+ * @author Gruppo 2
+ * 
+ * @version 1.0.0
+ */
 package indovinaparola.client;
 
 import javafx.application.Application;
@@ -6,18 +19,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * Punto di ingresso dell'applicazione JavaFX lato client.
- * Carica la schermata di login ({@code login.fxml}) e avvia la GUI.
- */
 public class ApplicazioneClient extends Application {
 
     /**
-     * Avvia la GUI del client caricando il file FXML della schermata di login.
+     * @brief Avvia la GUI del client caricando il file FXML della schermata di login.
      *
-     * @param primaryStage stage principale fornito dal framework JavaFX
+     * Carica il file FXML della schermata di login, crea una scena con dimensioni
+     * fisse e la visualizza nella finestra principale dell'applicazione.
+     * La finestra non è ridimensionabile.
+     * 
+     * @param[in] primaryStage stage principale fornito dal framework JavaFX
      * @throws Exception in caso di errore nel caricamento FXML
      */
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(
@@ -32,9 +46,9 @@ public class ApplicazioneClient extends Application {
     }
 
     /**
-     * Punto di ingresso principale dell'applicazione client.
+     * @brief Punto di ingresso principale dell'applicazione client.
      *
-     * @param args argomenti da riga di comando (non utilizzati)
+     * @param[in] args argomenti da riga di comando (non utilizzati)
      */
     public static void main(String[] args) {
         launch(args);

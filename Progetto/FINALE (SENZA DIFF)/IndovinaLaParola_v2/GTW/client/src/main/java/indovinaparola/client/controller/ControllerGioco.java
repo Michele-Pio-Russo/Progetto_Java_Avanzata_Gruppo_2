@@ -1,3 +1,19 @@
+/**
+ * @file ControllerGioco.java
+ *
+ * @brief Controller JavaFX per la finestra di gioco del client.
+ *
+ * Gestisce tre pannelli sovrapposti in un StackPane: il pannello di attesa,
+ * il pannello di gioco e il pannello del risultato finale.
+ * La visibilità e il managed sono alternati per mostrare un solo pannello
+ * alla volta senza ricreare la scena.
+ * Il timer è implementato con Timeline di JavaFX, che rimane nel
+ * JavaFX Application Thread ed è thread-safe per la GUI.
+ *
+ * @author Gruppo 2
+ *
+ * @version 1.0.0
+ */
 package indovinaparola.client.controller;
 
 import indovinaparola.client.service.ConnessioneServer;
@@ -25,6 +41,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+<<<<<<< Updated upstream
 /**
  * Controller JavaFX per la finestra di gioco del client.
  *
@@ -40,58 +57,54 @@ import java.util.logging.Logger;
  * Il timer è implementato con {@link Timeline} di JavaFX:
  * rimane nel JavaFX Application Thread ed è thread-safe per la GUI.
  */
+=======
+>>>>>>> Stashed changes
 public class ControllerGioco {
 
-    private static final Logger LOGGER = Logger.getLogger(ControllerGioco.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ControllerGioco.class.getName()); /// @brief Logger della classe per la registrazione degli errori
 
-    // --- Binding FXML ---
-    @FXML private Label etichettaGiocatore;
-    @FXML private Label etichettaStato;
+    @FXML private Label etichettaGiocatore; /// @brief Label con il nome del giocatore autenticato
+    @FXML private Label etichettaStato;     /// @brief Label che mostra lo stato corrente della partita
 
-    // Pannello attesa
-    @FXML private VBox waitingPane;
-    @FXML private Label dettaglioAttesa;
+    @FXML private VBox waitingPane;     /// @brief Pannello mostrato mentre si attende l'avversario
+    @FXML private Label dettaglioAttesa; /// @brief Label con il messaggio di dettaglio durante l'attesa
 
-    // Pannello gioco
-    @FXML private VBox gamePane;
-    @FXML private Label etichettaTimer;
-    @FXML private TextArea areaTesto;
-    @FXML private Label etichettaParoleCifrate;
-    @FXML private TextField campoRisposta;
-    @FXML private Label etichettaFeedback;
+    @FXML private VBox gamePane;                    /// @brief Pannello mostrato durante la sfida
+    @FXML private Label etichettaTimer;             /// @brief Label che mostra i secondi rimanenti
+    @FXML private TextArea areaTesto;               /// @brief Area di testo con l'estratto da analizzare
+    @FXML private Label etichettaParoleCifrate;     /// @brief Label con le parole cifrate da indovinare
+    @FXML private TextField campoRisposta;          /// @brief Campo di testo per inserire la risposta
+    @FXML private Label etichettaFeedback;          /// @brief Label per i messaggi di feedback all'utente
 
-    // Pannello risultato
-    @FXML private VBox pannelloRisultato;
-    @FXML private Label emojiRisultato;
-    @FXML private Label titoloRisultato;
-    @FXML private Label dettaglioRisultato;
+    @FXML private VBox pannelloRisultato;   /// @brief Pannello mostrato al termine della sfida
+    @FXML private Label emojiRisultato;     /// @brief Label con l'emoji rappresentativa dell'esito
+    @FXML private Label titoloRisultato;    /// @brief Label con il titolo dell'esito (vittoria, sconfitta, pareggio)
+    @FXML private Label dettaglioRisultato; /// @brief Label con i dettagli del risultato finale
 
-    // --- Stato interno ---
-    private String nomeUtente;
-    private ConnessioneServer connessione;
-    private Timeline timelineTimer;
-    private int secondiRimanenti;
-    private long tempoInizioSfida;
+    private String nomeUtente;          /// @brief Nome del giocatore autenticato
+    private ConnessioneServer connessione; /// @brief Connessione socket attiva con il server
+    private Timeline timelineTimer;     /// @brief Timeline JavaFX per il countdown della sfida
+    private int secondiRimanenti;       /// @brief Secondi rimanenti nel countdown corrente
+    private long tempoInizioSfida;      /// @brief Timestamp di inizio della sfida in millisecondi
 
     /**
-     * Inizializza il controller con i dati della sessione autenticata.
-     * Deve essere chiamato dal {@link ControllerAccesso} dopo il caricamento FXML.
+     * @brief Inizializza il controller con i dati della sessione autenticata.
      *
-     * @param nomeUtente   nomeUtente del giocatore autenticato
-     * @param connessione connessione già aperta e autenticata con il server
-     * @param waitingMsg messaggio di attesa iniziale da mostrare
+     * Imposta le label iniziali, registra le callback per i messaggi
+     * e la disconnessione, e mostra il pannello di attesa.
+     * Deve essere chiamato da ControllerAccesso dopo il caricamento FXML.
+     *
+     * @param[in] nomeUtente  nome del giocatore autenticato
+     * @param[in] connessione connessione già aperta e autenticata con il server
+     * @param[in] waitingMsg  messaggio di attesa iniziale da mostrare
      */
-    public void init(final String nomeUtente,
-                     final ConnessioneServer connessione,
-                     final String waitingMsg) {
+    public void init(final String nomeUtente, final ConnessioneServer connessione, final String waitingMsg) {
         this.nomeUtente = nomeUtente;
         this.connessione = connessione;
 
         etichettaGiocatore.setText("Giocatore: " + nomeUtente);
-        dettaglioAttesa.setText(waitingMsg != null ? waitingMsg
-            : "Connesso. In attesa dell'avversario...");
+        dettaglioAttesa.setText(waitingMsg != null ? waitingMsg : "Connesso. In attesa dell'avversario...");
 
-        // Aggiorna la callback dei messaggi: ora gestiamo noi i messaggi di gioco
         connessione.setMessageCallback(new Consumer<Messaggio>() {
             @Override
             public void accept(Messaggio msg) {
@@ -117,31 +130,40 @@ public class ControllerGioco {
     }
 
     /**
-     * Consegna manualmente un messaggio al controller, come se fosse
-     * arrivato dal {@link ConnessioneServer}.
+     * @brief Consegna manualmente un messaggio al controller.
      *
+<<<<<<< Updated upstream
      * Usato da {@link ControllerAccesso} per "rigiocare" eventuali messaggi
      * (tipicamente {@code CHALLENGE_START}) ricevuti dal reader thread durante
      * la transizione tra la schermata di login e quella di gioco, prima che
      * questo controller registrasse la propria callback (fix race condition
      * sul secondo client).
+=======
+     * Usato da {@code ControllerAccesso} per riconsegnare eventuali messaggi
+     * (tipicamente {@code CHALLENGE_START}) ricevuti durante la transizione
+     * tra la schermata di login e quella di gioco, prima che questo controller
+     * registrasse la propria callback (fix race condition sul secondo client).
+>>>>>>> Stashed changes
      *
-     * @param msg messaggio da processare
+     * @param[in] msg messaggio da processare
      */
     public void consegnaMessaggio(Messaggio msg) {
         gestisciMessaggioServer(msg);
     }
 
-    // ----------------------------------------------------------------
-    // Gestione messaggi dal server
-    // ----------------------------------------------------------------
-
     /**
+<<<<<<< Updated upstream
      * Smista i messaggi ricevuti dal server al metodo appropriato.
      * Tutti gli aggiornamenti alla GUI passano per {@link Platform#runLater}
      *.
+=======
+     * @brief Smista i messaggi ricevuti dal server al metodo appropriato.
+>>>>>>> Stashed changes
      *
-     * @param msg messaggio ricevuto dal server
+     * Tutti gli aggiornamenti alla GUI passano per {@code Platform.runLater}
+     * per garantire la thread safety con il JavaFX Application Thread.
+     *
+     * @param[in] msg messaggio ricevuto dal server
      */
     private void gestisciMessaggioServer(final Messaggio msg) {
         Platform.runLater(new Runnable() {
@@ -169,16 +191,17 @@ public class ControllerGioco {
     }
 
     /**
-     * Avvia la sfida ricevuta dal server.
-     * Popola il testo e la parola cifrata, imposta il timer con {@link Timeline}.
+     * @brief Avvia la sfida ricevuta dal server.
      *
-     * @param carico dati della sfida
+     * Popola l'area di testo e la label delle parole cifrate, abilita
+     * il campo di risposta e avvia il timer countdown tramite {@code Timeline}.
+     *
+     * @param[in] carico dati della sfida ricevuti dal server
      */
     private void avviaSfida(PayloadSfida carico) {
         tempoInizioSfida = System.currentTimeMillis();
         secondiRimanenti = carico.getSecondiTimeout();
 
-        // Popola UI
         areaTesto.setText(carico.getEstrattoTesto());
         List<String> words = carico.getParoleCifrate();
         StringBuilder sb = new StringBuilder();
@@ -195,16 +218,25 @@ public class ControllerGioco {
         mostraGioco();
         etichettaStato.setText("In gioco!");
 
+<<<<<<< Updated upstream
         // Avvia il timer countdown con Timeline
+=======
+>>>>>>> Stashed changes
         avviaCountdown();
     }
 
     /**
-     * Avvia il timer countdown con {@link Timeline} di JavaFX.
+     * @brief Avvia il timer countdown con Timeline di JavaFX.
      *
+<<<<<<< Updated upstream
      * {@code Timeline} è la scelta corretta per task periodici nel foreground
      * (aggiornamento GUI): rimane nel FX Application Thread ed è thread-safe
      *.
+=======
+     * Crea una {@code Timeline} con un {@code KeyFrame} al secondo che decrementa
+     * il contatore e aggiorna la label del timer. Gli ultimi 10 secondi vengono
+     * evidenziati in rosso. Allo scadere del tempo il campo di risposta viene disabilitato.
+>>>>>>> Stashed changes
      */
     private void avviaCountdown() {
         if (timelineTimer != null) timelineTimer.stop();
@@ -212,7 +244,6 @@ public class ControllerGioco {
         etichettaTimer.setText(String.valueOf(secondiRimanenti));
         etichettaTimer.setStyle("-fx-text-fill: #f0f6fc; -fx-font-size: 32px; -fx-font-weight: bold;");
 
-        // KeyFrame eseguito ogni secondo nel FX Application Thread
         timelineTimer = new Timeline(new KeyFrame(Duration.seconds(1),
             new EventHandler<ActionEvent>() {
                 @Override
@@ -220,7 +251,6 @@ public class ControllerGioco {
                     secondiRimanenti--;
                     etichettaTimer.setText(String.valueOf(Math.max(0, secondiRimanenti)));
 
-                    // Evidenzia in rosso gli ultimi 10 secondi
                     if (secondiRimanenti <= 10) {
                         etichettaTimer.setStyle(
                             "-fx-text-fill: #f85149; -fx-font-size: 32px; -fx-font-weight: bold;");
@@ -239,16 +269,22 @@ public class ControllerGioco {
     }
 
     /**
-     * Mostra il pannello con il risultato finale della sfida.
+     * @brief Mostra il pannello con il risultato finale della sfida.
      *
-     * @param result risultato ricevuto dal server
+     * Ferma il timer, aggiorna emoji, titolo e dettaglio in base all'esito
+     * (vittoria, sconfitta o pareggio) e mostra il pannello del risultato.
+     *
+     * @param[in] result risultato della sfida ricevuto dal server
      */
     private void mostraRisultato(RisultatoSfida result) {
         if (timelineTimer != null) timelineTimer.stop();
         campoRisposta.setDisable(true);
         etichettaStato.setText("Partita terminata");
 
+<<<<<<< Updated upstream
         // Usa il metodo dell'enum Esito
+=======
+>>>>>>> Stashed changes
         emojiRisultato.setText(result.getEsito().toEmoji());
         titoloRisultato.setText(result.getEsito().toDisplayString());
 
@@ -281,25 +317,31 @@ public class ControllerGioco {
     }
 
     /**
-     * Gestisce i messaggi di errore ricevuti dal server durante la sfida.
+     * @brief Gestisce i messaggi di errore ricevuti dal server durante la sfida.
      *
-     * @param errorMsg messaggio di errore
+     * Se l'errore segnala la disconnessione dell'avversario, ferma il timer
+     * e rimette automaticamente il client in lista d'attesa dopo 3 secondi
+     * tramite una {@code Timeline} one-shot. Altrimenti mostra il messaggio
+     * di errore nella label di feedback.
+     *
+     * @param[in] errorMsg messaggio di errore ricevuto dal server
      */
     private void gestisciErroreServer(String errorMsg) {
         if (errorMsg != null && errorMsg.contains("disconnesso")) {
-            // Avversario disconnesso → torna in attesa dopo 3 secondi
             if (timelineTimer != null) timelineTimer.stop();
             etichettaStato.setText("Partita annullata");
             mostraFeedback("L'avversario si e' disconnesso. In attesa di nuovo avversario...");
 
+<<<<<<< Updated upstream
             // Timeline one-shot per il ritardo
+=======
+>>>>>>> Stashed changes
             Timeline delay = new Timeline(new KeyFrame(Duration.seconds(3),
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
                         dettaglioAttesa.setText("In attesa di un nuovo avversario...");
                         mostraAttesa();
-                        // Notifica il server che siamo di nuovo disponibili
                         connessione.invia(new Messaggio(Messaggio.Tipo.REQUEUE_REQUEST, null));
                     }
                 }));
@@ -310,12 +352,11 @@ public class ControllerGioco {
         }
     }
 
-    // ----------------------------------------------------------------
-    // Azioni FXML
-    // ----------------------------------------------------------------
-
     /**
-     * Invia la risposta al server.
+     * @brief Invia la risposta dell'utente al server.
+     *
+     * Legge il contenuto del campo di risposta, verifica che non sia vuoto
+     * e invia un messaggio CHALLENGE_ANSWER al server.
      * Collegato al pulsante "Invia" e all'evento onAction del TextField (tasto Invio).
      */
     @FXML
@@ -331,7 +372,10 @@ public class ControllerGioco {
     }
 
     /**
-     * Naviga alla schermata dello storico partite.
+     * @brief Naviga alla schermata dello storico partite.
+     *
+     * Carica il file history.fxml, inizializza ControllerStorico
+     * e sostituisce la scena corrente.
      */
     @FXML
     private void gestisciVisualizzaStorico() {
@@ -348,26 +392,22 @@ public class ControllerGioco {
     }
 
     /**
-     * Rimette il client in lista d'attesa per una nuova partita.
+     * @brief Rimette il client in lista d'attesa per una nuova partita.
+     *
+     * Mostra il pannello di attesa e invia al server un messaggio
+     * REQUEUE_REQUEST. Non reinvia le credenziali poiché il client
+     * è già autenticato sulla connessione corrente.
      */
     @FXML
     private void gestisciNuovaPartita() {
         dettaglioAttesa.setText("In attesa di un nuovo avversario...");
         mostraAttesa();
         etichettaStato.setText("In attesa...");
-        // Richiede al server di rientrare in lista d'attesa per una nuova
-        // partita: il client e' gia' autenticato sulla stessa connessione,
-        // quindi NON va reinviato un LOGIN_REQUEST (carico null -> il server
-        // farebbe un cast/NPE su PayloadAutenticazione e chiuderebbe la connessione).
         connessione.invia(new Messaggio(Messaggio.Tipo.REQUEUE_REQUEST, null));
     }
 
-    // ----------------------------------------------------------------
-    // Gestione visibilità pannelli
-    // ----------------------------------------------------------------
-
     /**
-     * Mostra il pannello di attesa, nasconde gli altri.
+     * @brief Mostra il pannello di attesa e nasconde gli altri.
      */
     private void mostraAttesa() {
         setPaneVisible(waitingPane, true);
@@ -377,7 +417,7 @@ public class ControllerGioco {
     }
 
     /**
-     * Mostra il pannello di gioco, nasconde gli altri.
+     * @brief Mostra il pannello di gioco e nasconde gli altri.
      */
     private void mostraGioco() {
         setPaneVisible(waitingPane, false);
@@ -386,7 +426,7 @@ public class ControllerGioco {
     }
 
     /**
-     * Mostra il pannello risultato, nasconde gli altri.
+     * @brief Mostra il pannello del risultato e nasconde gli altri.
      */
     private void mostraPannelloRisultato() {
         setPaneVisible(waitingPane, false);
@@ -395,12 +435,13 @@ public class ControllerGioco {
     }
 
     /**
-     * Imposta visibilità e managed di un pannello VBox.
-     * Impostare anche managed=false evita che il pannello occupi spazio
-     * nel layout anche quando è invisible.
+     * @brief Imposta visibilità e managed di un pannello VBox.
      *
-     * @param pane    pannello da mostrare/nascondere
-     * @param visible true per mostrare, false per nascondere
+     * Impostare managed=false evita che il pannello occupi spazio
+     * nel layout anche quando è invisibile.
+     *
+     * @param[in] pane    pannello da mostrare o nascondere
+     * @param[in] visible true per mostrare, false per nascondere
      */
     private void setPaneVisible(VBox pane, boolean visible) {
         pane.setVisible(visible);
@@ -408,9 +449,9 @@ public class ControllerGioco {
     }
 
     /**
-     * Mostra un messaggio di feedback nella label dedicata.
+     * @brief Mostra un messaggio di feedback nella label dedicata.
      *
-     * @param msg messaggio da mostrare
+     * @param[in] msg testo del messaggio da visualizzare
      */
     private void mostraFeedback(String msg) {
         etichettaFeedback.setText(msg);
