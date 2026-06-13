@@ -14,7 +14,7 @@ public class Messaggio implements Serializable {
 
     /**
      * Tipi di messaggio scambiati nel protocollo.
-     * Uso di enum (Modulo 2 - Tipi enum del corso JA26).
+     * Uso di enum.
      */
     public enum Tipo {
         /** Richiesta di login da client a server. */

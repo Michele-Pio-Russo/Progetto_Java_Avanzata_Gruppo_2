@@ -26,13 +26,13 @@ import java.util.logging.Logger;
 /**
  * Controller JavaFX per la schermata di login e registrazione del client.
  *
- * <p>Gestisce la connessione iniziale al server in un thread separato
+ * Gestisce la connessione iniziale al server in un thread separato
  * (non blocca il JavaFX Application Thread), la modalità alternata
- * login/registrazione e la navigazione alla schermata di gioco.</p>
+ * login/registrazione e la navigazione alla schermata di gioco.
  *
- * <p>La callback dei messaggi usa {@link Consumer}&lt;{@link Messaggio}&gt;
+ * La callback dei messaggi usa {@link Consumer}&lt;{@link Messaggio}&gt;
  * come interfaccia funzionale assegnata tramite anonymous class Java 8
- * (Modulo 4 - Lambda corso JA26).</p>
+ *.
  */
 public class ControllerAccesso implements Initializable {
 
@@ -68,7 +68,7 @@ public class ControllerAccesso implements Initializable {
 
         connessione = new ConnessioneServer();
 
-        // Consumer<Messaggio> assegnato con lambda (Modulo 4)
+        // Consumer<Messaggio> assegnato con lambda
         connessione.setMessageCallback(new Consumer<Messaggio>() {
             @Override
             public void accept(Messaggio msg) {
@@ -76,7 +76,7 @@ public class ControllerAccesso implements Initializable {
             }
         });
 
-        // Runnable per la disconnessione (Modulo 4 - interfaccia funzionale)
+        // Runnable per la disconnessione
         connessione.setDisconnectCallback(new Runnable() {
             @Override
             public void run() {

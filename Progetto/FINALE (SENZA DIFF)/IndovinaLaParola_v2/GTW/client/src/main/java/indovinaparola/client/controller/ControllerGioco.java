@@ -28,17 +28,17 @@ import java.util.logging.Logger;
 /**
  * Controller JavaFX per la finestra di gioco del client.
  *
- * <p>Gestisce tre pannelli sovrapposti in un {@code StackPane}:
+ * Gestisce tre pannelli sovrapposti in un {@code StackPane}:
  * <ul>
  *   <li>{@code waitingPane} — in attesa dell'avversario</li>
  *   <li>{@code gamePane}    — sfida in corso</li>
  *   <li>{@code pannelloRisultato}  — risultato finale</li>
  * </ul>
  * La visibilità e il {@code managed} sono alternati per mostrare
- * uno solo alla volta senza ricreare la scena.</p>
+ * uno solo alla volta senza ricreare la scena.
  *
- * <p>Il timer è implementato con {@link Timeline} di JavaFX (Modulo JavaFX corso JA26):
- * rimane nel JavaFX Application Thread ed è thread-safe per la GUI.</p>
+ * Il timer è implementato con {@link Timeline} di JavaFX:
+ * rimane nel JavaFX Application Thread ed è thread-safe per la GUI.
  */
 public class ControllerGioco {
 
@@ -120,11 +120,11 @@ public class ControllerGioco {
      * Consegna manualmente un messaggio al controller, come se fosse
      * arrivato dal {@link ConnessioneServer}.
      *
-     * <p>Usato da {@link ControllerAccesso} per "rigiocare" eventuali messaggi
+     * Usato da {@link ControllerAccesso} per "rigiocare" eventuali messaggi
      * (tipicamente {@code CHALLENGE_START}) ricevuti dal reader thread durante
      * la transizione tra la schermata di login e quella di gioco, prima che
      * questo controller registrasse la propria callback (fix race condition
-     * sul secondo client).</p>
+     * sul secondo client).
      *
      * @param msg messaggio da processare
      */
@@ -139,7 +139,7 @@ public class ControllerGioco {
     /**
      * Smista i messaggi ricevuti dal server al metodo appropriato.
      * Tutti gli aggiornamenti alla GUI passano per {@link Platform#runLater}
-     * (Modulo 6 - thread safety con JavaFX).
+     *.
      *
      * @param msg messaggio ricevuto dal server
      */
@@ -195,16 +195,16 @@ public class ControllerGioco {
         mostraGioco();
         etichettaStato.setText("In gioco!");
 
-        // Avvia il timer countdown con Timeline (Modulo JavaFX)
+        // Avvia il timer countdown con Timeline
         avviaCountdown();
     }
 
     /**
      * Avvia il timer countdown con {@link Timeline} di JavaFX.
      *
-     * <p>{@code Timeline} è la scelta corretta per task periodici nel foreground
+     * {@code Timeline} è la scelta corretta per task periodici nel foreground
      * (aggiornamento GUI): rimane nel FX Application Thread ed è thread-safe
-     * (Modulo JavaFX corso JA26 — differenza tra Timeline e ScheduledExecutorService).</p>
+     *.
      */
     private void avviaCountdown() {
         if (timelineTimer != null) timelineTimer.stop();
@@ -248,7 +248,7 @@ public class ControllerGioco {
         campoRisposta.setDisable(true);
         etichettaStato.setText("Partita terminata");
 
-        // Usa il metodo dell'enum Esito (Modulo 2 - enum con comportamento)
+        // Usa il metodo dell'enum Esito
         emojiRisultato.setText(result.getEsito().toEmoji());
         titoloRisultato.setText(result.getEsito().toDisplayString());
 
@@ -292,7 +292,7 @@ public class ControllerGioco {
             etichettaStato.setText("Partita annullata");
             mostraFeedback("L'avversario si e' disconnesso. In attesa di nuovo avversario...");
 
-            // Timeline one-shot per il ritardo (Modulo JavaFX)
+            // Timeline one-shot per il ritardo
             Timeline delay = new Timeline(new KeyFrame(Duration.seconds(3),
                 new EventHandler<ActionEvent>() {
                     @Override

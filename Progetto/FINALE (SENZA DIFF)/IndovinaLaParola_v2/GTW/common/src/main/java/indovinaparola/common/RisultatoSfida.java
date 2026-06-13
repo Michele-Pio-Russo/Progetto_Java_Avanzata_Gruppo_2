@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Contiene il nome del vincitore (se presente), la parola corretta
  * e l'esito dal punto di vista del client ricevente.
  *
- * <p>Uso di enum annidato {@link Esito} — Modulo 2 corso JA26.</p>
+ * Uso di enum annidato {@link Esito} — Modulo 2 corso JA26.
  */
 public class RisultatoSfida implements Serializable {
 
@@ -15,7 +15,7 @@ public class RisultatoSfida implements Serializable {
 
     /**
      * Esito della sfida dal punto di vista del client ricevente.
-     * Esempio di enum con comportamento (Modulo 2 - corso JA26).
+     * Esempio di enum con comportamento.
      */
     public enum Esito {
         /** Il client ricevente ha risposto correttamente per primo. */

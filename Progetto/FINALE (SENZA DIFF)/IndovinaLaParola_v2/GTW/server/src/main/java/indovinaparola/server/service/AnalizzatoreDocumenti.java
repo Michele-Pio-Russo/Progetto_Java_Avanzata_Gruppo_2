@@ -1,3 +1,15 @@
+/**
+ * @file AnalizzatoreDocumenti.java
+ * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe AnalizzatoreDocumenti
+ *
+ * Questa classe permette di istanziare un oggetto AnalizzatoreDocumenti, i metodi setter e getter permettono di
+ * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
+ * le informazioni relative alla classe AnalizzatoreDocumenti.
+ *
+ * @author Gruppo 2
+ * @date 
+ * @version 1.0.0
+ */
 package indovinaparola.server.service;
 
 import java.io.*;
@@ -8,33 +20,33 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
- * Analizzatore di documenti testuali.
- * Calcola la <b>Term Frequency (TF)</b> di ogni parola presente nei file analizzati,
- * usando esclusivamente la <b>Java Stream API</b> (Modulo 5 corso JA26).
+ * @brief Analizzatore di documenti testuali.
+ * @brief Calcola la <b>Term Frequency (TF)</b> di ogni parola presente nei file analizzati,
+ * usando esclusivamente la <b>Java Stream API</b>.
  *
- * <p>Implementa {@link Serializable} per permettere il salvataggio e il
- * ricaricamento dei risultati dell'analisi senza dover rielaborare i documenti.</p>
+ * Implementa {@link Serializable} per permettere il salvataggio e il
+ * ricaricamento dei risultati dell'analisi senza dover rielaborare i documenti.
  *
- * <p>La mappa TF viene esposta tramite {@link Collections#unmodifiableMap} come
+ * La mappa TF viene esposta tramite {@link Collections#unmodifiableMap} come
  * oggetto immutabile — tecnica raccomandata dal Modulo 6 (Concurrency) per
- * condivisione sicura tra thread.</p>
+ * condivisione sicura tra thread.
  */
 public class AnalizzatoreDocumenti implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; ///< Identificatore di versione per la serializzazione
     private static final Logger LOGGER = Logger.getLogger(AnalizzatoreDocumenti.class.getName());
 
-    /** Mappa parola (lowercase) → frequenza relativa (TF = count / totalWords). */
+    /** @brief Mappa parola (lowercase) → frequenza relativa (TF = count / totalWords). */
     private Map<String, Double> termFrequency = new HashMap<>();
 
-    /** Testo aggregato di tutti i documenti analizzati. */
+    /** @brief Testo aggregato di tutti i documenti analizzati. */
     private String aggregatedText = "";
 
     /**
-     * Analizza una lista di file di testo e calcola la Term Frequency.
-     * L'elaborazione usa esclusivamente la Java Stream API (Modulo 5).
+     * @brief Analizza una lista di file di testo e calcola la Term Frequency.
+     * @brief L'elaborazione usa esclusivamente la Java Stream API.
      *
-     * @param files lista di file .txt da analizzare (non null, non vuota)
+     * @param[in] files lista di file .txt da analizzare (non null, non vuota)
      * @throws IOException in caso di errore di lettura di uno dei file
      */
     public void analyze(List<File> files) throws IOException {
@@ -52,7 +64,7 @@ public class AnalizzatoreDocumenti implements Serializable {
             .replaceAll("[^a-zA-Z\\s]", " ")
             .split("\\s+");
 
-        // Conteggio totale parole valide con Stream (Modulo 5 - count terminale)
+        // Conteggio totale parole valide con Stream
         final long totalWords = Arrays.stream(tokens)
             .filter(t -> !t.isEmpty())
             .count();
@@ -62,7 +74,7 @@ public class AnalizzatoreDocumenti implements Serializable {
             return;
         }
 
-        // Pipeline Stream (Modulo 5):
+        // Pipeline Stream:
         // filter → groupingBy (counting) → entrySet stream → toMap (calcolo TF)
         termFrequency = Arrays.stream(tokens)
             .filter(t -> !t.isEmpty() && t.length() > 2)
@@ -81,9 +93,9 @@ public class AnalizzatoreDocumenti implements Serializable {
     }
 
     /**
-     * Restituisce la mappa Term Frequency come vista non modificabile.
-     * Esporre una vista immutabile protegge la struttura interna da modifiche
-     * esterne e rende l'oggetto sicuro per la condivisione tra thread (Modulo 6).
+     * @brief Restituisce la mappa Term Frequency come vista non modificabile.
+     * @brief Esporre una vista immutabile protegge la struttura interna da modifiche
+     * esterne e rende l'oggetto sicuro per la condivisione tra thread.
      *
      * @return mappa non modificabile parola → TF
      */
@@ -92,7 +104,7 @@ public class AnalizzatoreDocumenti implements Serializable {
     }
 
     /**
-     * Restituisce il testo aggregato di tutti i documenti analizzati.
+     * @brief Restituisce il testo aggregato di tutti i documenti analizzati.
      *
      * @return testo completo
      */
@@ -101,7 +113,7 @@ public class AnalizzatoreDocumenti implements Serializable {
     }
 
     /**
-     * Indica se l'analisi è stata effettuata con successo.
+     * @brief Indica se l'analisi è stata effettuata con successo.
      *
      * @return true se la mappa TF contiene almeno un elemento
      */
@@ -110,10 +122,10 @@ public class AnalizzatoreDocumenti implements Serializable {
     }
 
     /**
-     * Estrae un estratto casuale dal testo analizzato di circa {@code numWords} parole.
-     * Usato dal server per fornire ai client il testo della sfida.
+     * @brief Estrae un estratto casuale dal testo analizzato di circa {@code numWords} parole.
+     * @brief Usato dal server per fornire ai client il testo della sfida.
      *
-     * @param numWords numero approssimativo di parole dell'estratto
+     * @param[in] numWords numero approssimativo di parole dell'estratto
      * @return estratto testuale, stringa vuota se il testo è vuoto
      */
     public String extractRandomExcerpt(int numWords) {
@@ -122,20 +134,20 @@ public class AnalizzatoreDocumenti implements Serializable {
         if (allWords.length <= numWords) return aggregatedText;
         Random rnd = new Random();
         int start = rnd.nextInt(allWords.length - numWords);
-        // Stream per assemblare l'estratto (Modulo 5)
+        // Stream per assemblare l'estratto
         return Arrays.stream(allWords, start, start + numWords)
             .collect(Collectors.joining(" "));
     }
 
     /**
-     * Seleziona una parola dall'estratto in base al livello di difficoltà.
-     * Con difficoltà alta vengono preferite parole con TF bassa (più rare),
+     * @brief Seleziona una parola dall'estratto in base al livello di difficoltà.
+     * @brief Con difficoltà alta vengono preferite parole con TF bassa (più rare),
      * con difficoltà bassa parole con TF alta (più comuni e facili).
      *
-     * <p>Usa la Stream API con {@link Comparator} lambda (Moduli 4 e 5).</p>
+     * Usa la Stream API con {@link Comparator} lambda (Moduli 4 e 5).
      *
-     * @param excerpt    estratto da cui selezionare la parola
-     * @param difficulty livello: 1=facile (parole comuni), 2=medio, 3=difficile (parole rare)
+     * @param[in] excerpt    estratto da cui selezionare la parola
+     * @param[in] difficulty livello: 1=facile (parole comuni), 2=medio, 3=difficile (parole rare)
      * @return parola selezionata, oppure null se nessuna parola idonea trovata
      */
     public String selectWordFromExcerpt(String excerpt, int difficulty) {
@@ -143,7 +155,7 @@ public class AnalizzatoreDocumenti implements Serializable {
             .replaceAll("[^a-z\\s]", "")
             .split("\\s+");
 
-        // Lambda Comparator (Modulo 4): ordina per TF ascendente (difficile) o discendente (facile)
+        // Lambda Comparator: ordina per TF ascendente (difficile) o discendente (facile)
         final boolean preferRare = (difficulty >= 2);
         Comparator<String> byTf = (a, b) -> {
             double tfA = termFrequency.getOrDefault(a, 0.0);
@@ -167,11 +179,11 @@ public class AnalizzatoreDocumenti implements Serializable {
     }
 
     /**
-     * Salva l'istanza corrente su file in formato serializzato binario.
-     * Permette di ricaricare i risultati dell'analisi nelle sessioni successive
+     * @brief Salva l'istanza corrente su file in formato serializzato binario.
+     * @brief Permette di ricaricare i risultati dell'analisi nelle sessioni successive
      * senza dover rielaborare i documenti.
      *
-     * @param outputPath percorso del file di output (es. "data/analysis.dat")
+     * @param[in] outputPath percorso del file di output (es. "data/analysis.dat")
      * @throws IOException in caso di errore di scrittura
      */
     public void saveToFile(String outputPath) throws IOException {
@@ -183,9 +195,9 @@ public class AnalizzatoreDocumenti implements Serializable {
     }
 
     /**
-     * Carica un'istanza di {@link AnalizzatoreDocumenti} precedentemente serializzata.
+     * @brief Carica un'istanza di {@link AnalizzatoreDocumenti} precedentemente serializzata.
      *
-     * @param inputPath percorso del file da caricare
+     * @param[in] inputPath percorso del file da caricare
      * @return istanza caricata con i risultati dell'analisi precedente
      * @throws IOException            in caso di errore di lettura
      * @throws ClassNotFoundException se la classe non è trovata nel classpath

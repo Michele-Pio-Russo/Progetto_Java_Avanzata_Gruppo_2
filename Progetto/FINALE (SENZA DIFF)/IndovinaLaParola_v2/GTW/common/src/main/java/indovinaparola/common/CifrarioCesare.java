@@ -5,7 +5,7 @@ package indovinaparola.common;
  * Sostituisce ogni lettera con quella che si trova {@code spostamento} posizioni
  * avanti nell'alfabeto (A-Z, a-z). Tutti gli altri caratteri rimangono invariati.
  *
- * <p>Classe di utilità — costruttore privato.</p>
+ * Classe di utilità — costruttore privato.
  */
 public final class CifrarioCesare {
 

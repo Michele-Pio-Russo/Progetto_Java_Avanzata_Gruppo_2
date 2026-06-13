@@ -80,11 +80,11 @@ public class ControllerStorico {
     }
 
     /**
-     * Configura le colonne della TableView con CellValueFactory lambda (Modulo 4)
+     * Configura le colonne della TableView con CellValueFactory lambda
      * e CellFactory per la colorazione dell'esito.
      */
     private void configuraTabella() {
-        // Lambda come Callback<CellDataFeatures, ObservableValue> (Modulo 4)
+        // Lambda come Callback<CellDataFeatures, ObservableValue>
         dateCol.setCellValueFactory(c ->
             new SimpleStringProperty(c.getValue().getDataPartita()));
         opponentCol.setCellValueFactory(c ->

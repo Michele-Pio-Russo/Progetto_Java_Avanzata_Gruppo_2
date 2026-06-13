@@ -1,3 +1,15 @@
+/**
+ * @file CoordinatoreGioco.java
+ * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe CoordinatoreGioco
+ *
+ * Questa classe permette di istanziare un oggetto CoordinatoreGioco, i metodi setter e getter permettono di
+ * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
+ * le informazioni relative alla classe CoordinatoreGioco.
+ *
+ * @author Gruppo 2
+ * @date 
+ * @version 1.0.0
+ */
 package indovinaparola.server.model;
 
 import indovinaparola.common.*;
@@ -10,68 +22,68 @@ import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 /**
- * Coordinatore centrale della logica di gioco lato server.
+ * @brief Coordinatore centrale della logica di gioco lato server.
  *
- * <p>Gestisce: autenticazione, lista d'attesa giocatori, avvio e risoluzione
- * delle sfide, timeout automatico e persistenza dei risultati nel database.</p>
+ * Gestisce: autenticazione, lista d'attesa giocatori, avvio e risoluzione
+ * delle sfide, timeout automatico e persistenza dei risultati nel database.
  *
- * <p>Tutti i metodi pubblici sono {@code synchronized} perché questo oggetto
+ * Tutti i metodi pubblici sono {@code synchronized} perché questo oggetto
  * è condiviso tra i thread di ogni {@link GestoreClient}. Il monitor implicito
  * di Java garantisce l'accesso esclusivo e la visibilità degli aggiornamenti
- * (Modulo 6 - Concurrency API corso JA26).</p>
+ *.
  *
- * <p>Il timeout della sfida è gestito con {@link ScheduledExecutorService}
- * (Modulo 6), che evita l'uso di {@code Thread.sleep()} nei thread di gioco.</p>
+ * Il timeout della sfida è gestito con {@link ScheduledExecutorService}
+ *, che evita l'uso di {@code Thread.sleep()} nei thread di gioco.
  *
- * <p>La callback di log usa {@link Consumer}&lt;String&gt; come interfaccia funzionale
- * assegnata tramite lambda dal controller JavaFX (Modulo 4 - Lambda).</p>
+ * La callback di log usa {@link Consumer}&lt;String&gt; come interfaccia funzionale
+ * assegnata tramite lambda dal controller JavaFX.
  */
 public class CoordinatoreGioco {
 
-    private static final Logger LOGGER = Logger.getLogger(CoordinatoreGioco.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CoordinatoreGioco.class.getName()); ///< Logger della classe CoordinatoreGioco
 
-    /** Durata massima di una sfida in secondi (configurabile). */
-    private int timeoutSeconds = 60;
+    /** @brief Durata massima di una sfida in secondi (configurabile). */
+    private int timeoutSeconds = 60; ///< Durata massima di una sfida in secondi
 
-    /** Numero di parole dell'estratto inviato ai client. */
-    private int excerptWords = 60;
+    /** @brief Numero di parole dell'estratto inviato ai client. */
+    private int excerptWords = 60; ///< Numero di parole dell'estratto inviato ai client
 
-    private final GestoreDatabase db;
-    private AnalizzatoreDocumenti analizzatore;
+    private final GestoreDatabase db; ///< Riferimento al gestore del database
+    private AnalizzatoreDocumenti analizzatore; ///< Riferimento all'analizzatore documenti
 
-    /** Giocatori autenticati in attesa di un avversario. */
-    private final List<GestoreClient> giocatoriInAttesa = new ArrayList<>();
+    /** @brief Giocatori autenticati in attesa di un avversario. */
+    private final List<GestoreClient> giocatoriInAttesa = new ArrayList<>(); ///< Lista dei client autenticati in attesa di giocare
 
     /**
-     * Callback per aggiornare la TextArea di log nella GUI del server.
-     * Assegnata tramite lambda dal controller (Modulo 4 - Consumer interfaccia funzionale).
+     * @brief Callback per aggiornare la TextArea di log nella GUI del server.
+     * Assegnata tramite lambda dal controller.
      */
-    private Consumer<String> statusCallback;
+    private Consumer<String> statusCallback; ///< Callback per notificare messaggi alla GUI
 
     /**
-     * Executor per il timeout automatico della sfida.
+     * @brief Executor per il timeout automatico della sfida.
      * Un thread singolo è sufficiente per gestire i timeout sequenziali.
-     * (Modulo 6 - ScheduledExecutorService)
+     *
      */
-    private final ScheduledExecutorService scheduler =
+    private final ScheduledExecutorService scheduler = ///< Executor per schedulare i timeout delle sfide
         Executors.newSingleThreadScheduledExecutor();
 
     // --- Stato della sfida in corso ---
-    private GestoreClient giocatore1;
-    private GestoreClient giocatore2;
-    private String parolaOriginaleCorrente;
-    private String parolaCifrataCorrente;
-    private int spostamentoCorrente;
-    private String estrattoCorrente;
-    private long tempoInizioSfida;
+    private GestoreClient giocatore1; ///< Primo giocatore impegnato nella sfida corrente
+    private GestoreClient giocatore2; ///< Secondo giocatore impegnato nella sfida corrente
+    private String parolaOriginaleCorrente; ///< Parola da indovinare, in chiaro
+    private String parolaCifrataCorrente; ///< Parola cifrata da mostrare ai giocatori
+    private int spostamentoCorrente; ///< Chiave (spostamento) del cifrario
+    private String estrattoCorrente; ///< Estratto del testo con la parola cifrata
+    private long tempoInizioSfida; ///< Timestamp di inizio della sfida
     private boolean sfidaAttiva = false;
-    private ScheduledFuture<?> taskTimeout;
+    private ScheduledFuture<?> taskTimeout; ///< Task di timeout per la sfida corrente
 
     /**
-     * Costruisce il coordinatore del gioco.
+     * @brief Costruisce il coordinatore del gioco.
      *
-     * @param db       gestore del database (già connesso)
-     * @param analizzatore analizzatore documenti, può essere null inizialmente
+     * @param[in] db       gestore del database (già connesso)
+     * @param[in] analizzatore analizzatore documenti, può essere null inizialmente
      */
     public CoordinatoreGioco(GestoreDatabase db, AnalizzatoreDocumenti analizzatore) {
         this.db = db;
@@ -79,10 +91,10 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Configura i parametri di gioco letti dalle properties del server.
+     * @brief Configura i parametri di gioco letti dalle properties del server.
      *
-     * @param timeoutSeconds durata massima sfida in secondi
-     * @param excerptWords   numero di parole dell'estratto
+     * @param[in] timeoutSeconds durata massima sfida in secondi
+     * @param[in] excerptWords   numero di parole dell'estratto
      */
     public void setGameConfig(int timeoutSeconds, int excerptWords) {
         this.timeoutSeconds = timeoutSeconds;
@@ -90,42 +102,39 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Imposta la callback per i messaggi di log da mostrare nella GUI server.
-     * Viene assegnata dal controller tramite espressione lambda (Modulo 4).
+     * @brief Imposta la callback per i messaggi di log da mostrare nella GUI server.
+     * Viene assegnata dal controller tramite espressione lambda.
      *
-     * <p>Esempio di uso nel controller:</p>
+     * Esempio di uso nel controller:
      * <pre>
      * coordinator.setStatusCallback(msg -&gt;
      *     Platform.runLater(() -&gt; logArea.appendText(msg + "\n")));
      * </pre>
      *
-     * @param callback {@link Consumer}&lt;String&gt; che riceve ogni messaggio di log
+     * @param[in] callback {@link Consumer}&lt;String&gt; che riceve ogni messaggio di log
      */
     public void setStatusCallback(Consumer<String> callback) {
         this.statusCallback = callback;
     }
 
     /**
-     * Aggiorna l'analizzatore documenti (dopo una nuova analisi da parte dell'admin).
+     * @brief Aggiorna l'analizzatore documenti (dopo una nuova analisi da parte dell'admin).
      *
-     * @param analizzatore nuovo analizzatore con i risultati aggiornati
+     * @param[in] analizzatore nuovo analizzatore con i risultati aggiornati
      */
     public synchronized void setAnalyzer(AnalizzatoreDocumenti analizzatore) {
         this.analizzatore = analizzatore;
         log("Analizzatore aggiornato: " + analizzatore.getTermFrequency().size() + " parole.");
     }
 
-    // ----------------------------------------------------------------
-    // Gestione autenticazione
-    // ----------------------------------------------------------------
 
     /**
-     * Gestisce una richiesta di login da parte di un client.
+     * @brief Gestisce una richiesta di login da parte di un client.
      * Autentica le credenziali nel database e, se valide, aggiunge il
      * giocatore alla lista d'attesa.
      *
-     * @param client  client che ha inviato la richiesta
-     * @param carico credenziali di autenticazione
+     * @param[in] client  client che ha inviato la richiesta
+     * @param[in] carico credenziali di autenticazione
      */
     public synchronized void gestisciLogin(GestoreClient client, PayloadAutenticazione carico) {
         String ruolo = db.autentica(carico.getNomeUtente(), carico.getPassword());
@@ -148,11 +157,11 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Gestisce una richiesta di registrazione da parte di un client.
+     * @brief Gestisce una richiesta di registrazione da parte di un client.
      * Valida i dati e registra il nuovo utente nel database.
      *
-     * @param client  client richiedente
-     * @param carico credenziali del nuovo account
+     * @param[in] client  client richiedente
+     * @param[in] carico credenziali del nuovo account
      */
     public synchronized void gestisciRegistrazione(GestoreClient client, PayloadAutenticazione carico) {
         String nome = carico.getNomeUtente() == null ? "" : carico.getNomeUtente().trim();
@@ -184,21 +193,18 @@ public class CoordinatoreGioco {
         }
     }
 
-    // ----------------------------------------------------------------
-    // Gestione partita
-    // ----------------------------------------------------------------
 
     /**
-     * Gestisce la richiesta di un client già autenticato di rientrare
+     * @brief Gestisce la richiesta di un client già autenticato di rientrare
      * in lista d'attesa per una nuova partita (pulsante "Nuova partita"
      * lato client, dopo {@code CHALLENGE_RESULT}).
      *
-     * <p>A differenza di {@link #gestisciLogin}, questo metodo non richiede
+     * A differenza di {@link #gestisciLogin}, questo metodo non richiede
      * nuove credenziali: il client è già autenticato sulla stessa
      * connessione TCP. Evita inoltre di reinserire due volte lo stesso
-     * client se già presente in {@code giocatoriInAttesa}.</p>
+     * client se già presente in {@code giocatoriInAttesa}.
      *
-     * @param client client già autenticato che richiede una nuova partita
+     * @param[in] client client già autenticato che richiede una nuova partita
      */
     public synchronized void gestisciNuovaRichiesta(GestoreClient client) {
         if (!client.isAutenticato() || !"player".equals(client.getRuolo())) {
@@ -214,10 +220,13 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Aggiunge un giocatore alla lista d'attesa e avvia la sfida
+     * @brief Aggiunge un giocatore alla lista d'attesa e avvia la sfida
      * quando sono presenti esattamente due giocatori.
      *
-     * @param client client da aggiungere alla lista
+     * @pre Il client non deve essere già in attesa.
+     * @post Il client viene inserito in lista e la partita ha inizio se i giocatori in attesa diventano due.
+     *
+     * @param[in] client client da aggiungere alla lista
      */
     private void aggiungiInListaAttesa(GestoreClient client) {
         // Controlla che lo stesso username non sia già in lista d'attesa
@@ -246,13 +255,13 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Avvia una nuova sfida tra due giocatori.
+     * @brief Avvia una nuova sfida tra due giocatori.
      * Estrae un estratto dal corpus analizzato, sceglie una parola,
      * la cifra con il Cifrario di Cesare con spostamento casuale, invia il
      * carico ai due client e schedula il timeout automatico.
      *
-     * @param p1 primo giocatore
-     * @param p2 secondo giocatore
+     * @param[in] p1 primo giocatore
+     * @param[in] p2 secondo giocatore
      */
     private void avviaSfida(GestoreClient p1, GestoreClient p2) {
         if (analizzatore == null || !analizzatore.hasResults()) {
@@ -281,7 +290,7 @@ public class CoordinatoreGioco {
         String encrypted = CifrarioCesare.cifra(parola, spostamento);
 
         // Sostituisce la parola nell'estratto con quella cifrata tra parentesi quadre
-        // Pattern.quote() protegge da caratteri speciali regex nella parola (Modulo 5)
+        // Pattern.quote() protegge da caratteri speciali regex nella parola
         String textWithCipher = excerpt.replaceAll(
             "(?i)\\b" + java.util.regex.Pattern.quote(parola) + "\\b", "[" + encrypted + "]");
 
@@ -302,7 +311,7 @@ public class CoordinatoreGioco {
         log("Sfida avviata: " + p1.getNomeUtente() + " vs " + p2.getNomeUtente()
             + " | parola: " + parola + " | spostamento: " + spostamento);
 
-        // Timeout automatico con ScheduledExecutorService (Modulo 6)
+        // Timeout automatico con ScheduledExecutorService
         // La lambda cattura 'this' per chiamare terminaSfida in modo synchronized
         taskTimeout = scheduler.schedule(new Runnable() {
             @Override
@@ -318,12 +327,15 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Gestisce la risposta di un giocatore alla sfida in corso.
+     * @brief Gestisce la risposta di un giocatore alla sfida in corso.
      * Se la risposta è corretta, termina la sfida decretando il vincitore.
      * Se è errata, notifica solo il client che ha sbagliato.
      *
-     * @param client client che ha inviato la risposta
-     * @param guess  parola inserita dal giocatore
+     * @pre Una sfida deve essere attualmente in corso e il client deve esservi partecipante.
+     * @post Se la risposta è corretta, la sfida finisce e vengono registrati i risultati. Altrimenti viene inviato un errore al client.
+     *
+     * @param[in] client client che ha inviato la risposta
+     * @param[in] guess  parola inserita dal giocatore
      */
     public synchronized void gestisciRisposta(GestoreClient client, String guess) {
         if (!sfidaAttiva) return;
@@ -344,12 +356,12 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Termina la sfida in corso, invia i risultati ai client e persiste
+     * @brief Termina la sfida in corso, invia i risultati ai client e persiste
      * i dati nel database in una transazione atomica.
      *
-     * @param winner         client vincitore, null in caso di pareggio/timeout
-     * @param tempoRispostaMs tempo di risposta del vincitore in ms
-     * @param isDraw         true se la sfida è terminata in pareggio (timeout)
+     * @param[in] winner         client vincitore, null in caso di pareggio/timeout
+     * @param[in] tempoRispostaMs tempo di risposta del vincitore in ms
+     * @param[in] isDraw         true se la sfida è terminata in pareggio (timeout)
      */
     private void terminaSfida(GestoreClient winner, long tempoRispostaMs, boolean isDraw) {
         if (!sfidaAttiva) return;
@@ -365,7 +377,7 @@ public class CoordinatoreGioco {
             loser.invia(new Messaggio(Messaggio.Tipo.CHALLENGE_RESULT,
                 new RisultatoSfida(winner.getNomeUtente(), parolaOriginaleCorrente, RisultatoSfida.Esito.SCONFITTA)));
 
-            // Salva in transazione (Modulo 8)
+            // Salva in transazione
             log("DB: salvataggio vittoria in corso...");
             if (db == null) {
                 log("DB: ERRORE - riferimento db e' null!");
@@ -401,11 +413,11 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Gestisce la disconnessione inaspettata di un client.
+     * @brief Gestisce la disconnessione inaspettata di un client.
      * Rimuove il client dalla lista d'attesa; se la disconnessione avviene
      * durante una sfida attiva, annulla la sfida e notifica l'altro giocatore.
      *
-     * @param client client disconnesso
+     * @param[in] client client disconnesso
      */
     public synchronized void onClientDisconnesso(GestoreClient client) {
         giocatoriInAttesa.remove(client);
@@ -425,9 +437,9 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Gestisce la richiesta dello storico partite di un client.
+     * @brief Gestisce la richiesta dello storico partite di un client.
      *
-     * @param client client richiedente
+     * @param[in] client client richiedente
      */
     public synchronized void gestisciRichiestaStorico(GestoreClient client) {
         List<VoceStorico> history = db.getHistory(client.getNomeUtente());
@@ -436,17 +448,17 @@ public class CoordinatoreGioco {
     }
 
     /**
-     * Restituisce il database manager.
+     * @brief Restituisce il database manager.
      *
      * @return istanza del database manager
      */
     public GestoreDatabase getDb() { return db; }
 
     /**
-     * Scrive un messaggio nel log del sistema, chiamando anche la callback
+     * @brief Scrive un messaggio nel log del sistema, chiamando anche la callback
      * della GUI se impostata.
      *
-     * @param msg messaggio di log
+     * @param[in] msg messaggio di log
      */
     private void log(String msg) {
         LOGGER.info(msg);

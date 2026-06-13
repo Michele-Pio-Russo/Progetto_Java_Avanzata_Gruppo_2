@@ -11,15 +11,15 @@ import java.util.logging.Logger;
 /**
  * Gestisce la connessione socket TCP del client verso il server.
  *
- * <p>I messaggi in ingresso vengono consegnati tramite una callback
+ * I messaggi in ingresso vengono consegnati tramite una callback
  * {@link Consumer}&lt;{@link Messaggio}&gt; assegnata dal controller
- * tramite espressione lambda (Modulo 4 - Lambda corso JA26).</p>
+ * tramite espressione lambda.
  *
- * <p>Il thread di lettura è daemon (Modulo 7 Appendix - Networking):
- * non impedisce la chiusura della JVM quando la finestra viene chiusa.</p>
+ * Il thread di lettura è daemon:
+ * non impedisce la chiusura della JVM quando la finestra viene chiusa.
  *
- * <p>Ordine obbligatorio degli stream (Modulo 7): {@link ObjectOutputStream}
- * prima di {@link ObjectInputStream}, con {@code flush()} dopo OOS.</p>
+ * Ordine obbligatorio degli stream: {@link ObjectOutputStream}
+ * prima di {@link ObjectInputStream}, con {@code flush()} dopo OOS.
  */
 public class ConnessioneServer {
 
@@ -31,13 +31,13 @@ public class ConnessioneServer {
 
     /**
      * Callback invocata ad ogni messaggio ricevuto dal server.
-     * Assegnata tramite lambda dal controller (Modulo 4).
+     * Assegnata tramite lambda dal controller.
      */
     private Consumer<Messaggio> callbackMessaggio;
 
     /**
      * Callback invocata alla disconnessione dal server.
-     * Assegnata tramite lambda dal controller (Modulo 4).
+     * Assegnata tramite lambda dal controller.
      */
     private Runnable callbackDisconnessione;
 
@@ -71,7 +71,7 @@ public class ConnessioneServer {
     public void connetti(String host, int porta) throws IOException {
         socket = new Socket(host, porta);
 
-        // ORDINE OBBLIGATORIO: OOS prima di OIS + flush() (Modulo 7 Appendix)
+        // ORDINE OBBLIGATORIO: OOS prima di OIS + flush()
         out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
         in = new ObjectInputStream(socket.getInputStream());
@@ -126,7 +126,7 @@ public class ConnessioneServer {
         try {
             out.writeObject(msg);
             out.flush();
-            out.reset(); // Evita object caching di ObjectOutputStream (Modulo 7)
+            out.reset(); // Evita object caching di ObjectOutputStream
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "Errore invio messaggio", e);
         }

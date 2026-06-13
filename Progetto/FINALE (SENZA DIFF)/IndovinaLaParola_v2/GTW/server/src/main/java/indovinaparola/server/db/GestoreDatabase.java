@@ -1,3 +1,15 @@
+/**
+ * @file GestoreDatabase.java
+ * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe GestoreDatabase
+ *
+ * Questa classe permette di istanziare un oggetto GestoreDatabase, i metodi setter e getter permettono di
+ * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
+ * le informazioni relative alla classe GestoreDatabase.
+ *
+ * @author Gruppo 2
+ * @date 
+ * @version 1.0.0
+ */
 package indovinaparola.server.db;
 
 import indovinaparola.common.VoceStorico;
@@ -11,37 +23,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Gestore del database SQLite dell'applicazione.
- * Implementa il pattern Singleton e il pattern DAO (Data Access Object).
+ * @brief Gestore del database SQLite dell'applicazione.
+ * @brief Implementa il pattern Singleton e il pattern DAO (Data Access Object).
  *
- * <p>Tutte le query usano esclusivamente {@link PreparedStatement} per prevenire
+ * Tutte le query usano esclusivamente {@link PreparedStatement} per prevenire
  * SQL injection. Le operazioni che coinvolgono più tabelle (es. salvataggio sfida
- * + risultati) sono gestite in transazione esplicita.</p>
+ * + risultati) sono gestite in transazione esplicita.
  *
- * <p>Modulo 8 corso JA26: JDBC, PreparedStatement, transazioni, try-with-resources.</p>
  */
 public class GestoreDatabase {
 
-    private static final Logger LOGGER = Logger.getLogger(GestoreDatabase.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(GestoreDatabase.class.getName()); ///< Logger della classe GestoreDatabase
 
-    private static GestoreDatabase instance;
-    private Connection connessione;
-    private final String dbPath;
+    private static GestoreDatabase instance; ///< Istanza singleton del GestoreDatabase
+    private Connection connessione; ///< Connessione attiva al database SQLite
+    private final String dbPath; ///< Percorso locale del file SQLite
 
     /**
-     * Costruttore privato — pattern Singleton.
+     * @brief Costruttore privato — pattern Singleton.
      *
-     * @param dbPath percorso relativo al file SQLite
+     * @param[in] dbPath percorso relativo al file SQLite
      */
     private GestoreDatabase(String dbPath) {
         this.dbPath = dbPath;
     }
 
     /**
-     * Restituisce l'istanza Singleton del GestoreDatabase.
-     * Crea l'istanza al primo invocation (lazy initialization).
+     * @brief Restituisce l'istanza Singleton del GestoreDatabase.
+     * @brief Crea l'istanza al primo invocation (lazy initialization).
      *
-     * @param dbPath percorso relativo al file database SQLite
+     * @param[in] dbPath percorso relativo al file database SQLite
      * @return istanza singleton
      */
     public static synchronized GestoreDatabase getInstance(String dbPath) {
@@ -52,8 +63,11 @@ public class GestoreDatabase {
     }
 
     /**
-     * Apre la connessione al database e inizializza schema e account predefiniti.
-     * Deve essere chiamato una sola volta all'avvio del server.
+     * @brief Apre la connessione al database e inizializza schema e account predefiniti.
+     * @brief Deve essere chiamato una sola volta all'avvio del server.
+     *
+     * @pre Il percorso del database (dbPath) deve essere valido.
+     * @post La connessione al database è aperta e le tabelle sono inizializzate.
      *
      * @throws SQLException in caso di errore di connessione o inizializzazione
      */
@@ -66,7 +80,10 @@ public class GestoreDatabase {
     }
 
     /**
-     * Chiude la connessione al database.
+     * @brief Chiude la connessione al database.
+     *
+     * @pre La connessione al database deve essere attiva.
+     * @post La connessione al database viene chiusa in modo sicuro.
      */
     public void disconnetti() {
         try {
@@ -79,17 +96,14 @@ public class GestoreDatabase {
         }
     }
 
-    // ----------------------------------------------------------------
-    // Schema e seeding
-    // ----------------------------------------------------------------
 
     /**
-     * Crea le tabelle del database se non esistono già.
+     * @brief Crea le tabelle del database se non esistono già.
      *
      * @throws SQLException in caso di errore DDL
      */
     private void initSchema() throws SQLException {
-        // try-with-resources per Statement (Modulo 8)
+        // try-with-resources per Statement
         try (Statement stmt = connessione.createStatement()) {
             stmt.execute(
                 "CREATE TABLE IF NOT EXISTS users (" +
@@ -125,8 +139,8 @@ public class GestoreDatabase {
     }
 
     /**
-     * Inserisce gli account predefiniti se non sono già presenti nel database.
-     * Account creati: admin/admin123 (ruolo admin), giocatore1/pass1, giocatore2/pass2 (ruolo player).
+     * @brief Inserisce gli account predefiniti se non sono già presenti nel database.
+     * @brief Account creati: admin/admin123 (ruolo admin), giocatore1/pass1, giocatore2/pass2 (ruolo player).
      *
      * @throws SQLException in caso di errore di inserimento
      */
@@ -137,16 +151,16 @@ public class GestoreDatabase {
     }
 
     /**
-     * Inserisce un utente solo se lo nomeUtente non è già presente.
+     * @brief Inserisce un utente solo se lo nomeUtente non è già presente.
      *
-     * @param nomeUtente nomeUtente da inserire
-     * @param password password in chiaro (verrà hashata)
-     * @param ruolo     ruolo: "admin" o "player"
+     * @param[in] nomeUtente nomeUtente da inserire
+     * @param[in] password password in chiaro (verrà hashata)
+     * @param[in] ruolo     ruolo: "admin" o "player"
      * @throws SQLException in caso di errore SQL
      */
     private void insertUserIfAbsent(String nomeUtente, String password, String ruolo)
             throws SQLException {
-        // try-with-resources per PreparedStatement (Modulo 8)
+        // try-with-resources per PreparedStatement
         try (PreparedStatement check = connessione.prepareStatement(
                 "SELECT COUNT(*) FROM users WHERE nomeUtente = ?")) {
             check.setString(1, nomeUtente);
@@ -165,15 +179,15 @@ public class GestoreDatabase {
         }
     }
 
-    // ----------------------------------------------------------------
-    // Autenticazione
-    // ----------------------------------------------------------------
 
     /**
-     * Autentica un utente verificando nomeUtente e hash della password.
+     * @brief Autentica un utente verificando nomeUtente e hash della password.
      *
-     * @param nomeUtente nomeUtente da verificare
-     * @param password password in chiaro
+     * @pre nomeUtente e password non devono essere nulli o vuoti.
+     * @post Viene restituito il ruolo dell'utente se i dati sono corretti.
+     *
+     * @param[in] nomeUtente nomeUtente da verificare
+     * @param[in] password password in chiaro
      * @return ruolo dell'utente ("admin" o "player"), oppure null se le credenziali non sono valide
      */
     public String autentica(String nomeUtente, String password) {
@@ -193,12 +207,15 @@ public class GestoreDatabase {
     }
 
     /**
-     * Registra un nuovo utente con ruolo "player".
+     * @brief Registra un nuovo utente con ruolo "player".
      *
-     * @param nomeUtente nomeUtente scelto dall'utente
-     * @param password password in chiaro (verrà hashata)
+     * @pre L'utente non deve essere già presente nel database.
+     * @post Viene creato un nuovo record nel database per l'utente.
+     *
+     * @param[in] nomeUtente nomeUtente scelto dall'utente
+     * @param[in] password password in chiaro (verrà hashata)
      * @return true se la registrazione è avvenuta con successo,
-     *         false se lo nomeUtente è già occupato
+     *         @brief false se lo nomeUtente è già occupato
      */
     public boolean registraUtente(String nomeUtente, String password) {
         String sql = "INSERT INTO users(nomeUtente, password_hash, ruolo) VALUES(?,?,?)";
@@ -216,9 +233,9 @@ public class GestoreDatabase {
     }
 
     /**
-     * Restituisce l'identificativo numerico di un utente dato il suo nomeUtente.
+     * @brief Restituisce l'identificativo numerico di un utente dato il suo nomeUtente.
      *
-     * @param nomeUtente nomeUtente da cercare
+     * @param[in] nomeUtente nomeUtente da cercare
      * @return user_id, oppure -1 se non trovato
      */
     public int getUserId(String nomeUtente) {
@@ -234,24 +251,21 @@ public class GestoreDatabase {
         return -1;
     }
 
-    // ----------------------------------------------------------------
-    // Sfide e risultati — transazione esplicita (Modulo 8)
-    // ----------------------------------------------------------------
 
     /**
-     * Salva una sfida e i risultati di entrambi i giocatori in un'unica transazione atomica.
-     * Se una delle operazioni fallisce, viene eseguito il rollback di tutta la transazione.
+     * @brief Salva una sfida e i risultati di entrambi i giocatori in un'unica transazione atomica.
+     * @brief Se una delle operazioni fallisce, viene eseguito il rollback di tutta la transazione.
      *
-     * <p>Dimostrazione di transazione esplicita JDBC (Modulo 8 corso JA26).</p>
+     * Dimostrazione di transazione esplicita JDBC.
      *
-     * @param estrattoTesto   estratto testuale
-     * @param encryptedWord parola cifrata
-     * @param originalWord  parola originale
-     * @param spostamento         spostamento del cifrario di Cesare
-     * @param winnerUser    nomeUtente del vincitore (null se pareggio)
-     * @param loserUser     nomeUtente del perdente (null se pareggio)
-     * @param draw          true se la sfida è terminata in pareggio
-     * @param tempoRispostaMs tempo di risposta del vincitore in ms (-1 se pareggio)
+     * @param[in] estrattoTesto   estratto testuale
+     * @param[in] encryptedWord parola cifrata
+     * @param[in] originalWord  parola originale
+     * @param[in] spostamento         spostamento del cifrario di Cesare
+     * @param[in] winnerUser    nomeUtente del vincitore (null se pareggio)
+     * @param[in] loserUser     nomeUtente del perdente (null se pareggio)
+     * @param[in] draw          true se la sfida è terminata in pareggio
+     * @param[in] tempoRispostaMs tempo di risposta del vincitore in ms (-1 se pareggio)
      */
     public void saveChallengeWithResults(
             String estrattoTesto, String encryptedWord, String originalWord, int spostamento,
@@ -307,12 +321,12 @@ public class GestoreDatabase {
     }
 
     /**
-     * Inserisce una riga nella tabella challenges e restituisce il challenge_id generato.
+     * @brief Inserisce una riga nella tabella challenges e restituisce il challenge_id generato.
      *
-     * @param estrattoTesto   estratto testuale
-     * @param encryptedWord parola cifrata
-     * @param originalWord  parola originale
-     * @param spostamento         spostamento del cifrario
+     * @param[in] estrattoTesto   estratto testuale
+     * @param[in] encryptedWord parola cifrata
+     * @param[in] originalWord  parola originale
+     * @param[in] spostamento         spostamento del cifrario
      * @return challenge_id generato, oppure -1 in caso di errore
      * @throws SQLException in caso di errore SQL
      */
@@ -336,12 +350,12 @@ public class GestoreDatabase {
     }
 
     /**
-     * Inserisce un risultato per un singolo giocatore nella tabella results.
+     * @brief Inserisce un risultato per un singolo giocatore nella tabella results.
      *
-     * @param idSfida    id della sfida
-     * @param userId         id dell'utente
-     * @param esito        esito: "win", "loss" o "draw"
-     * @param tempoRispostaMs tempo di risposta in ms (-1 se timeout)
+     * @param[in] idSfida    id della sfida
+     * @param[in] userId         id dell'utente
+     * @param[in] esito        esito: "win", "loss" o "draw"
+     * @param[in] tempoRispostaMs tempo di risposta in ms (-1 se timeout)
      * @throws SQLException in caso di errore SQL
      */
     private void insertResult(int idSfida, int userId,
@@ -357,14 +371,11 @@ public class GestoreDatabase {
         }
     }
 
-    // ----------------------------------------------------------------
-    // Storico e statistiche
-    // ----------------------------------------------------------------
 
     /**
-     * Restituisce lo storico delle sfide di un utente, ordinate dalla più recente.
+     * @brief Restituisce lo storico delle sfide di un utente, ordinate dalla più recente.
      *
-     * @param nomeUtente nomeUtente del giocatore
+     * @param[in] nomeUtente nomeUtente del giocatore
      * @return lista di {@link VoceStorico}, vuota se nessuna sfida trovata
      */
     public List<VoceStorico> getHistory(String nomeUtente) {
@@ -401,26 +412,26 @@ public class GestoreDatabase {
     }
 
     /**
-     * Classe interna che rappresenta le statistiche aggregate di un utente.
-     * Usata per popolare la classifica nella GUI del server.
+     * @brief Classe interna che rappresenta le statistiche aggregate di un utente.
+     * @brief Usata per popolare la classifica nella GUI del server.
      */
     public static class UserStats {
-        /** Username dell'utente. */
+        /** @brief Username dell'utente. */
         public final String nomeUtente;
-        /** Numero di sfide vinte. */
+        /** @brief Numero di sfide vinte. */
         public final int wins;
-        /** Numero totale di sfide giocate. */
+        /** @brief Numero totale di sfide giocate. */
         public final int gamesPlayed;
-        /** Tempo medio di risposta in millisecondi. */
+        /** @brief Tempo medio di risposta in millisecondi. */
         public final long avgResponseMs;
 
         /**
-         * Costruisce le statistiche di un utente.
+         * @brief Costruisce le statistiche di un utente.
          *
-         * @param nomeUtente      nomeUtente
-         * @param wins          vittorie
-         * @param gamesPlayed   partite totali
-         * @param avgResponseMs tempo medio risposta in ms
+         * @param[in] nomeUtente      nomeUtente
+         * @param[in] wins          vittorie
+         * @param[in] gamesPlayed   partite totali
+         * @param[in] avgResponseMs tempo medio risposta in ms
          */
         public UserStats(String nomeUtente, int wins, int gamesPlayed, long avgResponseMs) {
             this.nomeUtente = nomeUtente;
@@ -431,8 +442,8 @@ public class GestoreDatabase {
     }
 
     /**
-     * Restituisce le statistiche aggregate di tutti i giocatori, ordinate per vittorie decrescenti.
-     * Usato per popolare la classifica nella GUI amministratore.
+     * @brief Restituisce le statistiche aggregate di tutti i giocatori, ordinate per vittorie decrescenti.
+     * @brief Usato per popolare la classifica nella GUI amministratore.
      *
      * @return lista di {@link UserStats}, vuota se nessun risultato presente
      */
@@ -463,15 +474,12 @@ public class GestoreDatabase {
         return stats;
     }
 
-    // ----------------------------------------------------------------
-    // Utility
-    // ----------------------------------------------------------------
 
     /**
-     * Calcola l'hash SHA-256 di una password.
-     * Le password non vengono mai salvate in chiaro nel database.
+     * @brief Calcola l'hash SHA-256 di una password.
+     * @brief Le password non vengono mai salvate in chiaro nel database.
      *
-     * @param password password in chiaro
+     * @param[in] password password in chiaro
      * @return stringa esadecimale dell'hash SHA-256
      * @throws RuntimeException se l'algoritmo SHA-256 non è disponibile nella JVM
      */

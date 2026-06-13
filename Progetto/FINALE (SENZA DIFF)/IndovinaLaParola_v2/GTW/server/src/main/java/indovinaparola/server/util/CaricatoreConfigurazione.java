@@ -1,3 +1,15 @@
+/**
+ * @file CaricatoreConfigurazione.java
+ * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe CaricatoreConfigurazione
+ *
+ * Questa classe permette di istanziare un oggetto CaricatoreConfigurazione, i metodi setter e getter permettono di
+ * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
+ * le informazioni relative alla classe CaricatoreConfigurazione.
+ *
+ * @author Gruppo 2
+ * @date 
+ * @version 1.0.0
+ */
 package indovinaparola.server.util;
 
 import java.io.FileInputStream;
@@ -7,19 +19,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Carica i parametri di configurazione dal file {@code server.properties}.
- * I percorsi sono sempre relativi alla directory di esecuzione (working directory),
+ * @brief Carica i parametri di configurazione dal file {@code server.properties}.
+ * @brief I percorsi sono sempre relativi alla directory di esecuzione (working directory),
  * mai assoluti, in modo che il JAR sia portabile.
  */
 public class CaricatoreConfigurazione {
 
-    private static final Logger LOGGER = Logger.getLogger(CaricatoreConfigurazione.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CaricatoreConfigurazione.class.getName()); ///< Logger della classe CaricatoreConfigurazione
     private final Properties props = new Properties();
 
     /**
-     * Carica il file .properties dal percorso relativo specificato.
+     * @brief Carica il file .properties dal percorso relativo specificato.
      *
-     * @param relativePath percorso relativo al file (es. "properties/server.properties")
+     * @param[in] relativePath percorso relativo al file (es. "properties/server.properties")
      * @throws IOException se il file non esiste o non è leggibile
      */
     public CaricatoreConfigurazione(String relativePath) throws IOException {
@@ -35,10 +47,10 @@ public class CaricatoreConfigurazione {
     }
 
     /**
-     * Restituisce il valore di una proprietà come stringa.
+     * @brief Restituisce il valore di una proprietà come stringa.
      *
-     * @param key          chiave della proprietà
-     * @param defaultValue valore restituito se la chiave non esiste
+     * @param[in] key          chiave della proprietà
+     * @param[in] defaultValue valore restituito se la chiave non esiste
      * @return valore della proprietà o defaultValue
      */
     public String get(String key, String defaultValue) {
@@ -46,10 +58,10 @@ public class CaricatoreConfigurazione {
     }
 
     /**
-     * Restituisce il valore di una proprietà come intero.
+     * @brief Restituisce il valore di una proprietà come intero.
      *
-     * @param key          chiave della proprietà
-     * @param defaultValue valore restituito se la chiave non esiste o non è parsabile
+     * @param[in] key          chiave della proprietà
+     * @param[in] defaultValue valore restituito se la chiave non esiste o non è parsabile
      * @return intero parsato o defaultValue
      */
     public int getInt(String key, int defaultValue) {

@@ -1,3 +1,15 @@
+/**
+ * @file ControllerServer.java
+ * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ControllerServer
+ *
+ * Questa classe permette di istanziare un oggetto ControllerServer, i metodi setter e getter permettono di
+ * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
+ * le informazioni relative alla classe ControllerServer.
+ *
+ * @author Gruppo 2
+ * @date 
+ * @version 1.0.0
+ */
 package indovinaparola.server.controller;
 
 import indovinaparola.server.db.GestoreDatabase;
@@ -34,18 +46,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Controller JavaFX per il pannello di amministrazione del server.
- * Gestisce: avvio/stop del server, selezione e analisi dei documenti,
+ * @brief Controller JavaFX per il pannello di amministrazione del server.
+ * @brief Gestisce: avvio/stop del server, selezione e analisi dei documenti,
  * visualizzazione dei risultati TF e della classifica utenti.
  *
- * <p>Implementa {@link Initializable} come da pattern FXML (Modulo JavaFX corso JA26).
+ * Implementa {@link Initializable} come da pattern FXML.
  * Tutti gli aggiornamenti alla GUI da thread non-FX passano per {@link Platform#runLater}
- * (Modulo 6 - thread-safety con JavaFX).</p>
+ *.
  */
 public class ControllerServer implements Initializable {
 
-    private static final Logger LOGGER = Logger.getLogger(ControllerServer.class.getName());
-    private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static final Logger LOGGER = Logger.getLogger(ControllerServer.class.getName()); ///< Logger della classe ControllerServer
+    private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern("HH:mm:ss"); ///< Formattatore per i timestamp dei log
 
     // --- Binding FXML ---
     @FXML private Label statusLabel;
@@ -70,20 +82,23 @@ public class ControllerServer implements Initializable {
     @FXML private TextArea logArea;
 
     // --- Stato interno ---
-    private final List<File> selectedFiles = new ArrayList<>();
-    private AnalizzatoreDocumenti currentAnalyzer;
-    private GestoreDatabase db;
-    private CoordinatoreGioco coordinator;
+    private final List<File> selectedFiles = new ArrayList<>(); ///< Lista dei file selezionati per l'analisi
+    private AnalizzatoreDocumenti currentAnalyzer; ///< Istanza corrente dell'analizzatore documenti
+    private GestoreDatabase db; ///< Gestore del database
+    private CoordinatoreGioco coordinator; ///< Coordinatore della logica di gioco
     private ReteServer network;
-    private ServizioAnalisi analysisService;
+    private ServizioAnalisi analysisService; ///< Servizio asincrono per eseguire l'analisi
     private int serverPort = 5000;
 
     /**
-     * Inizializza il controller dopo il caricamento del file FXML.
-     * Configura le TableView, carica le properties e connette il database.
+     * @brief Inizializza il controller dopo il caricamento del file FXML.
+     * @brief Configura le TableView, carica le properties e connette il database.
      *
-     * @param location  URL della risorsa FXML (non usato)
-     * @param resources ResourceBundle (non usato)
+     * @pre I componenti grafici definiti nell'FXML devono essere stati iniettati correttamente.
+     * @post Il database è connesso, le tabelle configurate e il server è pronto all'uso.
+     *
+     * @param[in] location  URL della risorsa FXML (non usato)
+     * @param[in] resources ResourceBundle (non usato)
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -114,7 +129,7 @@ public class ControllerServer implements Initializable {
         }
 
         // Creazione coordinatore di gioco
-        // Lambda come Consumer<String> (Modulo 4): aggiorna la TextArea log
+        // Lambda come Consumer<String>: aggiorna la TextArea log
         coordinator = new CoordinatoreGioco(db, null);
         coordinator.setGameConfig(gameTimeout, excerptWords);
         coordinator.setStatusCallback(new java.util.function.Consumer<String>() {
@@ -146,7 +161,7 @@ public class ControllerServer implements Initializable {
                 })
         );
 
-        // Callback onSucceeded del Service (Modulo JavaFX)
+        // Callback onSucceeded del Service
         analysisService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
@@ -172,12 +187,9 @@ public class ControllerServer implements Initializable {
         log("Pannello server pronto. Porta: " + serverPort);
     }
 
-    // ----------------------------------------------------------------
-    // Controllo server
-    // ----------------------------------------------------------------
 
     /**
-     * Avvia il ServerSocket sulla porta configurata.
+     * @brief Avvia il ServerSocket sulla porta configurata.
      */
     @FXML
     private void handleStartServer() {
@@ -194,7 +206,7 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Ferma il server chiudendo il ServerSocket.
+     * @brief Ferma il server chiudendo il ServerSocket.
      */
     @FXML
     private void handleStopServer() {
@@ -205,12 +217,9 @@ public class ControllerServer implements Initializable {
         log("Server fermato.");
     }
 
-    // ----------------------------------------------------------------
-    // Documenti e analisi
-    // ----------------------------------------------------------------
 
     /**
-     * Apre il FileChooser per selezionare uno o più file .txt da analizzare.
+     * @brief Apre il FileChooser per selezionare uno o più file .txt da analizzare.
      */
     @FXML
     private void handleSelectFiles() {
@@ -234,7 +243,7 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Rimuove tutti i file dalla lista di selezione.
+     * @brief Rimuove tutti i file dalla lista di selezione.
      */
     @FXML
     private void handleClearFiles() {
@@ -243,8 +252,8 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Avvia l'analisi asincrona dei documenti selezionati tramite {@link ServizioAnalisi}.
-     * L'interfaccia rimane reattiva durante l'elaborazione (Modulo JavaFX - Service).
+     * @brief Avvia l'analisi asincrona dei documenti selezionati tramite {@link ServizioAnalisi}.
+     * @brief L'interfaccia rimane reattiva durante l'elaborazione.
      */
     @FXML
     private void handleAnalyze() {
@@ -264,7 +273,7 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Salva i risultati dell'analisi corrente in un file serializzato (.dat).
+     * @brief Salva i risultati dell'analisi corrente in un file serializzato (.dat).
      */
     @FXML
     private void handleSaveAnalysis() {
@@ -288,7 +297,7 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Carica un'analisi precedentemente salvata da file .dat.
+     * @brief Carica un'analisi precedentemente salvata da file .dat.
      */
     @FXML
     private void handleLoadAnalysis() {
@@ -313,7 +322,7 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Aggiorna la classifica utenti leggendo le statistiche dal database.
+     * @brief Aggiorna la classifica utenti leggendo le statistiche dal database.
      */
     @FXML
     private void handleRefreshStats() {
@@ -327,23 +336,20 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Pulisce la TextArea del log.
+     * @brief Pulisce la TextArea del log.
      */
     @FXML
     private void handleClearLog() {
         logArea.clear();
     }
 
-    // ----------------------------------------------------------------
-    // Setup tabelle
-    // ----------------------------------------------------------------
 
     /**
-     * Configura le colonne della TableView dei risultati Term Frequency.
-     * Usa lambda come CellValueFactory (Modulo 4 - lambda in JavaFX).
+     * @brief Configura le colonne della TableView dei risultati Term Frequency.
+     * @brief Usa lambda come CellValueFactory.
      */
     private void setupTfTable() {
-        // Lambda come Callback<CellDataFeatures, ObservableValue> (Modulo 4)
+        // Lambda come Callback<CellDataFeatures, ObservableValue>
         wordColumn.setCellValueFactory(cellData ->
             new SimpleStringProperty(cellData.getValue().parola));
         freqColumn.setCellValueFactory(cellData ->
@@ -358,7 +364,7 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Configura le colonne della TableView delle statistiche utenti.
+     * @brief Configura le colonne della TableView delle statistiche utenti.
      */
     private void setupStatsTable() {
         statUserCol.setCellValueFactory(c ->
@@ -372,15 +378,15 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Popola la TableView TF con i risultati dell'analisi, ordinati per frequenza decrescente.
-     * Mostra al massimo 500 righe per limitare il consumo di memoria.
+     * @brief Popola la TableView TF con i risultati dell'analisi, ordinati per frequenza decrescente.
+     * @brief Mostra al massimo 500 righe per limitare il consumo di memoria.
      *
-     * @param tf mappa parola → TF da mostrare
+     * @param[in] tf mappa parola → TF da mostrare
      */
     private void populateTfTable(final Map<String, Double> tf) {
         final ObservableList<TFEntry> data = FXCollections.observableArrayList();
 
-        // Stream per sorting e limit (Modulo 5)
+        // Stream per sorting e limit
         tf.entrySet().stream()
             .sorted((a, b) -> Double.compare(b.getValue(), a.getValue()))
             .limit(500)
@@ -394,14 +400,11 @@ public class ControllerServer implements Initializable {
         });
     }
 
-    // ----------------------------------------------------------------
-    // Utility
-    // ----------------------------------------------------------------
 
     /**
-     * Aggiunge una riga timestampata alla TextArea di log.
+     * @brief Aggiunge una riga timestampata alla TextArea di log.
      *
-     * @param msg messaggio da loggare
+     * @param[in] msg messaggio da loggare
      */
     private void log(String msg) {
         final String line = "[" + LocalTime.now().format(TIME_FMT) + "] " + msg + "\n";
@@ -415,11 +418,11 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Mostra un dialogo di avviso all'utente.
+     * @brief Mostra un dialogo di avviso all'utente.
      *
-     * @param tipo    tipo di alert
-     * @param title   titolo del dialogo
-     * @param content testo del messaggio
+     * @param[in] tipo    tipo di alert
+     * @param[in] title   titolo del dialogo
+     * @param[in] content testo del messaggio
      */
     private void showAlert(final Alert.AlertType tipo,
                            final String title, final String content) {
@@ -434,22 +437,19 @@ public class ControllerServer implements Initializable {
         });
     }
 
-    // ----------------------------------------------------------------
-    // Classi interne per TableView (no record → Java 8)
-    // ----------------------------------------------------------------
 
     /**
-     * Riga per la TableView dei risultati Term Frequency.
+     * @brief Riga per la TableView dei risultati Term Frequency.
      */
     public static class TFEntry {
-        /** Parola. */ public final String parola;
-        /** Frequenza relativa (TF). */ public final double tf;
+        /** @brief Parola. */ public final String parola;
+        /** @brief Frequenza relativa (TF). */ public final double tf;
 
         /**
-         * Costruisce una voce TF.
+         * @brief Costruisce una voce TF.
          *
-         * @param parola parola
-         * @param tf   frequenza relativa
+         * @param[in] parola parola
+         * @param[in] tf   frequenza relativa
          */
         public TFEntry(String parola, double tf) {
             this.parola = parola;
@@ -458,21 +458,21 @@ public class ControllerServer implements Initializable {
     }
 
     /**
-     * Riga per la TableView della classifica utenti.
+     * @brief Riga per la TableView della classifica utenti.
      */
     public static class StatEntry {
-        /** Username. */      public final String  nomeUtente;
-        /** Vittorie. */      public final int     wins;
-        /** Partite totali. */public final int     games;
-        /** Tempo medio ms. */public final long    avgMs;
+        /** @brief Username. */      public final String  nomeUtente;
+        /** @brief Vittorie. */      public final int     wins;
+        /** @brief Partite totali. */public final int     games;
+        /** @brief Tempo medio ms. */public final long    avgMs;
 
         /**
-         * Costruisce una voce della classifica.
+         * @brief Costruisce una voce della classifica.
          *
-         * @param nomeUtente nomeUtente
-         * @param wins     vittorie
-         * @param games    partite totali
-         * @param avgMs    tempo medio risposta in ms
+         * @param[in] nomeUtente nomeUtente
+         * @param[in] wins     vittorie
+         * @param[in] games    partite totali
+         * @param[in] avgMs    tempo medio risposta in ms
          */
         public StatEntry(String nomeUtente, int wins, int games, long avgMs) {
             this.nomeUtente = nomeUtente;
