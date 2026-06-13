@@ -23,19 +23,6 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Gestisce la connessione socket TCP del client verso il server.
- *
- * I messaggi in ingresso vengono consegnati tramite una callback
- * {@link Consumer}&lt;{@link Messaggio}&gt; assegnata dal controller
- * tramite espressione lambda.
- *
- * Il thread di lettura è daemon:
- * non impedisce la chiusura della JVM quando la finestra viene chiusa.
- *
- * Ordine obbligatorio degli stream: {@link ObjectOutputStream}
- * prima di {@link ObjectInputStream}, con {@code flush()} dopo OOS.
- */
 
 public class ConnessioneServer {
 
@@ -52,8 +39,7 @@ public class ConnessioneServer {
 
 
     /**
-     * Imposta la callback per i messaggi ricevuti dal server.
-=======
+     * 
      * @brief Imposta la callback per i messaggi ricevuti dal server.
      *
      * @param[in] callback Consumer invocato ad ogni messaggio ricevuto
@@ -85,7 +71,6 @@ public class ConnessioneServer {
     public void connetti(String host, int porta) throws IOException {
         socket = new Socket(host, porta);
 
-        // ORDINE OBBLIGATORIO: OOS prima di OIS + flush()
         out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
         in = new ObjectInputStream(socket.getInputStream());
@@ -145,7 +130,7 @@ public class ConnessioneServer {
         try {
             out.writeObject(msg);
             out.flush();
-            out.reset(); // Evita object caching di ObjectOutputStream
+            out.reset();
             out.reset();
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "Errore invio messaggio", e);

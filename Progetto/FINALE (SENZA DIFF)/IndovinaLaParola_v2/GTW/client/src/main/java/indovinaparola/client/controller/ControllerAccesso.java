@@ -36,22 +36,11 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Controller JavaFX per la schermata di login e registrazione del client.
- *
- * Gestisce la connessione iniziale al server in un thread separato
- * (non blocca il JavaFX Application Thread), la modalità alternata
- * login/registrazione e la navigazione alla schermata di gioco.
- *
- * La callback dei messaggi usa {@link Consumer}&lt;{@link Messaggio}&gt;
- * come interfaccia funzionale assegnata tramite anonymous class Java 8
- *.
- */
 public class ControllerAccesso implements Initializable {
 
     private static final Logger LOGGER = Logger.getLogger(ControllerAccesso.class.getName()); /// @brief Logger della classe per la registrazione degli errori
 
-    @FXML private Label formTitle; ////// @brief Titolo del form (login o registrazione)
+    @FXML private Label formTitle; /// @brief Titolo del form (login o registrazione)
     @FXML private TextField campoNomeUtente; /// @brief Campo di testo per l'inserimento del nome utente
     @FXML private PasswordField passwordField; /// @brief Campo per l'inserimento della password
     @FXML private VBox confirmBox; /// @brief Contenitore del campo di conferma password (visibile solo in modalità registrazione)
@@ -69,7 +58,7 @@ public class ControllerAccesso implements Initializable {
     /**
      * @brief Inizializza il controller dopo il caricamento FXML.
      *
-     * Carica la configurazione del server tramite {@code ConfigurazioneClient},
+     * Carica la configurazione del server tramite ConfigurazioneClient,
      * imposta le callback per i messaggi e la disconnessione,
      * e avvia il tentativo di connessione al server.
      *
@@ -149,10 +138,10 @@ public class ControllerAccesso implements Initializable {
     /**
      * @brief Smista i messaggi ricevuti dal server al metodo appropriato.
      *
-     * Tutti gli aggiornamenti alla GUI vengono eseguiti tramite {@code Platform.runLater}.
-     * In caso di messaggio {@code WAITING}, sostituisce immediatamente la callback
-     * con un buffer temporaneo per evitare la perdita di messaggi (es. {@code CHALLENGE_START})
-     * che potrebbero arrivare prima che {@code ControllerGioco} sia inizializzato.
+     * Tutti gli aggiornamenti alla GUI vengono eseguiti tramite Platform.runLater.
+     * In caso di messaggio WAITING, sostituisce immediatamente la callback
+     * con un buffer temporaneo per evitare la perdita di messaggi (es. CHALLENGE_START)
+     * che potrebbero arrivare prima che ControllerGioco sia inizializzato.
      *
      * @param[in] msg messaggio ricevuto dal server
      */
@@ -205,7 +194,7 @@ public class ControllerAccesso implements Initializable {
      *
      * In caso di successo aggiorna la label di connessione con il nome utente.
      * La navigazione alla schermata di gioco avviene separatamente,
-     * alla ricezione del messaggio {@code WAITING}.
+     * alla ricezione del messaggio WAITING.
      *
      * @param[in] resp risposta di autenticazione ricevuta dal server
      */

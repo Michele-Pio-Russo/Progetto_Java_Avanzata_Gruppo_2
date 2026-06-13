@@ -41,24 +41,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-<<<<<<< Updated upstream
-/**
- * Controller JavaFX per la finestra di gioco del client.
- *
- * Gestisce tre pannelli sovrapposti in un {@code StackPane}:
- * <ul>
- *   <li>{@code waitingPane} — in attesa dell'avversario</li>
- *   <li>{@code gamePane}    — sfida in corso</li>
- *   <li>{@code pannelloRisultato}  — risultato finale</li>
- * </ul>
- * La visibilità e il {@code managed} sono alternati per mostrare
- * uno solo alla volta senza ricreare la scena.
- *
- * Il timer è implementato con {@link Timeline} di JavaFX:
- * rimane nel JavaFX Application Thread ed è thread-safe per la GUI.
- */
-=======
->>>>>>> Stashed changes
+
 public class ControllerGioco {
 
     private static final Logger LOGGER = Logger.getLogger(ControllerGioco.class.getName()); /// @brief Logger della classe per la registrazione degli errori
@@ -218,25 +201,15 @@ public class ControllerGioco {
         mostraGioco();
         etichettaStato.setText("In gioco!");
 
-<<<<<<< Updated upstream
-        // Avvia il timer countdown con Timeline
-=======
->>>>>>> Stashed changes
         avviaCountdown();
     }
 
     /**
      * @brief Avvia il timer countdown con Timeline di JavaFX.
      *
-<<<<<<< Updated upstream
-     * {@code Timeline} è la scelta corretta per task periodici nel foreground
-     * (aggiornamento GUI): rimane nel FX Application Thread ed è thread-safe
-     *.
-=======
-     * Crea una {@code Timeline} con un {@code KeyFrame} al secondo che decrementa
+     * Crea una Timeline con un KeyFrame al secondo che decrementa
      * il contatore e aggiorna la label del timer. Gli ultimi 10 secondi vengono
      * evidenziati in rosso. Allo scadere del tempo il campo di risposta viene disabilitato.
->>>>>>> Stashed changes
      */
     private void avviaCountdown() {
         if (timelineTimer != null) timelineTimer.stop();
@@ -281,10 +254,6 @@ public class ControllerGioco {
         campoRisposta.setDisable(true);
         etichettaStato.setText("Partita terminata");
 
-<<<<<<< Updated upstream
-        // Usa il metodo dell'enum Esito
-=======
->>>>>>> Stashed changes
         emojiRisultato.setText(result.getEsito().toEmoji());
         titoloRisultato.setText(result.getEsito().toDisplayString());
 
@@ -331,11 +300,6 @@ public class ControllerGioco {
             if (timelineTimer != null) timelineTimer.stop();
             etichettaStato.setText("Partita annullata");
             mostraFeedback("L'avversario si e' disconnesso. In attesa di nuovo avversario...");
-
-<<<<<<< Updated upstream
-            // Timeline one-shot per il ritardo
-=======
->>>>>>> Stashed changes
             Timeline delay = new Timeline(new KeyFrame(Duration.seconds(3),
                 new EventHandler<ActionEvent>() {
                     @Override

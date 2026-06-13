@@ -83,13 +83,6 @@ public class ControllerStorico {
     }
 
     /**
-<<<<<<< Updated upstream
-     * Configura le colonne della TableView con CellValueFactory lambda
-     * e CellFactory per la colorazione dell'esito.
-     */
-    private void configuraTabella() {
-        // Lambda come Callback<CellDataFeatures, ObservableValue>
-=======
      * @brief Configura le colonne della TableView.
      *
      * Imposta le CellValueFactory per ogni colonna e le CellFactory
@@ -98,7 +91,6 @@ public class ControllerStorico {
      * visualizzati come "—".
      */
     private void configuraTabella() {
->>>>>>> Stashed changes
         dateCol.setCellValueFactory(c ->
             new SimpleStringProperty(c.getValue().getDataPartita()));
         opponentCol.setCellValueFactory(c ->
