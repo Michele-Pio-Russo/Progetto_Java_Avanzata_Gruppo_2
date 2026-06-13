@@ -1,13 +1,19 @@
+/**
+* @file VoceStorico.java
+* 
+* @brief Rappresenta una voce dello storico delle sfide di un giocatore.
+* Classe immutabile (tutti i campi final, nessun setter),
+* per oggetti di trasferimento dati (DTO) in ambiente multi-thread.
+* 
+* @author Gruppo 2
+* 
+* @version 1.0
+*/
+
 package indovinaparola.common;
 
 import java.io.Serializable;
 
-/**
- * Rappresenta una voce dello storico delle sfide di un giocatore.
- * Classe immutabile (tutti i campi final, nessun setter) — buona pratica
- * per oggetti di trasferimento dati (DTO) in ambiente multi-thread.
- * Compatibile JDK 8.
- */
 public class VoceStorico implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,13 +25,13 @@ public class VoceStorico implements Serializable {
     private final String parolaCorretta;
 
     /**
-     * Costruisce una voce dello storico.
+     * @brief Costruttore per creare un oggetto di tipo VoceStorico
      *
-     * @param dataPartita       data e ora della sfida (formato DATETIME SQLite)
-     * @param avversario       nomeUtente dell'avversario
-     * @param esito        esito: "win", "loss" o "draw"
-     * @param tempoRispostaMs tempo di risposta in millisecondi (-1 se timeout)
-     * @param parolaCorretta    parola corretta della sfida
+     * @param[in] dataPartita data e ora della sfida (formato DATETIME SQLite)
+     * @param[in] avversario nomeUtente dell'avversario
+     * @param[in] esito esito: "win", "loss" o "draw"
+     * @param[in] tempoRispostaMs tempo di risposta in millisecondi (-1 se timeout)
+     * @param[in] parolaCorretta parola corretta della sfida
      */
     public VoceStorico(String dataPartita, String avversario, String esito,
                         long tempoRispostaMs, String parolaCorretta) {
@@ -37,39 +43,50 @@ public class VoceStorico implements Serializable {
     }
 
     /**
-     * Restituisce la data e l'ora della sfida.
+     * @brief Restituisce la data e l'ora della sfida.
      *
-     * @return stringa datetime
+     * @return dataPartita
      */
-    public String getDataPartita() { return dataPartita; }
+    public String getDataPartita() { 
+        return dataPartita; 
+    }
 
     /**
-     * Restituisce lo nomeUtente dell'avversario.
+     * @brief Restituisce lo nomeUtente dell'avversario.
      *
-     * @return nomeUtente avversario
+     * @return avversario
      */
-    public String getAvversario() { return avversario; }
+    public String getAvversario() { 
+        return avversario; 
+    }
 
     /**
-     * Restituisce l'esito della sfida.
+     * @brief Restituisce l'esito della sfida.
      *
-     * @return "win", "loss" o "draw"
+     * @return esito
      */
-    public String getEsito() { return esito; }
+    public String getEsito() { 
+        return esito; 
+    }
 
     /**
-     * Restituisce il tempo di risposta in millisecondi.
+     * @brief Restituisce il tempo di risposta in millisecondi.
      *
-     * @return ms di risposta, -1 se timeout
+     * @return tempoRispostaMs
      */
-    public long getTempoRispostaMs() { return tempoRispostaMs; }
+    
+    public long getTempoRispostaMs() { 
+        return tempoRispostaMs; 
+    }
 
     /**
-     * Restituisce la parola corretta della sfida.
+     * @brief Restituisce la parola corretta della sfida.
      *
-     * @return parola corretta
+     * @return parolaCorretta
      */
-    public String getParolaCorretta() { return parolaCorretta; }
+    public String getParolaCorretta() { 
+        return parolaCorretta; 
+    }
 
     @Override
     public String toString() {

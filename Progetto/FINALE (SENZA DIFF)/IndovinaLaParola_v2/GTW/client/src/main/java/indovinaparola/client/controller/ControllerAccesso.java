@@ -36,7 +36,6 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-<<<<<<< Updated upstream
 /**
  * Controller JavaFX per la schermata di login e registrazione del client.
  *
@@ -48,8 +47,6 @@ import java.util.logging.Logger;
  * come interfaccia funzionale assegnata tramite anonymous class Java 8
  *.
  */
-=======
->>>>>>> Stashed changes
 public class ControllerAccesso implements Initializable {
 
     private static final Logger LOGGER = Logger.getLogger(ControllerAccesso.class.getName()); /// @brief Logger della classe per la registrazione degli errori
@@ -87,10 +84,6 @@ public class ControllerAccesso implements Initializable {
 
         connessione = new ConnessioneServer();
 
-<<<<<<< Updated upstream
-        // Consumer<Messaggio> assegnato con lambda
-=======
->>>>>>> Stashed changes
         connessione.setMessageCallback(new Consumer<Messaggio>() {
             @Override
             public void accept(Messaggio msg) {
@@ -98,10 +91,6 @@ public class ControllerAccesso implements Initializable {
             }
         });
 
-<<<<<<< Updated upstream
-        // Runnable per la disconnessione
-=======
->>>>>>> Stashed changes
         connessione.setDisconnectCallback(new Runnable() {
             @Override
             public void run() {

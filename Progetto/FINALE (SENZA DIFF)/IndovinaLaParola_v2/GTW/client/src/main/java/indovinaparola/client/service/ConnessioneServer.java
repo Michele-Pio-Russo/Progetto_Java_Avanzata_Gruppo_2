@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-<<<<<<< Updated upstream
 /**
  * Gestisce la connessione socket TCP del client verso il server.
  *
@@ -37,8 +36,7 @@ import java.util.logging.Logger;
  * Ordine obbligatorio degli stream: {@link ObjectOutputStream}
  * prima di {@link ObjectInputStream}, con {@code flush()} dopo OOS.
  */
-=======
->>>>>>> Stashed changes
+
 public class ConnessioneServer {
 
     private static final Logger LOGGER = Logger.getLogger(ConnessioneServer.class.getName()); /// @brief Logger della classe per la registrazione degli errori
@@ -52,26 +50,11 @@ public class ConnessioneServer {
 
     private volatile boolean connesso = false; /// @brief Indica se la connessione con il server è attiva
 
-    /**
-<<<<<<< Updated upstream
-     * Callback invocata ad ogni messaggio ricevuto dal server.
-     * Assegnata tramite lambda dal controller.
-     */
-    private Consumer<Messaggio> callbackMessaggio;
-
-    /**
-     * Callback invocata alla disconnessione dal server.
-     * Assegnata tramite lambda dal controller.
-     */
-    private Runnable callbackDisconnessione;
-
-    private volatile boolean connesso = false;
 
     /**
      * Imposta la callback per i messaggi ricevuti dal server.
 =======
      * @brief Imposta la callback per i messaggi ricevuti dal server.
->>>>>>> Stashed changes
      *
      * @param[in] callback Consumer invocato ad ogni messaggio ricevuto
      */
@@ -102,10 +85,7 @@ public class ConnessioneServer {
     public void connetti(String host, int porta) throws IOException {
         socket = new Socket(host, porta);
 
-<<<<<<< Updated upstream
         // ORDINE OBBLIGATORIO: OOS prima di OIS + flush()
-=======
->>>>>>> Stashed changes
         out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
         in = new ObjectInputStream(socket.getInputStream());
@@ -165,11 +145,8 @@ public class ConnessioneServer {
         try {
             out.writeObject(msg);
             out.flush();
-<<<<<<< Updated upstream
             out.reset(); // Evita object caching di ObjectOutputStream
-=======
             out.reset();
->>>>>>> Stashed changes
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "Errore invio messaggio", e);
         }

@@ -1,12 +1,15 @@
+/**
+* @file CifrarioCesare.java
+* 
+* @brief Implementazione del Cifrario di Cesare
+* Questa classe crea tutta la logica dietro la cifratura della parola da indovinare
+* 
+* @author Gruppo 2
+* 
+* @version 1.0
+*/
 package indovinaparola.common;
 
-/**
- * Implementazione del Cifrario di Cesare.
- * Sostituisce ogni lettera con quella che si trova {@code spostamento} posizioni
- * avanti nell'alfabeto (A-Z, a-z). Tutti gli altri caratteri rimangono invariati.
- *
- * Classe di utilità — costruttore privato.
- */
 public final class CifrarioCesare {
 
     private CifrarioCesare() {
@@ -14,14 +17,15 @@ public final class CifrarioCesare {
     }
 
     /**
-     * Cifra una parola con il Cifrario di Cesare.
+     * @brief Cifra una parola con il Cifrario di Cesare.
+     * 
      * Ogni lettera viene spostata di {@code spostamento} posizioni in avanti.
-     * Lettere maiuscole e minuscole vengono gestite separatamente.
-     * Caratteri non alfabetici rimangono invariati.
+     * Le lettere maiuscole e minuscole vengono gestite separatamente.
+     * I caratteri non alfabetici rimangono invariati.
      *
-     * @param parola  parola da cifrare (non null)
-     * @param spostamento numero di posizioni di spostamento (1–25)
-     * @return parola cifrata
+     * @param[in] parola  parola da cifrare (non null)
+     * @param[in] spostamento numero di posizioni di spostamento (1–25)
+     * @return (String) la parola cifrata
      */
     public static String cifra(String parola, int spostamento) {
         StringBuilder sb = new StringBuilder();
@@ -37,12 +41,12 @@ public final class CifrarioCesare {
     }
 
     /**
-     * Decifra una parola cifrata con il Cifrario di Cesare.
-     * Equivale a cifrare con spostamento inverso (26 - spostamento).
+     * @brief Decifra una parola cifrata con il Cifrario di Cesare.
+     * Cifra con spostamento inverso (26 - spostamento).
      *
-     * @param parola  parola cifrata (non null)
-     * @param spostamento spostamento originale usato per la cifratura (1–25)
-     * @return parola originale
+     * @param[in] parola  parola cifrata (non null)
+     * @param[in] spostamento spostamento originale usato per la cifratura (1–25)
+     * @return (String) parola originale
      */
     public static String decifra(String parola, int spostamento) {
         return cifra(parola, 26 - spostamento);

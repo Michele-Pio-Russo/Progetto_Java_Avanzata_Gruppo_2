@@ -1,58 +1,63 @@
+/**
+* @file Messaggio.java
+* 
+* @brief Sistema di comunicazione client-server
+* Ogni messaggio ha un tipo (enum {@link Tipo}) e un carico Object
+* che viene castato in base al tipo ricevuto.
+* Implementa {@link Serializable} per la trasmissione via ObjectStream.
+* 
+* @author Gruppo 2
+* 
+* @version 1.0
+*/
+
 package indovinaparola.common;
 
 import java.io.Serializable;
 
-/**
- * Classe base del protocollo di comunicazione client-server.
- * Ogni messaggio ha un tipo (enum {@link Tipo}) e un carico Object
- * che viene castato in base al tipo ricevuto.
- * Implementa {@link Serializable} per la trasmissione via ObjectStream.
- */
 public class Messaggio implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * Tipi di messaggio scambiati nel protocollo.
-     * Uso di enum.
+     * @brief Tipi di messaggio scambiati nel protocollo.
      */
     public enum Tipo {
-        /** Richiesta di login da client a server. */
-        LOGIN_REQUEST,
-        /** Risposta del server al login. */
-        LOGIN_RESPONSE,
-        /** Richiesta di registrazione da client a server. */
-        REGISTER_REQUEST,
-        /** Risposta del server alla registrazione. */
-        REGISTER_RESPONSE,
-        /** Server notifica il client che è in attesa di avversario. */
-        WAITING,
-        /** Server invia la sfida ai due client. */
-        CHALLENGE_START,
-        /** Client invia la propria risposta al server. */
-        CHALLENGE_ANSWER,
-        /** Server invia l'esito della sfida ai due client. */
-        CHALLENGE_RESULT,
-        /** Client richiede lo storico delle proprie partite. */
-        HISTORY_REQUEST,
-        /** Server risponde con la lista delle partite passate. */
-        HISTORY_RESPONSE,
-        /** Client (già autenticato) richiede di rientrare in lista d'attesa per una nuova partita. */
-        REQUEUE_REQUEST,
-        /** Messaggio di errore generico. */
-        ERROR,
-        /** Notifica di disconnessione. */
-        DISCONNECT
+        LOGIN_REQUEST,  ///@brief Richiesta di login da client a server.
+        
+        LOGIN_RESPONSE,  ///@brief Risposta del server al login.
+        
+        REGISTER_REQUEST,    ///@brief Richiesta di registrazione da client a server.
+        
+        REGISTER_RESPONSE,   ///@brief Risposta del server alla registrazione.
+        
+        WAITING,     ///@brief Il server notifica il client che è in attesa di avversario.
+        
+        CHALLENGE_START,     ///@brief Il server invia la sfida ai due client.
+        
+        CHALLENGE_ANSWER,    ///@brief Il client invia la propria risposta al server.
+        
+        CHALLENGE_RESULT,    ///@brief Il server invia l'esito della sfida ai due client.
+        
+        HISTORY_REQUEST,     ///@brief Il client richiede lo storico delle proprie partite.
+        
+        HISTORY_RESPONSE,    ///@brief Il server risponde con la lista delle partite passate.
+        
+        REQUEUE_REQUEST,     ///@brief Il client (già autenticato) richiede di rientrare in lista d'attesa per una nuova partita.
+        
+        ERROR,   ///@brief Messaggio di errore generico.
+        
+        DISCONNECT   ///@brief Notifica di disconnessione.
     }
 
     private final Tipo tipo;
     private final Object carico;
 
     /**
-     * Costruisce un messaggio con tipo e carico.
+     * @brief Costruttore per creare un oggetto di tipo messaggio
      *
-     * @param tipo    tipo del messaggio (non null)
-     * @param carico dati associati al messaggio (può essere null)
+     * @param[in] tipo tipo del messaggio (non null)
+     * @param[in] carico dati associati al messaggio (può essere null)
      */
     public Messaggio(Tipo tipo, Object carico) {
         this.tipo = tipo;
@@ -60,20 +65,18 @@ public class Messaggio implements Serializable {
     }
 
     /**
-     * Restituisce il tipo del messaggio.
+     * @brief Restituisce il tipo del messaggio.
      *
-     * @return tipo del messaggio
+     * @return tipo
      */
     public Tipo getTipo() {
         return tipo;
     }
 
     /**
-     * Restituisce il carico del messaggio.
-     * Il chiamante deve effettuare il cast al tipo appropriato
-     * in base a {@link #getTipo()}.
+     * @brief Restituisce il carico del messaggio. (può essere null)
      *
-     * @return carico (può essere null)
+     * @return carico
      */
     public Object getCarico() {
         return carico;

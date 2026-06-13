@@ -1,12 +1,19 @@
+/**
+* @file PayloadAutenticazione.java
+* 
+* @brief Payload per le richieste di autenticazione (login e registrazione).
+* Trasporta nomeUtente e password in chiaro, la password viene hashata
+* lato server prima di essere confrontata o salvata.
+* 
+* @author Gruppo 2
+* 
+* @version 1.0
+*/
+
 package indovinaparola.common;
 
 import java.io.Serializable;
 
-/**
- * Payload per le richieste di autenticazione (login e registrazione).
- * Trasporta nomeUtente e password in chiaro; la password viene hashata
- * lato server prima di essere confrontata o salvata.
- */
 public class PayloadAutenticazione implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,10 +22,10 @@ public class PayloadAutenticazione implements Serializable {
     private final String password;
 
     /**
-     * Costruisce il carico di autenticazione.
+     * @brief Costruttore per creare un oggetto di tipo PayloadAutenticazione
      *
-     * @param nomeUtente nome utente
-     * @param password password in chiaro
+     * @param[in] nomeUtente nome utente
+     * @param[in] password password in chiaro
      */
     public PayloadAutenticazione(String nomeUtente, String password) {
         this.nomeUtente = nomeUtente;
@@ -26,16 +33,16 @@ public class PayloadAutenticazione implements Serializable {
     }
 
     /**
-     * Restituisce lo nomeUtente.
+     * @brief Restituisce lo nomeUtente.
      *
-     * @return nomeUtente
+     * @return nomeUtente 
      */
     public String getNomeUtente() {
         return nomeUtente;
     }
 
     /**
-     * Restituisce la password in chiaro.
+     * @brief Restituisce la password in chiaro.
      *
      * @return password
      */

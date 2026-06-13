@@ -1,32 +1,36 @@
+/**
+* @file RisultatoSfida.java
+* 
+* @brief Payload inviato dal server a entrambi i client al termine di una sfida.
+* Contiene il nome del vincitore (se presente), la parola corretta
+* e l'esito dal punto di vista del client ricevente.
+* 
+* @author Gruppo 2
+* 
+* @version 1.0
+*/
+
 package indovinaparola.common;
 
 import java.io.Serializable;
 
-/**
- * Payload inviato dal server a entrambi i client al termine di una sfida.
- * Contiene il nome del vincitore (se presente), la parola corretta
- * e l'esito dal punto di vista del client ricevente.
- *
- * Uso di enum annidato {@link Esito} — Modulo 2 corso JA26.
- */
 public class RisultatoSfida implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * Esito della sfida dal punto di vista del client ricevente.
-     * Esempio di enum con comportamento.
+     * @brief Esito della sfida dal punto di vista del client ricevente.
      */
     public enum Esito {
-        /** Il client ricevente ha risposto correttamente per primo. */
-        VITTORIA,
-        /** L'avversario ha risposto correttamente per primo. */
-        SCONFITTA,
-        /** Nessuno ha risposto correttamente entro il timeout. */
-        PAREGGIO;
+        
+        VITTORIA,   ///@brief Il client ricevente ha risposto correttamente per primo.
+        
+        SCONFITTA,  ///@brief L'avversario ha risposto correttamente per primo.
+        
+        PAREGGIO;   ///@brief Nessuno ha risposto correttamente entro il timeout.
 
         /**
-         * Restituisce una stringa leggibile dell'esito in italiano.
+         * @brief Restituisce una stringa leggibile dell'esito in italiano.
          *
          * @return stringa esito
          */
@@ -40,7 +44,7 @@ public class RisultatoSfida implements Serializable {
         }
 
         /**
-         * Restituisce l'emoji associata all'esito.
+         * @brief Restituisce l'emoji associata all'esito.
          *
          * @return stringa emoji
          */
@@ -59,11 +63,11 @@ public class RisultatoSfida implements Serializable {
     private final Esito esito;
 
     /**
-     * Costruisce il risultato della sfida.
+     * @brief Costruttore per creare un oggetto di tipo RisultatoSfida
      *
-     * @param nomeUtenteVincitore nomeUtente del vincitore, null in caso di pareggio
-     * @param parolaCorretta    parola originale corretta
-     * @param esito        esito dal punto di vista del client ricevente
+     * @param[in] nomeUtenteVincitore nome utente del vincitore, null in caso di pareggio
+     * @param[in] parolaCorretta parola originale corretta
+     * @param[in] esito esito dal punto di vista del client ricevente
      */
     public RisultatoSfida(String nomeUtenteVincitore, String parolaCorretta, Esito esito) {
         this.nomeUtenteVincitore = nomeUtenteVincitore;
@@ -72,27 +76,27 @@ public class RisultatoSfida implements Serializable {
     }
 
     /**
-     * Restituisce lo nomeUtente del vincitore.
+     * @brief Restituisce il nome utente del vincitore.
      *
-     * @return nomeUtente vincitore, o null in caso di pareggio
+     * @return nomeUtenteVincitore, o null in caso di pareggio
      */
     public String getNomeUtenteVincitore() {
         return nomeUtenteVincitore;
     }
 
     /**
-     * Restituisce la parola originale corretta.
+     * @brief Restituisce la parola originale corretta.
      *
-     * @return parola corretta
+     * @return parolaCorretta
      */
     public String getParolaCorretta() {
         return parolaCorretta;
     }
 
     /**
-     * Restituisce l'esito della sfida dal punto di vista del ricevente.
+     * @brief Restituisce l'esito della sfida dal punto di vista del ricevente.
      *
-     * @return esito {@link Esito}
+     * @return esito
      */
     public Esito getEsito() {
         return esito;

@@ -1,13 +1,20 @@
+/**
+* @file PayloadSfida.java
+* 
+* @brief Payload inviato dal server a entrambi i client all'avvio di una sfida.
+* Contiene l'estratto testuale con la parola cifrata, la lista delle
+* parole cifrate evidenziate e la durata del timer in secondi.
+* 
+* @author Gruppo 2
+* 
+* @version 1.0
+*/
+
 package indovinaparola.common;
 
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Payload inviato dal server a entrambi i client all'avvio di una sfida.
- * Contiene l'estratto testuale con la parola cifrata, la lista delle
- * parole cifrate evidenziate e la durata del timer in secondi.
- */
 public class PayloadSfida implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,12 +25,12 @@ public class PayloadSfida implements Serializable {
     private final int secondiTimeout;
 
     /**
-     * Costruisce il carico della sfida.
+     * @brief Costruttore per creare un oggetto di tipo PayloadSfida
      *
-     * @param idSfida    identificativo della sfida nel database
-     * @param estrattoTesto    estratto testuale con la parola cifrata tra parentesi quadre
-     * @param paroleCifrate lista delle parole cifrate presenti nell'estratto
-     * @param secondiTimeout durata massima della sfida in secondi
+     * @param[in] idSfida identificativo della sfida nel database
+     * @param[in] estrattoTesto estratto testuale con la parola cifrata tra parentesi quadre
+     * @param[in] paroleCifrate lista delle parole cifrate presenti nell'estratto
+     * @param[in] secondiTimeout durata massima della sfida in secondi
      */
     public PayloadSfida(int idSfida, String estrattoTesto,
                             List<String> paroleCifrate, int secondiTimeout) {
@@ -34,36 +41,36 @@ public class PayloadSfida implements Serializable {
     }
 
     /**
-     * Restituisce l'id della sfida nel database.
+     * @brief Restituisce l'id della sfida nel database.
      *
-     * @return challenge_id
+     * @return idSfida
      */
     public int getIdSfida() {
         return idSfida;
     }
 
     /**
-     * Restituisce l'estratto testuale con la parola cifrata.
+     * @brief Restituisce l'estratto testuale con la parola cifrata.
      *
-     * @return estratto testo
+     * @return estrattoTesto 
      */
     public String getEstrattoTesto() {
         return estrattoTesto;
     }
 
     /**
-     * Restituisce la lista delle parole cifrate nella sfida.
+     * @brief Restituisce la lista delle parole cifrate nella sfida.
      *
-     * @return lista parole cifrate
+     * @return paroleCifrate 
      */
     public List<String> getParoleCifrate() {
         return paroleCifrate;
     }
 
     /**
-     * Restituisce la durata del timer in secondi.
+     * @brief Restituisce la durata del timer in secondi.
      *
-     * @return secondi disponibili per rispondere
+     * @return secondiTimeout
      */
     public int getSecondiTimeout() {
         return secondiTimeout;
