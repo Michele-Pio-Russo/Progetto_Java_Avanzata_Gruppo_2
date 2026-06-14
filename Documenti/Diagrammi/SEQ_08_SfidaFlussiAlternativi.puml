@@ -1,0 +1,76 @@
+@startuml SEQ_08_SfidaFlussiAlternativi
+skinparam actorStyle awesome
+skinparam sequenceMessageAlign center
+
+title SEQ_08 — UC-G04: Flussi Alternativi A (Timeout) e C (Disconnessione)
+
+actor "Giocatore 1" as G1
+actor "Giocatore 2" as G2
+participant "ControllerGioco\n(Client 1/2)" as CG
+participant "GestoreClient 1" as GC1
+participant "GestoreClient 2" as GC2
+participant "CoordinatoreGioco" as COORD
+participant "GestoreDatabase" as DB_MGR
+database "SQLite" as DB
+
+== Stato iniziale: sfida avviata (vedi SEQ_04) ==
+COORD -> COORD : scheduler.schedule(taskTimeout,\ntimeoutSeconds, SECONDS)
+COORD -> COORD : sfidaAttiva = true
+
+== Alt. A — Timeout (nessuna risposta corretta) ==
+... timeoutSeconds secondi trascorsi senza risposta corretta ...
+COORD -> COORD : taskTimeout.run()\n(Runnable synchronized su\nCoordinatoreGioco.this)
+COORD -> COORD : controlla sfidaAttiva == true
+
+alt sfidaAttiva == true
+  COORD -> COORD : terminaSfida(null, -1, true)
+  COORD -> COORD : Esito.PAREGGIO per entrambi
+  COORD -> DB_MGR : saveChallengeWithResults(\nchallenge, results[2])
+  DB_MGR -> DB : setAutoCommit(false)
+  DB_MGR -> DB : INSERT INTO challenges (...)
+  DB_MGR -> DB : INSERT INTO results\n(user1, 'draw', -1)
+  DB_MGR -> DB : INSERT INTO results\n(user2, 'draw', -1)
+  DB_MGR -> DB : commit()
+  DB --> DB_MGR : ok
+  COORD -> COORD : taskTimeout già consumato\n(annullamento non necessario)
+  COORD -> GC1 : invia(CHALLENGE_RESULT,\nRisultatoSfida(null, parolaCorretta, PAREGGIO))
+  COORD -> GC2 : invia(CHALLENGE_RESULT,\nRisultatoSfida(null, parolaCorretta, PAREGGIO))
+  GC1 --> CG : CHALLENGE_RESULT (PAREGGIO)
+  GC2 --> CG : CHALLENGE_RESULT (PAREGGIO)
+  CG -> CG : ferma countdownTimeline
+  CG --> G1 : pannelloRisultato\n(🤝 "Pareggio!", parola corretta)
+  CG --> G2 : pannelloRisultato\n(🤝 "Pareggio!", parola corretta)
+else sfidaAttiva == false (risposta già arrivata)
+  COORD -> COORD : nessuna azione\n(la sfida è già terminata)
+end
+
+== Alt. C — Disconnessione di un avversario durante la sfida ==
+GC1 -> GC1 : cicloAscolto() riceve\nEOFException / SocketException
+GC1 -> COORD : onClientDisconnesso(client1)
+COORD -> COORD : controlla se client1 è in\nuna sfida attiva (giocatore1/giocatore2)
+
+alt sfida attiva con client1 coinvolto
+  COORD -> COORD : taskTimeout.cancel()
+  COORD -> COORD : sfidaAttiva = false
+  COORD -> GC2 : invia(ERROR,\n"L'avversario si è disconnesso.\nLa partita è annullata.")
+  GC2 --> CG : ERROR (avversario disconnesso)
+  CG -> CG : ferma countdownTimeline
+  CG --> G2 : Mostra messaggio di errore\nin etichettaFeedback
+  note over COORD
+    Nessun salvataggio su DB:
+    la sfida annullata per
+    disconnessione NON viene
+    persistita (Alt. C esclusa
+    da saveChallengeWithResults).
+  end note
+  ... Timeline one-shot 3 secondi (lato client G2) ...
+  CG -> GC2 : invia(REQUEUE_REQUEST)
+  GC2 -> COORD : gestisciNuovaRichiesta(client2)
+  COORD -> COORD : reinserisce client2 in\ngiocatoriInAttesa
+  COORD -> GC2 : invia(WAITING, "1/2")
+  GC2 --> CG : WAITING
+  CG --> G2 : Mostra waitingPane
+else client1 non era in sfida attiva
+  COORD -> COORD : rimuove client1 da\ngiocatoriInAttesa (se presente)
+end
+@enduml

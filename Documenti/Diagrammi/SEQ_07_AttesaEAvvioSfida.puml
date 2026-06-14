@@ -1,0 +1,47 @@
+@startuml SEQ_07_AttesaEAvvioSfida
+skinparam actorStyle awesome
+skinparam sequenceMessageAlign center
+
+title SEQ_07 — Attesa Partita e Avvio Automatico Sfida (UC-G03)
+
+actor "Giocatore 1" as G1
+actor "Giocatore 2" as G2
+participant "GestoreClient 1" as GC1
+participant "GestoreClient 2" as GC2
+participant "CoordinatoreGioco" as COORD
+
+== Giocatore 1 si autentica ==
+G1 -> GC1 : login effettuato (ruolo=player)
+GC1 -> COORD : aggiungiInListaAttesa(client1)
+
+alt client1 già presente in giocatoriInAttesa
+  COORD -> GC1 : invia(ERROR,\n"Sei già in lista d'attesa")
+  GC1 --> G1 : Mostra messaggio di errore
+else client1 non presente
+  COORD -> COORD : giocatoriInAttesa.add(client1)\n(size = 1)
+  COORD -> GC1 : invia(WAITING, "1/2")
+  GC1 --> G1 : Mostra waitingPane\n("In attesa di un avversario... 1/2")
+end
+
+== Giocatore 2 si autentica ==
+G2 -> GC2 : login effettuato (ruolo=player)
+GC2 -> COORD : aggiungiInListaAttesa(client2)
+COORD -> COORD : giocatoriInAttesa.add(client2)\n(size = 2)
+COORD -> GC2 : invia(WAITING, "2/2")
+GC2 --> G2 : Mostra waitingPane\n("In attesa di un avversario... 2/2")
+
+== Soglia raggiunta: avvio automatico sfida ==
+COORD -> COORD : giocatoriInAttesa.size() == 2\n-> rimuove p1, p2 dalla lista
+COORD -> COORD : avviaSfida(p1, p2)\n(vedi SEQ_04 — Sfida Completa)
+
+note over COORD
+  IF-S23: l'accesso duplicato in lista
+  d'attesa è bloccato (controllo per
+  nomeUtente già presente).
+  IF-S24: al raggiungimento di 2
+  elementi, il server rimuove i due
+  giocatori e chiama avviaSfida(p1, p2),
+  che genera estratto, parola, shift
+  e invia CHALLENGE_START (SEQ_04).
+end note
+@enduml

@@ -1,156 +1,234 @@
 @startuml CD_02_DettaglioServer
 skinparam classAttributeIconSize 0
 
-title CD_02 — Dettaglio Modulo Server
+title CD_02 — Dettaglio Modulo Server (package reali da Doxygen)
 
 class ApplicazioneServer <<JavaFX Application>> {
-  +start(Stage primaryStage)
-  +{static} main(String[] args)
+  +start(primaryStage : Stage)
+  +{static} main(args : String[])
 }
 
-class CaricatoreConfigurazione {
-  -props : Properties
-  +CaricatoreConfigurazione(relativePath)
-  +get(key, defaultValue) : String
-  +getInt(key, defaultValue) : int
+package "util" {
+  class CaricatoreConfigurazione {
+    -props : Properties
+    -{static} LOGGER : Logger
+    +CaricatoreConfigurazione(relativePath : String)
+    +get(key, defaultValue : String) : String
+    +getInt(key : String, defaultValue : int) : int
+  }
 }
 
-package "network" {
+package "model" {
   class ReteServer {
-    -serverSocket : ServerSocket
     -porta : int
     -coordinator : CoordinatoreGioco
-    -running : boolean
-    +ReteServer(porta, coordinator)
-    +start()
+    -serverSocket : ServerSocket
+    -running : boolean = false
+    -{static} LOGGER : Logger
+    +ReteServer(porta : int, coordinator : CoordinatoreGioco)
+    +start() <<throws IOException>>
     +stop()
     +isRunning() : boolean
   }
 
   class GestoreClient {
     -socket : Socket
+    -coordinator : CoordinatoreGioco
     -out : ObjectOutputStream
     -in : ObjectInputStream
     -nomeUtente : String
     -ruolo : String
-    -autenticato : boolean
-    -coordinator : CoordinatoreGioco
-    +GestoreClient(socket, coordinator)
+    -autenticato : boolean = false
+    -{static} LOGGER : Logger
+    +GestoreClient(socket : Socket, coordinator : CoordinatoreGioco)
     +startListening()
     -cicloAscolto()
-    -smistaMessaggio(Messaggio msg)
-    +invia(Messaggio msg) : synchronized
+    -smistaMessaggio(msg : Messaggio)
+    +invia(msg : Messaggio) : synchronized
+    +close()
+    +isAutenticato() : boolean
+    +setAutenticato(autenticato : boolean)
+    +getNomeUtente() : String
+    +setNomeUtente(nomeUtente : String)
+    +getRuolo() : String
+    +setRuolo(ruolo : String)
+    +getRemoteAddress() : String
   }
-}
 
-package "game" {
   class CoordinatoreGioco {
-    -timeoutSeconds : int = 60
-    -excerptWords : int = 60
     -db : GestoreDatabase
     -analizzatore : AnalizzatoreDocumenti
-    -giocatoriInAttesa : List<GestoreClient>
-    -scheduler : ScheduledExecutorService
+    -giocatoriInAttesa : List<GestoreClient> = ArrayList<>()
     -giocatore1 : GestoreClient
     -giocatore2 : GestoreClient
+    -scheduler : ScheduledExecutorService
+    -taskTimeout : ScheduledFuture<?>
+    -sfidaAttiva : boolean = false
     -parolaOriginaleCorrente : String
     -parolaCifrataCorrente : String
-    -spostamentoCorrente : int
     -estrattoCorrente : String
+    -spostamentoCorrente : int
+    -tempoInizioSfida : long
+    -timeoutSeconds : int = 60
+    -excerptWords : int = 60
     -statusCallback : Consumer<String>
-    +gestisciLogin(...)
-    +gestisciRegistrazione(...)
-    +aggiungiInListaAttesa(client)
-    +avviaSfida(p1, p2)
-    +gestisciRisposta(client, risposta, t)
-    +terminaSfida(vincitore, t, timeout)
-    +gestisciNuovaRichiesta(client)
-    +onClientDisconnesso(client)
-    +gestisciRichiestaStorico(client)
+    -{static} LOGGER : Logger
+    +CoordinatoreGioco(db : GestoreDatabase, analizzatore : AnalizzatoreDocumenti)
+    +setGameConfig(timeoutSeconds : int, excerptWords : int)
+    +setStatusCallback(callback : Consumer<String>)
+    +setAnalyzer(analizzatore : AnalizzatoreDocumenti) : synchronized
+    +getDb() : GestoreDatabase
+    +gestisciLogin(client : GestoreClient, carico : PayloadAutenticazione) : synchronized
+    +gestisciRegistrazione(client : GestoreClient, carico : PayloadAutenticazione) : synchronized
+    +gestisciNuovaRichiesta(client : GestoreClient) : synchronized
+    +gestisciRisposta(client : GestoreClient, guess : String) : synchronized
+    +gestisciRichiestaStorico(client : GestoreClient) : synchronized
+    +onClientDisconnesso(client : GestoreClient) : synchronized
+    -aggiungiInListaAttesa(client : GestoreClient)
+    -avviaSfida(p1 : GestoreClient, p2 : GestoreClient)
+    -terminaSfida(winner : GestoreClient, tempoRispostaMs : long, isDraw : boolean)
+    -log(msg : String)
   }
 }
 
-package "analysis" {
+package "service" {
   class AnalizzatoreDocumenti <<Serializable>> {
-    -termFrequency : Map<String, Double>
-    -aggregatedText : String
-    +analyze(List<File> files)
+    -termFrequency : Map<String, Double> = HashMap<>()
+    -aggregatedText : String = ""
+    -{static} serialVersionUID : long = 1L
+    -{static} LOGGER : Logger
+    +analyze(files : List<File>) <<throws IOException>>
     +getTermFrequency() : Map<String,Double>
     +getAggregatedText() : String
     +hasResults() : boolean
-    +extractRandomExcerpt(numWords) : String
-    +selectWordFromExcerpt(excerpt, difficulty) : String
-    +saveToFile(outputPath)
-    +{static} loadFromFile(inputPath) : AnalizzatoreDocumenti
+    +extractRandomExcerpt(numWords : int) : String
+    +selectWordFromExcerpt(excerpt : String, difficulty : int) : String
+    +saveToFile(outputPath : String) <<throws IOException>>
+    +{static} loadFromFile(inputPath : String) : AnalizzatoreDocumenti\n<<throws IOException, ClassNotFoundException>>
   }
 
   class ServizioAnalisi {
     -files : List<File>
-    +setFiles(List<File> files)
+    +setFiles(files : List<File>)
+    #createTask() : Task<AnalizzatoreDocumenti>
     .. extends javafx.concurrent.Service<AnalizzatoreDocumenti> ..
   }
 }
 
-package "persistence" {
+package "db" {
   class GestoreDatabase <<Singleton>> {
     -{static} instance : GestoreDatabase
-    -connessione : Connection
     -dbPath : String
-    -GestoreDatabase(dbPath)
-    +{static} getInstance(dbPath) : GestoreDatabase
-    +connetti()
+    -connessione : Connection
+    -{static} LOGGER : Logger
+    -GestoreDatabase(dbPath : String)
+    +{static} getInstance(dbPath : String) : GestoreDatabase <<synchronized>>
+    +connetti() <<throws SQLException>>
     +disconnetti()
-    -initSchema()
-    -seedAccounts()
-    -insertUserIfAbsent(user, pwd, ruolo)
-    +autentica(user, pwd) : String
-    +registraUtente(user, pwd) : boolean
-    +getUserId(user) : int
-    +saveChallengeWithResults(...)
-    +getHistory(nomeUtente) : List<VoceStorico>
-    +getAllStats() : List<StatisticaGiocatore>
-    -hashPassword(pwd) : String
+    -initSchema() <<throws SQLException>>
+    -seedAccounts() <<throws SQLException>>
+    -insertUserIfAbsent(nomeUtente, password, ruolo : String) <<throws SQLException>>
+    +{static} hashPassword(password : String) : String
+    +autentica(nomeUtente : String, password : String) : String
+    +registraUtente(nomeUtente : String, password : String) : boolean
+    +getUserId(nomeUtente : String) : int
+    -insertChallenge(estrattoTesto, encryptedWord, originalWord : String,\n  spostamento : int) : int <<throws SQLException>>
+    -insertResult(idSfida : int, userId : int, esito : String,\n  tempoRispostaMs : long) <<throws SQLException>>
+    +saveChallengeWithResults(estrattoTesto, encryptedWord, originalWord : String,\n  spostamento : int, winnerUser, loserUser : String,\n  draw : boolean, t1, t2 : long)
+    +getHistory(nomeUtente : String) : List<VoceStorico>
+    +getAllStats() : List<UserStats>
   }
+
+  class UserStats {
+    +nomeUtente : final String
+    +wins : final int
+    +gamesPlayed : final int
+    +avgResponseMs : final long
+    +UserStats(nomeUtente : String, wins : int,\n  gamesPlayed : int, avgResponseMs : long)
+  }
+
+  GestoreDatabase +-- UserStats
 }
 
-package "gui" {
+package "controller" {
   class ControllerServer <<Initializable>> {
-    -statusLabel, portLabel : Label
-    -startServerBtn, stopServerBtn : Button
-    -analyzeBtn, saveAnalysisBtn, loadAnalysisBtn : Button
-    -refreshStatsBtn : Button
+    -coordinator : CoordinatoreGioco
+    -db : GestoreDatabase
+    -network : ReteServer
+    -analysisService : ServizioAnalisi
+    -currentAnalyzer : AnalizzatoreDocumenti
+    -selectedFiles : List<File> = ArrayList<>()
+    -serverPort : int = 5000
+    -statusLabel, portLabel, progressLabel, dettaglio... : Label
+    -startServerBtn, stopServerBtn, selectFilesBtn,\nanalyzeBtn, saveAnalysisBtn, loadAnalysisBtn,\nrefreshStatsBtn : Button
     -documentListView : ListView<String>
     -progressBar : ProgressBar
-    -progressLabel : Label
+    -logArea : TextArea
     -tfTableView : TableView<TFEntry>
-    +avviaServer()
-    +fermaServer()
-    +selezionaFile()
-    +avviaAnalisi()
-    +salvaAnalisi()
-    +caricaAnalisi()
-    +aggiornaClassifica()
+    -wordColumn : TableColumn<TFEntry,String>
+    -freqColumn : TableColumn<TFEntry,Double>
+    -statsTableView : TableView<StatEntry>
+    -statUserCol : TableColumn<StatEntry,String>
+    -statWinsCol : TableColumn<StatEntry,Integer>
+    -statGamesCol : TableColumn<StatEntry,Integer>
+    -statAvgCol : TableColumn<StatEntry,Long>
+    -{static} LOGGER : Logger
+    -{static} TIME_FMT : DateTimeFormatter
+    +initialize(location : URL, resources : ResourceBundle)
+    -handleStartServer()
+    -handleStopServer()
+    -handleSelectFiles()
+    -handleClearFiles()
+    -handleAnalyze()
+    -handleSaveAnalysis()
+    -handleLoadAnalysis()
+    -handleRefreshStats()
+    -handleClearLog()
+    -setupTfTable()
+    -setupStatsTable()
+    -populateTfTable(tf : Map<String,Double>)
+    -showAlert(tipo : Alert.AlertType, title, content : String)
+    -log(msg : String)
   }
+
+  class TFEntry {
+    word : String
+    frequency : Double
+  }
+
+  class StatEntry {
+    nomeUtente : String
+    wins, gamesPlayed : int
+    avgResponseMs : long
+  }
+
+  ControllerServer +-- TFEntry
+  ControllerServer +-- StatEntry
 }
 
+ApplicazioneServer --> ControllerServer : carica server.fxml
 ApplicazioneServer --> CaricatoreConfigurazione
-ApplicazioneServer --> ReteServer
-ApplicazioneServer --> CoordinatoreGioco
-ApplicazioneServer --> ControllerServer
 
 ReteServer "1" *-- "0..*" GestoreClient : crea/gestisce
 GestoreClient --> CoordinatoreGioco : smista messaggi
 CoordinatoreGioco --> GestoreDatabase
 CoordinatoreGioco --> AnalizzatoreDocumenti
-ControllerServer --> ServizioAnalisi
-ServizioAnalisi ..|> AnalizzatoreDocumenti : produce
-ControllerServer --> CoordinatoreGioco
-ControllerServer --> GestoreDatabase : getAllStats()
+CoordinatoreGioco ..> "indovinaparola.common.CifrarioCesare" : usa
+
+ControllerServer --> ReteServer : network
+ControllerServer --> CoordinatoreGioco : coordinator
+ControllerServer --> GestoreDatabase : db
+ControllerServer --> ServizioAnalisi : analysisService
+ControllerServer --> AnalizzatoreDocumenti : currentAnalyzer
+ControllerServer ..> UserStats : getAllStats()
+ServizioAnalisi ..> AnalizzatoreDocumenti : createTask() produce
 
 note right of GestoreClient
   invia() è synchronized e chiama
   out.reset() dopo ogni writeObject
-  (IF-S09).
+  (IF-S09). OOS inizializzato
+  prima di OIS con flush()
+  (IF-S08).
 end note
 
 note right of CoordinatoreGioco
@@ -158,5 +236,24 @@ note right of CoordinatoreGioco
   synchronized (IF-S22): l'istanza
   è condivisa tra i thread
   GestoreClient.
+end note
+
+note right of GestoreDatabase
+  Singleton (getInstance lazy,
+  synchronized). PreparedStatement
+  per tutte le query.
+  saveChallengeWithResults() in
+  transazione atomica
+  (setAutoCommit(false) ->
+  commit()/rollback()).
+end note
+
+note bottom of ServizioAnalisi
+  ServizioAnalisi estende
+  javafx.concurrent.Service<AnalizzatoreDocumenti>:
+  riusabile con reset()+start();
+  createTask() esegue analisi
+  in background senza bloccare
+  il FX Application Thread.
 end note
 @enduml

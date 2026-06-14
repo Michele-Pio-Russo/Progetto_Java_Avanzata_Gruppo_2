@@ -1,0 +1,48 @@
+@startuml SEQ_09_NuovaPartita
+skinparam actorStyle awesome
+skinparam sequenceMessageAlign center
+
+title SEQ_09 — Nuova Partita (UC-G06): richiesta di rientro in coda dopo l'esito
+
+actor "Giocatore" as G
+participant "ControllerGioco" as CG
+participant "ConnessioneServer" as CONN
+participant "GestoreClient" as GC
+participant "CoordinatoreGioco" as COORD
+
+== Stato iniziale: pannelloRisultato visibile (post CHALLENGE_RESULT) ==
+CG --> G : Mostra pannelloRisultato\n(emoji, esito, parola corretta,\npulsante "Nuova partita")
+
+G -> CG : Clicca "Nuova partita"
+CG -> CG : nasconde pannelloRisultato,\nmostra waitingPane\n(setVisible/setManaged, StackPane)
+
+CG -> CONN : invia(REQUEUE_REQUEST, null)
+CONN -> GC : invio su Socket TCP (OOS, invia() synchronized + reset())
+GC -> COORD : gestisciNuovaRichiesta(client)
+
+COORD -> COORD : verifica che il client sia\nautenticato e non già presente\nin giocatoriInAttesa
+
+alt client non presente in coda
+  COORD -> COORD : giocatoriInAttesa.add(client)
+  COORD -> GC : invia(WAITING, "N/2")
+else client già in coda
+  COORD -> GC : invia(ERROR,\n"Sei già in lista d'attesa")
+end
+
+GC --> CONN : WAITING / ERROR
+CONN --> CG : callbackMessaggio(messaggio)
+CG --> G : Aggiorna waitingPane\ncon stato attesa
+
+note over COORD
+  IF-S29: gestisciNuovaRichiesta()
+  (REQUEUE_REQUEST) reinserisce un
+  giocatore già autenticato in lista
+  d'attesa senza richiedere nuove
+  credenziali, sulla stessa connessione
+  TCP già stabilita al login (UC-G02).
+end note
+
+== Quando in coda si raggiungono 2 giocatori ==
+... vedi SEQ_07 — Attesa e Avvio Sfida ...
+COORD -> COORD : avviaSfida(p1, p2)\n(vedi SEQ_04 — Sfida Completa)
+@enduml

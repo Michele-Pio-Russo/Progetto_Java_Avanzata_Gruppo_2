@@ -1,0 +1,50 @@
+@startuml SEQ_10_StopServer
+skinparam actorStyle awesome
+skinparam sequenceMessageAlign center
+
+title SEQ_10 — Stop Server (UC-A06, parte "Stop")
+
+actor "Amministratore" as A
+participant "ControllerServer" as CS
+participant "ReteServer" as RETE
+participant "GestoreClient i" as GC
+participant "CoordinatoreGioco" as COORD
+participant "ServerAcceptThread" as ACCEPT
+
+== Stato iniziale: server in esecuzione ==
+note over RETE
+  ServerSocket aperto sulla porta
+  configurata; ServerAcceptThread
+  (daemon) in attesa su accept();
+  N GestoreClient attivi, ciascuno
+  con il proprio thread daemon
+  di lettura.
+end note
+
+A -> CS : Clicca "Stop Server"
+CS -> RETE : stop()
+
+RETE -> RETE : running = false
+RETE -> RETE : serverSocket.close()
+RETE -> ACCEPT : interrompe il blocco su accept()\n(SocketException gestita)
+ACCEPT -> ACCEPT : termina ciclo di accettazione\n(thread daemon esce)
+
+loop per ogni GestoreClient attivo
+  RETE -> GC : richiede chiusura\n(o GC intercetta\nSocketException sul read)
+  GC -> COORD : onClientDisconnesso(client)
+  COORD -> COORD : rimuove client da\ngiocatoriInAttesa /\nannulla eventuale sfida attiva
+  GC -> GC : chiude socket, out, in
+end
+
+RETE --> CS : log "Server arrestato"
+CS --> A : Aggiorna stato GUI\n(pulsante "Avvia Server" riabilitato,\n"Stop Server" disabilitato)
+
+note over CS
+  Il database (GestoreDatabase, Singleton)
+  resta connesso fino alla chiusura
+  dell'applicazione: lo stop del server
+  riguarda solo ReteServer (ServerSocket
+  e connessioni client attive), non la
+  persistenza SQLite.
+end note
+@enduml

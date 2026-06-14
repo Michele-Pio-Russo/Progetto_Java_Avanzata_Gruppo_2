@@ -16,13 +16,13 @@ U -> CA : Inserisce username e password,\npreme "Accedi"
 CA -> CONN : invia(LOGIN_REQUEST,\nPayloadAutenticazione(user, pwd))
 CONN -> GC : invio su Socket TCP (OOS, thread separato)
 GC -> COORD : gestisciLogin(payload)
-COORD -> DB_MGR : verificaCredenziali(nomeUtente, password)
+COORD -> DB_MGR : autentica(nomeUtente, password) : String
 DB_MGR -> DB_MGR : hashPassword(password) -> SHA-256
-DB_MGR -> DB : SELECT password_hash, ruolo\nFROM users WHERE nomeUtente = ?
-DB --> DB_MGR : password_hash, ruolo (o nessun risultato)
+DB_MGR -> DB : SELECT password_hash, ruolo\nFROM users WHERE nomeUtente = ?\nAND password_hash = ?
+DB --> DB_MGR : ruolo (o nessuna riga)
 
 alt Credenziali valide
-  DB_MGR --> COORD : successo=true, ruolo
+  DB_MGR --> COORD : ruolo = "admin" | "player"
   COORD -> GC : setNomeUtente(), setRuolo(),\nsetAutenticato(true)
 
   alt ruolo == "player"
@@ -44,7 +44,7 @@ alt Credenziali valide
   end
 
 else Credenziali non valide
-  DB_MGR --> COORD : successo=false
+  DB_MGR --> COORD : ruolo = null
   COORD -> GC : invia(LOGIN_RESPONSE,\nRispostaAutenticazione(false,\n"Credenziali errate", null))
   GC --> CONN : LOGIN_RESPONSE
   CONN --> CA : callbackMessaggio

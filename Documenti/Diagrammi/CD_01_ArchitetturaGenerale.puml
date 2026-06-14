@@ -1,109 +1,138 @@
 @startuml CD_01_ArchitetturaGenerale
 skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
 left to right direction
 
-title CD_01 — Architettura Generale (Maven multi-modulo)
+title CD_01 — Architettura Generale (package reali da Doxygen)
 
 package "common\n(indovinaparola.common)" as COMMON {
-  class Messaggio {
-    -tipo : Tipo
-    -carico : Object
-    +getTipo()
-    +getCarico()
-  }
-  enum "Messaggio.Tipo" as MTipo {
-    LOGIN_REQUEST
-    LOGIN_RESPONSE
-    REGISTER_REQUEST
-    REGISTER_RESPONSE
-    WAITING
-    CHALLENGE_START
-    CHALLENGE_ANSWER
-    CHALLENGE_RESULT
-    HISTORY_REQUEST
-    HISTORY_RESPONSE
-    REQUEUE_REQUEST
-    ERROR
-    DISCONNECT
-  }
+  class Messaggio
+  enum "Messaggio.Tipo" as MTipo
   class PayloadAutenticazione
   class RispostaAutenticazione
   class PayloadSfida
-  class RisultatoSfida {
-    +enum Esito
-  }
+  class RisultatoSfida
+  enum "RisultatoSfida.Esito" as Esito
   class VoceStorico
-  class CifrarioCesare <<utility>> {
-    +{static} cifra(parola, spostamento)
-    +{static} decifra(parola, spostamento)
-  }
+  class CifrarioCesare <<utility>>
 
   Messaggio *-- MTipo
-  RisultatoSfida +-- "Esito"
+  RisultatoSfida *-- Esito
 }
 
 package "server\n(indovinaparola.server)" as SERVER {
-  class ApplicazioneServer
-  class ReteServer
-  class GestoreClient
-  class CoordinatoreGioco
-  class AnalizzatoreDocumenti
-  class ServizioAnalisi
-  class GestoreDatabase <<Singleton>>
-  class CaricatoreConfigurazione
-  class ControllerServer
 
-  ApplicazioneServer --> ControllerServer
-  ApplicazioneServer --> CaricatoreConfigurazione
-  ReteServer --> GestoreClient : crea
-  ReteServer --> CoordinatoreGioco
-  GestoreClient --> CoordinatoreGioco
+  class ApplicazioneServer <<JavaFX Application>>
+
+  package "model" as S_MODEL {
+    class ReteServer
+    class GestoreClient
+    class CoordinatoreGioco
+  }
+
+  package "db" as S_DB {
+    class GestoreDatabase <<Singleton>>
+    class "GestoreDatabase.UserStats" as UserStats
+    GestoreDatabase +-- UserStats
+  }
+
+  package "service" as S_SERVICE {
+    class AnalizzatoreDocumenti <<Serializable>>
+    class ServizioAnalisi
+  }
+
+  package "controller" as S_CTRL {
+    class ControllerServer <<Initializable>>
+    class "ControllerServer.StatEntry" as StatEntry
+    class "ControllerServer.TFEntry" as TFEntry
+    ControllerServer +-- StatEntry
+    ControllerServer +-- TFEntry
+  }
+
+  package "util" as S_UTIL {
+    class CaricatoreConfigurazione
+  }
+
+  ApplicazioneServer --> ControllerServer : carica server.fxml
+
+  ReteServer "1" *-- "0..*" GestoreClient : crea/gestisce
+  GestoreClient --> CoordinatoreGioco : smista messaggi
   CoordinatoreGioco --> GestoreDatabase
   CoordinatoreGioco --> AnalizzatoreDocumenti
-  CoordinatoreGioco --> CifrarioCesare
-  ControllerServer --> ServizioAnalisi
-  ServizioAnalisi --> AnalizzatoreDocumenti
+
+  ControllerServer --> ReteServer : network
+  ControllerServer --> CoordinatoreGioco : coordinator
+  ControllerServer --> GestoreDatabase : db
+  ControllerServer --> ServizioAnalisi : analysisService
+  ControllerServer --> AnalizzatoreDocumenti : currentAnalyzer
+  ServizioAnalisi ..> AnalizzatoreDocumenti : produce (Service<T>)
+
+  ApplicazioneServer --> CaricatoreConfigurazione
 }
 
 package "client\n(indovinaparola.client)" as CLIENT {
-  class ApplicazioneClient
-  class ConnessioneServer
-  class ConfigurazioneClient
-  class ControllerAccesso
-  class ControllerGioco
-  class ControllerStorico
 
-  ApplicazioneClient --> ControllerAccesso
+  class ApplicazioneClient <<JavaFX Application>>
+
+  package "service" as C_SERVICE {
+    class ConnessioneServer
+  }
+
+  package "util" as C_UTIL {
+    class ConfigurazioneClient
+  }
+
+  package "controller" as C_CTRL {
+    class ControllerAccesso <<Initializable>>
+    class ControllerGioco
+    class ControllerStorico
+  }
+
+  ApplicazioneClient --> ControllerAccesso : carica login.fxml
   ApplicazioneClient --> ConfigurazioneClient
-  ControllerAccesso --> ConnessioneServer
-  ControllerAccesso --> ControllerGioco : carica game.fxml
+
+  ControllerAccesso --> ConnessioneServer : crea/usa
+  ControllerAccesso ..> ControllerGioco : carica game.fxml\n+ init()
   ControllerGioco --> ConnessioneServer
-  ControllerGioco --> ControllerStorico : carica history.fxml
+  ControllerGioco ..> ControllerStorico : carica history.fxml\n+ init()
   ControllerStorico --> ConnessioneServer
 }
 
-COMMON <.. SERVER : usa (dipendenza)
-COMMON <.. CLIENT : usa (dipendenza)
+COMMON <.. SERVER : usa (common.jar)
+COMMON <.. CLIENT : usa (common.jar)
 CLIENT ..> SERVER : comunica via\nSocket TCP\n(Messaggio Serializable)
 
-note bottom of COMMON
-  Artefatto: common.jar
-  Classi Serializable condivise:
-  Messaggio, CifrarioCesare,
-  Payload e DTO vari.
+note bottom of S_MODEL
+  network + game logic:
+  ReteServer (ServerSocket, accept thread),
+  GestoreClient (1 per connessione,
+  thread daemon di lettura),
+  CoordinatoreGioco (logica di gioco,
+  metodi synchronized).
 end note
 
-note bottom of SERVER
-  Artefatto: server.jar
-  GUI admin (JavaFX+FXML), rete,
-  logica di gioco, analisi TF,
-  persistenza SQLite.
+note bottom of S_DB
+  Persistenza SQLite via JDBC.
+  GestoreDatabase: Singleton,
+  PreparedStatement, transazioni.
+  UserStats: DTO classifica
+  (nomeUtente, wins, gamesPlayed,
+  avgResponseMs).
 end note
 
-note bottom of CLIENT
-  Artefatto: client.jar
-  GUI login/gioco/storico
-  (JavaFX+FXML), connessione
-  socket, controller.
+note bottom of S_SERVICE
+  AnalizzatoreDocumenti: calcolo TF
+  (Stream API), estratto ed estrazione
+  parola, Serializable (.dat).
+  ServizioAnalisi extends
+  javafx.concurrent.Service<AnalizzatoreDocumenti>.
+end note
+
+note bottom of C_SERVICE
+  ConnessioneServer: Socket TCP,
+  OOS prima di OIS + flush(),
+  thread daemon di lettura,
+  invia() synchronized + reset(),
+  callback su messaggio/disconnessione.
 end note
 @enduml

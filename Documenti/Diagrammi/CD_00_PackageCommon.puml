@@ -1,0 +1,140 @@
+@startuml CD_00_PackageCommon
+skinparam classAttributeIconSize 0
+left to right direction
+
+title CD_00 — Package common (indovinaparola.common)
+
+class Messaggio <<Serializable>> {
+  -tipo : Tipo
+  -carico : Object
+  +Messaggio(tipo : Tipo, carico : Object)
+  +getTipo() : Tipo
+  +getCarico() : Object
+  +toString() : String
+}
+
+enum "Messaggio.Tipo" as Tipo {
+  LOGIN_REQUEST
+  LOGIN_RESPONSE
+  REGISTER_REQUEST
+  REGISTER_RESPONSE
+  WAITING
+  CHALLENGE_START
+  CHALLENGE_ANSWER
+  CHALLENGE_RESULT
+  HISTORY_REQUEST
+  HISTORY_RESPONSE
+  REQUEUE_REQUEST
+  ERROR
+  DISCONNECT
+}
+
+class PayloadAutenticazione <<Serializable>> {
+  -nomeUtente : String
+  -password : String
+  +PayloadAutenticazione(nomeUtente : String, password : String)
+  +getNomeUtente() : String
+  +getPassword() : String
+}
+
+class RispostaAutenticazione <<Serializable>> {
+  -successo : boolean
+  -messaggio : String
+  -ruolo : String
+  +RispostaAutenticazione(successo : boolean, messaggio : String, ruolo : String)
+  +isSuccesso() : boolean
+  +getMessaggio() : String
+  +getRuolo() : String
+}
+
+class PayloadSfida <<Serializable>> {
+  -idSfida : int
+  -estrattoTesto : String
+  -paroleCifrate : List<String>
+  -secondiTimeout : int
+  +PayloadSfida(idSfida : int, estrattoTesto : String,\n  paroleCifrate : List<String>, secondiTimeout : int)
+  +getIdSfida() : int
+  +getEstrattoTesto() : String
+  +getParoleCifrate() : List<String>
+  +getSecondiTimeout() : int
+}
+
+class RisultatoSfida <<Serializable>> {
+  -nomeUtenteVincitore : String
+  -parolaCorretta : String
+  -esito : Esito
+  +RisultatoSfida(nomeUtenteVincitore : String,\n  parolaCorretta : String, esito : Esito)
+  +getNomeUtenteVincitore() : String
+  +getParolaCorretta() : String
+  +getEsito() : Esito
+}
+
+enum "RisultatoSfida.Esito" as Esito {
+  VITTORIA
+  SCONFITTA
+  PAREGGIO
+  --
+  +toDisplayString() : String
+  +toEmoji() : String
+}
+
+class VoceStorico <<Serializable>> {
+  -dataPartita : String
+  -avversario : String
+  -esito : String
+  -tempoRispostaMs : long
+  -parolaCorretta : String
+  +VoceStorico(dataPartita : String, avversario : String,\n  esito : String, tempoRispostaMs : long, parolaCorretta : String)
+  +getDataPartita() : String
+  +getAvversario() : String
+  +getEsito() : String
+  +getTempoRispostaMs() : long
+  +getParolaCorretta() : String
+  +toString() : String
+}
+
+class CifrarioCesare <<utility>> {
+  -CifrarioCesare()
+  +{static} cifra(parola : String, spostamento : int) : String
+  +{static} decifra(parola : String, spostamento : int) : String
+}
+
+Messaggio "1" *-- "1" Tipo : tipo
+Messaggio ..> PayloadAutenticazione : <<carico>>\n(LOGIN/REGISTER_REQUEST)
+Messaggio ..> RispostaAutenticazione : <<carico>>\n(LOGIN/REGISTER_RESPONSE)
+Messaggio ..> PayloadSfida : <<carico>>\n(CHALLENGE_START)
+Messaggio ..> RisultatoSfida : <<carico>>\n(CHALLENGE_RESULT)
+Messaggio ..> "List<VoceStorico>" : <<carico>>\n(HISTORY_RESPONSE)
+
+RisultatoSfida "1" *-- "1" Esito : esito
+
+PayloadSfida ..> CifrarioCesare : <<usa>>\n(parola cifrata da\nCoordinatoreGioco)
+
+note bottom of Messaggio
+  Classe base del protocollo, con
+  serialVersionUID=1L: il campo tipo
+  (enum a 13 valori) determina il cast
+  del campo carico (Object) lato
+  ricevente (DF-01, DF-02).
+end note
+
+note bottom of CifrarioCesare
+  Utility class non istanziabile
+  (costruttore privato). cifra/decifra
+  sono simmetriche:
+  decifra(x,k) = cifra(x,26-k) (DF-04).
+end note
+
+note bottom of VoceStorico
+  Classe immutabile (tutti i campi
+  final, nessun setter): DTO sicuro
+  per ambiente multi-thread,
+  compatibile JDK 8.
+end note
+
+note bottom of Esito
+  toDisplayString(): "Hai vinto!" /
+  "Hai perso." / "Pareggio!"
+  toEmoji(): 🏆 / 😞 / 🤝  (DF-03)
+end note
+@enduml

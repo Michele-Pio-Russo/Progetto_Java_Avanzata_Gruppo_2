@@ -36,7 +36,8 @@ CG --> G2 : Mostra gamePane + avvia Timeline
 == Risposta Giocatore 1 (corretta) ==
 G1 -> CG : digita parola, Invio/Invia
 CG -> GC : invia(CHALLENGE_ANSWER, "parola")
-GC -> COORD : gestisciRisposta(client1, "parola", t1)
+GC -> COORD : gestisciRisposta(client1, "parola")
+COORD -> COORD : t1 = currentTimeMillis() - tempoInizioSfida
 COORD -> COORD : confronto case-insensitive\ncon parolaOriginaleCorrente
 
 alt risposta corretta

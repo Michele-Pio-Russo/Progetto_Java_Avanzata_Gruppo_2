@@ -1,126 +1,164 @@
 @startuml CD_03_DettaglioClient
 skinparam classAttributeIconSize 0
 
-title CD_03 — Dettaglio Modulo Client
+title CD_03 — Dettaglio Modulo Client (package reali da Doxygen)
 
 class ApplicazioneClient <<JavaFX Application>> {
-  +start(Stage primaryStage)
-  +{static} main(String[] args)
+  +start(primaryStage : Stage) <<throws Exception>>
+  +{static} main(args : String[])
 }
 
-class ConfigurazioneClient {
-  -props : Properties
-  +getServerIp() : String
-  +getServerPort() : int
+package "util" {
+  class ConfigurazioneClient {
+    -props : Properties = Properties()
+    -{static} LOGGER : Logger
+    +ConfigurazioneClient()
+    +getServerIp() : String
+    +getServerPort() : int
+  }
 }
 
-package "network" {
+package "service" {
   class ConnessioneServer {
     -socket : Socket
     -out : ObjectOutputStream
     -in : ObjectInputStream
+    -connesso : volatile boolean = false
     -callbackMessaggio : Consumer<Messaggio>
     -callbackDisconnessione : Runnable
-    -connesso : boolean
-    +setMessageCallback(Consumer<Messaggio>)
-    +setDisconnectCallback(Runnable)
-    +connetti(host, porta)
+    -{static} LOGGER : Logger
+    +connetti(host : String, porta : int) <<throws IOException>>
     -avviaThreadLettura()
-    +invia(Messaggio msg) : synchronized
+    +invia(msg : Messaggio) : synchronized
     +disconnetti()
+    +isConnesso() : boolean
+    +setMessageCallback(callback : Consumer<Messaggio>)
+    +setDisconnectCallback(callback : Runnable)
   }
 }
 
 package "controller" {
   class ControllerAccesso <<Initializable>> {
-    -formTitle : Label
     -campoNomeUtente : TextField
     -passwordField : PasswordField
-    -confirmBox : VBox
     -confirmField : PasswordField
-    -errorLabel : Label
-    -pulsantePrincipale : Button
-    -switchBtn : Button
-    -connectionLabel : Label
-    -isRegistrationMode : boolean
+    -confirmBox : VBox
+    -formTitle, errorLabel, connectionLabel : Label
+    -pulsantePrincipale, switchBtn : Button
+    -isRegistrationMode : boolean = false
     -connessione : ConnessioneServer
     -serverIp : String
-    +inizializzaConnessione()
-    +gestisciAccesso()
-    +gestisciRegistrazione()
-    +toggleModalita()
-    -vaiAGioco()
+    -serverPort : int
+    -{static} LOGGER : Logger
+    +initialize(location : URL, resources : ResourceBundle)
+    -tryConnect()
+    -handlePrimary()
+    -handleSwitch()
+    -gestisciMessaggioServer(msg : Messaggio)
+    -gestisciRispostaLogin(resp : RispostaAutenticazione)
+    -gestisciRispostaRegistrazione(resp : RispostaAutenticazione)
+    -mostraErrore(msg : String)
+    -clearError()
+    -vaiAGioco(nomeUtente : String, conn : ConnessioneServer,\n  waitingMsg : String, pendingMessages : Queue<Messaggio>)
   }
 
   class ControllerGioco {
-    -etichettaGiocatore, etichettaStato : Label
-    -waitingPane : VBox
-    -dettaglioAttesa : Label
-    -gamePane : VBox
-    -etichettaTimer : Label
-    -areaTesto : TextArea
-    -etichettaParoleCifrate : Label
-    -campoRisposta : TextField
-    -etichettaFeedback : Label
-    -pannelloRisultato : VBox
-    -emojiRisultato, titoloRisultato : Label
+    -nomeUtente : String
     -connessione : ConnessioneServer
-    -countdownTimeline : Timeline
-    +init(nomeUtente, connessione, stage)
-    +consegnaMessaggio(Messaggio msg)
-    -avviaSfida(PayloadSfida payload)
-    -avviaCountdown(secondi)
-    +gestisciInvioRisposta()
-    -mostraRisultato(RisultatoSfida r)
-    -gestisciErrore(String msg)
-    +gestisciIndietro()
+    -etichettaGiocatore, etichettaStato, dettaglioAttesa : Label
+    -etichettaTimer, etichettaParoleCifrate, etichettaFeedback : Label
+    -emojiRisultato, titoloRisultato, dettaglioRisultato : Label
+    -waitingPane, gamePane, pannelloRisultato : VBox
+    -areaTesto : TextArea
+    -campoRisposta : TextField
+    -timelineTimer : Timeline
+    -secondiRimanenti : int
+    -tempoInizioSfida : long
+    -{static} LOGGER : Logger
+    +init(nomeUtente : String, connessione : ConnessioneServer, waitingMsg : String)
+    +consegnaMessaggio(msg : Messaggio)
+    -gestisciMessaggioServer(msg : Messaggio)
+    -avviaSfida(carico : PayloadSfida)
+    -avviaCountdown()
+    -gestisciInvioRisposta()
+    -mostraRisultato(result : RisultatoSfida)
+    -gestisciErroreServer(errorMsg : String)
+    -gestisciNuovaPartita()
+    -gestisciVisualizzaStorico()
+    -mostraAttesa()
+    -mostraGioco()
+    -mostraPannelloRisultato()
+    -mostraFeedback(msg : String)
+    -setPaneVisible(pane : VBox, visible : boolean)
   }
 
   class ControllerStorico {
-    -historyTable : TableView<VoceStorico>
-    -dateCol, opponentCol, outcomeCol, wordCol : TableColumn
-    -timeCol : TableColumn<VoceStorico, Long>
+    -nomeUtente : String
     -connessione : ConnessioneServer
     -stageProprietario : Stage
-    -nomeUtente : String
-    +init(nomeUtente, connessione, stage)
+    -historyTable : TableView<VoceStorico>
+    -dateCol, opponentCol, outcomeCol, wordCol : TableColumn<VoceStorico,String>
+    -timeCol : TableColumn<VoceStorico,Long>
+    -{static} LOGGER : Logger
+    +init(nomeUtente : String, connessione : ConnessioneServer,\n  owner : Stage, root : Parent)
     -configuraTabella()
-    -gestisciMessaggio(Messaggio msg)
+    -gestisciMessaggio(msg : Messaggio)
+    -gestisciIndietro()
+    -formatOutcome(esito : String) : String
   }
 }
 
+ApplicazioneClient --> ControllerAccesso : carica login.fxml
 ApplicazioneClient --> ConfigurazioneClient
-ApplicazioneClient --> ControllerAccesso
 
-ControllerAccesso --> ConnessioneServer : crea/usa
-ControllerAccesso ..> ControllerGioco : carica game.fxml\n+ gc.init()
-ControllerGioco --> ConnessioneServer
-ControllerGioco ..> ControllerStorico : carica history.fxml\n+ cs.init()
-ControllerStorico --> ConnessioneServer
+ControllerAccesso --> ConnessioneServer : crea/usa\n(tryConnect)
+ControllerAccesso ..> ControllerGioco : vaiAGioco()\ncarica game.fxml + init()
+ControllerGioco --> ConnessioneServer : connessione
+ControllerGioco ..> ControllerStorico : gestisciVisualizzaStorico()\ncarica history.fxml + init()
+ControllerStorico --> ConnessioneServer : connessione
 
 note right of ConnessioneServer
   OOS creato prima di OIS,
   con flush() immediato
   (IF-C02). invia() è
   synchronized + out.reset()
-  (IF-C03).
+  (IF-C03). avviaThreadLettura()
+  invoca callbackMessaggio per
+  ogni Messaggio ricevuto e
+  callbackDisconnessione alla
+  chiusura della connessione.
 end note
 
 note right of ControllerAccesso
-  IF-C07/IF-C08: alla ricezione
-  di WAITING, la callback viene
-  sostituita (sul reader thread)
-  con una ConcurrentLinkedQueue
-  per evitare la race condition
-  WAITING -> CHALLENGE_START.
+  implements Initializable.
+  initialize() legge porta/IP
+  da ConfigurazioneClient.
+  vaiAGioco(): gestisce la coda
+  pendingMessages (Queue<Messaggio>)
+  per il fix della race condition
+  WAITING -> CHALLENGE_START
+  (IF-C07/IF-C08).
 end note
 
 note right of ControllerGioco
-  countdownTimeline: KeyFrame ogni
-  secondo; sotto i 10s il testo
-  diventa rosso (#f85149).
-  Gestisce ERROR "disconnesso" con
-  Timeline one-shot di 3s ->
-  REQUEUE_REQUEST.
+  init() (non Initializable):
+  riceve nomeUtente, connessione
+  e waitingMsg dal controller
+  precedente. timelineTimer:
+  KeyFrame ogni secondo; sotto
+  i 10s il testo diventa rosso.
+  gestisciErroreServer() gestisce
+  ERROR "disconnesso" con Timeline
+  one-shot 3s -> gestisciNuovaPartita().
+end note
+
+note right of ControllerStorico
+  init() riceve anche lo Stage
+  proprietario e il Parent root
+  per gestisciIndietro() (ritorno
+  al pannello di attesa).
+  formatOutcome() converte
+  'win'/'loss'/'draw' in testo
+  leggibile per la colonna esito.
 end note
 @enduml
