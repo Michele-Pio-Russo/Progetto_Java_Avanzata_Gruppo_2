@@ -1,5 +1,0 @@
-<map id="indovinaparola.server.model.GestoreClient.close" name="indovinaparola.server.model.GestoreClient.close">
-<area shape="rect" id="Node000001" title="Chiude la connessione socket con il client." alt="" coords="241,5,428,48"/>
-<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1model_1_1_gestore_client.html#a57ac9adadba72412554e1f8c335a5d77" title="Loop di lettura messaggi dal client." alt="" coords="5,5,193,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,27,193,29,193,24,227,26"/>
-</map>

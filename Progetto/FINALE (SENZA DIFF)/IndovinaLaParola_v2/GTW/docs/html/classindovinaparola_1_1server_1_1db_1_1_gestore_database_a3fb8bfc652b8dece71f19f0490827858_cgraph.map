@@ -1,7 +1,0 @@
-<map id="indovinaparola.server.db.GestoreDatabase.seedAccounts" name="indovinaparola.server.db.GestoreDatabase.seedAccounts">
-<area shape="rect" id="Node000001" title="Inserisce gli account predefiniti se non sono già presenti nel database." alt="" coords="5,5,216,48"/>
-<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#ac6b92cbce524b9e1cb7cdc6fd09f1c5b" title="Inserisce un utente solo se lo nomeUtente non è già presente." alt="" coords="264,5,500,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,24,251,27,246,27,216,29"/>
-<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a5271fb604008dfb6233c7fe4166f1798" title="Calcola l&#39;hash SHA&#45;256 di una password." alt="" coords="548,5,761,48"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="500,24,535,27,530,27,501,29"/>
-</map>

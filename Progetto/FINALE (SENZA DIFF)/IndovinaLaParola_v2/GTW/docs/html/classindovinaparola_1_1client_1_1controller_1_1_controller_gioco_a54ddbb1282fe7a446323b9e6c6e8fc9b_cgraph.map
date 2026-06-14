@@ -1,5 +1,0 @@
-<map id="indovinaparola.client.controller.ControllerGioco.gestisciInvioRisposta" name="indovinaparola.client.controller.ControllerGioco.gestisciInvioRisposta">
-<area shape="rect" id="Node000001" title="Invia la risposta dell&#39;utente al server." alt="" coords="5,5,246,48"/>
-<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#aca84c0f0e06335a4e0d25f674250949c" title="Mostra un messaggio di feedback nella label dedicata." alt="" coords="294,5,506,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="246,24,280,27,275,27,246,29"/>
-</map>

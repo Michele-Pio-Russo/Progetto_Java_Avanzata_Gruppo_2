@@ -1,7 +1,0 @@
-<map id="indovinaparola.server.model.GestoreClient.smistaMessaggio" name="indovinaparola.server.model.GestoreClient.smistaMessaggio">
-<area shape="rect" id="Node000001" title="Smista il messaggio ricevuto al metodo appropriato del coordinatore,." alt="" coords="5,35,213,77"/>
-<area shape="rect" id="Node000002" href="$classindovinaparola_1_1common_1_1_messaggio.html#a42d1e549994b4e59cf42f7707298f818" title="Restituisce il carico del messaggio." alt="" coords="273,5,520,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,43,260,40,255,41,214,48"/>
-<area shape="rect" id="Node000003" href="$classindovinaparola_1_1common_1_1_messaggio.html#a5dab2d30f1c776e7822004c01ef271c2" title="Restituisce il tipo del messaggio." alt="" coords="261,72,533,99"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="213,64,248,70,243,70,213,69"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="Grafico della gerarchia delle classi" name="Grafico della gerarchia delle classi">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,47,92,73"/>
-<area shape="rect" id="Node000001" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html" title=" " alt="" coords="142,5,342,48"/>
-<area shape="poly" id="edge3_Node000000_Node000001" title=" " alt="" coords="106,47,144,43,139,45,108,53"/>
-<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1controller_1_1_controller_server.html" title="Controller JavaFX per il pannello di amministrazione del server." alt="" coords="140,72,345,115"/>
-<area shape="poly" id="edge4_Node000000_Node000002" title=" " alt="" coords="107,67,142,75,137,76,107,73"/>
-</map>

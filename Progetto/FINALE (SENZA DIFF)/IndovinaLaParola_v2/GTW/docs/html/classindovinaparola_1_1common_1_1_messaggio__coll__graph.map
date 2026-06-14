@@ -1,7 +1,0 @@
-<map id="indovinaparola.common.Messaggio" name="indovinaparola.common.Messaggio">
-<area shape="rect" id="Node000001" title=" " alt="" coords="29,403,244,557"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,133,83,203"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,215,116,403,111,403,57,219"/>
-<area shape="rect" id="Node000003" href="$enumindovinaparola_1_1common_1_1_messaggio_1_1_tipo.html" title="Tipi di messaggio scambiati nel protocollo." alt="" coords="108,5,351,331"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="182,328,166,387,162,385,179,333"/>
-</map>

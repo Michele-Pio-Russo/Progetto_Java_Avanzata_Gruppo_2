@@ -1,5 +1,0 @@
-<map id="common/src/main/java/indovinaparola/common/Messaggio.java" name="common/src/main/java/indovinaparola/common/Messaggio.java">
-<area shape="rect" id="Node000001" title="Sistema di comunicazione client&#45;server Ogni messaggio ha un tipo (enum Tipo) e un carico Object che v..." alt="" coords="5,5,168,64"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="21,112,152,139"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,62,89,97,84,95,85,66"/>
-</map>

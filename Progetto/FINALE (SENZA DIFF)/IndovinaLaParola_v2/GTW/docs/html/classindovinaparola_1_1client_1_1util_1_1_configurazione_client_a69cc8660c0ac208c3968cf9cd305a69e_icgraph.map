@@ -1,5 +1,0 @@
-<map id="indovinaparola.client.util.ConfigurazioneClient.getServerPort" name="indovinaparola.client.util.ConfigurazioneClient.getServerPort">
-<area shape="rect" id="Node000001" title="Restituisce la porta del server." alt="" coords="254,5,480,48"/>
-<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#a253a19a80520ae73e6eedfef39705bdb" title="Porta del server letta dal file di configurazione." alt="" coords="5,5,206,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,27,206,29,206,24,241,26"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="indovinaparola.server.controller.ControllerServer.handleSaveAnalysis" name="indovinaparola.server.controller.ControllerServer.handleSaveAnalysis">
-<area shape="rect" id="Node000001" title="Salva i risultati dell&#39;analisi corrente in un file serializzato (.dat)." alt="" coords="5,5,243,48"/>
-<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1controller_1_1_controller_server.html#ad38f24a29b85919f9215932d95f50f4d" title="Aggiunge una riga timestampata alla TextArea di log." alt="" coords="291,5,496,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="243,24,278,27,273,27,243,29"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="indovinaparola.server.service.ServizioAnalisi.createTask" name="indovinaparola.server.service.ServizioAnalisi.createTask">
-<area shape="rect" id="Node000001" title="Crea il Task che esegue l&#39;analisi in background." alt="" coords="5,39,200,81"/>
-<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html#a79226d494595e0aa379b22f5bca8bd4b" title="Analizza una lista di file di testo e calcola la Term Frequency." alt="" coords="279,5,484,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,46,266,40,261,41,201,51"/>
-<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html#ab05b90df49dbc56fc7035f6a87e3a675" title="Restituisce la mappa Term Frequency come vista non modificabile." alt="" coords="248,72,516,115"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,69,235,75,230,76,200,74"/>
-</map>

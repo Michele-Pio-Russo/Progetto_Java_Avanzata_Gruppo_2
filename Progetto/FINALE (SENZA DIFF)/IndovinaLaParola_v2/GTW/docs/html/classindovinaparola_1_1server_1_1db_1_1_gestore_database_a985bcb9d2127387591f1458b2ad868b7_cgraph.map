@@ -1,5 +1,0 @@
-<map id="indovinaparola.server.db.GestoreDatabase.getInstance" name="indovinaparola.server.db.GestoreDatabase.getInstance">
-<area shape="rect" id="Node000001" title="Restituisce l&#39;istanza Singleton del GestoreDatabase." alt="" coords="5,5,201,48"/>
-<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a3b0290884041f2f0a16d869d9e8548da" title="Costruttore privato — pattern Singleton." alt="" coords="249,5,478,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,24,236,26,230,27,201,29"/>
-</map>
