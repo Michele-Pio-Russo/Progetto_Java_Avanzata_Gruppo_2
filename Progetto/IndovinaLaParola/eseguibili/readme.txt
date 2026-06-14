@@ -1,12 +1,10 @@
 Account predefiniti per il testing di IndovinaLaParola:
 
---- ACCOUNT AMMINISTRATORE ---
-Utile per l'accesso all'interfaccia di gestione server
-Username: admin
-Password: admin123
+ACCOUNT AMMINISTRATORE
+- Username: admin
+- Password: admin123
 
---- ACCOUNT UTENTI (PLAYERS) ---
-Utili per testare subito una sfida completa tra due client
+ACCOUNT UTENTI (PLAYERS)
 Giocatore 1: 
 - Username: giocatore1 
 - Password: pass1
@@ -16,7 +14,7 @@ Giocatore 2:
 - Password: pass2
 
 
---- ISTRUZIONI DI AVVIO ---
+ISTRUZIONI DI AVVIO
 Essendo applicazioni grafiche (JavaFX) che producono log su terminale, l'esecuzione di "java -jar" terrà bloccata la console attiva. 
 
 Per testare l'ambiente simulando un server e due client connessi simultaneamente, avete due opzioni:
