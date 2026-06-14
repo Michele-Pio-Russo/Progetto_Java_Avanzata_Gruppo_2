@@ -1,10 +1,10 @@
 /**
  * @file ReteServer.java
- * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ReteServer
+ * @brief Gestisce le connessioni di rete in ingresso dai client tramite socket TCP.
  *
- * Questa classe permette di istanziare un oggetto ReteServer, i metodi setter e getter permettono di
- * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
- * le informazioni relative alla classe ReteServer.
+ * Questa classe permette di istanziare un oggetto ReteServer. I suoi metodi start e stop consentono di
+ * avviare e interrompere il server in ascolto per nuove connessioni TCP, delegando poi la loro 
+ * gestione effettiva alla classe GestoreClient.
  *
  * @author Gruppo 2
  * @date 

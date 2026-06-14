@@ -1,10 +1,10 @@
 /**
  * @file CaricatoreConfigurazione.java
- * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe CaricatoreConfigurazione
+ * @brief Gestisce il caricamento dei parametri di configurazione dal file properties del server.
  *
- * Questa classe permette di istanziare un oggetto CaricatoreConfigurazione, i metodi setter e getter permettono di
- * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
- * le informazioni relative alla classe CaricatoreConfigurazione.
+ * Questa classe permette di istanziare un oggetto CaricatoreConfigurazione. I metodi della classe,
+ * in particolare i metodi getter, permettono di estrapolare e leggere i valori delle proprietà definite
+ * nel file di configurazione del server.
  *
  * @author Gruppo 2
  * @date 

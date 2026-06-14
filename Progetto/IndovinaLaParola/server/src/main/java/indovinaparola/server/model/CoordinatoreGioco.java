@@ -1,10 +1,10 @@
 /**
  * @file CoordinatoreGioco.java
- * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe CoordinatoreGioco
+ * @brief Coordinatore centrale della logica di gioco e della gestione dei client lato server.
  *
- * Questa classe permette di istanziare un oggetto CoordinatoreGioco, i metodi setter e getter permettono di
- * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
- * le informazioni relative alla classe CoordinatoreGioco.
+ * Questa classe permette di istanziare un oggetto CoordinatoreGioco. Offre metodi per gestire 
+ * l'intero ciclo di vita di una partita, metodi per ricevere e smistare le comunicazioni dai client, 
+ * e interagisce con il database per il salvataggio dei risultati finali.
  *
  * @author Gruppo 2
  * @date 
@@ -35,7 +35,7 @@ import java.util.logging.Logger;
  * Il timeout della sfida è gestito con {@link ScheduledExecutorService}
  *, che evita l'uso di {@code Thread.sleep()} nei thread di gioco.
  *
- * La callback di log usa {@link Consumer}&lt;String&gt; come interfaccia funzionale
+ * La callback di log usa {@link Consumer}<String> come interfaccia funzionale
  * assegnata tramite lambda dal controller JavaFX.
  */
 public class CoordinatoreGioco {
@@ -109,12 +109,12 @@ public class CoordinatoreGioco {
      * Viene assegnata dal controller tramite espressione lambda.
      *
      * Esempio di uso nel controller:
-     * <pre>
-     * coordinator.setStatusCallback(msg -&gt;
-     *     Platform.runLater(() -&gt; logArea.appendText(msg + "\n")));
-     * </pre>
+     * 
+     * coordinator.setStatusCallback(msg ->
+     *     Platform.runLater(() -> logArea.appendText(msg + "\n")));
+     * 
      *
-     * @param[in] callback {@link Consumer}&lt;String&gt; che riceve ogni messaggio di log
+     * @param[in] callback {@link Consumer}<String> che riceve ogni messaggio di log
      */
     public void setStatusCallback(Consumer<String> callback) {
         this.statusCallback = callback;

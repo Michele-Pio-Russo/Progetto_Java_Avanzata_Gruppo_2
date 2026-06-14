@@ -1,10 +1,10 @@
 /**
  * @file GestoreClient.java
- * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe GestoreClient
+ * @brief Gestisce la comunicazione con un singolo client connesso al server.
  *
- * Questa classe permette di istanziare un oggetto GestoreClient, i metodi setter e getter permettono di
- * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
- * le informazioni relative alla classe GestoreClient.
+ * Questa classe permette di istanziare un oggetto GestoreClient per ogni connessione. I metodi setter e 
+ * getter permettono di ottenere e modificare le informazioni relative allo stato dell'utente autenticato, 
+ * mentre metodi aggiuntivi gestiscono l'invio e la ricezione asincrona dei messaggi di rete.
  *
  * @author Gruppo 2
  * @date 
@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  * di uscita.
  *
  * Pattern di networking:
- * {@link ObjectOutputStream} deve essere creato <b>prima</b> di
+ * {@link ObjectOutputStream} deve essere creato prima di
  * {@link ObjectInputStream} e deve essere eseguito {@code flush()} subito
  * dopo, altrimenti si verifica un deadlock tra client e server.
  */

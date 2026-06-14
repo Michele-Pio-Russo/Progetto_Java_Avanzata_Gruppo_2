@@ -1,10 +1,10 @@
 /**
  * @file ControllerServer.java
- * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ControllerServer
+ * @brief Controller JavaFX per il pannello di amministrazione del server.
  *
- * Questa classe permette di istanziare un oggetto ControllerServer, i metodi setter e getter permettono di
- * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
- * le informazioni relative alla classe ControllerServer.
+ * Questa classe implementa Initializable e funge da controller per l'interfaccia JavaFX del server. 
+ * Contiene i metodi di gestione degli eventi (handler) associati ai vari componenti dell'interfaccia, 
+ * come i pulsanti per l'avvio del server e l'analisi dei file.
  *
  * @author Gruppo 2
  * @date 

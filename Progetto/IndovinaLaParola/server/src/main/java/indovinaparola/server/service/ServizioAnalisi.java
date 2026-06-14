@@ -1,10 +1,10 @@
 /**
  * @file ServizioAnalisi.java
- * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ServizioAnalisi
+ * @brief Servizio asincrono per la gestione e l'avvio dell'analisi dei documenti di testo.
  *
- * Questa classe permette di istanziare un oggetto ServizioAnalisi, i metodi setter e getter permettono di
- * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
- * le informazioni relative alla classe ServizioAnalisi.
+ * Questa classe estende Service di JavaFX. Il suo metodo setter permette di specificare la lista
+ * di file da analizzare, mentre il metodo createTask crea e restituisce il task che si occuperà 
+ * di eseguire l'elaborazione testuale in un thread separato.
  *
  * @author Gruppo 2
  * @date 
@@ -22,7 +22,7 @@ import java.util.List;
  * @brief JavaFX Service per l'analisi asincrona dei documenti.
  *
  * Estende {@link Service} invece di {@link Task} perché {@code Service} è
- * <b>riusabile</b>: può essere resettato e riavviato ({@code restart()}) ogni
+ * riusabile: può essere resettato e riavviato ({@code restart()}) ogni
  * @brief volta che l'amministratore seleziona nuovi documenti. Un {@code Task} invece
  * è one-shot e non può essere riavviato.
  *

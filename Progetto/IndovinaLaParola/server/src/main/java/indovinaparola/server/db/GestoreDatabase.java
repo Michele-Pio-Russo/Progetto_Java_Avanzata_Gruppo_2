@@ -1,10 +1,10 @@
 /**
  * @file GestoreDatabase.java
- * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe GestoreDatabase
+ * @brief Gestisce l'interazione con il database SQLite del server.
  *
- * Questa classe permette di istanziare un oggetto GestoreDatabase, i metodi setter e getter permettono di
- * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
- * le informazioni relative alla classe GestoreDatabase.
+ * Questa classe permette di istanziare un oggetto GestoreDatabase implementando il pattern Singleton. 
+ * Espone metodi per l'inizializzazione del database e metodi per eseguire interrogazioni e scritture 
+ * (come il salvataggio delle sfide e la registrazione degli utenti).
  *
  * @author Gruppo 2
  * @date 

@@ -1,10 +1,10 @@
 /**
  * @file AnalizzatoreDocumenti.java
- * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe AnalizzatoreDocumenti
+ * @brief Elabora i documenti testuali e calcola la frequenza delle parole (Term Frequency).
  *
- * Questa classe permette di istanziare un oggetto AnalizzatoreDocumenti, i metodi setter e getter permettono di
- * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
- * le informazioni relative alla classe AnalizzatoreDocumenti.
+ * Questa classe permette di istanziare un oggetto AnalizzatoreDocumenti. Fornisce metodi per eseguire
+ * l'analisi sui file di testo e metodi getter per ottenere i risultati (come la frequenza dei termini
+ * calcolata e il testo aggregato), oltre a metodi per l'estrazione casuale di parole per le sfide.
  *
  * @author Gruppo 2
  * @date 
@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 
 /**
  * @brief Analizzatore di documenti testuali.
- * @brief Calcola la <b>Term Frequency (TF)</b> di ogni parola presente nei file analizzati,
- * usando esclusivamente la <b>Java Stream API</b>.
+ * @brief Calcola la Term Frequency (TF) di ogni parola presente nei file analizzati,
+ * usando esclusivamente la Java Stream API.
  *
  * Implementa {@link Serializable} per permettere il salvataggio e il
  * ricaricamento dei risultati dell'analisi senza dover rielaborare i documenti.

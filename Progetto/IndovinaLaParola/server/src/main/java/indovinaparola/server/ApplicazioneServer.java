@@ -1,10 +1,10 @@
 /**
  * @file ApplicazioneServer.java
- * @brief Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ApplicazioneServer
+ * @brief Punto di ingresso dell'applicazione JavaFX lato server.
  *
- * Questa classe permette di istanziare un oggetto ApplicazioneServer, i metodi setter e getter permettono di
- * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
- * le informazioni relative alla classe ApplicazioneServer.
+ * Questa classe estende Application e funge da punto d'ingresso del programma lato server. 
+ * Contiene il metodo main per il lancio e il metodo start per configurare e mostrare 
+ * la finestra principale dell'interfaccia grafica.
  *
  * @author Gruppo 2
  * @date 
