@@ -1,5 +1,5 @@
 <map id="server/src/main/java/indovinaparola/server/service/ServizioAnalisi.java" name="server/src/main/java/indovinaparola/server/service/ServizioAnalisi.java">
-<area shape="rect" id="Node000001" title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ..." alt="" coords="253,5,439,64"/>
+<area shape="rect" id="Node000001" title="Servizio asincrono per la gestione e l&#39;avvio dell&#39;analisi dei documenti di testo." alt="" coords="253,5,439,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,175,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="266,65,142,109,140,104,260,64"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="199,112,352,139"/>

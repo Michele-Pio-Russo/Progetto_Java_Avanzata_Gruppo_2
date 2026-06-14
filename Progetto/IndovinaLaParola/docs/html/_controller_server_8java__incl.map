@@ -1,5 +1,5 @@
 <map id="server/src/main/java/indovinaparola/server/controller/ControllerServer.java" name="server/src/main/java/indovinaparola/server/controller/ControllerServer.java">
-<area shape="rect" id="Node000001" title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ..." alt="" coords="3033,5,3237,64"/>
+<area shape="rect" id="Node000001" title="Controller JavaFX per il pannello di amministrazione del server." alt="" coords="3033,5,3237,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,172,155"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3030,36,2482,42,1665,52,1232,62,821,75,463,92,188,115,187,109,462,87,821,70,1231,57,1665,47,2482,37,3035,36"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="196,112,384,155"/>

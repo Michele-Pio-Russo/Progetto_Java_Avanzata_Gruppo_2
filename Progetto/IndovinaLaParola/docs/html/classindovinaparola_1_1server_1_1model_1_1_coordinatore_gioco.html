@@ -804,10 +804,9 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 
 <p>Imposta la callback per i messaggi di log da mostrare nella GUI server. </p>
 <p>Viene assegnata dal controller tramite espressione lambda.</p>
-<p>Esempio di uso nel controller: </p><pre>
-coordinator.setStatusCallback(msg -&gt;
-    Platform.runLater(() -&gt; logArea.appendText(msg + "\n")));
-</pre><dl class="params"><dt>Parametri</dt><dd>
+<p>Esempio di uso nel controller:</p>
+<p>coordinator.setStatusCallback(msg -&gt; Platform.runLater(() -&gt; logArea.appendText(msg + "\n")));</p>
+<dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">callback</td><td><code><a class="el" href="">Consumer</a></code>&lt;String&gt; che riceve ogni messaggio di log </td></tr>
   </table>

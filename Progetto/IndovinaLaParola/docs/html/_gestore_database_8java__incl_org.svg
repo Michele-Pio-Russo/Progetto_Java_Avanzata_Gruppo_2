@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ...">
+<g id="a_Node000001"><a xlink:title="Gestisce l&#39;interazione con il database SQLite del server.">
 <polygon fill="#999999" stroke="#666666" points="628.75,-112 498.75,-112 498.75,-68 628.75,-68 628.75,-112"/>
 <text xml:space="preserve" text-anchor="start" x="506.75" y="-98.5" font-family="Helvetica,sans-Serif" font-size="10.00">server/src/main/java</text>
 <text xml:space="preserve" text-anchor="start" x="506.75" y="-86.5" font-family="Helvetica,sans-Serif" font-size="10.00">/indovinaparola/server</text>

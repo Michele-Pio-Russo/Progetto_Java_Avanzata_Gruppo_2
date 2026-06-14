@@ -185,7 +185,7 @@ Attributi privati statici</h2></td></tr>
 <div class="textblock"><p>Gestisce la connessione con un singolo client tramite socket TCP. </p>
 <p>Per ogni client connesso viene creato un <code class="JavaDocCode">GestoreClient</code> che avvia un thread daemon dedicato alla lettura dei messaggi in ingresso.</p>
 <p>Il metodo <code><a class="el" href="#af3f6165ff95ef2006e69eb6fb7adb6bf">invia(Messaggio)</a></code> è <code class="JavaDocCode">synchronized</code> per garantire che messaggi inviati da thread diversi non si sovrappongano sullo stream di uscita.</p>
-<p>Pattern di networking: <code><a class="el" href="">ObjectOutputStream</a></code> deve essere creato <b>prima</b> di <code><a class="el" href="">ObjectInputStream</a></code> e deve essere eseguito <code class="JavaDocCode">flush()</code> subito dopo, altrimenti si verifica un deadlock tra client e server. </p>
+<p>Pattern di networking: <code><a class="el" href="">ObjectOutputStream</a></code> deve essere creato prima di <code><a class="el" href="">ObjectInputStream</a></code> e deve essere eseguito <code class="JavaDocCode">flush()</code> subito dopo, altrimenti si verifica un deadlock tra client e server. </p>
 
 <p class="definition">Definizione alla linea <a class="el" href="_gestore_client_8java_source.html#l00036">36</a> del file <a class="el" href="_gestore_client_8java_source.html">GestoreClient.java</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Documentazione dei costruttori e dei distruttori</h2>

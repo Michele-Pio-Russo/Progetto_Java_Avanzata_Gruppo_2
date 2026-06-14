@@ -1,5 +1,5 @@
 <map id="server/src/main/java/indovinaparola/server/model/CoordinatoreGioco.java" name="server/src/main/java/indovinaparola/server/model/CoordinatoreGioco.java">
-<area shape="rect" id="Node000001" title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ..." alt="" coords="542,5,742,64"/>
+<area shape="rect" id="Node000001" title="Coordinatore centrale della logica di gioco e della gestione dei client lato server." alt="" coords="542,5,742,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,120,173,147"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="542,54,185,115,163,119,162,114,185,109,541,49"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="196,112,363,155"/>

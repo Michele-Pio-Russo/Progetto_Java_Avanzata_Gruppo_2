@@ -1,5 +1,5 @@
 <map id="server/src/main/java/indovinaparola/server/service/AnalizzatoreDocumenti.java" name="server/src/main/java/indovinaparola/server/service/AnalizzatoreDocumenti.java">
-<area shape="rect" id="Node000001" title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ..." alt="" coords="228,5,462,64"/>
+<area shape="rect" id="Node000001" title="Elabora i documenti testuali e calcola la frequenza delle parole (Term Frequency)." alt="" coords="228,5,462,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,74,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="246,67,89,112,88,107,245,62"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="97,112,216,139"/>

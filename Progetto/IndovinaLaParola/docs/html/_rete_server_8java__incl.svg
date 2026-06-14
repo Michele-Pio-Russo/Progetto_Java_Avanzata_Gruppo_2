@@ -58,7 +58,7 @@ var sectionId = 'dynsection-0';
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ...">
+<g id="a_Node000001"><a xlink:title="Gestisce le connessioni di rete in ingresso dai client tramite socket TCP.">
 <polygon fill="#999999" stroke="#666666" points="352.12,-100 233.38,-100 233.38,-56 352.12,-56 352.12,-100"/>
 <text xml:space="preserve" text-anchor="start" x="241.38" y="-86.5" font-family="Helvetica,sans-Serif" font-size="10.00">server/src/main/java</text>
 <text xml:space="preserve" text-anchor="start" x="241.38" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00">/indovinaparola/server</text>

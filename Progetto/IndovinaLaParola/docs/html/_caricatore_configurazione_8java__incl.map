@@ -1,5 +1,5 @@
 <map id="server/src/main/java/indovinaparola/server/util/CaricatoreConfigurazione.java" name="server/src/main/java/indovinaparola/server/util/CaricatoreConfigurazione.java">
-<area shape="rect" id="Node000001" title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ..." alt="" coords="298,5,519,64"/>
+<area shape="rect" id="Node000001" title="Gestisce il caricamento dei parametri di configurazione dal file properties del server." alt="" coords="298,5,519,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,161,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="304,67,145,110,143,105,302,62"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="185,112,320,139"/>

@@ -1,5 +1,5 @@
 <map id="server/src/main/java/indovinaparola/server/db/GestoreDatabase.java" name="server/src/main/java/indovinaparola/server/db/GestoreDatabase.java">
-<area shape="rect" id="Node000001" title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ..." alt="" coords="670,5,844,64"/>
+<area shape="rect" id="Node000001" title="Gestisce l&#39;interazione con il database SQLite del server." alt="" coords="670,5,844,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,197,155"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="667,47,466,77,212,114,211,109,465,71,673,46"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="221,120,410,147"/>

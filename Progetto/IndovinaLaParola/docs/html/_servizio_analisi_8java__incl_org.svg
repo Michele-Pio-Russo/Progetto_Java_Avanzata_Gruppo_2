@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ...">
+<g id="a_Node000001"><a xlink:title="Servizio asincrono per la gestione e l&#39;avvio dell&#39;analisi dei documenti di testo.">
 <polygon fill="#999999" stroke="#666666" points="325,-100 186,-100 186,-56 325,-56 325,-100"/>
 <text xml:space="preserve" text-anchor="start" x="194" y="-86.5" font-family="Helvetica,sans-Serif" font-size="10.00">server/src/main/java</text>
 <text xml:space="preserve" text-anchor="start" x="194" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00">/indovinaparola/server</text>

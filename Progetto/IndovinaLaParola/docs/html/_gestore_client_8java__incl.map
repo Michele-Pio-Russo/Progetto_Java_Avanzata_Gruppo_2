@@ -1,5 +1,5 @@
 <map id="server/src/main/java/indovinaparola/server/model/GestoreClient.java" name="server/src/main/java/indovinaparola/server/model/GestoreClient.java">
-<area shape="rect" id="Node000001" title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ..." alt="" coords="259,5,431,64"/>
+<area shape="rect" id="Node000001" title="Gestisce la comunicazione con un singolo client connesso al server." alt="" coords="259,5,431,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,173,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="265,65,141,109,139,104,259,64"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="196,112,264,139"/>

@@ -149,7 +149,7 @@ Attributi privati</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrizione dettagliata</h2>
 <div class="textblock"><p>JavaFX Service per l'analisi asincrona dei documenti. </p>
-<p>Estende <code><a class="el" href="">Service</a></code> invece di <code><a class="el" href="">Task</a></code> perché <code class="JavaDocCode">Service</code> è <b>riusabile</b>: può essere resettato e riavviato (<code class="JavaDocCode">restart()</code>) ogni</p>
+<p>Estende <code><a class="el" href="">Service</a></code> invece di <code><a class="el" href="">Task</a></code> perché <code class="JavaDocCode">Service</code> è riusabile: può essere resettato e riavviato (<code class="JavaDocCode">restart()</code>) ogni</p>
 <p>volta che l'amministratore seleziona nuovi documenti. Un <code class="JavaDocCode">Task</code> invece è one-shot e non può essere riavviato.</p>
 <p>Il metodo <code class="JavaDocCode">createTask()</code> crea un nuovo <code><a class="el" href="">Task</a></code> a ogni avvio del Service. Il Task viene eseguito in un thread di background, mentre i binding su <code class="JavaDocCode">progressProperty()</code> e <code class="JavaDocCode">messageProperty()</code> aggiornano la GUI sul JavaFX Application Thread in modo thread-safe. </p>
 

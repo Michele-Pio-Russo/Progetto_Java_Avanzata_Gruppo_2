@@ -1,5 +1,5 @@
 <map id="server/src/main/java/indovinaparola/server/ApplicazioneServer.java" name="server/src/main/java/indovinaparola/server/ApplicazioneServer.java">
-<area shape="rect" id="Node000001" title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ..." alt="" coords="394,5,559,64"/>
+<area shape="rect" id="Node000001" title="Punto di ingresso dell&#39;applicazione JavaFX lato server." alt="" coords="394,5,559,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,196,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="394,58,169,111,168,105,393,53"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="220,112,384,139"/>

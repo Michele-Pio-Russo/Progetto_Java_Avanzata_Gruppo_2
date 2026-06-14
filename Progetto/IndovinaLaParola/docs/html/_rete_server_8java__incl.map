@@ -1,5 +1,5 @@
 <map id="server/src/main/java/indovinaparola/server/model/ReteServer.java" name="server/src/main/java/indovinaparola/server/model/ReteServer.java">
-<area shape="rect" id="Node000001" title="Questo file contiene gli attributi, il costruttore e i metodi setter, getter e toString della classe ..." alt="" coords="316,5,475,64"/>
+<area shape="rect" id="Node000001" title="Gestisce le connessioni di rete in ingresso dai client tramite socket TCP." alt="" coords="316,5,475,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,141,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="317,60,134,110,133,105,315,55"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="164,112,315,139"/>
