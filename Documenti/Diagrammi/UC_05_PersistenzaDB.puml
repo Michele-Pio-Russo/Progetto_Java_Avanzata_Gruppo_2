@@ -1,0 +1,75 @@
+@startuml UC_05_PersistenzaDB
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor Lavender
+  BorderColor DarkViolet
+}
+
+title UC_05 — Persistenza e Database (SQLite via JDBC)
+
+actor "Sistema\n(GestoreDatabase)" as SYS
+database "Persistenza Locale\n(SQLite - db/database.db)" as DB
+
+rectangle "Modulo Persistenza" {
+  usecase "Connettersi al DB\n(Singleton, getInstance)" as UC_CONN
+  usecase "Inizializzare schema\n(CREATE TABLE IF NOT EXISTS)" as UC_SCHEMA
+  usecase "Inserire account\npredefiniti (seedAccounts)" as UC_SEED
+  usecase "Autenticare utente\n(SHA-256)" as UC_AUTH
+  usecase "Registrare nuovo utente" as UC_REG
+  usecase "Salvare sfida + risultati\n(transazione atomica)" as UC_SAVE
+  usecase "Leggere storico\n(getHistory, subquery)" as UC_HIST
+  usecase "Leggere statistiche\naggregate (getAllStats)" as UC_STATS
+}
+
+SYS -- UC_CONN
+SYS -- UC_AUTH
+SYS -- UC_REG
+SYS -- UC_SAVE
+SYS -- UC_HIST
+SYS -- UC_STATS
+
+UC_CONN ..> UC_SCHEMA : <<include>>
+UC_SCHEMA ..> UC_SEED : <<include>>
+
+UC_AUTH --> DB
+UC_REG  --> DB
+UC_SAVE --> DB
+UC_HIST --> DB
+UC_STATS --> DB
+
+note right of UC_SCHEMA
+  Tabelle create con
+  CREATE TABLE IF NOT EXISTS
+  (operazione idempotente):
+  - users (user_id, nomeUtente,
+    password_hash, ruolo, created_at)
+  - challenges (challenge_id, played_at,
+    text_excerpt, encrypted_word,
+    original_word, caesar_shift)
+  - results (result_id, challenge_id,
+    user_id, esito, response_time_ms)
+end note
+
+note right of UC_SEED
+  Account predefiniti (solo se assenti):
+  admin/admin123 (ruolo admin)
+  giocatore1/pass1 (ruolo player)
+  giocatore2/pass2 (ruolo player)
+  Password hashate con SHA-256.
+end note
+
+note bottom of UC_SAVE
+  saveChallengeWithResults():
+  setAutoCommit(false) -> INSERT challenge
+  -> INSERT results (entrambi i giocatori)
+  -> commit() / rollback() in caso di errore.
+end note
+
+note bottom of UC_HIST
+  getHistory(nomeUtente): subquery SQL
+  che individua l'avversario per ogni
+  sfida, ordinata per played_at DESC.
+end note
+@enduml

@@ -1,78 +1,86 @@
 @startuml UC_03_Giocatore
+left to right direction
 skinparam actorStyle awesome
 skinparam packageStyle rectangle
 skinparam usecase {
-  BackgroundColor LightCyan
-  BorderColor SteelBlue
+  BackgroundColor LightYellow
+  BorderColor Black
 }
 
-title Casi d'Uso - Giocatore
+title UC_03 — Casi d'Uso Giocatore
 
-actor "Giocatore" as Player
-actor "Sistema\n(Server)" as Server
+actor "Giocatore" as G
+actor "Server" as S
 
-rectangle "Applicazione Client — IndovinaLaParola" {
+rectangle "Modulo Giocatore" {
+  usecase "UC-G01\nRegistrazione" as UCG01
+  usecase "UC-G02\nLogin" as UCG02
+  usecase "UC-G03\nAttesa partita" as UCG03
+  usecase "UC-G04\nPartecipazione sfida" as UCG04
+  usecase "UC-G05\nVisualizzazione esito" as UCG05
+  usecase "UC-G06\nNuova partita" as UCG06
+  usecase "UC-G07\nStorico partite" as UCG07
+  usecase "UC-G08\nRitorno da storico" as UCG08
 
-  usecase "Registrazione" as G01
-  usecase "Invio REGISTER_REQUEST\nal server" as G01a
-  usecase "Verifica unicita'\nnomeUtente" as G01b
-
-  usecase "Login" as G02
-  usecase "Invio LOGIN_REQUEST\nal server" as G02a
-  usecase "Ricezione LOGIN_RESPONSE\ne navigazione" as G02b
-
-  usecase "Attesa avversario" as G03
-  usecase "Ricezione WAITING" as G03a
-
-  usecase "Partecipazione sfida" as G04
-  usecase "Visualizzazione\ntesto cifrato" as G04a
-  usecase "Timer countdown\n(Timeline)" as G04b
-  usecase "Inserimento e invio\nrisposta (CHALLENGE_ANSWER)" as G04c
-
-  usecase "Visualizzazione esito" as G05
-
-  usecase "Storico partite\npersonali" as G06
-
-  usecase "Nuova partita" as G07
+  usecase "Validare campi\n(username/password)" as UCG_VAL
+  usecase "Invio REGISTER_REQUEST /\nLOGIN_REQUEST" as UCG_SEND
+  usecase "Ricezione WAITING" as UCG_WAIT
+  usecase "Ricezione CHALLENGE_START\ne avvio Timeline" as UCG_START
+  usecase "Invio CHALLENGE_ANSWER" as UCG_ANSWER
+  usecase "Ricezione CHALLENGE_RESULT" as UCG_RESULT
+  usecase "Invio REQUEUE_REQUEST" as UCG_REQUEUE
+  usecase "Invio HISTORY_REQUEST" as UCG_HIST
 }
 
-Player --> G01
-Player --> G02
-Player --> G03
-Player --> G04
-Player --> G05
-Player --> G06
-Player --> G07
+G -- UCG01
+G -- UCG02
+G -- UCG03
+G -- UCG04
+G -- UCG05
+G -- UCG06
+G -- UCG07
+G -- UCG08
 
-Server --> G02 : valida credenziali
-Server --> G03 : invia WAITING
-Server --> G04 : invia CHALLENGE_START
-Server --> G05 : invia CHALLENGE_RESULT
+S -- UCG_WAIT
+S -- UCG_START
+S -- UCG_RESULT
 
-G01 ..> G01a : <<include>>
-G01 ..> G01b : <<include>>
-G02 ..> G02a : <<include>>
-G02 ..> G02b : <<include>>
-G03 ..> G03a : <<include>>
-G04 ..> G04a : <<include>>
-G04 ..> G04b : <<include>>
-G04 ..> G04c : <<include>>
+UCG01 ..> UCG_VAL  : <<include>>
+UCG02 ..> UCG_VAL  : <<include>>
+UCG01 ..> UCG_SEND : <<include>>
+UCG02 ..> UCG_SEND : <<include>>
 
-G02 ..> G03 : <<extend>>\ndopo login OK
-G03 ..> G04 : <<extend>>\nquando entrambi connessi
-G04 ..> G05 : <<extend>>\nalla ricezione CHALLENGE_RESULT
-G05 ..> G07 : <<extend>>\npulsante "Nuova partita"
-G05 ..> G06 : <<extend>>\npulsante "Vedi storico"
+UCG02 ..> UCG03 : <<extend>>\n(se ruolo=player)
+UCG03 ..> UCG_WAIT : <<include>>
 
-note right of G04b
-  Il timer countdown è gestito tramite una
-  Timeline JavaFX con KeyFrame ogni secondo.
-  Gli ultimi 10 secondi vengono colorati in rosso.
+UCG04 ..> UCG_START  : <<include>>
+UCG04 ..> UCG_ANSWER : <<include>>
+
+UCG05 ..> UCG_RESULT : <<include>>
+UCG06 ..> UCG_REQUEUE : <<include>>
+UCG08 ..> UCG_REQUEUE : <<include>>
+
+UCG07 ..> UCG_HIST : <<include>>
+
+note right of UCG01
+  Username >= 3 caratteri,
+  password >= 4 caratteri,
+  conferma password == password.
 end note
 
-note bottom of G07
-  La richiesta di nuova partita viene inviata sulla
-  stessa connessione TCP aperta, senza dover rieseguire il login.
+note right of UCG03
+  IF-S23/IF-S24: accodamento in
+  giocatoriInAttesa (ArrayList
+  sincronizzato); quando si
+  raggiungono 2 elementi il
+  server avvia automaticamente
+  la sfida.
 end note
 
+note bottom of UCG06
+  Dalla schermata risultato il
+  giocatore preme "Nuova partita":
+  REQUEUE_REQUEST sulla stessa
+  connessione, senza nuovo login.
+end note
 @enduml

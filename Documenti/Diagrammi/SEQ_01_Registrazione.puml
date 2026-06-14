@@ -2,64 +2,44 @@
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
-title Diagramma di Sequenza - Registrazione Giocatore
+title SEQ_01 — Registrazione (UC-G01)
 
-actor "Giocatore" as Player
-participant "ControllerAccesso\n(login.fxml)" as Ctrl
-participant "ConnessioneServer\n(TCP)" as Conn
-participant "GestoreClient\n(thread daemon)" as GC
-participant "CoordinatoreGioco" as Coord
-participant "GestoreDatabase" as DB
-database "SQLite\n(users)" as SQLite
+actor "Giocatore" as G
+participant "ControllerAccesso" as CA
+participant "ConnessioneServer" as CONN
+participant "GestoreClient" as GC
+participant "CoordinatoreGioco" as COORD
+participant "GestoreDatabase" as DB_MGR
+database "SQLite\n(users)" as DB
 
-Player -> Ctrl : inserisce nomeUtente e password\npreme "Registrati"
-activate Ctrl
+G -> CA : Inserisce username,\npassword, conferma password
+CA -> CA : Valida campi:\nusername >= 3 caratteri,\npassword >= 4 caratteri,\nconferma == password
 
-Ctrl -> Ctrl : valida input\n(campi non vuoti)
+alt Validazione client OK
+  CA -> CONN : invia(REGISTER_REQUEST,\nPayloadAutenticazione(user, pwd))
+  CONN -> GC : invio su Socket TCP (OOS)
+  GC -> COORD : gestisciRegistrazione(payload)
+  COORD -> DB_MGR : registraUtente(nomeUtente, password)
+  DB_MGR -> DB_MGR : hashPassword() -> SHA-256
+  DB_MGR -> DB : SELECT user WHERE nomeUtente = ?
 
-alt input non valido
-  Ctrl --> Player : mostra errore "Username e password\nsono obbligatori"
+  alt Username non esistente
+    DB --> DB_MGR : nessun risultato
+    DB_MGR -> DB : INSERT INTO users\n(nomeUtente, password_hash, ruolo='player')
+    DB --> DB_MGR : ok
+    DB_MGR --> COORD : successo = true
+    COORD -> GC : invia(REGISTER_RESPONSE,\nRispostaAutenticazione(true, "Registrazione ok", null))
+  else Username gia' esistente
+    DB --> DB_MGR : utente trovato
+    DB_MGR --> COORD : successo = false
+    COORD -> GC : invia(REGISTER_RESPONSE,\nRispostaAutenticazione(false, "Username gia' esistente", null))
+  end
+
+  GC --> CONN : REGISTER_RESPONSE (OIS)
+  CONN --> CA : callbackMessaggio(messaggio)
+  CA --> G : Mostra esito registrazione
+
+else Validazione client fallita
+  CA --> G : Mostra errore di validazione\n(campo vuoto / lunghezza minima\n/ conferma non corrispondente)
 end
-
-Ctrl -> Conn : invia(REGISTER_REQUEST,\nPayloadAutenticazione(nomeUtente, password))
-activate Conn
-Conn -> GC : trasmette sul socket TCP
-activate GC
-
-GC -> GC : smistaMessaggio(msg)\n→ case REGISTER_REQUEST
-GC -> Coord : gestisciRegistrazione(client, payload)
-activate Coord
-
-Coord -> Coord : valida payload\n(nomeUtente e password non vuoti)
-
-Coord -> DB : registraUtente(nomeUtente, password)
-activate DB
-DB -> DB : hashPassword(password)\n(SHA-256)
-DB -> SQLite : INSERT INTO users\n(nomeUtente, password_hash, ruolo='player')
-activate SQLite
-
-alt username gia' esistente (violazione UNIQUE)
-  SQLite --> DB : SQLException (UNIQUE constraint)
-  DB --> Coord : return false
-  Coord -> GC : invia(REGISTER_RESPONSE,\nRispostaAutenticazione(false,\n"Username gia' esistente."))
-  GC -> Conn : socket → client
-  Conn -> Ctrl : callbackMessaggio.accept(msg)
-  Ctrl --> Player : mostra errore\n"Username gia' esistente"
-else registrazione riuscita
-  SQLite --> DB : OK
-  deactivate SQLite
-  DB --> Coord : return true
-  deactivate DB
-  Coord -> GC : invia(REGISTER_RESPONSE,\nRispostaAutenticazione(true,\n"Registrazione completata. Ora accedi."))
-  deactivate Coord
-  GC -> Conn : socket → client
-  deactivate GC
-  Conn -> Ctrl : callbackMessaggio.accept(msg)
-  deactivate Conn
-  Ctrl -> Ctrl : gestisciRispostaRegistrazione:\ntorna in modalita' login
-  Ctrl --> Player : mostra conferma verde\n"Registrazione completata. Ora accedi."
-end
-
-deactivate Ctrl
-
 @enduml

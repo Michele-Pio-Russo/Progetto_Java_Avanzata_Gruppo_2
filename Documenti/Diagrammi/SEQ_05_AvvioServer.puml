@@ -2,84 +2,48 @@
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
-title Diagramma di Sequenza - Avvio Server
+title SEQ_05 — Avvio Server: properties, schema SQLite, ServerSocket, UI admin
 
-actor "Amministratore\n/ Revisore" as Admin
-participant "JVM\n(java -jar server.jar)" as JVM
-participant "ApplicazioneServer\n(JavaFX Application)" as App
-participant "ControllerServer\n(initialize)" as Ctrl
-participant "CaricatoreConfigurazione" as Cfg
-participant "GestoreDatabase\n(Singleton)" as DB
-participant "CoordinatoreGioco" as Coord
-participant "ReteServer" as Rete
-participant "ServizioAnalisi\n(JavaFX Service)" as Svc
-database "server.properties" as Props
-database "SQLite\n(database.db)" as SQLite
-database "File .dat\n(analisi)" as DatFile
+actor "Amministratore" as A
+participant "ApplicazioneServer\n(main)" as APP
+participant "CaricatoreConfigurazione" as CFG
+participant "GestoreDatabase\n(Singleton)" as DB_MGR
+participant "ReteServer" as RETE
+participant "CoordinatoreGioco" as COORD
+participant "ControllerServer\n(GUI)" as CS
+database "SQLite\n(database.db)" as DB
 
-Admin -> JVM : java -jar server.jar
-activate JVM
-JVM -> App : Application.launch()
-activate App
+A -> APP : esegue "java -jar server.jar"
+APP -> CFG : carica server.properties
 
-App -> App : start(primaryStage)\nFXMLLoader.load("/fxml/server.fxml")
+alt file presente
+  CFG --> APP : server.port, db.path,\nanalysis.save.path,\ngame.timeout.seconds,\ngame.excerpt.words
+else file assente
+  CFG -> CFG : log warning
+  CFG --> APP : valori di default
+end
 
-App -> Ctrl : initialize(location, resources)
-activate Ctrl
+APP -> DB_MGR : getInstance(db.path)
+DB_MGR -> DB : connetti()
+DB_MGR -> DB : initSchema()\n(CREATE TABLE IF NOT EXISTS\nusers, challenges, results)
+DB_MGR -> DB : seedAccounts()\n(insertUserIfAbsent per\nadmin/giocatore1/giocatore2)
+DB --> DB_MGR : schema pronto
 
-Ctrl -> Cfg : new CaricatoreConfigurazione\n("properties/server.properties")
-activate Cfg
-Cfg -> Props : FileInputStream.load()
-Props --> Cfg : server.porta=5000
-Cfg --> Ctrl : serverPort = 5000
-deactivate Cfg
+APP -> COORD : crea CoordinatoreGioco(db, config)
+APP -> RETE : crea ReteServer(port, coordinatore)
+APP -> CS : avvia GUI JavaFX\n(ControllerServer, server.fxml)
+CS --> A : Mostra finestra admin\n(pulsanti Avvia/Stop, Seleziona file,\nAvvia Analisi, ecc.)
 
-Ctrl -> Ctrl : portLabel.setText("5000")
+A -> CS : Clicca "Avvia Server"
+CS -> RETE : avvia()
+RETE -> RETE : new ServerSocket(port)
+RETE -> RETE : avvia ServerAcceptThread\n(thread daemon)
+RETE --> CS : log "Server avviato sulla porta 5000"
+CS --> A : Mostra log nella GUI
 
-Ctrl -> DB : GestoreDatabase.getInstance("db/database.db")\n.connetti()
-activate DB
-DB -> DB : initSchema()\n(CREATE TABLE IF NOT EXISTS\nusers, challenges, results)
-DB -> DB : seedAccounts()\n(INSERT IF NOT EXISTS\nadmin, giocatore1, giocatore2)
-DB -> SQLite : esegue DDL e INSERT
-SQLite --> DB : OK
-DB --> Ctrl : connessione pronta
-deactivate DB
-
-Ctrl -> Coord : new CoordinatoreGioco(db, null)
-activate Coord
-Ctrl -> Coord : setStatusCallback(\n  msg -> Platform.runLater(\n    () -> logArea.appendText(msg)))\n[callback tramite espressione lambda]
-deactivate Coord
-
-Ctrl -> Svc : new ServizioAnalisi()\nprogressBar.progressProperty().bind(...)\nanalysisService.messageProperty().addListener(...)
-activate Svc
-Svc --> Ctrl : binding dichiarativo pronto
-deactivate Svc
-
-Ctrl --> App : inizializzazione completata
-App -> App : primaryStage.show()\n"IndovinaLaParola - Server Amministratore"
-App --> Admin : interfaccia admin visibile
-
-Admin -> Ctrl : preme "Avvia Server"
-Ctrl -> Rete : new ReteServer(5000, coordinator)\n.start()
-activate Rete
-Rete -> Rete : new ServerSocket(5000)\nrunning = true
-Rete -> Rete : Thread daemon "ServerAcceptThread"\nacceptThread.start()
-note right of Rete
-  Loop: while(running) {
-    Socket s = serverSocket.accept();
-    new GestoreClient(s, coord).startListening();
-  }
-  Ogni GestoreClient avvia
-  il proprio thread daemon di lettura.
-end note
-Rete --> Ctrl : server attivo
-deactivate Rete
-
-Ctrl -> Ctrl : statusLabel.setText("Server ATTIVO - porta 5000")
-Ctrl --> Admin : log "[HH:mm:ss] Server avviato sulla porta 5000."
-
-deactivate Ctrl
-deactivate App
-deactivate JVM
-
+loop per ogni connessione client
+  RETE -> RETE : accept()
+  RETE -> RETE : crea GestoreClient dedicato
+  RETE -> RETE : gestoreClient.startListening()\n(thread daemon, OOS prima di OIS + flush())
+end
 @enduml

@@ -1,0 +1,70 @@
+@startuml ER_SchemaDatabase
+skinparam linetype ortho
+
+title ER — Schema Database SQLite (db/database.db)
+
+entity "users" as USERS {
+  * user_id : INTEGER <<PK, AUTOINCREMENT>>
+  --
+  * nomeUtente : TEXT <<UNIQUE, NOT NULL>>
+  * password_hash : TEXT <<NOT NULL>>
+  * ruolo : TEXT <<NOT NULL, DEFAULT 'player'>>
+  created_at : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
+}
+
+entity "challenges" as CHALLENGES {
+  * challenge_id : INTEGER <<PK, AUTOINCREMENT>>
+  --
+  played_at : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
+  text_excerpt : TEXT
+  encrypted_word : TEXT
+  original_word : TEXT
+  caesar_shift : INTEGER
+}
+
+entity "results" as RESULTS {
+  * result_id : INTEGER <<PK, AUTOINCREMENT>>
+  --
+  * challenge_id : INTEGER <<FK -> challenges>>
+  * user_id : INTEGER <<FK -> users>>
+  * esito : TEXT <<NOT NULL>>\n('win' | 'loss' | 'draw')
+  response_time_ms : INTEGER
+  --
+  nota: -1 se l'utente non
+  ha risposto (timeout/sconfitta)
+}
+
+CHALLENGES ||--o{ RESULTS : "1 sfida -> 2 risultati\n(challenge_id)"
+USERS      ||--o{ RESULTS : "1 utente -> N risultati\n(user_id)"
+
+note bottom of USERS
+  seedAccounts() inserisce, se assenti:
+  admin / admin123 (ruolo admin)
+  giocatore1 / pass1 (ruolo player)
+  giocatore2 / pass2 (ruolo player)
+  Password hashate con SHA-256.
+end note
+
+note right of RESULTS
+  Query principali:
+  - getHistory(nomeUtente): join
+    results+challenges+users con
+    subquery per individuare
+    l'avversario, ORDER BY
+    played_at DESC
+  - getAllStats(): SUM(win),
+    COUNT(*), AVG(response_time_ms
+    WHERE >=0), GROUP BY user_id,
+    ORDER BY wins DESC
+end note
+
+note left of CHALLENGES
+  Tutte le query usano
+  PreparedStatement.
+  saveChallengeWithResults()
+  inserisce challenge + 2 results
+  in un'unica transazione
+  (setAutoCommit(false) ->
+  commit()/rollback()).
+end note
+@enduml

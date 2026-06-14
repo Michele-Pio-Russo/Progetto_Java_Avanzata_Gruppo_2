@@ -1,0 +1,162 @@
+@startuml CD_02_DettaglioServer
+skinparam classAttributeIconSize 0
+
+title CD_02 — Dettaglio Modulo Server
+
+class ApplicazioneServer <<JavaFX Application>> {
+  +start(Stage primaryStage)
+  +{static} main(String[] args)
+}
+
+class CaricatoreConfigurazione {
+  -props : Properties
+  +CaricatoreConfigurazione(relativePath)
+  +get(key, defaultValue) : String
+  +getInt(key, defaultValue) : int
+}
+
+package "network" {
+  class ReteServer {
+    -serverSocket : ServerSocket
+    -porta : int
+    -coordinator : CoordinatoreGioco
+    -running : boolean
+    +ReteServer(porta, coordinator)
+    +start()
+    +stop()
+    +isRunning() : boolean
+  }
+
+  class GestoreClient {
+    -socket : Socket
+    -out : ObjectOutputStream
+    -in : ObjectInputStream
+    -nomeUtente : String
+    -ruolo : String
+    -autenticato : boolean
+    -coordinator : CoordinatoreGioco
+    +GestoreClient(socket, coordinator)
+    +startListening()
+    -cicloAscolto()
+    -smistaMessaggio(Messaggio msg)
+    +invia(Messaggio msg) : synchronized
+  }
+}
+
+package "game" {
+  class CoordinatoreGioco {
+    -timeoutSeconds : int = 60
+    -excerptWords : int = 60
+    -db : GestoreDatabase
+    -analizzatore : AnalizzatoreDocumenti
+    -giocatoriInAttesa : List<GestoreClient>
+    -scheduler : ScheduledExecutorService
+    -giocatore1 : GestoreClient
+    -giocatore2 : GestoreClient
+    -parolaOriginaleCorrente : String
+    -parolaCifrataCorrente : String
+    -spostamentoCorrente : int
+    -estrattoCorrente : String
+    -statusCallback : Consumer<String>
+    +gestisciLogin(...)
+    +gestisciRegistrazione(...)
+    +aggiungiInListaAttesa(client)
+    +avviaSfida(p1, p2)
+    +gestisciRisposta(client, risposta, t)
+    +terminaSfida(vincitore, t, timeout)
+    +gestisciNuovaRichiesta(client)
+    +onClientDisconnesso(client)
+    +gestisciRichiestaStorico(client)
+  }
+}
+
+package "analysis" {
+  class AnalizzatoreDocumenti <<Serializable>> {
+    -termFrequency : Map<String, Double>
+    -aggregatedText : String
+    +analyze(List<File> files)
+    +getTermFrequency() : Map<String,Double>
+    +getAggregatedText() : String
+    +hasResults() : boolean
+    +extractRandomExcerpt(numWords) : String
+    +selectWordFromExcerpt(excerpt, difficulty) : String
+    +saveToFile(outputPath)
+    +{static} loadFromFile(inputPath) : AnalizzatoreDocumenti
+  }
+
+  class ServizioAnalisi {
+    -files : List<File>
+    +setFiles(List<File> files)
+    .. extends javafx.concurrent.Service<AnalizzatoreDocumenti> ..
+  }
+}
+
+package "persistence" {
+  class GestoreDatabase <<Singleton>> {
+    -{static} instance : GestoreDatabase
+    -connessione : Connection
+    -dbPath : String
+    -GestoreDatabase(dbPath)
+    +{static} getInstance(dbPath) : GestoreDatabase
+    +connetti()
+    +disconnetti()
+    -initSchema()
+    -seedAccounts()
+    -insertUserIfAbsent(user, pwd, ruolo)
+    +autentica(user, pwd) : String
+    +registraUtente(user, pwd) : boolean
+    +getUserId(user) : int
+    +saveChallengeWithResults(...)
+    +getHistory(nomeUtente) : List<VoceStorico>
+    +getAllStats() : List<StatisticaGiocatore>
+    -hashPassword(pwd) : String
+  }
+}
+
+package "gui" {
+  class ControllerServer <<Initializable>> {
+    -statusLabel, portLabel : Label
+    -startServerBtn, stopServerBtn : Button
+    -analyzeBtn, saveAnalysisBtn, loadAnalysisBtn : Button
+    -refreshStatsBtn : Button
+    -documentListView : ListView<String>
+    -progressBar : ProgressBar
+    -progressLabel : Label
+    -tfTableView : TableView<TFEntry>
+    +avviaServer()
+    +fermaServer()
+    +selezionaFile()
+    +avviaAnalisi()
+    +salvaAnalisi()
+    +caricaAnalisi()
+    +aggiornaClassifica()
+  }
+}
+
+ApplicazioneServer --> CaricatoreConfigurazione
+ApplicazioneServer --> ReteServer
+ApplicazioneServer --> CoordinatoreGioco
+ApplicazioneServer --> ControllerServer
+
+ReteServer "1" *-- "0..*" GestoreClient : crea/gestisce
+GestoreClient --> CoordinatoreGioco : smista messaggi
+CoordinatoreGioco --> GestoreDatabase
+CoordinatoreGioco --> AnalizzatoreDocumenti
+ControllerServer --> ServizioAnalisi
+ServizioAnalisi ..|> AnalizzatoreDocumenti : produce
+ControllerServer --> CoordinatoreGioco
+ControllerServer --> GestoreDatabase : getAllStats()
+
+note right of GestoreClient
+  invia() è synchronized e chiama
+  out.reset() dopo ogni writeObject
+  (IF-S09).
+end note
+
+note right of CoordinatoreGioco
+  Tutti i metodi pubblici sono
+  synchronized (IF-S22): l'istanza
+  è condivisa tra i thread
+  GestoreClient.
+end note
+@enduml

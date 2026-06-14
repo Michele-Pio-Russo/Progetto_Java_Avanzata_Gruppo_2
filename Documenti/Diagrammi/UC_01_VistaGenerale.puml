@@ -1,0 +1,52 @@
+@startuml UC_01_VistaGenerale
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor White
+  BorderColor Black
+}
+
+title UC_01 — Vista Generale del Sistema
+
+actor "Amministratore" as ADMIN
+actor "Giocatore" as PLAYER
+actor "Server\n(CoordinatoreGioco)" as SERVER
+
+rectangle "IndovinaLaParola" {
+  usecase "Login" as UC_LOGIN
+  usecase "Registrazione" as UC_REG
+  usecase "Gestione documenti\ne analisi TF" as UC_DOC
+  usecase "Gestione server\n(avvio/stop)" as UC_SRV
+  usecase "Visualizzazione classifica" as UC_CLASS
+  usecase "Attesa partita" as UC_ATTESA
+  usecase "Partecipazione sfida" as UC_SFIDA
+  usecase "Visualizzazione esito" as UC_ESITO
+  usecase "Consultazione storico" as UC_STORICO
+}
+
+ADMIN -- UC_LOGIN
+ADMIN -- UC_DOC
+ADMIN -- UC_SRV
+ADMIN -- UC_CLASS
+
+PLAYER -- UC_LOGIN
+PLAYER -- UC_REG
+PLAYER -- UC_ATTESA
+PLAYER -- UC_SFIDA
+PLAYER -- UC_ESITO
+PLAYER -- UC_STORICO
+
+SERVER -- UC_ATTESA
+SERVER -- UC_SFIDA
+SERVER -- UC_CLASS
+
+UC_LOGIN ..> UC_ATTESA : <<extend>>\n(se ruolo=player)
+
+note right of UC_LOGIN
+  In base al campo "ruolo" restituito
+  da LOGIN_RESPONSE, l'utente accede
+  alla GUI admin oppure entra in
+  lista d'attesa (player).
+end note
+@enduml

@@ -2,76 +2,52 @@
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
-title Diagramma di Sequenza - Login
+title SEQ_02 — Login (UC-G02 / UC-A01) con biforcazione admin/giocatore
 
-actor "Utente\n(Giocatore o Admin)" as User
-participant "ControllerAccesso\n(login.fxml)" as Ctrl
-participant "ConnessioneServer\n(TCP)" as Conn
-participant "GestoreClient\n(thread daemon)" as GC
-participant "CoordinatoreGioco" as Coord
-participant "GestoreDatabase" as DB
-database "SQLite\n(users)" as SQLite
+actor "Utente\n(Admin o Giocatore)" as U
+participant "ControllerAccesso" as CA
+participant "ConnessioneServer" as CONN
+participant "GestoreClient" as GC
+participant "CoordinatoreGioco" as COORD
+participant "GestoreDatabase" as DB_MGR
+database "SQLite\n(users)" as DB
 
-User -> Ctrl : inserisce nomeUtente e password\npreme "Accedi"
-activate Ctrl
+U -> CA : Inserisce username e password,\npreme "Accedi"
+CA -> CONN : invia(LOGIN_REQUEST,\nPayloadAutenticazione(user, pwd))
+CONN -> GC : invio su Socket TCP (OOS, thread separato)
+GC -> COORD : gestisciLogin(payload)
+COORD -> DB_MGR : verificaCredenziali(nomeUtente, password)
+DB_MGR -> DB_MGR : hashPassword(password) -> SHA-256
+DB_MGR -> DB : SELECT password_hash, ruolo\nFROM users WHERE nomeUtente = ?
+DB --> DB_MGR : password_hash, ruolo (o nessun risultato)
 
-Ctrl -> Conn : invia(LOGIN_REQUEST,\nPayloadAutenticazione(nomeUtente, password))
-activate Conn
-Conn -> GC : trasmette sul socket TCP
-activate GC
+alt Credenziali valide
+  DB_MGR --> COORD : successo=true, ruolo
+  COORD -> GC : setNomeUtente(), setRuolo(),\nsetAutenticato(true)
 
-GC -> GC : smistaMessaggio\n→ case LOGIN_REQUEST
-GC -> Coord : gestisciLogin(client, payload)
-activate Coord
+  alt ruolo == "player"
+    COORD -> COORD : giocatoriInAttesa.add(client)\n(controllo duplicati IF-S23)
+    COORD -> GC : invia(LOGIN_RESPONSE,\nRispostaAutenticazione(true, msg, "player"))
+    GC --> CONN : LOGIN_RESPONSE
+    CONN --> CA : callbackMessaggio
+    CA --> U : Carica game.fxml,\nmostra waitingPane
+    COORD -> GC : invia(WAITING, "1/2")
+    GC --> CONN : WAITING
+    CONN --> CA : ControllerGioco.consegnaMessaggio()
+    CA --> U : Aggiorna stato attesa
 
-Coord -> DB : autentica(nomeUtente, password)
-activate DB
-DB -> DB : hashPassword(password)
-DB -> SQLite : SELECT ruolo FROM users\nWHERE nomeUtente=? AND password_hash=?
-activate SQLite
-SQLite --> DB : record (o null)
-deactivate SQLite
+  else ruolo == "admin"
+    COORD -> GC : invia(LOGIN_RESPONSE,\nRispostaAutenticazione(true, msg, "admin"))
+    GC --> CONN : LOGIN_RESPONSE
+    CONN --> CA : callbackMessaggio
+    CA --> U : Apre GUI Amministratore\n(ControllerServer)
+  end
 
-alt credenziali non valide
-  DB --> Coord : return null
-  Coord -> GC : invia(LOGIN_RESPONSE,\nRispostaAutenticazione(false,\n"Credenziali non valide."))
-  GC -> Conn : socket → client
-  Conn -> Ctrl : callbackMessaggio
-  Ctrl --> User : mostra errore
-
-else ruolo = "admin"
-  DB --> Coord : return "admin"
-  deactivate DB
-  Coord -> Coord : client.setNomeUtente / setRuolo\n/ setAutenticato(true)
-  Coord -> GC : invia(LOGIN_RESPONSE,\nRispostaAutenticazione(true,\n"Login effettuato.", "admin"))
-  GC -> Conn : socket → client
-  Conn -> Ctrl : callbackMessaggio
-  Ctrl --> User : apre ControllerServer\n(interfaccia admin)
-
-else ruolo = "player"
-  DB --> Coord : return "player"
-  deactivate DB
-  Coord -> Coord : client.setAutenticato(true)
-  Coord -> Coord : aggiungiInListaAttesa(client)
-  Coord -> GC : invia(LOGIN_RESPONSE, success)\n+ invia(WAITING, "In attesa (1/2)")
-  deactivate Coord
-  GC -> Conn : socket → client
-  deactivate GC
-  Conn -> Ctrl : callbackMessaggio WAITING
-
-  note right of Conn
-    Per evitare race condition in ControllerAccesso:
-    se si riceve WAITING, i messaggi successivi
-    (es. CHALLENGE_START) vengono accodati in una
-    ConcurrentLinkedQueue temporanea finché non viene
-    mostrata e inizializzata la schermata di gioco.
-  end note
-
-  Conn -> Ctrl : naviga a game.fxml\n(vaiAGioco con pendingMessages)
-  deactivate Conn
-  Ctrl --> User : mostra schermata di attesa\n"In attesa dell'avversario... (1/2)"
+else Credenziali non valide
+  DB_MGR --> COORD : successo=false
+  COORD -> GC : invia(LOGIN_RESPONSE,\nRispostaAutenticazione(false,\n"Credenziali errate", null))
+  GC --> CONN : LOGIN_RESPONSE
+  CONN --> CA : callbackMessaggio
+  CA --> U : Mostra messaggio di errore\nnella schermata di accesso
 end
-
-deactivate Ctrl
-
 @enduml

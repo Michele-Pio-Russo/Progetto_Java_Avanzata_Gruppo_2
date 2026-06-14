@@ -1,0 +1,54 @@
+@startuml SEQ_06_ClassificheStorico
+skinparam actorStyle awesome
+skinparam sequenceMessageAlign center
+
+title SEQ_06 — Classifiche (UC-A07) e Storico (UC-G07): query SQL vittorie, partite, tempo medio
+
+actor "Amministratore" as A
+actor "Giocatore" as G
+participant "ControllerServer" as CS
+participant "ControllerStorico" as CST
+participant "ConnessioneServer" as CONN
+participant "GestoreClient" as GC
+participant "CoordinatoreGioco" as COORD
+participant "GestoreDatabase" as DB_MGR
+database "SQLite\n(results, users, challenges)" as DB
+
+== UC-A07: Visualizzazione classifica (lato Admin, locale al server) ==
+A -> CS : Clicca "Aggiorna Classifica"
+CS -> DB_MGR : getAllStats()
+DB_MGR -> DB : SELECT u.nomeUtente,\n SUM(CASE esito='win' THEN 1 ELSE 0) AS wins,\n COUNT(*) AS games_played,\n CAST(AVG(CASE response_time_ms>=0\n  THEN response_time_ms END) AS INTEGER) AS avg_ms\nFROM results r JOIN users u ON r.user_id=u.user_id\nGROUP BY r.user_id ORDER BY wins DESC
+DB --> DB_MGR : righe (nomeUtente, wins,\ngames_played, avg_ms)
+DB_MGR --> CS : List<StatisticaGiocatore>
+CS -> CS : popola TableView classifica\n(username, vittorie, partite, tempo medio)
+CS --> A : Mostra classifica aggiornata
+
+== UC-G07: Storico partite (lato Giocatore, via rete) ==
+G -> CST : Clicca "Storico"
+CST -> CONN : invia(HISTORY_REQUEST, null)
+CONN -> GC : invio su Socket TCP
+GC -> COORD : gestisciRichiestaStorico(nomeUtente)
+COORD -> DB_MGR : getHistory(nomeUtente)
+DB_MGR -> DB : SELECT c.played_at, c.original_word,\n r.esito, r.response_time_ms,\n (SELECT u2.nomeUtente FROM results r2\n  JOIN users u2 ON r2.user_id=u2.user_id\n  WHERE r2.challenge_id=c.challenge_id\n    AND u2.nomeUtente != ?) AS avversario\nFROM results r JOIN challenges c\n ON r.challenge_id=c.challenge_id\nJOIN users u ON r.user_id=u.user_id\nWHERE u.nomeUtente = ?\nORDER BY c.played_at DESC
+DB --> DB_MGR : righe storico
+DB_MGR --> COORD : List<VoceStorico>
+COORD -> GC : invia(HISTORY_RESPONSE, List<VoceStorico>)
+GC --> CONN : HISTORY_RESPONSE
+CONN --> CST : callbackMessaggio
+
+CST -> CST : popola TableView\n(data, avversario, esito, parola, tempo)
+CST -> CST : CellFactory colora righe:\nverde=Vinto, rosso=Perso, giallo=Pareggio;\n"—" se response_time_ms < 0
+CST --> G : Mostra storico partite
+
+== UC-G08: Ritorno da storico ==
+G -> CST : Clicca "Indietro"
+CST -> CST : ricarica game.fxml, gc.init()
+CST -> CONN : invia(REQUEUE_REQUEST, null)
+CONN -> GC : invio su Socket TCP
+GC -> COORD : gestisciNuovaRichiesta(client)
+COORD -> COORD : reinserisce in\ngiocatoriInAttesa (se non presente)
+COORD -> GC : invia(WAITING, "1/2")
+GC --> CONN : WAITING
+CONN --> CST : ControllerGioco.consegnaMessaggio()
+CST --> G : Mostra waitingPane
+@enduml

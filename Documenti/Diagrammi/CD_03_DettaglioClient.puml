@@ -1,0 +1,126 @@
+@startuml CD_03_DettaglioClient
+skinparam classAttributeIconSize 0
+
+title CD_03 — Dettaglio Modulo Client
+
+class ApplicazioneClient <<JavaFX Application>> {
+  +start(Stage primaryStage)
+  +{static} main(String[] args)
+}
+
+class ConfigurazioneClient {
+  -props : Properties
+  +getServerIp() : String
+  +getServerPort() : int
+}
+
+package "network" {
+  class ConnessioneServer {
+    -socket : Socket
+    -out : ObjectOutputStream
+    -in : ObjectInputStream
+    -callbackMessaggio : Consumer<Messaggio>
+    -callbackDisconnessione : Runnable
+    -connesso : boolean
+    +setMessageCallback(Consumer<Messaggio>)
+    +setDisconnectCallback(Runnable)
+    +connetti(host, porta)
+    -avviaThreadLettura()
+    +invia(Messaggio msg) : synchronized
+    +disconnetti()
+  }
+}
+
+package "controller" {
+  class ControllerAccesso <<Initializable>> {
+    -formTitle : Label
+    -campoNomeUtente : TextField
+    -passwordField : PasswordField
+    -confirmBox : VBox
+    -confirmField : PasswordField
+    -errorLabel : Label
+    -pulsantePrincipale : Button
+    -switchBtn : Button
+    -connectionLabel : Label
+    -isRegistrationMode : boolean
+    -connessione : ConnessioneServer
+    -serverIp : String
+    +inizializzaConnessione()
+    +gestisciAccesso()
+    +gestisciRegistrazione()
+    +toggleModalita()
+    -vaiAGioco()
+  }
+
+  class ControllerGioco {
+    -etichettaGiocatore, etichettaStato : Label
+    -waitingPane : VBox
+    -dettaglioAttesa : Label
+    -gamePane : VBox
+    -etichettaTimer : Label
+    -areaTesto : TextArea
+    -etichettaParoleCifrate : Label
+    -campoRisposta : TextField
+    -etichettaFeedback : Label
+    -pannelloRisultato : VBox
+    -emojiRisultato, titoloRisultato : Label
+    -connessione : ConnessioneServer
+    -countdownTimeline : Timeline
+    +init(nomeUtente, connessione, stage)
+    +consegnaMessaggio(Messaggio msg)
+    -avviaSfida(PayloadSfida payload)
+    -avviaCountdown(secondi)
+    +gestisciInvioRisposta()
+    -mostraRisultato(RisultatoSfida r)
+    -gestisciErrore(String msg)
+    +gestisciIndietro()
+  }
+
+  class ControllerStorico {
+    -historyTable : TableView<VoceStorico>
+    -dateCol, opponentCol, outcomeCol, wordCol : TableColumn
+    -timeCol : TableColumn<VoceStorico, Long>
+    -connessione : ConnessioneServer
+    -stageProprietario : Stage
+    -nomeUtente : String
+    +init(nomeUtente, connessione, stage)
+    -configuraTabella()
+    -gestisciMessaggio(Messaggio msg)
+  }
+}
+
+ApplicazioneClient --> ConfigurazioneClient
+ApplicazioneClient --> ControllerAccesso
+
+ControllerAccesso --> ConnessioneServer : crea/usa
+ControllerAccesso ..> ControllerGioco : carica game.fxml\n+ gc.init()
+ControllerGioco --> ConnessioneServer
+ControllerGioco ..> ControllerStorico : carica history.fxml\n+ cs.init()
+ControllerStorico --> ConnessioneServer
+
+note right of ConnessioneServer
+  OOS creato prima di OIS,
+  con flush() immediato
+  (IF-C02). invia() è
+  synchronized + out.reset()
+  (IF-C03).
+end note
+
+note right of ControllerAccesso
+  IF-C07/IF-C08: alla ricezione
+  di WAITING, la callback viene
+  sostituita (sul reader thread)
+  con una ConcurrentLinkedQueue
+  per evitare la race condition
+  WAITING -> CHALLENGE_START.
+end note
+
+note right of ControllerGioco
+  countdownTimeline: KeyFrame ogni
+  secondo; sotto i 10s il testo
+  diventa rosso (#f85149).
+  Gestisce ERROR "disconnesso" con
+  Timeline one-shot di 3s ->
+  REQUEUE_REQUEST.
+end note
+@enduml

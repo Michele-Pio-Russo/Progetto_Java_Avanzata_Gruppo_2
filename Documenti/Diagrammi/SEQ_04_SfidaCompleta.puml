@@ -2,108 +2,67 @@
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
-title Diagramma di Sequenza - Partecipazione alla Sfida
+title SEQ_04 — Sfida Completa (UC-G04): cifratura Cesare, risposte parallele, vincitore, DB
 
-actor "Giocatore 1" as P1
-actor "Giocatore 2" as P2
-participant "ControllerGioco\n(Client 1)" as CG1
-participant "ControllerGioco\n(Client 2)" as CG2
-participant "CoordinatoreGioco\n(synchronized)" as Coord
-participant "AnalizzatoreDocumenti" as Anal
-participant "CifrarioCesare" as Ciph
-participant "GestoreDatabase\n(transazione)" as DB
-database "SQLite\n(challenges, results)" as SQLite
+actor "Giocatore 1" as G1
+actor "Giocatore 2" as G2
+participant "ControllerGioco\n(Client 1/2)" as CG
+participant "GestoreClient" as GC
+participant "CoordinatoreGioco" as COORD
+participant "AnalizzatoreDocumenti" as AN
+participant "CifrarioCesare" as CES
+participant "GestoreDatabase" as DB_MGR
+database "SQLite" as DB
 
-== Attesa connessione secondo client ==
+== Avvio sfida (giocatoriInAttesa == 2) ==
+COORD -> COORD : avviaSfida(p1, p2)
+COORD -> AN : extractRandomExcerpt(excerptWords)
+AN --> COORD : estratto (~60 parole)
+COORD -> AN : selectWordFromExcerpt(estratto, difficulty)
+AN -> AN : filtra parole >= 4 caratteri,\nComparator lambda su TF,\ntop-5, scelta casuale
+AN --> COORD : parolaOriginale
+COORD -> COORD : shift = random(1,25)
+COORD -> CES : cifra(parolaOriginale, shift)
+CES --> COORD : parolaCifrata
+COORD -> COORD : sostituisce nel testo\n[parolaCifrata] (Pattern.quote())
+COORD -> COORD : crea PayloadSfida(idSfida,\nestratto, [parolaCifrata], timeoutSeconds)
+COORD -> COORD : scheduler.schedule(taskTimeout,\ntimeoutSeconds, SECONDS)
+COORD -> GC : invia(CHALLENGE_START, payload) x2
+GC --> CG : CHALLENGE_START
 
-P1 -> CG1 : [gia' autenticato — waitingPane visibile]
-P2 -> CG2 : completa login → WAITING ricevuto
+CG --> G1 : Mostra gamePane + avvia Timeline
+CG --> G2 : Mostra gamePane + avvia Timeline
 
-CG2 -> Coord : gestisciLogin → aggiungiInListaAttesa(client2)
-activate Coord
-note right of Coord
-  Quando ci sono 2 giocatori
-  in attesa, avvia la sfida.
-end note
+== Risposta Giocatore 1 (corretta) ==
+G1 -> CG : digita parola, Invio/Invia
+CG -> GC : invia(CHALLENGE_ANSWER, "parola")
+GC -> COORD : gestisciRisposta(client1, "parola", t1)
+COORD -> COORD : confronto case-insensitive\ncon parolaOriginaleCorrente
 
-== Preparazione Sfida ==
+alt risposta corretta
+  COORD -> COORD : taskTimeout.cancel()
+  COORD -> COORD : terminaSfida(client1, t1, false)
+  COORD -> COORD : Esito: VITTORIA (G1) /\nSCONFITTA (G2)
+  COORD -> DB_MGR : saveChallengeWithResults(\nchallenge, risultati[2])
+  DB_MGR -> DB : setAutoCommit(false)
+  DB_MGR -> DB : INSERT INTO challenges (...)
+  DB_MGR -> DB : INSERT INTO results (G1, 'win', t1)
+  DB_MGR -> DB : INSERT INTO results (G2, 'loss', -1)
+  DB_MGR -> DB : commit()
+  DB --> DB_MGR : ok
+  COORD -> GC : invia(CHALLENGE_RESULT,\nRisultatoSfida) x2
+  GC --> CG : CHALLENGE_RESULT
+  CG -> CG : ferma Timeline
+  CG --> G1 : pannelloRisultato\n(VITTORIA, emoji, parola corretta)
+  CG --> G2 : pannelloRisultato\n(SCONFITTA, emoji, parola corretta)
 
-Coord -> Anal : extractRandomExcerpt(60 parole)
-activate Anal
-Anal --> Coord : estratto String (60 parole random)
-Coord -> Anal : selectWordFromExcerpt(excerpt, difficolta'=2)
-note right of Anal
-  Filtra le parole dell'estratto per lunghezza >= 4
-  e le ordina per Term Frequency (frequenza).
-  Prende le prime 5 e ne sceglie una a caso.
-end note
-Anal --> Coord : parolaSelezionata
-deactivate Anal
-
-Coord -> Ciph : CifrarioCesare.cifra(parola, shift)\nshift = random.nextInt(25)+1
-activate Ciph
-Ciph --> Coord : parolaCifrata
-deactivate Ciph
-
-Coord -> Coord : textWithCipher = excerpt\n.replaceAll(parola, "[cifrata]")\nsfidaAttiva = true\ntempoInizioSfida = System.currentTimeMillis()
-
-== Invio ai Client ==
-
-Coord -> CG1 : GestoreClient1.invia(\n  CHALLENGE_START,\n  PayloadSfida(0, testo, [cifrata], 60))
-Coord -> CG2 : GestoreClient2.invia(\n  CHALLENGE_START,\n  PayloadSfida(0, testo, [cifrata], 60))
-
-CG1 -> CG1 : avviaSfida(payload)\n→ mostraGioco()\n→ avviaCountdown() [Timeline 60s]
-CG2 -> CG2 : avviaSfida(payload)\n→ mostraGioco()\n→ avviaCountdown() [Timeline 60s]
-
-CG1 --> P1 : mostra testo cifrato + timer countdown
-CG2 --> P2 : mostra testo cifrato + timer countdown
-
-== Fase di Risposta (in parallelo) ==
-
-Coord -> Coord : Imposta un timer di timeout a 60 secondi
-
-par Giocatori rispondono in parallelo
-  P1 -> CG1 : inserisce risposta\npreme "Invia"
-  CG1 -> Coord : GestoreClient1.→\ngestisciRisposta(client1, "risposta1")
-
-  P2 -> CG2 : inserisce risposta\npreme "Invia"
-  CG2 -> Coord : GestoreClient2.→\ngestisciRisposta(client2, "risposta2")
+else risposta errata
+  COORD -> GC : invia(ERROR,\n"Risposta errata. Riprova!")\n(solo a client1)
+  GC --> CG : ERROR
+  CG --> G1 : etichettaFeedback aggiornata,\ncampo risposta riabilitato
+  note over COORD
+    Sfida continua,
+    timeout non resettato
+  end note
 end
-
-== Validazione ==
-
-Coord -> Coord : guess.trim().equalsIgnoreCase\n(parolaOriginaleCorrente)
-
-alt Giocatore 1 risponde corretto per primo
-  Coord -> Coord : terminaSfida(client1, tempoMs, false)
-  Coord -> Coord : sfidaAttiva = false\ntaskTimeout.cancel(false)
-
-  Coord -> CG1 : invia(CHALLENGE_RESULT,\nRisultatoSfida(vincitore, parola, VITTORIA))
-  Coord -> CG2 : invia(CHALLENGE_RESULT,\nRisultatoSfida(vincitore, parola, SCONFITTA))
-
-  Coord -> DB : saveChallengeWithResults(\n  estratto, cifrata, originale, shift,\n  "giocatore1", "giocatore2",\n  draw=false, tempoMs)
-  activate DB
-  DB -> DB : setAutoCommit(false)
-  DB -> SQLite : INSERT INTO challenges(...)
-  SQLite --> DB : challenge_id
-  DB -> SQLite : INSERT INTO results(id, g1_id, 'win', tempoMs)
-  DB -> SQLite : INSERT INTO results(id, g2_id, 'loss', -1)
-  DB -> DB : commit()
-  deactivate DB
-
-  CG1 --> P1 : pannelloRisultato\n"🏆 Hai vinto!\nLa parola era: ..."
-  CG2 --> P2 : pannelloRisultato\n"😞 Hai perso.\ngiocatore1 ha risposto prima."
-
-else Timeout scaduto — nessuno ha risposto
-  Coord -> Coord : [scheduler esegue il Runnable]\nterminaSfida(null, -1, true)
-  Coord -> CG1 : invia(CHALLENGE_RESULT,\nRisultatoSfida(null, parola, PAREGGIO))
-  Coord -> CG2 : invia(CHALLENGE_RESULT,\nRisultatoSfida(null, parola, PAREGGIO))
-  Coord -> DB : saveChallengeWithResults(..., draw=true, -1)
-
-  CG1 --> P1 : pannelloRisultato "🤝 Pareggio!"
-  CG2 --> P2 : pannelloRisultato "🤝 Pareggio!"
-end
-
-deactivate Coord
-
 @enduml

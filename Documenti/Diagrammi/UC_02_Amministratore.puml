@@ -1,4 +1,5 @@
 @startuml UC_02_Amministratore
+left to right direction
 skinparam actorStyle awesome
 skinparam packageStyle rectangle
 skinparam usecase {
@@ -6,58 +7,70 @@ skinparam usecase {
   BorderColor SteelBlue
 }
 
-title Casi d'Uso - Amministratore
+title UC_02 — Casi d'Uso Amministratore
 
-actor "Amministratore" as Admin
-actor "Sistema\n(Server)" as Server
+actor "Amministratore" as A
+actor "Sistema\n(ServizioAnalisi/ReteServer)" as S
 
-rectangle "Interfaccia Amministratore — IndovinaLaParola" {
+rectangle "Modulo Amministrazione" {
+  usecase "UC-A01\nLogin amministratore" as UCA01
+  usecase "UC-A06\nAvvio/Stop server" as UCA06
+  usecase "UC-A02\nSelezione file .txt" as UCA02
+  usecase "UC-A03\nAvvio analisi TF" as UCA03
+  usecase "UC-A04\nSalvataggio analisi (.dat)" as UCA04
+  usecase "UC-A05\nCaricamento analisi (.dat)" as UCA05
+  usecase "UC-A07\nVisualizzazione classifica" as UCA07
 
-  usecase "Login" as A01
-  usecase "Verifica credenziali\nnel database (SHA-256)" as A01s
-
-  usecase "Caricamento file TXT\ndal filesystem" as A02
-  usecase "FileChooser\nmulti-selezione" as A02s
-
-  usecase "Avvio analisi\nTerm Frequency" as A03
-  usecase "ServizioAnalisi\n(JavaFX Service)" as A03s
-  usecase "AnalizzatoreDocumenti" as A03t
-
-  usecase "Salvataggio analisi\nserializzata (.dat)" as A04
-
-  usecase "Caricamento analisi\nprecedentemente salvata" as A05
-
-  usecase "Visualizzazione classifiche\ne statistiche utenti" as A06
-  usecase "GestoreDatabase" as A06s
+  usecase "Verifica credenziali\n(admin/admin123)" as UCA_CHECK
+  usecase "Apertura ServerSocket\n(porta da .properties)" as UCA_SOCKET
+  usecase "Pipeline Stream TF\n(filter->groupingBy->toMap)" as UCA_TF
+  usecase "Binding ProgressBar /\nLabel progresso" as UCA_PROG
+  usecase "Serializzazione OOS/OIS\n(AnalizzatoreDocumenti)" as UCA_SER
+  usecase "Interrogazione getAllStats()" as UCA_STATS
+  usecase "Popolamento TableView\n(top-500 / classifica)" as UCA_TABLE
 }
 
-Admin --> A01
-Admin --> A02
-Admin --> A03
-Admin --> A04
-Admin --> A05
-Admin --> A06
+A -- UCA01
+A -- UCA06
+A -- UCA02
+A -- UCA03
+A -- UCA04
+A -- UCA05
+A -- UCA07
 
-Server --> A01 : autentica
+S -- UCA_CHECK
+S -- UCA_SOCKET
+S -- UCA_TF
+S -- UCA_PROG
+S -- UCA_SER
+S -- UCA_STATS
 
-A01 ..> A01s : <<include>>
-A02 ..> A02s : <<include>>
-A03 ..> A03s : <<include>>
-A03 ..> A03t : <<include>>
-A06 ..> A06s : <<include>>
+UCA01 ..> UCA_CHECK  : <<include>>
+UCA06 ..> UCA_SOCKET : <<include>>
 
-A04 ..> A03 : <<extend>>\nse analisi completata
-A05 ..> A03 : <<extend>>\nevita rielaborazione
+UCA03 ..> UCA_TF   : <<include>>
+UCA03 ..> UCA02    : <<extend>>
+UCA_TF ..> UCA_PROG : <<include>>
+UCA03 ..> UCA_TABLE : <<extend>>
 
-note right of A03s
-  L'analisi dei file avviene in background
-  tramite un Service di JavaFX, in modo
-  da non bloccare l'interfaccia grafica.
+UCA04 ..> UCA_SER : <<include>>
+UCA05 ..> UCA_SER : <<include>>
+
+UCA07 ..> UCA_STATS : <<include>>
+UCA_STATS ..> UCA_TABLE : <<include>>
+
+note right of UCA01
+  L'admin accede con admin/admin123;
+  il server verifica nel DB
+  (hash SHA-256) e abilita la GUI
+  di gestione.
 end note
 
-note bottom of A03t
-  Il calcolo delle frequenze delle parole (TF)
-  viene eseguito usando le Stream API di Java.
+note bottom of UCA03
+  Il Task interno di ServizioAnalisi
+  tokenizza il testo (regex [^a-zA-Z\\s])
+  e calcola la TF; la GUI resta reattiva
+  grazie al binding su progressProperty
+  e messageProperty (Platform.runLater).
 end note
-
 @enduml
