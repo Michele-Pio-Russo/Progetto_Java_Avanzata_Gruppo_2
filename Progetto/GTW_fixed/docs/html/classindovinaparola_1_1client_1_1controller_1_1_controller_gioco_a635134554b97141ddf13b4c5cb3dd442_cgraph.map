@@ -1,0 +1,15 @@
+<map id="indovinaparola.client.controller.ControllerGioco.avviaSfida" name="indovinaparola.client.controller.ControllerGioco.avviaSfida">
+<area shape="rect" id="Node000001" title="Avvia la sfida ricevuta dal server." alt="" coords="5,139,206,181"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a98d4852e0f811db7596d7793ddee21b1" title="Avvia il timer countdown con Timeline di JavaFX." alt="" coords="254,5,466,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,136,186,97,252,58,269,53,264,56,255,62,189,101,135,140"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1common_1_1_payload_sfida.html#a52de5c49c2410d48eff330d1b5184f63" title="Restituisce l&#39;estratto testuale con la parola cifrata." alt="" coords="255,72,464,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="189,136,263,118,259,121,191,141"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1common_1_1_payload_sfida.html#a1febb61dc32ff276638816f46c64f0bf" title="Restituisce la lista delle parole cifrate nella sfida." alt="" coords="255,139,464,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,157,242,159,237,161,207,163"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1common_1_1_payload_sfida.html#afe61b33ab689e4254eefb0ed5b114eba" title="Restituisce la durata del timer in secondi." alt="" coords="255,205,464,248"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="190,179,264,200,259,202,190,185"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a48e4e9e8e6ac758d18537dfd04b65dbe" title="Mostra il pannello di gioco e nasconde gli altri." alt="" coords="260,272,460,315"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="134,179,189,219,255,258,269,266,264,266,252,262,186,223,133,184"/>
+<area shape="rect" id="Node000007" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#aef0c643e7d1756b519308f9e7f7760a4" title="Imposta visibilità e managed di un pannello VBox." alt="" coords="514,272,716,315"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="461,291,501,293,496,293,461,296"/>
+</map>

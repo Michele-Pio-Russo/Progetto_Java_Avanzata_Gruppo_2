@@ -58,6 +58,7 @@ public class GestoreClient {
     public GestoreClient(Socket socket, CoordinatoreGioco coordinator) {
         this.socket = socket;
         this.coordinator = coordinator;
+        this.coordinator.aggiungiClient(this);
         try {
             // ORDINE OBBLIGATORIO: ObjectOutputStream PRIMA di ObjectInputStream
             // Senza il flush(), l'header OOS non viene inviato e il costruttore

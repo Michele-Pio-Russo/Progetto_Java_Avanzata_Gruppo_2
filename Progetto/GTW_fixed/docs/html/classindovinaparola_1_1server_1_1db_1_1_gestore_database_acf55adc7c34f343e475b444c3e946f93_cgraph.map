@@ -1,0 +1,9 @@
+<map id="indovinaparola.server.db.GestoreDatabase.saveChallengeWithResults" name="indovinaparola.server.db.GestoreDatabase.saveChallengeWithResults">
+<area shape="rect" id="Node000001" title="Salva una sfida e i risultati di entrambi i giocatori in un&#39;unica transazione atomica." alt="" coords="5,64,246,123"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a54af98a435dbe9088bc41f01ff2b22c2" title="Restituisce l&#39;identificativo numerico di un utente dato il suo nomeUtente." alt="" coords="310,5,494,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,62,299,51,294,53,247,67"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#ad30405eb9d0f38cd630e09eec1d85427" title="Inserisce una riga nella tabella challenges e restituisce il challenge_id generato." alt="" coords="294,72,511,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="246,91,280,93,275,94,247,96"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a33d3cc33fa6e28143524f2c72b2deb10" title="Inserisce un risultato per un singolo giocatore nella tabella results." alt="" coords="304,139,501,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="246,120,299,134,293,135,246,125"/>
+</map>

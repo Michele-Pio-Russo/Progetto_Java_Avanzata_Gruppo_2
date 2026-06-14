@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IndovinaLaParola:  File sorgente server/src/main/java/indovinaparola/server/util/CaricatoreConfigurazione.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IndovinaLaParola<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Gioco Multiplayer Client-Server a Sfide in Tempo Reale - JA26</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('_caricatore_configurazione_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Caricamento in corso...</div>
+<div class="SRStatus" id="Searching">Ricerca in corso...</div>
+<div class="SRStatus" id="NoMatches">Nessun risultato</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">CaricatoreConfigurazione.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_caricatore_configurazione_8java.html">Vai alla documentazione di questo file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespaceindovinaparola_1_1server_1_1util.html">   13</a></span><span class="keyword">package </span>indovinaparola.server.util;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">import</span> java.io.FileInputStream;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> java.io.IOException;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> java.util.Properties;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">import</span> java.util.logging.Level;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">import</span> java.util.logging.Logger;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html">   26</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7cf8d0d59596443c3c3d40ef346a3d2b">CaricatoreConfigurazione</a> {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#ad65d6c2830ba27aa4b7d64f290c021a8">   28</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger <a class="code hl_variable" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#ad65d6c2830ba27aa4b7d64f290c021a8">LOGGER</a> = Logger.getLogger(<a class="code hl_function" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7cf8d0d59596443c3c3d40ef346a3d2b">CaricatoreConfigurazione</a>.class.getName()); </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7f7358ddf3e30aee6d3a9a8ea22c9c0c">   29</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> Properties <a class="code hl_variable" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7f7358ddf3e30aee6d3a9a8ea22c9c0c">props</a> = <span class="keyword">new</span> Properties();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7cf8d0d59596443c3c3d40ef346a3d2b">   37</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7cf8d0d59596443c3c3d40ef346a3d2b">CaricatoreConfigurazione</a>(String relativePath) <span class="keywordflow">throws</span> IOException {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">try</span> (FileInputStream fis = <span class="keyword">new</span> FileInputStream(relativePath)) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <a class="code hl_variable" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7f7358ddf3e30aee6d3a9a8ea22c9c0c">props</a>.load(fis);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <a class="code hl_variable" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#ad65d6c2830ba27aa4b7d64f290c021a8">LOGGER</a>.info(<span class="stringliteral">&quot;Configurazione caricata da: &quot;</span> + relativePath);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        } <span class="keywordflow">catch</span> (IOException e) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            <a class="code hl_variable" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#ad65d6c2830ba27aa4b7d64f290c021a8">LOGGER</a>.log(Level.WARNING,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                <span class="stringliteral">&quot;File di configurazione non trovato: &quot;</span> + relativePath</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                + <span class="stringliteral">&quot;. Verranno usati i valori di default.&quot;</span>, e);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="keywordflow">throw</span> e;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a92a1923ca721e4f89bb07ffee39418f0">   56</a></span>    <span class="keyword">public</span> String <span class="keyword">get</span>(String key, String defaultValue) {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7f7358ddf3e30aee6d3a9a8ea22c9c0c">props</a>.getProperty(key, defaultValue).trim();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span></div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a75c91368af90799cfe3a7fa5b20f8406">   67</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a75c91368af90799cfe3a7fa5b20f8406">getInt</a>(String key, <span class="keywordtype">int</span> defaultValue) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">return</span> Integer.parseInt(<a class="code hl_variable" href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7f7358ddf3e30aee6d3a9a8ea22c9c0c">props</a>.getProperty(key,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                String.valueOf(defaultValue)).trim());</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        } <span class="keywordflow">catch</span> (NumberFormatException e) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">return</span> defaultValue;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    }</div>
+</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
+</div>
+<div class="ttc" id="aclassindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione_html_a75c91368af90799cfe3a7fa5b20f8406"><div class="ttname"><a href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a75c91368af90799cfe3a7fa5b20f8406">indovinaparola.server.util.CaricatoreConfigurazione.getInt</a></div><div class="ttdeci">int getInt(String key, int defaultValue)</div><div class="ttdoc">Restituisce il valore di una proprietà come intero.</div><div class="ttdef"><b>Definition</b> <a href="#l00067">CaricatoreConfigurazione.java:67</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione_html_a7cf8d0d59596443c3c3d40ef346a3d2b"><div class="ttname"><a href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7cf8d0d59596443c3c3d40ef346a3d2b">indovinaparola.server.util.CaricatoreConfigurazione.CaricatoreConfigurazione</a></div><div class="ttdeci">CaricatoreConfigurazione(String relativePath)</div><div class="ttdoc">Carica il file .properties dal percorso relativo specificato.</div><div class="ttdef"><b>Definition</b> <a href="#l00037">CaricatoreConfigurazione.java:37</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione_html_a7f7358ddf3e30aee6d3a9a8ea22c9c0c"><div class="ttname"><a href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#a7f7358ddf3e30aee6d3a9a8ea22c9c0c">indovinaparola.server.util.CaricatoreConfigurazione.props</a></div><div class="ttdeci">final Properties props</div><div class="ttdef"><b>Definition</b> <a href="#l00029">CaricatoreConfigurazione.java:29</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione_html_ad65d6c2830ba27aa4b7d64f290c021a8"><div class="ttname"><a href="classindovinaparola_1_1server_1_1util_1_1_caricatore_configurazione.html#ad65d6c2830ba27aa4b7d64f290c021a8">indovinaparola.server.util.CaricatoreConfigurazione.LOGGER</a></div><div class="ttdeci">static final Logger LOGGER</div><div class="ttdoc">Logger della classe CaricatoreConfigurazione.</div><div class="ttdef"><b>Definition</b> <a href="#l00028">CaricatoreConfigurazione.java:28</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_41e1742e44e2de38b3bc91f993fed282.html">server</a></li><li class="navelem"><a href="dir_a063914ab482288b7b0e1b2fca86158c.html">src</a></li><li class="navelem"><a href="dir_91e543ac8e4fcedafd5c94340625243f.html">main</a></li><li class="navelem"><a href="dir_74337cc04aadcfbdd497cbc655ab04a0.html">java</a></li><li class="navelem"><a href="dir_c4a55330c2bbf105faffc0a50271cbaf.html">indovinaparola</a></li><li class="navelem"><a href="dir_35deea13f148fcb88111fb610ef14123.html">server</a></li><li class="navelem"><a href="dir_10c5996f4a5d7aeabd67f3adf0ec7d83.html">util</a></li><li class="navelem"><a href="_caricatore_configurazione_8java.html">CaricatoreConfigurazione.java</a></li>
+    <li class="footer">Generato da <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<map id="indovinaparola.server.model.CoordinatoreGioco.disconnettiTutti" name="indovinaparola.server.model.CoordinatoreGioco.disconnettiTutti">
+<area shape="rect" id="Node000001" title="Disconnette tutti i client attualmente connessi." alt="" coords="5,5,228,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#a259735d196946931b37383bfd46e7c92" title="Scrive un messaggio nel log del sistema, chiamando anche la callback della GUI se impostata." alt="" coords="276,5,463,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="228,24,263,27,257,27,228,29"/>
+</map>

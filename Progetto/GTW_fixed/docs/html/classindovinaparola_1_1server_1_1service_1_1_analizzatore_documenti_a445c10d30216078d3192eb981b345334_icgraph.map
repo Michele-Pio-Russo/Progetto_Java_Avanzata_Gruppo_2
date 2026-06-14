@@ -1,0 +1,5 @@
+<map id="indovinaparola.server.service.AnalizzatoreDocumenti.loadFromFile" name="indovinaparola.server.service.AnalizzatoreDocumenti.loadFromFile">
+<area shape="rect" id="Node000001" title="Carica un&#39;istanza di AnalizzatoreDocumenti precedentemente serializzata." alt="" coords="289,5,524,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1controller_1_1_controller_server.html#a72cf7a86d6c4dcbea7f767b0d086ad83" title="Carica un&#39;analisi precedentemente salvata da file .dat." alt="" coords="5,5,241,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="270,27,241,29,241,24,275,27"/>
+</map>

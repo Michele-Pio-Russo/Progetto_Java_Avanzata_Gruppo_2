@@ -1,0 +1,5 @@
+<map id="indovinaparola.server.db.GestoreDatabase.registraUtente" name="indovinaparola.server.db.GestoreDatabase.registraUtente">
+<area shape="rect" id="Node000001" title="Registra un nuovo utente con ruolo &quot;player&quot;." alt="" coords="5,5,215,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a5271fb604008dfb6233c7fe4166f1798" title="Calcola l&#39;hash SHA&#45;256 di una password." alt="" coords="263,5,476,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,24,250,27,244,27,215,29"/>
+</map>

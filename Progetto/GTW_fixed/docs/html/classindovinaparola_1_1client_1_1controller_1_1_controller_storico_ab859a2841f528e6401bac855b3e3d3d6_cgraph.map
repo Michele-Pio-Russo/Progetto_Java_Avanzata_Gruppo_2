@@ -1,0 +1,12 @@
+<map id="indovinaparola.client.controller.ControllerStorico.init" name="indovinaparola.client.controller.ControllerStorico.init">
+<area shape="rect" id="Node000001" title="Nome del giocatore autenticato." alt="" coords="5,96,206,139"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_storico.html#a02efd8781ba418864d419fe397334324" title="Configura le colonne della TableView." alt="" coords="261,5,477,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,93,253,57,278,52,273,54,255,63,161,98"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_storico.html#ae1a912ecc7b94927cd658a82686662e7" title="Gestisce i messaggi ricevuti dal server." alt="" coords="254,96,484,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,115,241,117,235,118,207,120"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_storico.html#ad14e08a62ff5d1e6ba87c32efb395652" title="Ritorna alla schermata di accesso e mostra un messaggio di errore." alt="" coords="269,163,469,205"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="193,137,270,158,264,159,192,142"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_storico.html#a29b38f6c5bca3ff7c07df378c75660a1" title="Converte la stringa di esito dal database in un testo leggibile." alt="" coords="532,5,744,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="477,24,519,26,514,27,478,29"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="319,94,317,86,326,77,343,71,369,69,397,72,415,80,410,80,396,77,369,75,344,77,328,81,322,87,324,97"/>
+</map>

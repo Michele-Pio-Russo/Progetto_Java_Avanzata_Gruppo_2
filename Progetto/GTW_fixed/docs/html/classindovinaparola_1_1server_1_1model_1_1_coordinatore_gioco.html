@@ -1,0 +1,1413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IndovinaLaParola: Riferimenti per la classe indovinaparola.server.model.CoordinatoreGioco</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IndovinaLaParola<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Gioco Multiplayer Client-Server a Sfide in Tempo Reale - JA26</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html','','classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Caricamento in corso...</div>
+<div class="SRStatus" id="Searching">Ricerca in corso...</div>
+<div class="SRStatus" id="NoMatches">Nessun risultato</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Riferimenti per la classe indovinaparola.server.model.CoordinatoreGioco</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Coordinatore centrale della logica di gioco lato server.  
+ <a href="#details">Continua...</a></p>
+<div class="dynheader">
+Diagramma di collaborazione per indovinaparola.server.model.CoordinatoreGioco:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Membri pubblici</h2></td></tr>
+<tr class="memitem:a60c758d990b5e7f3d70bd341e01df2fe" id="r_a60c758d990b5e7f3d70bd341e01df2fe"><td class="memItemLeft">synchronized void&#160;</td><td class="memItemRight"><a class="el" href="#a60c758d990b5e7f3d70bd341e01df2fe">aggiungiClient</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> client)</td></tr>
+<tr class="memdesc:a60c758d990b5e7f3d70bd341e01df2fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggiunge un client alla lista dei client connessi.  <br /></td></tr>
+<tr class="memitem:a3d0509da0a1b488c988036de5f7bae4b" id="r_a3d0509da0a1b488c988036de5f7bae4b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3d0509da0a1b488c988036de5f7bae4b">CoordinatoreGioco</a> (<a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html">GestoreDatabase</a> db, <a class="el" href="classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html">AnalizzatoreDocumenti</a> analizzatore)</td></tr>
+<tr class="memdesc:a3d0509da0a1b488c988036de5f7bae4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Costruisce il coordinatore del gioco.  <br /></td></tr>
+<tr class="memitem:a9a9279a2dd83a55d5a52cc28d42f470b" id="r_a9a9279a2dd83a55d5a52cc28d42f470b"><td class="memItemLeft">synchronized void&#160;</td><td class="memItemRight"><a class="el" href="#a9a9279a2dd83a55d5a52cc28d42f470b">disconnettiTutti</a> ()</td></tr>
+<tr class="memdesc:a9a9279a2dd83a55d5a52cc28d42f470b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnette tutti i client attualmente connessi.  <br /></td></tr>
+<tr class="memitem:aba933d2e360705148082ee71b1efa5e2" id="r_aba933d2e360705148082ee71b1efa5e2"><td class="memItemLeft">synchronized void&#160;</td><td class="memItemRight"><a class="el" href="#aba933d2e360705148082ee71b1efa5e2">gestisciLogin</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> client, <a class="el" href="classindovinaparola_1_1common_1_1_payload_autenticazione.html">PayloadAutenticazione</a> carico)</td></tr>
+<tr class="memdesc:aba933d2e360705148082ee71b1efa5e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gestisce una richiesta di login da parte di un client.  <br /></td></tr>
+<tr class="memitem:ac326640683c670408d7c607e09422654" id="r_ac326640683c670408d7c607e09422654"><td class="memItemLeft">synchronized void&#160;</td><td class="memItemRight"><a class="el" href="#ac326640683c670408d7c607e09422654">gestisciNuovaRichiesta</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> client)</td></tr>
+<tr class="memdesc:ac326640683c670408d7c607e09422654"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gestisce la richiesta di un client già autenticato di rientrare in lista d'attesa per una nuova partita (pulsante "Nuova partita" lato client, dopo <code class="JavaDocCode">CHALLENGE_RESULT</code>).  <br /></td></tr>
+<tr class="memitem:a60560ef53dc389eb8f1420387af230c4" id="r_a60560ef53dc389eb8f1420387af230c4"><td class="memItemLeft">synchronized void&#160;</td><td class="memItemRight"><a class="el" href="#a60560ef53dc389eb8f1420387af230c4">gestisciRegistrazione</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> client, <a class="el" href="classindovinaparola_1_1common_1_1_payload_autenticazione.html">PayloadAutenticazione</a> carico)</td></tr>
+<tr class="memdesc:a60560ef53dc389eb8f1420387af230c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gestisce una richiesta di registrazione da parte di un client.  <br /></td></tr>
+<tr class="memitem:ab969ed20542ee3d8855b601b8f99357e" id="r_ab969ed20542ee3d8855b601b8f99357e"><td class="memItemLeft">synchronized void&#160;</td><td class="memItemRight"><a class="el" href="#ab969ed20542ee3d8855b601b8f99357e">gestisciRichiestaStorico</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> client)</td></tr>
+<tr class="memdesc:ab969ed20542ee3d8855b601b8f99357e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gestisce la richiesta dello storico partite di un client.  <br /></td></tr>
+<tr class="memitem:ac6aa455879d7d4800e93ea6a15d558de" id="r_ac6aa455879d7d4800e93ea6a15d558de"><td class="memItemLeft">synchronized void&#160;</td><td class="memItemRight"><a class="el" href="#ac6aa455879d7d4800e93ea6a15d558de">gestisciRisposta</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> client, String guess)</td></tr>
+<tr class="memdesc:ac6aa455879d7d4800e93ea6a15d558de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gestisce la risposta di un giocatore alla sfida in corso.  <br /></td></tr>
+<tr class="memitem:a3f76e64012a5aaacee4322b14a795f09" id="r_a3f76e64012a5aaacee4322b14a795f09"><td class="memItemLeft"><a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html">GestoreDatabase</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3f76e64012a5aaacee4322b14a795f09">getDb</a> ()</td></tr>
+<tr class="memdesc:a3f76e64012a5aaacee4322b14a795f09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce il database manager.  <br /></td></tr>
+<tr class="memitem:a8dc354f288dde6b981308b2482ed36d2" id="r_a8dc354f288dde6b981308b2482ed36d2"><td class="memItemLeft">synchronized void&#160;</td><td class="memItemRight"><a class="el" href="#a8dc354f288dde6b981308b2482ed36d2">onClientDisconnesso</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> client)</td></tr>
+<tr class="memdesc:a8dc354f288dde6b981308b2482ed36d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gestisce la disconnessione inaspettata di un client.  <br /></td></tr>
+<tr class="memitem:af4f46b6c65109326c93d365623e0dd93" id="r_af4f46b6c65109326c93d365623e0dd93"><td class="memItemLeft">synchronized void&#160;</td><td class="memItemRight"><a class="el" href="#af4f46b6c65109326c93d365623e0dd93">setAnalyzer</a> (<a class="el" href="classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html">AnalizzatoreDocumenti</a> analizzatore)</td></tr>
+<tr class="memdesc:af4f46b6c65109326c93d365623e0dd93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggiorna l'analizzatore documenti (dopo una nuova analisi da parte dell'admin).  <br /></td></tr>
+<tr class="memitem:ae20cf9804eede9a10d9090f91059495c" id="r_ae20cf9804eede9a10d9090f91059495c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae20cf9804eede9a10d9090f91059495c">setGameConfig</a> (int timeoutSeconds, int excerptWords)</td></tr>
+<tr class="memdesc:ae20cf9804eede9a10d9090f91059495c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura i parametri di gioco letti dalle properties del server.  <br /></td></tr>
+<tr class="memitem:ad34b576210d218f051ba149a7a7631b3" id="r_ad34b576210d218f051ba149a7a7631b3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad34b576210d218f051ba149a7a7631b3">setStatusCallback</a> (Consumer&lt; String &gt; callback)</td></tr>
+<tr class="memdesc:ad34b576210d218f051ba149a7a7631b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta la callback per i messaggi di log da mostrare nella GUI server.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Membri privati</h2></td></tr>
+<tr class="memitem:a8086e340afb1a4ce81dc8993aa913cfd" id="r_a8086e340afb1a4ce81dc8993aa913cfd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8086e340afb1a4ce81dc8993aa913cfd">aggiungiInListaAttesa</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> client)</td></tr>
+<tr class="memdesc:a8086e340afb1a4ce81dc8993aa913cfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggiunge un giocatore alla lista d'attesa e avvia la sfida quando sono presenti esattamente due giocatori.  <br /></td></tr>
+<tr class="memitem:a8bd8b81c9b3f5331c36fea260be105cf" id="r_a8bd8b81c9b3f5331c36fea260be105cf"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8bd8b81c9b3f5331c36fea260be105cf">avviaSfida</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> p1, <a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> p2)</td></tr>
+<tr class="memdesc:a8bd8b81c9b3f5331c36fea260be105cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Avvia una nuova sfida tra due giocatori.  <br /></td></tr>
+<tr class="memitem:a259735d196946931b37383bfd46e7c92" id="r_a259735d196946931b37383bfd46e7c92"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a259735d196946931b37383bfd46e7c92">log</a> (String msg)</td></tr>
+<tr class="memdesc:a259735d196946931b37383bfd46e7c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrive un messaggio nel log del sistema, chiamando anche la callback della GUI se impostata.  <br /></td></tr>
+<tr class="memitem:a269d7268fb2c81755f3d076c83a73d0d" id="r_a269d7268fb2c81755f3d076c83a73d0d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a269d7268fb2c81755f3d076c83a73d0d">terminaSfida</a> (<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> winner, long tempoRispostaMs, boolean isDraw)</td></tr>
+<tr class="memdesc:a269d7268fb2c81755f3d076c83a73d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Termina la sfida in corso, invia i risultati ai client e persiste i dati nel database in una transazione atomica.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Attributi privati</h2></td></tr>
+<tr class="memitem:a7e4294f5c41cecf21a072338380f1b20" id="r_a7e4294f5c41cecf21a072338380f1b20"><td class="memItemLeft"><a class="el" href="classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html">AnalizzatoreDocumenti</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7e4294f5c41cecf21a072338380f1b20">analizzatore</a></td></tr>
+<tr class="memdesc:a7e4294f5c41cecf21a072338380f1b20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Riferimento all'analizzatore documenti.  <br /></td></tr>
+<tr class="memitem:af03260616dc5dc0fadd3ec5ba1c2a06f" id="r_af03260616dc5dc0fadd3ec5ba1c2a06f"><td class="memItemLeft">final <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html">GestoreDatabase</a>&#160;</td><td class="memItemRight"><a class="el" href="#af03260616dc5dc0fadd3ec5ba1c2a06f">db</a></td></tr>
+<tr class="memdesc:af03260616dc5dc0fadd3ec5ba1c2a06f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Riferimento al gestore del database.  <br /></td></tr>
+<tr class="memitem:a8c8f17a9c6a7f771de46d5f5c407808f" id="r_a8c8f17a9c6a7f771de46d5f5c407808f"><td class="memItemLeft">String&#160;</td><td class="memItemRight"><a class="el" href="#a8c8f17a9c6a7f771de46d5f5c407808f">estrattoCorrente</a></td></tr>
+<tr class="memdesc:a8c8f17a9c6a7f771de46d5f5c407808f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estratto del testo con la parola cifrata.  <br /></td></tr>
+<tr class="memitem:a4f4cae020628c039c06900b6f13704a7" id="r_a4f4cae020628c039c06900b6f13704a7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4f4cae020628c039c06900b6f13704a7">excerptWords</a> = 60</td></tr>
+<tr class="memdesc:a4f4cae020628c039c06900b6f13704a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numero di parole dell'estratto inviato ai client.  <br /></td></tr>
+<tr class="memitem:aea7e23c10ce8c91a38f6b4c4a899d085" id="r_aea7e23c10ce8c91a38f6b4c4a899d085"><td class="memItemLeft"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a>&#160;</td><td class="memItemRight"><a class="el" href="#aea7e23c10ce8c91a38f6b4c4a899d085">giocatore1</a></td></tr>
+<tr class="memdesc:aea7e23c10ce8c91a38f6b4c4a899d085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primo giocatore impegnato nella sfida corrente.  <br /></td></tr>
+<tr class="memitem:ac770c1cb6e3e258ea62271699344f851" id="r_ac770c1cb6e3e258ea62271699344f851"><td class="memItemLeft"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac770c1cb6e3e258ea62271699344f851">giocatore2</a></td></tr>
+<tr class="memdesc:ac770c1cb6e3e258ea62271699344f851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Secondo giocatore impegnato nella sfida corrente.  <br /></td></tr>
+<tr class="memitem:a0151315aa50d1c0e7de72c302d308359" id="r_a0151315aa50d1c0e7de72c302d308359"><td class="memItemLeft">final List&lt; <a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0151315aa50d1c0e7de72c302d308359">giocatoriInAttesa</a> = new ArrayList&lt;&gt;()</td></tr>
+<tr class="memdesc:a0151315aa50d1c0e7de72c302d308359"><td class="mdescLeft">&#160;</td><td class="mdescRight">Giocatori autenticati in attesa di un avversario.  <br /></td></tr>
+<tr class="memitem:a35663ab365a25af9e07a1a99030c38f8" id="r_a35663ab365a25af9e07a1a99030c38f8"><td class="memItemLeft">String&#160;</td><td class="memItemRight"><a class="el" href="#a35663ab365a25af9e07a1a99030c38f8">parolaCifrataCorrente</a></td></tr>
+<tr class="memdesc:a35663ab365a25af9e07a1a99030c38f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parola cifrata da mostrare ai giocatori.  <br /></td></tr>
+<tr class="memitem:a498d0df3a7bf51aecacede206233d412" id="r_a498d0df3a7bf51aecacede206233d412"><td class="memItemLeft">String&#160;</td><td class="memItemRight"><a class="el" href="#a498d0df3a7bf51aecacede206233d412">parolaOriginaleCorrente</a></td></tr>
+<tr class="memdesc:a498d0df3a7bf51aecacede206233d412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parola da indovinare, in chiaro.  <br /></td></tr>
+<tr class="memitem:acb6d0b0462422bd77d53e5ad206cfb76" id="r_acb6d0b0462422bd77d53e5ad206cfb76"><td class="memItemLeft">final ScheduledExecutorService&#160;</td><td class="memItemRight"><a class="el" href="#acb6d0b0462422bd77d53e5ad206cfb76">scheduler</a></td></tr>
+<tr class="memdesc:acb6d0b0462422bd77d53e5ad206cfb76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executor per il timeout automatico della sfida.  <br /></td></tr>
+<tr class="memitem:ab3c53b9ab2baab00392536c821664f50" id="r_ab3c53b9ab2baab00392536c821664f50"><td class="memItemLeft">boolean&#160;</td><td class="memItemRight"><a class="el" href="#ab3c53b9ab2baab00392536c821664f50">sfidaAttiva</a> = false</td></tr>
+<tr class="memitem:a62cdfacd6d8b6921db390af56f124e85" id="r_a62cdfacd6d8b6921db390af56f124e85"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a62cdfacd6d8b6921db390af56f124e85">spostamentoCorrente</a></td></tr>
+<tr class="memdesc:a62cdfacd6d8b6921db390af56f124e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chiave (spostamento) del cifrario.  <br /></td></tr>
+<tr class="memitem:a94cb4fe1dc707bda2541269d0e919c32" id="r_a94cb4fe1dc707bda2541269d0e919c32"><td class="memItemLeft">Consumer&lt; String &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a94cb4fe1dc707bda2541269d0e919c32">statusCallback</a></td></tr>
+<tr class="memdesc:a94cb4fe1dc707bda2541269d0e919c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback per aggiornare la TextArea di log nella GUI del server.  <br /></td></tr>
+<tr class="memitem:a14df00141d1715de8a079e5fb2403556" id="r_a14df00141d1715de8a079e5fb2403556"><td class="memItemLeft">ScheduledFuture&lt;?&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a14df00141d1715de8a079e5fb2403556">taskTimeout</a></td></tr>
+<tr class="memdesc:a14df00141d1715de8a079e5fb2403556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task di timeout per la sfida corrente.  <br /></td></tr>
+<tr class="memitem:a59e019c4128b0e4fc3611943d28c8fae" id="r_a59e019c4128b0e4fc3611943d28c8fae"><td class="memItemLeft">long&#160;</td><td class="memItemRight"><a class="el" href="#a59e019c4128b0e4fc3611943d28c8fae">tempoInizioSfida</a></td></tr>
+<tr class="memdesc:a59e019c4128b0e4fc3611943d28c8fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp di inizio della sfida.  <br /></td></tr>
+<tr class="memitem:ac77820306d26c80c4430e7fe24054298" id="r_ac77820306d26c80c4430e7fe24054298"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac77820306d26c80c4430e7fe24054298">timeoutSeconds</a> = 60</td></tr>
+<tr class="memdesc:ac77820306d26c80c4430e7fe24054298"><td class="mdescLeft">&#160;</td><td class="mdescRight">Durata massima di una sfida in secondi (configurabile).  <br /></td></tr>
+<tr class="memitem:a2ca6daf5e1983975fbef58685214b197" id="r_a2ca6daf5e1983975fbef58685214b197"><td class="memItemLeft">final List&lt; <a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2ca6daf5e1983975fbef58685214b197">tuttiIClient</a> = new ArrayList&lt;&gt;()</td></tr>
+<tr class="memdesc:a2ca6daf5e1983975fbef58685214b197"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tutti i client connessi al server.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-static-attribs" class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Attributi privati statici</h2></td></tr>
+<tr class="memitem:ae25c3bb058b4fe3e8e923cad2d2f1ba8" id="r_ae25c3bb058b4fe3e8e923cad2d2f1ba8"><td class="memItemLeft">static final Logger&#160;</td><td class="memItemRight"><a class="el" href="#ae25c3bb058b4fe3e8e923cad2d2f1ba8">LOGGER</a> = Logger.getLogger(CoordinatoreGioco.class.getName())</td></tr>
+<tr class="memdesc:ae25c3bb058b4fe3e8e923cad2d2f1ba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logger della classe <a class="el" href="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html" title="Coordinatore centrale della logica di gioco lato server.">CoordinatoreGioco</a>.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>Coordinatore centrale della logica di gioco lato server. </p>
+<p>Gestisce: autenticazione, lista d'attesa giocatori, avvio e risoluzione delle sfide, timeout automatico e persistenza dei risultati nel database.</p>
+<p>Tutti i metodi pubblici sono <code class="JavaDocCode">synchronized</code> perché questo oggetto è condiviso tra i thread di ogni <code><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></code>. Il monitor implicito di Java garantisce l'accesso esclusivo e la visibilità degli aggiornamenti Il timeout della sfida è gestito con <code><a class="el" href="">ScheduledExecutorService</a></code> , che evita l'uso di <code class="JavaDocCode">Thread.sleep()</code> nei thread di gioco.</p>
+<p>La callback di log usa <code><a class="el" href="">Consumer</a></code>&lt;String&gt; come interfaccia funzionale assegnata tramite lambda dal controller JavaFX. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00041">41</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Documentazione dei costruttori e dei distruttori</h2>
+<a id="a3d0509da0a1b488c988036de5f7bae4b" name="a3d0509da0a1b488c988036de5f7bae4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d0509da0a1b488c988036de5f7bae4b">&#9670;&#160;</a></span>CoordinatoreGioco()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">indovinaparola.server.model.CoordinatoreGioco.CoordinatoreGioco </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html">GestoreDatabase</a></td>          <td class="paramname"><span class="paramname"><em>db</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html">AnalizzatoreDocumenti</a></td>          <td class="paramname"><span class="paramname"><em>analizzatore</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Costruisce il coordinatore del gioco. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">db</td><td>gestore del database (già connesso) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">analizzatore</td><td>analizzatore documenti, può essere null inizialmente </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00091">91</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00052">analizzatore</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00051">db</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>.</p>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a3d0509da0a1b488c988036de5f7bae4b_icgraph.svg" width="100%" height="402"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentazione delle funzioni membro</h2>
+<a id="a60c758d990b5e7f3d70bd341e01df2fe" name="a60c758d990b5e7f3d70bd341e01df2fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60c758d990b5e7f3d70bd341e01df2fe">&#9670;&#160;</a></span>aggiungiClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized void indovinaparola.server.model.CoordinatoreGioco.aggiungiClient </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Aggiunge un client alla lista dei client connessi. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">client</td><td>client da aggiungere </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00466">466</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00058">tuttiIClient</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_client_8java_source.html#l00058">indovinaparola.server.model.GestoreClient.GestoreClient()</a>.</p>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a60c758d990b5e7f3d70bd341e01df2fe_icgraph.svg" width="462" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a8086e340afb1a4ce81dc8993aa913cfd" name="a8086e340afb1a4ce81dc8993aa913cfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8086e340afb1a4ce81dc8993aa913cfd">&#9670;&#160;</a></span>aggiungiInListaAttesa()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.model.CoordinatoreGioco.aggiungiInListaAttesa </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Aggiunge un giocatore alla lista d'attesa e avvia la sfida quando sono presenti esattamente due giocatori. </p>
+<dl class="section pre"><dt>Precondizione</dt><dd>Il client non deve essere già in attesa. </dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>Il client viene inserito in lista e la partita ha inizio se i giocatori in attesa diventano due.</dd></dl>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">client</td><td>client da aggiungere alla lista </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00234">234</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, <a class="el" href="_messaggio_8java_source.html#l00048">indovinaparola.common.Messaggio.Tipo.ERROR</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00075">giocatore1</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00076">giocatore2</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00055">giocatoriInAttesa</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>, e <a class="el" href="_messaggio_8java_source.html#l00034">indovinaparola.common.Messaggio.Tipo.WAITING</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00142">gestisciLogin()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00212">gestisciNuovaRichiesta()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a8086e340afb1a4ce81dc8993aa913cfd_cgraph.svg" width="100%" height="554"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a8086e340afb1a4ce81dc8993aa913cfd_icgraph.svg" width="496" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a8bd8b81c9b3f5331c36fea260be105cf" name="a8bd8b81c9b3f5331c36fea260be105cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd8b81c9b3f5331c36fea260be105cf">&#9670;&#160;</a></span>avviaSfida()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.model.CoordinatoreGioco.avviaSfida </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>p1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>p2</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Avvia una nuova sfida tra due giocatori. </p>
+<p>Estrae un estratto dal corpus analizzato, sceglie una parola, la cifra con il Cifrario di Cesare con spostamento casuale, invia il carico ai due client e schedula il timeout automatico.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p1</td><td>primo giocatore </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p2</td><td>secondo giocatore </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">269</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00052">analizzatore</a>, <a class="el" href="_messaggio_8java_source.html#l00036">indovinaparola.common.Messaggio.Tipo.CHALLENGE_START</a>, <a class="el" href="_cifrario_cesare_8java_source.html#l00030">indovinaparola.common.CifrarioCesare.cifra()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00091">CoordinatoreGioco()</a>, <a class="el" href="_messaggio_8java_source.html#l00048">indovinaparola.common.Messaggio.Tipo.ERROR</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00080">estrattoCorrente</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00049">excerptWords</a>, <a class="el" href="_gestore_client_8java_source.html#l00174">indovinaparola.server.model.GestoreClient.getNomeUtente()</a>, <a class="el" href="_gestore_client_8java_source.html#l00148">indovinaparola.server.model.GestoreClient.invia()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00078">parolaCifrataCorrente</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00077">parolaOriginaleCorrente</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00071">scheduler</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00082">sfidaAttiva</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00079">spostamentoCorrente</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00083">taskTimeout</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00081">tempoInizioSfida</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00046">timeoutSeconds</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00234">aggiungiInListaAttesa()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a8bd8b81c9b3f5331c36fea260be105cf_cgraph.svg" width="100%" height="547"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a8bd8b81c9b3f5331c36fea260be105cf_icgraph.svg" width="100%" height="402"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a9a9279a2dd83a55d5a52cc28d42f470b" name="a9a9279a2dd83a55d5a52cc28d42f470b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a9279a2dd83a55d5a52cc28d42f470b">&#9670;&#160;</a></span>disconnettiTutti()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized void indovinaparola.server.model.CoordinatoreGioco.disconnettiTutti </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disconnette tutti i client attualmente connessi. </p>
+<p>Viene chiamato quando il server si ferma, per chiudere le socket. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00474">474</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_messaggio_8java_source.html#l00048">indovinaparola.common.Messaggio.Tipo.ERROR</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00075">giocatore1</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00076">giocatore2</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00055">giocatoriInAttesa</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00082">sfidaAttiva</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00083">taskTimeout</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00058">tuttiIClient</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a9a9279a2dd83a55d5a52cc28d42f470b_cgraph.svg" width="468" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aba933d2e360705148082ee71b1efa5e2" name="aba933d2e360705148082ee71b1efa5e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba933d2e360705148082ee71b1efa5e2">&#9670;&#160;</a></span>gestisciLogin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized void indovinaparola.server.model.CoordinatoreGioco.gestisciLogin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>client</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1common_1_1_payload_autenticazione.html">PayloadAutenticazione</a></td>          <td class="paramname"><span class="paramname"><em>carico</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gestisce una richiesta di login da parte di un client. </p>
+<p>Autentica le credenziali nel database e, se valide, aggiunge il giocatore alla lista d'attesa.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">client</td><td>client che ha inviato la richiesta </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">carico</td><td>credenziali di autenticazione </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00142">142</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00234">aggiungiInListaAttesa()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00051">db</a>, <a class="el" href="_payload_autenticazione_8java_source.html#l00040">indovinaparola.common.PayloadAutenticazione.getNomeUtente()</a>, <a class="el" href="_payload_autenticazione_8java_source.html#l00049">indovinaparola.common.PayloadAutenticazione.getPassword()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>, e <a class="el" href="_messaggio_8java_source.html#l00028">indovinaparola.common.Messaggio.Tipo.LOGIN_RESPONSE</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_aba933d2e360705148082ee71b1efa5e2_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ac326640683c670408d7c607e09422654" name="ac326640683c670408d7c607e09422654"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac326640683c670408d7c607e09422654">&#9670;&#160;</a></span>gestisciNuovaRichiesta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized void indovinaparola.server.model.CoordinatoreGioco.gestisciNuovaRichiesta </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gestisce la richiesta di un client già autenticato di rientrare in lista d'attesa per una nuova partita (pulsante "Nuova partita" lato client, dopo <code class="JavaDocCode">CHALLENGE_RESULT</code>). </p>
+<p>A differenza di <code><a class="el" href="#aba933d2e360705148082ee71b1efa5e2">gestisciLogin</a></code>, questo metodo non richiede nuove credenziali: il client è già autenticato sulla stessa connessione TCP. Evita inoltre di reinserire due volte lo stesso client se già presente in <code class="JavaDocCode">giocatoriInAttesa</code>.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">client</td><td>client già autenticato che richiede una nuova partita </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00212">212</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00234">aggiungiInListaAttesa()</a>, <a class="el" href="_messaggio_8java_source.html#l00048">indovinaparola.common.Messaggio.Tipo.ERROR</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00055">giocatoriInAttesa</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_ac326640683c670408d7c607e09422654_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a60560ef53dc389eb8f1420387af230c4" name="a60560ef53dc389eb8f1420387af230c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60560ef53dc389eb8f1420387af230c4">&#9670;&#160;</a></span>gestisciRegistrazione()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized void indovinaparola.server.model.CoordinatoreGioco.gestisciRegistrazione </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>client</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1common_1_1_payload_autenticazione.html">PayloadAutenticazione</a></td>          <td class="paramname"><span class="paramname"><em>carico</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gestisce una richiesta di registrazione da parte di un client. </p>
+<p>Valida i dati e registra il nuovo utente nel database.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">client</td><td>client richiedente </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">carico</td><td>credenziali del nuovo account </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00169">169</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00051">db</a>, <a class="el" href="_payload_autenticazione_8java_source.html#l00040">indovinaparola.common.PayloadAutenticazione.getNomeUtente()</a>, <a class="el" href="_payload_autenticazione_8java_source.html#l00049">indovinaparola.common.PayloadAutenticazione.getPassword()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>, e <a class="el" href="_messaggio_8java_source.html#l00032">indovinaparola.common.Messaggio.Tipo.REGISTER_RESPONSE</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a60560ef53dc389eb8f1420387af230c4_cgraph.svg" width="527" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ab969ed20542ee3d8855b601b8f99357e" name="ab969ed20542ee3d8855b601b8f99357e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab969ed20542ee3d8855b601b8f99357e">&#9670;&#160;</a></span>gestisciRichiestaStorico()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized void indovinaparola.server.model.CoordinatoreGioco.gestisciRichiestaStorico </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gestisce la richiesta dello storico partite di un client. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">client</td><td>client richiedente </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00448">448</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00051">db</a>, e <a class="el" href="_messaggio_8java_source.html#l00044">indovinaparola.common.Messaggio.Tipo.HISTORY_RESPONSE</a>.</p>
+
+</div>
+</div>
+<a id="ac6aa455879d7d4800e93ea6a15d558de" name="ac6aa455879d7d4800e93ea6a15d558de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6aa455879d7d4800e93ea6a15d558de">&#9670;&#160;</a></span>gestisciRisposta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized void indovinaparola.server.model.CoordinatoreGioco.gestisciRisposta </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>client</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>guess</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gestisce la risposta di un giocatore alla sfida in corso. </p>
+<p>Se la risposta è corretta, termina la sfida decretando il vincitore. Se è errata, notifica solo il client che ha sbagliato.</p>
+<dl class="section pre"><dt>Precondizione</dt><dd>Una sfida deve essere attualmente in corso e il client deve esservi partecipante. </dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>Se la risposta è corretta, la sfida finisce e vengono registrati i risultati. Altrimenti viene inviato un errore al client.</dd></dl>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">client</td><td>client che ha inviato la risposta </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">guess</td><td>parola inserita dal giocatore </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00343">343</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_messaggio_8java_source.html#l00048">indovinaparola.common.Messaggio.Tipo.ERROR</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00075">giocatore1</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00076">giocatore2</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00077">parolaOriginaleCorrente</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00082">sfidaAttiva</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00081">tempoInizioSfida</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_ac6aa455879d7d4800e93ea6a15d558de_cgraph.svg" width="100%" height="440"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a3f76e64012a5aaacee4322b14a795f09" name="a3f76e64012a5aaacee4322b14a795f09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f76e64012a5aaacee4322b14a795f09">&#9670;&#160;</a></span>getDb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html">GestoreDatabase</a> indovinaparola.server.model.CoordinatoreGioco.getDb </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Restituisce il database manager. </p>
+<dl class="section return"><dt>Restituisce</dt><dd>istanza del database manager </dd></dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00459">459</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00051">db</a>.</p>
+
+</div>
+</div>
+<a id="a259735d196946931b37383bfd46e7c92" name="a259735d196946931b37383bfd46e7c92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a259735d196946931b37383bfd46e7c92">&#9670;&#160;</a></span>log()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.model.CoordinatoreGioco.log </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>msg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Scrive un messaggio nel log del sistema, chiamando anche la callback della GUI se impostata. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">msg</td><td>messaggio di log </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">497</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00043">LOGGER</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00064">statusCallback</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00234">aggiungiInListaAttesa()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00474">disconnettiTutti()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00142">gestisciLogin()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00212">gestisciNuovaRichiesta()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00169">gestisciRegistrazione()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00343">gestisciRisposta()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00425">onClientDisconnesso()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00128">setAnalyzer()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a259735d196946931b37383bfd46e7c92_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a8dc354f288dde6b981308b2482ed36d2" name="a8dc354f288dde6b981308b2482ed36d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dc354f288dde6b981308b2482ed36d2">&#9670;&#160;</a></span>onClientDisconnesso()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized void indovinaparola.server.model.CoordinatoreGioco.onClientDisconnesso </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gestisce la disconnessione inaspettata di un client. </p>
+<p>Rimuove il client dalla lista d'attesa; se la disconnessione avviene durante una sfida attiva, annulla la sfida e notifica l'altro giocatore.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">client</td><td>client disconnesso </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00425">425</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_messaggio_8java_source.html#l00048">indovinaparola.common.Messaggio.Tipo.ERROR</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00075">giocatore1</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00076">giocatore2</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00055">giocatoriInAttesa</a>, <a class="el" href="_gestore_client_8java_source.html#l00148">indovinaparola.server.model.GestoreClient.invia()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00082">sfidaAttiva</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00083">taskTimeout</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00058">tuttiIClient</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a8dc354f288dde6b981308b2482ed36d2_cgraph.svg" width="504" height="120"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="af4f46b6c65109326c93d365623e0dd93" name="af4f46b6c65109326c93d365623e0dd93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4f46b6c65109326c93d365623e0dd93">&#9670;&#160;</a></span>setAnalyzer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized void indovinaparola.server.model.CoordinatoreGioco.setAnalyzer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html">AnalizzatoreDocumenti</a></td>          <td class="paramname"><span class="paramname"><em>analizzatore</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Aggiorna l'analizzatore documenti (dopo una nuova analisi da parte dell'admin). </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">analizzatore</td><td>nuovo analizzatore con i risultati aggiornati </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00128">128</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00052">analizzatore</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_af4f46b6c65109326c93d365623e0dd93_cgraph.svg" width="448" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ae20cf9804eede9a10d9090f91059495c" name="ae20cf9804eede9a10d9090f91059495c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae20cf9804eede9a10d9090f91059495c">&#9670;&#160;</a></span>setGameConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.model.CoordinatoreGioco.setGameConfig </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeoutSeconds</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>excerptWords</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configura i parametri di gioco letti dalle properties del server. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">timeoutSeconds</td><td>durata massima sfida in secondi </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">excerptWords</td><td>numero di parole dell'estratto </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00102">102</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_coordinatore_gioco_8java_source.html#l00049">excerptWords</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00046">timeoutSeconds</a>.</p>
+
+</div>
+</div>
+<a id="ad34b576210d218f051ba149a7a7631b3" name="ad34b576210d218f051ba149a7a7631b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad34b576210d218f051ba149a7a7631b3">&#9670;&#160;</a></span>setStatusCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.model.CoordinatoreGioco.setStatusCallback </td>
+          <td>(</td>
+          <td class="paramtype">Consumer&lt; String &gt;</td>          <td class="paramname"><span class="paramname"><em>callback</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Imposta la callback per i messaggi di log da mostrare nella GUI server. </p>
+<p>Viene assegnata dal controller tramite espressione lambda.</p>
+<p>Esempio di uso nel controller: </p><pre>
+coordinator.setStatusCallback(msg -&gt;
+    Platform.runLater(() -&gt; logArea.appendText(msg + "\n")));
+</pre><dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">callback</td><td><code><a class="el" href="">Consumer</a></code>&lt;String&gt; che riceve ogni messaggio di log </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00119">119</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+</div>
+</div>
+<a id="a269d7268fb2c81755f3d076c83a73d0d" name="a269d7268fb2c81755f3d076c83a73d0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a269d7268fb2c81755f3d076c83a73d0d">&#9670;&#160;</a></span>terminaSfida()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.model.CoordinatoreGioco.terminaSfida </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a></td>          <td class="paramname"><span class="paramname"><em>winner</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>tempoRispostaMs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean</td>          <td class="paramname"><span class="paramname"><em>isDraw</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Termina la sfida in corso, invia i risultati ai client e persiste i dati nel database in una transazione atomica. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">winner</td><td>client vincitore, null in caso di pareggio/timeout </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tempoRispostaMs</td><td>tempo di risposta del vincitore in ms </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">isDraw</td><td>true se la sfida è terminata in pareggio (timeout) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">369</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_messaggio_8java_source.html#l00040">indovinaparola.common.Messaggio.Tipo.CHALLENGE_RESULT</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00051">db</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00080">estrattoCorrente</a>, <a class="el" href="_gestore_client_8java_source.html#l00174">indovinaparola.server.model.GestoreClient.getNomeUtente()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00075">giocatore1</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00076">giocatore2</a>, <a class="el" href="_gestore_client_8java_source.html#l00148">indovinaparola.server.model.GestoreClient.invia()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>, <a class="el" href="_risultato_sfida_8java_source.html#l00030">indovinaparola.common.RisultatoSfida.Esito.PAREGGIO</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00078">parolaCifrataCorrente</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00077">parolaOriginaleCorrente</a>, <a class="el" href="_risultato_sfida_8java_source.html#l00028">indovinaparola.common.RisultatoSfida.Esito.SCONFITTA</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00082">sfidaAttiva</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00079">spostamentoCorrente</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00083">taskTimeout</a>, e <a class="el" href="_risultato_sfida_8java_source.html#l00026">indovinaparola.common.RisultatoSfida.Esito.VITTORIA</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00343">gestisciRisposta()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a269d7268fb2c81755f3d076c83a73d0d_cgraph.svg" width="463" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco_a269d7268fb2c81755f3d076c83a73d0d_icgraph.svg" width="100%" height="418"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Documentazione dei membri dato</h2>
+<a id="a7e4294f5c41cecf21a072338380f1b20" name="a7e4294f5c41cecf21a072338380f1b20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e4294f5c41cecf21a072338380f1b20">&#9670;&#160;</a></span>analizzatore</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html">AnalizzatoreDocumenti</a> indovinaparola.server.model.CoordinatoreGioco.analizzatore</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Riferimento all'analizzatore documenti. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00052">52</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00091">CoordinatoreGioco()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00128">setAnalyzer()</a>.</p>
+
+</div>
+</div>
+<a id="af03260616dc5dc0fadd3ec5ba1c2a06f" name="af03260616dc5dc0fadd3ec5ba1c2a06f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af03260616dc5dc0fadd3ec5ba1c2a06f">&#9670;&#160;</a></span>db</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html">GestoreDatabase</a> indovinaparola.server.model.CoordinatoreGioco.db</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Riferimento al gestore del database. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00051">51</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00091">CoordinatoreGioco()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00142">gestisciLogin()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00169">gestisciRegistrazione()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00448">gestisciRichiestaStorico()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00459">getDb()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="a8c8f17a9c6a7f771de46d5f5c407808f" name="a8c8f17a9c6a7f771de46d5f5c407808f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c8f17a9c6a7f771de46d5f5c407808f">&#9670;&#160;</a></span>estrattoCorrente</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String indovinaparola.server.model.CoordinatoreGioco.estrattoCorrente</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Estratto del testo con la parola cifrata. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00080">80</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="a4f4cae020628c039c06900b6f13704a7" name="a4f4cae020628c039c06900b6f13704a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f4cae020628c039c06900b6f13704a7">&#9670;&#160;</a></span>excerptWords</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int indovinaparola.server.model.CoordinatoreGioco.excerptWords = 60</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Numero di parole dell'estratto inviato ai client. </p>
+<p>Numero di parole dell'estratto inviato ai client </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00049">49</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00102">setGameConfig()</a>.</p>
+
+</div>
+</div>
+<a id="aea7e23c10ce8c91a38f6b4c4a899d085" name="aea7e23c10ce8c91a38f6b4c4a899d085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea7e23c10ce8c91a38f6b4c4a899d085">&#9670;&#160;</a></span>giocatore1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> indovinaparola.server.model.CoordinatoreGioco.giocatore1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Primo giocatore impegnato nella sfida corrente. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00075">75</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00234">aggiungiInListaAttesa()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00474">disconnettiTutti()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00343">gestisciRisposta()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00425">onClientDisconnesso()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="ac770c1cb6e3e258ea62271699344f851" name="ac770c1cb6e3e258ea62271699344f851"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac770c1cb6e3e258ea62271699344f851">&#9670;&#160;</a></span>giocatore2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a> indovinaparola.server.model.CoordinatoreGioco.giocatore2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Secondo giocatore impegnato nella sfida corrente. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00076">76</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00234">aggiungiInListaAttesa()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00474">disconnettiTutti()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00343">gestisciRisposta()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00425">onClientDisconnesso()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="a0151315aa50d1c0e7de72c302d308359" name="a0151315aa50d1c0e7de72c302d308359"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0151315aa50d1c0e7de72c302d308359">&#9670;&#160;</a></span>giocatoriInAttesa</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final List&lt;<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a>&gt; indovinaparola.server.model.CoordinatoreGioco.giocatoriInAttesa = new ArrayList&lt;&gt;()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Giocatori autenticati in attesa di un avversario. </p>
+<p>Lista dei client autenticati in attesa di giocare </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00055">55</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00234">aggiungiInListaAttesa()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00474">disconnettiTutti()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00212">gestisciNuovaRichiesta()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00425">onClientDisconnesso()</a>.</p>
+
+</div>
+</div>
+<a id="ae25c3bb058b4fe3e8e923cad2d2f1ba8" name="ae25c3bb058b4fe3e8e923cad2d2f1ba8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae25c3bb058b4fe3e8e923cad2d2f1ba8">&#9670;&#160;</a></span>LOGGER</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final Logger indovinaparola.server.model.CoordinatoreGioco.LOGGER = Logger.getLogger(CoordinatoreGioco.class.getName())</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logger della classe <a class="el" href="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html" title="Coordinatore centrale della logica di gioco lato server.">CoordinatoreGioco</a>. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00043">43</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>.</p>
+
+</div>
+</div>
+<a id="a35663ab365a25af9e07a1a99030c38f8" name="a35663ab365a25af9e07a1a99030c38f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35663ab365a25af9e07a1a99030c38f8">&#9670;&#160;</a></span>parolaCifrataCorrente</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String indovinaparola.server.model.CoordinatoreGioco.parolaCifrataCorrente</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parola cifrata da mostrare ai giocatori. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00078">78</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="a498d0df3a7bf51aecacede206233d412" name="a498d0df3a7bf51aecacede206233d412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a498d0df3a7bf51aecacede206233d412">&#9670;&#160;</a></span>parolaOriginaleCorrente</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String indovinaparola.server.model.CoordinatoreGioco.parolaOriginaleCorrente</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parola da indovinare, in chiaro. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00077">77</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00343">gestisciRisposta()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="acb6d0b0462422bd77d53e5ad206cfb76" name="acb6d0b0462422bd77d53e5ad206cfb76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb6d0b0462422bd77d53e5ad206cfb76">&#9670;&#160;</a></span>scheduler</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final ScheduledExecutorService indovinaparola.server.model.CoordinatoreGioco.scheduler</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Valore iniziale:</b><div class="fragment"><div class="line">                                             =</div>
+<div class="line">Executors.newSingleThreadScheduledExecutor()</div>
+</div><!-- fragment -->
+<p>Executor per il timeout automatico della sfida. </p>
+<p>Un thread singolo è sufficiente per gestire i timeout sequenziali. Executor per schedulare i timeout delle sfide </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00071">71</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="ab3c53b9ab2baab00392536c821664f50" name="ab3c53b9ab2baab00392536c821664f50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3c53b9ab2baab00392536c821664f50">&#9670;&#160;</a></span>sfidaAttiva</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean indovinaparola.server.model.CoordinatoreGioco.sfidaAttiva = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00082">82</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00474">disconnettiTutti()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00343">gestisciRisposta()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00425">onClientDisconnesso()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="a62cdfacd6d8b6921db390af56f124e85" name="a62cdfacd6d8b6921db390af56f124e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62cdfacd6d8b6921db390af56f124e85">&#9670;&#160;</a></span>spostamentoCorrente</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int indovinaparola.server.model.CoordinatoreGioco.spostamentoCorrente</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Chiave (spostamento) del cifrario. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00079">79</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="a94cb4fe1dc707bda2541269d0e919c32" name="a94cb4fe1dc707bda2541269d0e919c32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94cb4fe1dc707bda2541269d0e919c32">&#9670;&#160;</a></span>statusCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Consumer&lt;String&gt; indovinaparola.server.model.CoordinatoreGioco.statusCallback</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback per aggiornare la TextArea di log nella GUI del server. </p>
+<p>Assegnata tramite lambda dal controller. Callback per notificare messaggi alla GUI </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00064">64</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00497">log()</a>.</p>
+
+</div>
+</div>
+<a id="a14df00141d1715de8a079e5fb2403556" name="a14df00141d1715de8a079e5fb2403556"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14df00141d1715de8a079e5fb2403556">&#9670;&#160;</a></span>taskTimeout</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScheduledFuture&lt;?&gt; indovinaparola.server.model.CoordinatoreGioco.taskTimeout</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Task di timeout per la sfida corrente. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00083">83</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00474">disconnettiTutti()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00425">onClientDisconnesso()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00369">terminaSfida()</a>.</p>
+
+</div>
+</div>
+<a id="a59e019c4128b0e4fc3611943d28c8fae" name="a59e019c4128b0e4fc3611943d28c8fae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59e019c4128b0e4fc3611943d28c8fae">&#9670;&#160;</a></span>tempoInizioSfida</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long indovinaparola.server.model.CoordinatoreGioco.tempoInizioSfida</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Timestamp di inizio della sfida. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00081">81</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00343">gestisciRisposta()</a>.</p>
+
+</div>
+</div>
+<a id="ac77820306d26c80c4430e7fe24054298" name="ac77820306d26c80c4430e7fe24054298"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac77820306d26c80c4430e7fe24054298">&#9670;&#160;</a></span>timeoutSeconds</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int indovinaparola.server.model.CoordinatoreGioco.timeoutSeconds = 60</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Durata massima di una sfida in secondi (configurabile). </p>
+<p>Durata massima di una sfida in secondi </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00046">46</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00269">avviaSfida()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00102">setGameConfig()</a>.</p>
+
+</div>
+</div>
+<a id="a2ca6daf5e1983975fbef58685214b197" name="a2ca6daf5e1983975fbef58685214b197"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ca6daf5e1983975fbef58685214b197">&#9670;&#160;</a></span>tuttiIClient</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final List&lt;<a class="el" href="classindovinaparola_1_1server_1_1model_1_1_gestore_client.html">GestoreClient</a>&gt; indovinaparola.server.model.CoordinatoreGioco.tuttiIClient = new ArrayList&lt;&gt;()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tutti i client connessi al server. </p>
+<p>Lista di tutti i client connessi </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_coordinatore_gioco_8java_source.html#l00058">58</a> del file <a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_coordinatore_gioco_8java_source.html#l00466">aggiungiClient()</a>, <a class="el" href="_coordinatore_gioco_8java_source.html#l00474">disconnettiTutti()</a>, e <a class="el" href="_coordinatore_gioco_8java_source.html#l00425">onClientDisconnesso()</a>.</p>
+
+</div>
+</div>
+<hr/>La documentazione per questa classe è stata generata a partire dal seguente file:<ul>
+<li>server/src/main/java/indovinaparola/server/model/<a class="el" href="_coordinatore_gioco_8java_source.html">CoordinatoreGioco.java</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>indovinaparola</b></li><li class="navelem"><a href="namespaceindovinaparola_1_1server.html">server</a></li><li class="navelem"><a href="namespaceindovinaparola_1_1server_1_1model.html">model</a></li><li class="navelem"><a href="classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html">CoordinatoreGioco</a></li>
+    <li class="footer">Generato da <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

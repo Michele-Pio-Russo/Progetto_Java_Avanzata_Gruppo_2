@@ -1,0 +1,7 @@
+<map id="indovinaparola.server.db.GestoreDatabase.insertUserIfAbsent" name="indovinaparola.server.db.GestoreDatabase.insertUserIfAbsent">
+<area shape="rect" id="Node000001" title="Inserisce un utente solo se lo nomeUtente non è già presente." alt="" coords="485,5,721,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a3fb8bfc652b8dece71f19f0490827858" title="Inserisce gli account predefiniti se non sono già presenti nel database." alt="" coords="227,5,437,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="467,27,437,29,437,24,472,27"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a10f430d6e63a1c4ea113339adac52c6d" title="Apre la connessione al database e inizializza schema e account predefiniti." alt="" coords="5,5,179,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="208,27,179,29,179,24,214,26"/>
+</map>

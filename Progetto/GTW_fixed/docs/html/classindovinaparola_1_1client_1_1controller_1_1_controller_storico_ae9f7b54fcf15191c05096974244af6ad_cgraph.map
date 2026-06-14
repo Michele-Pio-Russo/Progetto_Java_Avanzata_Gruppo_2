@@ -1,0 +1,50 @@
+<map id="indovinaparola.client.controller.ControllerStorico.gestisciIndietro" name="indovinaparola.client.controller.ControllerStorico.gestisciIndietro">
+<area shape="rect" id="Node000001" title="Torna alla schermata di gioco nel pannello di attesa." alt="" coords="5,765,216,808"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#ae0952efcaf22ccc064ad247a0a8c65d9" title="Timestamp di inizio della sfida in millisecondi." alt="" coords="264,765,464,808"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,784,251,786,246,787,217,789"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a60b4bb8e7fa66a683451851d15fd53c4" title="&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream Smista i messaggi ricevuti dal server al metodo appropriato." alt="" coords="512,677,773,720"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="433,762,556,726,561,724,435,767"/>
+<area shape="rect" id="Node000015" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a643b1e5d31acfce71b9f374d724eae41" title="Mostra il pannello di attesa e nasconde gli altri." alt="" coords="857,795,1058,837"/>
+<area shape="poly" id="edge24_Node000002_Node000015" title=" " alt="" coords="464,789,844,809,840,811,464,794"/>
+<area shape="rect" id="Node000023" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#afbcee4405832f6009648bef73c4a222e" title="Ritorna alla schermata di accesso e mostra un messaggio di errore." alt="" coords="542,824,743,867"/>
+<area shape="poly" id="edge25_Node000002_Node000023" title=" " alt="" coords="465,805,530,821,524,821,464,810"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a635134554b97141ddf13b4c5cb3dd442" title="Avvia la sfida ricevuta dal server." alt="" coords="857,543,1058,585"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="676,674,741,635,820,596,842,591,847,589,822,601,743,640,678,679"/>
+<area shape="rect" id="Node000011" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a6cfd8694cca8570f51d9e1a0bfb1dfbc" title="Gestisce i messaggi di errore ricevuti dal server durante la sfida." alt="" coords="841,611,1074,653"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="746,674,841,656,836,658,747,679"/>
+<area shape="rect" id="Node000013" href="$classindovinaparola_1_1common_1_1_messaggio.html#a42d1e549994b4e59cf42f7707298f818" title="Restituisce il carico del messaggio." alt="" coords="834,677,1081,720"/>
+<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="773,696,821,698,815,699,774,701"/>
+<area shape="rect" id="Node000014" href="$classindovinaparola_1_1common_1_1_messaggio.html#a5dab2d30f1c776e7822004c01ef271c2" title="Restituisce il tipo del messaggio." alt="" coords="821,744,1094,771"/>
+<area shape="poly" id="edge13_Node000003_Node000014" title=" " alt="" coords="761,718,870,740,864,741,761,723"/>
+<area shape="poly" id="edge14_Node000003_Node000015" title=" " alt="" coords="685,718,749,750,822,780,846,790,841,790,820,785,747,754,684,723"/>
+<area shape="rect" id="Node000016" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a0b5fc593bd2fcf30df0807c3119195b7" title="Mostra il pannello con il risultato finale della sfida." alt="" coords="854,205,1061,248"/>
+<area shape="poly" id="edge16_Node000003_Node000016" title=" " alt="" coords="656,675,931,261,936,260,660,679"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a98d4852e0f811db7596d7793ddee21b1" title="Avvia il timer countdown con Timeline di JavaFX." alt="" coords="1164,539,1376,581"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1058,560,1151,561,1146,562,1059,565"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1common_1_1_payload_sfida.html#a52de5c49c2410d48eff330d1b5184f63" title="Restituisce l&#39;estratto testuale con la parola cifrata." alt="" coords="1166,605,1375,648"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="1058,581,1153,603,1148,603,1058,587"/>
+<area shape="rect" id="Node000007" href="$classindovinaparola_1_1common_1_1_payload_sfida.html#a1febb61dc32ff276638816f46c64f0bf" title="Restituisce la lista delle parole cifrate nella sfida." alt="" coords="1166,672,1375,715"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="1058,579,1095,596,1111,612,1120,628,1128,643,1143,658,1154,666,1149,665,1140,662,1124,647,1115,631,1107,615,1092,601,1058,584"/>
+<area shape="rect" id="Node000008" href="$classindovinaparola_1_1common_1_1_payload_sfida.html#afe61b33ab689e4254eefb0ed5b114eba" title="Restituisce la durata del timer in secondi." alt="" coords="1166,405,1375,448"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="990,540,1058,498,1141,458,1157,454,1162,452,1143,462,1060,503,992,545"/>
+<area shape="rect" id="Node000009" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a48e4e9e8e6ac758d18537dfd04b65dbe" title="Mostra il pannello di gioco e nasconde gli altri." alt="" coords="1170,472,1370,515"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="1055,539,1161,518,1155,519,1056,545"/>
+<area shape="rect" id="Node000010" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#aef0c643e7d1756b519308f9e7f7760a4" title="Imposta visibilità e managed di un pannello VBox." alt="" coords="1447,472,1649,515"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="1371,491,1434,493,1429,494,1371,496"/>
+<area shape="rect" id="Node000012" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#aca84c0f0e06335a4e0d25f674250949c" title="Mostra un messaggio di feedback nella label dedicata." alt="" coords="1164,739,1376,781"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="1073,651,1095,663,1111,679,1120,695,1128,710,1143,725,1153,732,1147,731,1140,729,1124,713,1115,697,1107,682,1092,667,1072,657"/>
+<area shape="poly" id="edge15_Node000015_Node000010" title=" " alt="" coords="1058,835,1138,844,1226,844,1271,838,1316,828,1358,813,1398,791,1429,765,1456,734,1479,699,1497,662,1524,590,1539,532,1543,528,1529,591,1502,665,1484,702,1461,737,1433,769,1400,796,1360,817,1317,833,1272,843,1227,849,1137,849,1058,840"/>
+<area shape="rect" id="Node000017" href="$classindovinaparola_1_1common_1_1_risultato_sfida.html#aa414e4d98b943d62a9cd8a6c1534ba97" title="Restituisce l&#39;esito della sfida dal punto di vista del ricevente." alt="" coords="1163,72,1378,115"/>
+<area shape="poly" id="edge17_Node000016_Node000017" title=" " alt="" coords="991,203,1059,163,1141,124,1163,119,1158,121,1143,129,1061,168,994,207"/>
+<area shape="rect" id="Node000018" href="$classindovinaparola_1_1common_1_1_risultato_sfida.html#ad94a700e26a9d9c9c5823d70f81dd35e" title="Restituisce il nome utente del vincitore." alt="" coords="1163,139,1378,181"/>
+<area shape="poly" id="edge18_Node000016_Node000018" title=" " alt="" coords="1060,202,1154,184,1149,186,1062,207"/>
+<area shape="rect" id="Node000019" href="$classindovinaparola_1_1common_1_1_risultato_sfida.html#a10fb53bc5ceae1e5c2ab66c6c370eb1e" title="Restituisce la parola originale corretta." alt="" coords="1163,205,1378,248"/>
+<area shape="poly" id="edge19_Node000016_Node000019" title=" " alt="" coords="1061,224,1150,226,1145,227,1062,229"/>
+<area shape="rect" id="Node000020" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_gioco.html#a56d6a79281726c5bab6553369780ae89" title="Mostra il pannello del risultato e nasconde gli altri." alt="" coords="1142,272,1399,315"/>
+<area shape="poly" id="edge20_Node000016_Node000020" title=" " alt="" coords="1061,246,1155,268,1149,269,1061,251"/>
+<area shape="rect" id="Node000021" href="$enumindovinaparola_1_1common_1_1_risultato_sfida_1_1_esito.html#a28506b14f136646cc9841534cb0db441" title="Nessuno ha risposto correttamente entro il timeout." alt="" coords="1163,339,1378,381"/>
+<area shape="poly" id="edge22_Node000016_Node000021" title=" " alt="" coords="993,246,1061,285,1143,324,1163,333,1158,334,1141,329,1059,290,993,251"/>
+<area shape="rect" id="Node000022" href="$enumindovinaparola_1_1common_1_1_risultato_sfida_1_1_esito.html#a7e6772969062be823b4c6b56e5b09467" title="Restituisce l&#39;emoji associata all&#39;esito." alt="" coords="1163,5,1378,48"/>
+<area shape="poly" id="edge23_Node000016_Node000022" title=" " alt="" coords="974,203,1042,132,1089,92,1140,58,1156,53,1151,56,1143,62,1092,96,1045,136,978,207"/>
+<area shape="poly" id="edge21_Node000020_Node000010" title=" " alt="" coords="1376,312,1400,324,1440,354,1476,390,1528,460,1523,459,1472,393,1437,358,1398,329,1376,318"/>
+</map>

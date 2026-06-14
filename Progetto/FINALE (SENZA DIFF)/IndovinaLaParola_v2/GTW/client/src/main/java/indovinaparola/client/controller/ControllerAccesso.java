@@ -248,11 +248,6 @@ public class ControllerAccesso implements Initializable {
             return;
         }
 
-        if (!connessione.isConnesso()) {
-            mostraErrore("Non connesso al server. Attendi o riavvia.");
-            return;
-        }
-
         if (isRegistrationMode) {
             if (nomeUtente.length() < 3) {
                 mostraErrore("Username deve avere almeno 3 caratteri.");
@@ -267,14 +262,58 @@ public class ControllerAccesso implements Initializable {
                 mostraErrore("Le password non coincidono.");
                 return;
             }
+        }
+
+        if (!connessione.isConnesso()) {
+            mostraErrore("Tentativo di connessione al server in corso...");
+            pulsantePrincipale.setDisable(true);
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        connessione.connetti(serverIp, serverPort);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                connectionLabel.setText("Connesso a " + serverIp + ":" + serverPort);
+                                clearError();
+                                inviaRichiesta(nomeUtente, password);
+                            }
+                        });
+                    } catch (IOException e) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                pulsantePrincipale.setDisable(false);
+                                mostraErrore("Server non raggiungibile. Accendi il server e riprova.");
+                            }
+                        });
+                    }
+                }
+            });
+            t.setDaemon(true);
+            t.start();
+            return;
+        }
+
+        inviaRichiesta(nomeUtente, password);
+        pulsantePrincipale.setDisable(true);
+    }
+
+    /**
+     * @brief Invia la richiesta al server (login o registrazione).
+     *
+     * @param[in] nomeUtente nome utente
+     * @param[in] password password
+     */
+    private void inviaRichiesta(String nomeUtente, String password) {
+        if (isRegistrationMode) {
             connessione.invia(new Messaggio(Messaggio.Tipo.REGISTER_REQUEST,
                 new PayloadAutenticazione(nomeUtente, password)));
         } else {
             connessione.invia(new Messaggio(Messaggio.Tipo.LOGIN_REQUEST,
                 new PayloadAutenticazione(nomeUtente, password)));
         }
-
-        pulsantePrincipale.setDisable(true);
     }
 
     /**

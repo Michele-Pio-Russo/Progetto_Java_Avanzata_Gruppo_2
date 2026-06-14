@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IndovinaLaParola:  File sorgente client/src/main/java/indovinaparola/client/service/ConnessioneServer.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IndovinaLaParola<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Gioco Multiplayer Client-Server a Sfide in Tempo Reale - JA26</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('_connessione_server_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Caricamento in corso...</div>
+<div class="SRStatus" id="Searching">Ricerca in corso...</div>
+<div class="SRStatus" id="NoMatches">Nessun risultato</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ConnessioneServer.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_connessione_server_8java.html">Vai alla documentazione di questo file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespaceindovinaparola_1_1client_1_1service.html">   16</a></span><span class="keyword">package </span>indovinaparola.client.service;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">import</span> indovinaparola.common.Messaggio;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">import</span> java.io.*;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">import</span> java.net.Socket;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">import</span> java.util.function.Consumer;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">import</span> java.util.logging.Level;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">import</span> java.util.logging.Logger;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html">   27</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html">ConnessioneServer</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0addd12d2de51a1dd09ce4588bffa26c">   29</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0addd12d2de51a1dd09ce4588bffa26c">LOGGER</a> = Logger.getLogger(<a class="code hl_class" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html">ConnessioneServer</a>.class.getName()); </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">   31</a></span>    <span class="keyword">private</span> Socket <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">socket</a>;           </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a600fd1e0cf1f4673256e53a1ecfc270f">   32</a></span>    <span class="keyword">private</span> ObjectOutputStream <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a600fd1e0cf1f4673256e53a1ecfc270f">out</a>;  </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a3ee621b84d67a4998cedb00b8d54fdaf">   33</a></span>    <span class="keyword">private</span> ObjectInputStream <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a3ee621b84d67a4998cedb00b8d54fdaf">in</a>;    </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a6747ba8a58e3aa356249b5ea89f6d1df">   35</a></span>    <span class="keyword">private</span> Consumer&lt;Messaggio&gt; <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a6747ba8a58e3aa356249b5ea89f6d1df">callbackMessaggio</a>;    </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a16f02c501ef1f8b813fd769eb119f3d8">   36</a></span>    <span class="keyword">private</span> Runnable <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a16f02c501ef1f8b813fd769eb119f3d8">callbackDisconnessione</a>;          </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0543332c2ef23a8e5f44d709563efc95">   38</a></span>    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keywordtype">boolean</span> <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0543332c2ef23a8e5f44d709563efc95">connesso</a> = <span class="keyword">false</span>; </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span></div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a13415c09751cbf229e06aeae15f06aaf">   47</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a13415c09751cbf229e06aeae15f06aaf">setMessageCallback</a>(Consumer&lt;Messaggio&gt; callback) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        this.callbackMessaggio = callback;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#ae4c8604c867c3cfe298cbedd65905a1e">   56</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#ae4c8604c867c3cfe298cbedd65905a1e">setDisconnectCallback</a>(Runnable callback) {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        this.callbackDisconnessione = callback;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span></div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a1a2ddcbfd9b1ff4ee8b46a55abaa04cb">   71</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a1a2ddcbfd9b1ff4ee8b46a55abaa04cb">connetti</a>(String host, <span class="keywordtype">int</span> porta) <span class="keywordflow">throws</span> IOException {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">socket</a> = <span class="keyword">new</span> Socket(host, porta);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a600fd1e0cf1f4673256e53a1ecfc270f">out</a> = <span class="keyword">new</span> ObjectOutputStream(<a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">socket</a>.getOutputStream());</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a600fd1e0cf1f4673256e53a1ecfc270f">out</a>.flush();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a3ee621b84d67a4998cedb00b8d54fdaf">in</a> = <span class="keyword">new</span> ObjectInputStream(<a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">socket</a>.getInputStream());</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0543332c2ef23a8e5f44d709563efc95">connesso</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0addd12d2de51a1dd09ce4588bffa26c">LOGGER</a>.info(<span class="stringliteral">&quot;Connesso al server &quot;</span> + host + <span class="stringliteral">&quot;:&quot;</span> + porta);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_function" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a6d3a9b81a5f8638204776af67514be59">avviaThreadLettura</a>();</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a6d3a9b81a5f8638204776af67514be59">   89</a></span>    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a6d3a9b81a5f8638204776af67514be59">avviaThreadLettura</a>() {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            @Override</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <span class="keyword">public</span> <span class="keywordtype">void</span> run() {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                    <span class="keywordflow">while</span> (<a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0543332c2ef23a8e5f44d709563efc95">connesso</a> &amp;&amp; !<a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">socket</a>.isClosed()) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                        <a class="code hl_class" href="classindovinaparola_1_1common_1_1_messaggio.html">Messaggio</a> msg = (<a class="code hl_class" href="classindovinaparola_1_1common_1_1_messaggio.html">Messaggio</a>) <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a3ee621b84d67a4998cedb00b8d54fdaf">in</a>.readObject();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a6747ba8a58e3aa356249b5ea89f6d1df">callbackMessaggio</a> != <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                            <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a6747ba8a58e3aa356249b5ea89f6d1df">callbackMessaggio</a>.accept(msg);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                        }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                } <span class="keywordflow">catch</span> (EOFException | java.net.SocketException e) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                    <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0addd12d2de51a1dd09ce4588bffa26c">LOGGER</a>.info(<span class="stringliteral">&quot;Connessione al server chiusa.&quot;</span>);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                } <span class="keywordflow">catch</span> (Exception e) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                    <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0addd12d2de51a1dd09ce4588bffa26c">LOGGER</a>.log(Level.WARNING, <span class="stringliteral">&quot;Errore ricezione messaggio&quot;</span>, e);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                } <span class="keywordflow">finally</span> {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                    <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0543332c2ef23a8e5f44d709563efc95">connesso</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a16f02c501ef1f8b813fd769eb119f3d8">callbackDisconnessione</a> != <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                        <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a16f02c501ef1f8b813fd769eb119f3d8">callbackDisconnessione</a>.run();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                    }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }, <span class="stringliteral">&quot;ClientReaderThread&quot;</span>);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        t.setDaemon(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        t.start();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
+</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span></div>
+<div class="foldopen" id="foldopen00125" data-start="{" data-end="}">
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#acd4e17a8901f572b3e1bd8f59a8016cc">  125</a></span>    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#acd4e17a8901f572b3e1bd8f59a8016cc">invia</a>(<a class="code hl_class" href="classindovinaparola_1_1common_1_1_messaggio.html">Messaggio</a> msg) {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0543332c2ef23a8e5f44d709563efc95">connesso</a>) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0addd12d2de51a1dd09ce4588bffa26c">LOGGER</a>.warning(<span class="stringliteral">&quot;Tentativo di invio su connessione chiusa.&quot;</span>);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a600fd1e0cf1f4673256e53a1ecfc270f">out</a>.writeObject(msg);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a600fd1e0cf1f4673256e53a1ecfc270f">out</a>.flush();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a600fd1e0cf1f4673256e53a1ecfc270f">out</a>.reset();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a600fd1e0cf1f4673256e53a1ecfc270f">out</a>.reset();</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        } <span class="keywordflow">catch</span> (IOException e) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0addd12d2de51a1dd09ce4588bffa26c">LOGGER</a>.log(Level.WARNING, <span class="stringliteral">&quot;Errore invio messaggio&quot;</span>, e);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
+</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span></div>
+<div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a2b8f7d811fb4f10bbfa5303a6a0945e1">  145</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a2b8f7d811fb4f10bbfa5303a6a0945e1">disconnetti</a>() {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0543332c2ef23a8e5f44d709563efc95">connesso</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">socket</a> != <span class="keyword">null</span> &amp;&amp; !<a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">socket</a>.isClosed()) {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">socket</a>.close();</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        } <span class="keywordflow">catch</span> (IOException e) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0addd12d2de51a1dd09ce4588bffa26c">LOGGER</a>.log(Level.WARNING, <span class="stringliteral">&quot;Errore chiusura connessione&quot;</span>, e);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        }</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
+</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span></div>
+<div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a3644d67345e94fe525750dd8d84f0bd6">  161</a></span>    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a3644d67345e94fe525750dd8d84f0bd6">isConnesso</a>() {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0543332c2ef23a8e5f44d709563efc95">connesso</a>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    }</div>
+</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>}</div>
+</div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html">indovinaparola.client.service.ConnessioneServer</a></div><div class="ttdef"><b>Definition</b> <a href="#l00027">ConnessioneServer.java:27</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a0543332c2ef23a8e5f44d709563efc95"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0543332c2ef23a8e5f44d709563efc95">indovinaparola.client.service.ConnessioneServer.connesso</a></div><div class="ttdeci">volatile boolean connesso</div><div class="ttdoc">Callback invocata alla disconnessione dal server.</div><div class="ttdef"><b>Definition</b> <a href="#l00038">ConnessioneServer.java:38</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a0abeaa2b055e85e29e9c43c2bd988ec8"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0abeaa2b055e85e29e9c43c2bd988ec8">indovinaparola.client.service.ConnessioneServer.socket</a></div><div class="ttdeci">Socket socket</div><div class="ttdoc">Logger della classe per la registrazione degli errori.</div><div class="ttdef"><b>Definition</b> <a href="#l00031">ConnessioneServer.java:31</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a0addd12d2de51a1dd09ce4588bffa26c"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a0addd12d2de51a1dd09ce4588bffa26c">indovinaparola.client.service.ConnessioneServer.LOGGER</a></div><div class="ttdeci">static final Logger LOGGER</div><div class="ttdef"><b>Definition</b> <a href="#l00029">ConnessioneServer.java:29</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a13415c09751cbf229e06aeae15f06aaf"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a13415c09751cbf229e06aeae15f06aaf">indovinaparola.client.service.ConnessioneServer.setMessageCallback</a></div><div class="ttdeci">void setMessageCallback(Consumer&lt; Messaggio &gt; callback)</div><div class="ttdoc">Indica se la connessione con il server è attiva.</div><div class="ttdef"><b>Definition</b> <a href="#l00047">ConnessioneServer.java:47</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a16f02c501ef1f8b813fd769eb119f3d8"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a16f02c501ef1f8b813fd769eb119f3d8">indovinaparola.client.service.ConnessioneServer.callbackDisconnessione</a></div><div class="ttdeci">Runnable callbackDisconnessione</div><div class="ttdoc">Callback invocata ad ogni messaggio ricevuto dal server.</div><div class="ttdef"><b>Definition</b> <a href="#l00036">ConnessioneServer.java:36</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a1a2ddcbfd9b1ff4ee8b46a55abaa04cb"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a1a2ddcbfd9b1ff4ee8b46a55abaa04cb">indovinaparola.client.service.ConnessioneServer.connetti</a></div><div class="ttdeci">void connetti(String host, int porta)</div><div class="ttdoc">Apre la connessione TCP con il server e avvia il thread daemon di lettura.</div><div class="ttdef"><b>Definition</b> <a href="#l00071">ConnessioneServer.java:71</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a2b8f7d811fb4f10bbfa5303a6a0945e1"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a2b8f7d811fb4f10bbfa5303a6a0945e1">indovinaparola.client.service.ConnessioneServer.disconnetti</a></div><div class="ttdeci">void disconnetti()</div><div class="ttdoc">Chiude la connessione con il server.</div><div class="ttdef"><b>Definition</b> <a href="#l00145">ConnessioneServer.java:145</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a3644d67345e94fe525750dd8d84f0bd6"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a3644d67345e94fe525750dd8d84f0bd6">indovinaparola.client.service.ConnessioneServer.isConnesso</a></div><div class="ttdeci">boolean isConnesso()</div><div class="ttdoc">Indica se la connessione con il server è attiva.</div><div class="ttdef"><b>Definition</b> <a href="#l00161">ConnessioneServer.java:161</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a3ee621b84d67a4998cedb00b8d54fdaf"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a3ee621b84d67a4998cedb00b8d54fdaf">indovinaparola.client.service.ConnessioneServer.in</a></div><div class="ttdeci">ObjectInputStream in</div><div class="ttdoc">Stream di output per la serializzazione dei messaggi.</div><div class="ttdef"><b>Definition</b> <a href="#l00033">ConnessioneServer.java:33</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a600fd1e0cf1f4673256e53a1ecfc270f"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a600fd1e0cf1f4673256e53a1ecfc270f">indovinaparola.client.service.ConnessioneServer.out</a></div><div class="ttdeci">ObjectOutputStream out</div><div class="ttdoc">Socket TCP verso il server.</div><div class="ttdef"><b>Definition</b> <a href="#l00032">ConnessioneServer.java:32</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a6747ba8a58e3aa356249b5ea89f6d1df"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a6747ba8a58e3aa356249b5ea89f6d1df">indovinaparola.client.service.ConnessioneServer.callbackMessaggio</a></div><div class="ttdeci">Consumer&lt; Messaggio &gt; callbackMessaggio</div><div class="ttdoc">Stream di input per la deserializzazione dei messaggi.</div><div class="ttdef"><b>Definition</b> <a href="#l00035">ConnessioneServer.java:35</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_a6d3a9b81a5f8638204776af67514be59"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a6d3a9b81a5f8638204776af67514be59">indovinaparola.client.service.ConnessioneServer.avviaThreadLettura</a></div><div class="ttdeci">void avviaThreadLettura()</div><div class="ttdoc">Avvia il thread daemon di lettura dei messaggi in ingresso.</div><div class="ttdef"><b>Definition</b> <a href="#l00089">ConnessioneServer.java:89</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_acd4e17a8901f572b3e1bd8f59a8016cc"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#acd4e17a8901f572b3e1bd8f59a8016cc">indovinaparola.client.service.ConnessioneServer.invia</a></div><div class="ttdeci">synchronized void invia(Messaggio msg)</div><div class="ttdoc">Invia un messaggio al server in modo thread-safe.</div><div class="ttdef"><b>Definition</b> <a href="#l00125">ConnessioneServer.java:125</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1client_1_1service_1_1_connessione_server_html_ae4c8604c867c3cfe298cbedd65905a1e"><div class="ttname"><a href="classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#ae4c8604c867c3cfe298cbedd65905a1e">indovinaparola.client.service.ConnessioneServer.setDisconnectCallback</a></div><div class="ttdeci">void setDisconnectCallback(Runnable callback)</div><div class="ttdoc">Imposta la callback invocata alla disconnessione dal server.</div><div class="ttdef"><b>Definition</b> <a href="#l00056">ConnessioneServer.java:56</a></div></div>
+<div class="ttc" id="aclassindovinaparola_1_1common_1_1_messaggio_html"><div class="ttname"><a href="classindovinaparola_1_1common_1_1_messaggio.html">indovinaparola.common.Messaggio</a></div><div class="ttdef"><b>Definition</b> <a href="_messaggio_8java_source.html#l00018">Messaggio.java:18</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_db3a54907829b36871118d03417739cd.html">client</a></li><li class="navelem"><a href="dir_b565d458ba0ce2faccd0ea2cd60c04eb.html">src</a></li><li class="navelem"><a href="dir_5b5219d075a78ddc77dc3d32f25a946d.html">main</a></li><li class="navelem"><a href="dir_04fa132dfdec31ce9b2392507e95e1e3.html">java</a></li><li class="navelem"><a href="dir_5a18bb3b38ae494c394a8d7f42c1dd3d.html">indovinaparola</a></li><li class="navelem"><a href="dir_c1cf9dbb2abc4dfcefb5504335a476bb.html">client</a></li><li class="navelem"><a href="dir_6b61a2ceacd8d3036e1289fbcd71b6ca.html">service</a></li><li class="navelem"><a href="_connessione_server_8java.html">ConnessioneServer.java</a></li>
+    <li class="footer">Generato da <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

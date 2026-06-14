@@ -1,0 +1,5 @@
+<map id="indovinaparola.client.controller.ControllerAccesso.inviaRichiesta" name="indovinaparola.client.controller.ControllerAccesso.inviaRichiesta">
+<area shape="rect" id="Node000001" title="Invia la richiesta al server (login o registrazione)." alt="" coords="269,5,483,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#ae9f42d41255a64a325998af1c3637155" title="Gestisce il click sul pulsante principale (Accedi o Registrati)." alt="" coords="5,5,221,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,27,221,29,221,24,256,27"/>
+</map>

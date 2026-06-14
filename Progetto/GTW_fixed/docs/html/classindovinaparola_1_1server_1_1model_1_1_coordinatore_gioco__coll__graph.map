@@ -1,0 +1,17 @@
+<map id="indovinaparola.server.model.CoordinatoreGioco" name="indovinaparola.server.model.CoordinatoreGioco">
+<area shape="rect" id="Node000001" title="Coordinatore centrale della logica di gioco lato server." alt="" coords="165,2004,342,2708"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html" title="Gestore del database SQLite dell&#39;applicazione." alt="" coords="5,124,195,572"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,569,96,842,102,1177,121,1544,136,1729,156,1910,168,1987,163,1987,151,1911,131,1730,115,1544,97,1177,91,842,95,574"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="194,303,215,320,222,348,219,368,211,381,206,380,214,366,217,348,210,322,196,308"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html" title="Coordinatore centrale della logica di gioco lato server." alt="" coords="171,644,347,1348"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="155,569,171,627,166,628,155,575"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html" title="Analizzatore di documenti testuali." alt="" coords="304,199,488,497"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="402,494,409,762,408,1114,402,1310,392,1511,377,1713,356,1911,345,1988,340,1987,351,1910,372,1713,387,1511,397,1310,402,1114,404,763,402,500"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="324,499,309,547,294,597,287,628,282,627,289,595,304,545,325,494"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="358,5,435,75"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="397,87,399,199,394,199,396,92"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1server_1_1model_1_1_gestore_client.html" title="Gestisce la connessione con un singolo client tramite socket TCP." alt="" coords="165,1441,342,1911"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="254,1908,256,1988,251,1987,253,1913"/>
+<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="253,1441,254,1417,256,1368,257,1362,259,1417,259,1442"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="176,1345,183,1417,184,1424,179,1424,178,1418,176,1350"/>
+</map>

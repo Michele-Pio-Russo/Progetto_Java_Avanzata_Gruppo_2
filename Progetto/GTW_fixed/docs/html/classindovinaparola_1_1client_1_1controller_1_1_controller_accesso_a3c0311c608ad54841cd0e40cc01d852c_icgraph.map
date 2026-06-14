@@ -1,0 +1,7 @@
+<map id="indovinaparola.client.controller.ControllerAccesso.vaiAGioco" name="indovinaparola.client.controller.ControllerAccesso.vaiAGioco">
+<area shape="rect" id="Node000001" title="Carica la schermata di gioco e vi naviga sostituendo la scena corrente." alt="" coords="580,5,780,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#ab7869d75ac66844317f2f181deade8c8" title="Smista i messaggi ricevuti dal server al metodo appropriato." alt="" coords="254,5,532,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="562,27,533,29,532,24,567,27"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#a253a19a80520ae73e6eedfef39705bdb" title="Porta del server letta dal file di configurazione." alt="" coords="5,5,206,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="235,27,206,29,206,24,241,26"/>
+</map>

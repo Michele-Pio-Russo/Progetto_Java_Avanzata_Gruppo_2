@@ -1,0 +1,5 @@
+<map id="indovinaparola.server.db.GestoreDatabase.insertUserIfAbsent" name="indovinaparola.server.db.GestoreDatabase.insertUserIfAbsent">
+<area shape="rect" id="Node000001" title="Inserisce un utente solo se lo nomeUtente non è già presente." alt="" coords="5,5,242,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a5271fb604008dfb6233c7fe4166f1798" title="Calcola l&#39;hash SHA&#45;256 di una password." alt="" coords="290,5,503,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,24,277,27,272,27,242,29"/>
+</map>

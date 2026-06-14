@@ -1,0 +1,14 @@
+<map id="indovinaparola.client.controller.ControllerGioco.gestisciVisualizzaStorico" name="indovinaparola.client.controller.ControllerGioco.gestisciVisualizzaStorico">
+<area shape="rect" id="Node000001" title="Naviga alla schermata dello storico partite." alt="" coords="5,96,267,139"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_storico.html#ab859a2841f528e6401bac855b3e3d3d6" title="Nome del giocatore autenticato." alt="" coords="315,96,515,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="267,115,302,117,297,118,268,120"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_storico.html#a02efd8781ba418864d419fe397334324" title="Configura le colonne della TableView." alt="" coords="570,5,786,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="468,93,562,57,582,54,587,52,564,63,470,98"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_storico.html#ae1a912ecc7b94927cd658a82686662e7" title="Gestisce i messaggi ricevuti dal server." alt="" coords="563,96,793,139"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="515,115,550,117,545,118,516,120"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_storico.html#ad14e08a62ff5d1e6ba87c32efb395652" title="Ritorna alla schermata di accesso e mostra un messaggio di errore." alt="" coords="578,163,778,205"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="502,137,579,158,574,158,502,142"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_storico.html#a29b38f6c5bca3ff7c07df378c75660a1" title="Converte la stringa di esito dal database in un testo leggibile." alt="" coords="841,5,1054,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="787,24,828,26,823,27,787,29"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="629,94,627,86,635,77,652,71,678,69,706,72,725,81,719,80,705,77,678,75,653,77,638,81,632,87,633,97"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="indovinaparola.common.PayloadAutenticazione.getNomeUtente" name="indovinaparola.common.PayloadAutenticazione.getNomeUtente">
+<area shape="rect" id="Node000001" title="Restituisce lo nomeUtente." alt="" coords="312,39,521,81"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#aba933d2e360705148082ee71b1efa5e2" title="Gestisce una richiesta di login da parte di un client." alt="" coords="30,5,239,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,46,239,42,239,36,299,45"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#a60560ef53dc389eb8f1420387af230c4" title="Gestisce una richiesta di registrazione da parte di un client." alt="" coords="5,72,264,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="293,75,264,81,264,75,299,74"/>
+</map>

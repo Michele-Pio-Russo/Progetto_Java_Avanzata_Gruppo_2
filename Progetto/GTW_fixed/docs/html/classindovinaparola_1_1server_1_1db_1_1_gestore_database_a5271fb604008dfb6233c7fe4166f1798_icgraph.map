@@ -1,0 +1,13 @@
+<map id="indovinaparola.server.db.GestoreDatabase.hashPassword" name="indovinaparola.server.db.GestoreDatabase.hashPassword">
+<area shape="rect" id="Node000001" title="Calcola l&#39;hash SHA&#45;256 di una password." alt="" coords="769,72,983,115"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#ac548d429514b35d654f6c6ce7cbdac8e" title="Autentica un utente verificando nomeUtente e hash della password." alt="" coords="513,5,693,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="768,68,693,51,694,46,774,68"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#ac6b92cbce524b9e1cb7cdc6fd09f1c5b" title="Inserisce un utente solo se lo nomeUtente non è già presente." alt="" coords="485,72,721,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="751,94,722,96,722,91,757,93"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a79ffb8009804d43cc7f187844b45ee72" title="Registra un nuovo utente con ruolo &quot;player&quot;." alt="" coords="498,139,708,181"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="774,119,694,141,693,135,768,119"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a3fb8bfc652b8dece71f19f0490827858" title="Inserisce gli account predefiniti se non sono già presenti nel database." alt="" coords="227,72,437,115"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="467,94,438,96,437,91,472,93"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#a10f430d6e63a1c4ea113339adac52c6d" title="Apre la connessione al database e inizializza schema e account predefiniti." alt="" coords="5,72,179,115"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="208,94,180,96,179,91,214,93"/>
+</map>

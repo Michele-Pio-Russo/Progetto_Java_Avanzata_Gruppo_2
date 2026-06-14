@@ -1,0 +1,11 @@
+<map id="indovinaparola.client.controller.ControllerAccesso.gestisciRispostaLogin" name="indovinaparola.client.controller.ControllerAccesso.gestisciRispostaLogin">
+<area shape="rect" id="Node000001" title="Gestisce la risposta del server a una richiesta di login." alt="" coords="5,105,266,148"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#a8fcb93bd28221354d59b636d124c27a8" title="Nasconde il messaggio di errore pulendo il testo della label." alt="" coords="321,5,521,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,102,313,57,336,52,332,54,315,63,194,107"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1common_1_1_risposta_autenticazione.html#a3d84e71c3bfa8d1e61592cb7b0b8b2b0" title="Restituisce il messaggio di esito da mostrare all&#39;utente." alt="" coords="314,72,528,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="265,109,300,107,295,109,267,114"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1common_1_1_risposta_autenticazione.html#a13d088946e08acd2fba54ee4ab4252f6" title="Indica se l&#39;autenticazione o la registrazione è riuscita." alt="" coords="314,139,528,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="266,139,300,145,295,146,266,145"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1client_1_1controller_1_1_controller_accesso.html#ae3da773814520a9692f5a80eb0f0843a" title="Mostra un messaggio di errore nella label dedicata." alt="" coords="317,205,524,248"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="193,146,315,191,337,200,331,200,313,196,192,151"/>
+</map>

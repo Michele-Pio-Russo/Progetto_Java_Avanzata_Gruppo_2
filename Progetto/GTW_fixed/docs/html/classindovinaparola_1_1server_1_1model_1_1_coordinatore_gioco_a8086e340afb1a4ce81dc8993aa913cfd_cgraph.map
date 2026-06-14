@@ -1,0 +1,21 @@
+<map id="indovinaparola.server.model.CoordinatoreGioco.aggiungiInListaAttesa" name="indovinaparola.server.model.CoordinatoreGioco.aggiungiInListaAttesa">
+<area shape="rect" id="Node000001" title="Aggiunge un giocatore alla lista d&#39;attesa e avvia la sfida quando sono presenti esattamente due gioca..." alt="" coords="5,254,226,313"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#a8bd8b81c9b3f5331c36fea260be105cf" title="Avvia una nuova sfida tra due giocatori." alt="" coords="274,182,468,225"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,251,288,229,283,231,212,256"/>
+<area shape="rect" id="Node000007" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#a259735d196946931b37383bfd46e7c92" title="Scrive un messaggio nel log del sistema, chiamando anche la callback della GUI se impostata." alt="" coords="810,291,998,334"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="226,286,516,299,797,310,792,310,516,305,226,292"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1common_1_1_cifrario_cesare.html#a31b7e413aafaf47558f13cd05832d14b" title="Cifra una parola con il Cifrario di Cesare." alt="" coords="534,115,739,158"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="458,179,536,162,531,163,459,184"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#a3d0509da0a1b488c988036de5f7bae4b" title="Costruisce il coordinatore del gioco." alt="" coords="516,182,757,225"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="468,201,503,203,498,204,469,206"/>
+<area shape="rect" id="Node000005" href="$classindovinaparola_1_1server_1_1model_1_1_gestore_client.html#a0132f0000b2143692d87516abd31e231" title="Restituisce lo nomeUtente del client autenticato." alt="" coords="805,141,1003,183"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="453,223,520,235,596,244,677,245,757,234,810,215,856,193,861,191,812,220,758,239,678,251,596,250,519,241,453,228"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1server_1_1model_1_1_gestore_client.html#af3f6165ff95ef2006e69eb6fb7adb6bf" title="Invia un messaggio al client in modo thread&#45;safe." alt="" coords="810,19,998,62"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="381,180,400,146,430,105,468,65,491,48,515,34,549,21,585,12,659,4,732,5,800,16,794,17,731,11,660,9,586,17,551,26,517,39,494,52,472,69,434,108,405,149,385,184"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="427,223,517,251,661,280,797,302,792,302,660,286,515,257,426,228"/>
+<area shape="rect" id="Node000008" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html#a269d7268fb2c81755f3d076c83a73d0d" title="Termina la sfida in corso, invia i risultati ai client e persiste i dati nel database in una transazi..." alt="" coords="534,49,740,91"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="396,179,449,140,515,101,533,96,528,98,517,106,452,144,399,184"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="721,89,758,101,842,134,836,134,756,106,721,95"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="740,56,797,52,792,53,741,61"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="740,89,759,101,779,123,788,145,795,168,808,194,841,239,875,281,870,279,837,242,803,197,790,170,783,147,774,126,756,105,740,95"/>
+</map>

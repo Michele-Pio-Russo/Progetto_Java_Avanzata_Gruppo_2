@@ -211,6 +211,7 @@ public class ControllerServer implements Initializable {
     @FXML
     private void handleStopServer() {
         if (network != null) network.stop();
+        if (coordinator != null) coordinator.disconnettiTutti();
         statusLabel.setText("Server FERMO");
         startServerBtn.setDisable(false);
         stopServerBtn.setDisable(true);

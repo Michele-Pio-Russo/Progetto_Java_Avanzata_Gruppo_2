@@ -1,0 +1,5 @@
+<map id="indovinaparola.server.db.GestoreDatabase.getUserId" name="indovinaparola.server.db.GestoreDatabase.getUserId">
+<area shape="rect" id="Node000001" title="Restituisce l&#39;identificativo numerico di un utente dato il suo nomeUtente." alt="" coords="294,13,478,56"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html#acf55adc7c34f343e475b444c3e946f93" title="Salva una sfida e i risultati di entrambi i giocatori in un&#39;unica transazione atomica." alt="" coords="5,5,246,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="275,35,246,37,246,32,281,34"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="indovinaparola.client.service.ConnessioneServer.avviaThreadLettura" name="indovinaparola.client.service.ConnessioneServer.avviaThreadLettura">
+<area shape="rect" id="Node000001" title="Avvia il thread daemon di lettura dei messaggi in ingresso." alt="" coords="243,5,493,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1client_1_1service_1_1_connessione_server.html#a1a2ddcbfd9b1ff4ee8b46a55abaa04cb" title="Apre la connessione TCP con il server e avvia il thread daemon di lettura." alt="" coords="5,5,195,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,27,195,29,195,24,230,26"/>
+</map>

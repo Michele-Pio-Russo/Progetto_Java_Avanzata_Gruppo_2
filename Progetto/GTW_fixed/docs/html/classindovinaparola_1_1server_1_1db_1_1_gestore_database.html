@@ -1,0 +1,1091 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IndovinaLaParola: Riferimenti per la classe indovinaparola.server.db.GestoreDatabase</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IndovinaLaParola<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Gioco Multiplayer Client-Server a Sfide in Tempo Reale - JA26</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classindovinaparola_1_1server_1_1db_1_1_gestore_database.html','','classindovinaparola_1_1server_1_1db_1_1_gestore_database-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Caricamento in corso...</div>
+<div class="SRStatus" id="Searching">Ricerca in corso...</div>
+<div class="SRStatus" id="NoMatches">Nessun risultato</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Riferimenti per la classe indovinaparola.server.db.GestoreDatabase</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Gestore del database SQLite dell'applicazione.  
+ <a href="#details">Continua...</a></p>
+<div class="dynheader">
+Diagramma di collaborazione per indovinaparola.server.db.GestoreDatabase:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Composti</h2></td></tr>
+<tr class="memitem:UserStats" id="r_UserStats"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database_1_1_user_stats.html">UserStats</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Classe interna che rappresenta le statistiche aggregate di un utente.  <a href="classindovinaparola_1_1server_1_1db_1_1_gestore_database_1_1_user_stats.html#details">Continua...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Membri pubblici</h2></td></tr>
+<tr class="memitem:ac548d429514b35d654f6c6ce7cbdac8e" id="r_ac548d429514b35d654f6c6ce7cbdac8e"><td class="memItemLeft">String&#160;</td><td class="memItemRight"><a class="el" href="#ac548d429514b35d654f6c6ce7cbdac8e">autentica</a> (String nomeUtente, String password)</td></tr>
+<tr class="memdesc:ac548d429514b35d654f6c6ce7cbdac8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Autentica un utente verificando nomeUtente e hash della password.  <br /></td></tr>
+<tr class="memitem:a10f430d6e63a1c4ea113339adac52c6d" id="r_a10f430d6e63a1c4ea113339adac52c6d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a10f430d6e63a1c4ea113339adac52c6d">connetti</a> ()  throws SQLException </td></tr>
+<tr class="memdesc:a10f430d6e63a1c4ea113339adac52c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apre la connessione al database e inizializza schema e account predefiniti.  <br /></td></tr>
+<tr class="memitem:afd679d2742b1ce95e353cedb6f3c041d" id="r_afd679d2742b1ce95e353cedb6f3c041d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afd679d2742b1ce95e353cedb6f3c041d">disconnetti</a> ()</td></tr>
+<tr class="memdesc:afd679d2742b1ce95e353cedb6f3c041d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chiude la connessione al database.  <br /></td></tr>
+<tr class="memitem:a3949b52a91e3c9775a7a6153cbc669a0" id="r_a3949b52a91e3c9775a7a6153cbc669a0"><td class="memItemLeft">List&lt; <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database_1_1_user_stats.html">UserStats</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3949b52a91e3c9775a7a6153cbc669a0">getAllStats</a> ()</td></tr>
+<tr class="memdesc:a3949b52a91e3c9775a7a6153cbc669a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce le statistiche aggregate di tutti i giocatori, ordinate per vittorie decrescenti.  <br /></td></tr>
+<tr class="memitem:afa0a73021e0dfa0d59c2a8dc43f8a6ea" id="r_afa0a73021e0dfa0d59c2a8dc43f8a6ea"><td class="memItemLeft">List&lt; <a class="el" href="classindovinaparola_1_1common_1_1_voce_storico.html">VoceStorico</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#afa0a73021e0dfa0d59c2a8dc43f8a6ea">getHistory</a> (String nomeUtente)</td></tr>
+<tr class="memdesc:afa0a73021e0dfa0d59c2a8dc43f8a6ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce lo storico delle sfide di un utente, ordinate dalla più recente.  <br /></td></tr>
+<tr class="memitem:a54af98a435dbe9088bc41f01ff2b22c2" id="r_a54af98a435dbe9088bc41f01ff2b22c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a54af98a435dbe9088bc41f01ff2b22c2">getUserId</a> (String nomeUtente)</td></tr>
+<tr class="memdesc:a54af98a435dbe9088bc41f01ff2b22c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce l'identificativo numerico di un utente dato il suo nomeUtente.  <br /></td></tr>
+<tr class="memitem:a79ffb8009804d43cc7f187844b45ee72" id="r_a79ffb8009804d43cc7f187844b45ee72"><td class="memItemLeft">boolean&#160;</td><td class="memItemRight"><a class="el" href="#a79ffb8009804d43cc7f187844b45ee72">registraUtente</a> (String nomeUtente, String password)</td></tr>
+<tr class="memdesc:a79ffb8009804d43cc7f187844b45ee72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registra un nuovo utente con ruolo "player".  <br /></td></tr>
+<tr class="memitem:acf55adc7c34f343e475b444c3e946f93" id="r_acf55adc7c34f343e475b444c3e946f93"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acf55adc7c34f343e475b444c3e946f93">saveChallengeWithResults</a> (String estrattoTesto, String encryptedWord, String originalWord, int spostamento, String winnerUser, String loserUser, boolean draw, long tempoRispostaMs)</td></tr>
+<tr class="memdesc:acf55adc7c34f343e475b444c3e946f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Salva una sfida e i risultati di entrambi i giocatori in un'unica transazione atomica.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Membri pubblici statici</h2></td></tr>
+<tr class="memitem:a985bcb9d2127387591f1458b2ad868b7" id="r_a985bcb9d2127387591f1458b2ad868b7"><td class="memItemLeft">static synchronized <a class="el" href="#a3b0290884041f2f0a16d869d9e8548da">GestoreDatabase</a>&#160;</td><td class="memItemRight"><a class="el" href="#a985bcb9d2127387591f1458b2ad868b7">getInstance</a> (String dbPath)</td></tr>
+<tr class="memdesc:a985bcb9d2127387591f1458b2ad868b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce l'istanza Singleton del <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html" title="Gestore del database SQLite dell&#39;applicazione.">GestoreDatabase</a>.  <br /></td></tr>
+<tr class="memitem:a5271fb604008dfb6233c7fe4166f1798" id="r_a5271fb604008dfb6233c7fe4166f1798"><td class="memItemLeft">static String&#160;</td><td class="memItemRight"><a class="el" href="#a5271fb604008dfb6233c7fe4166f1798">hashPassword</a> (String password)</td></tr>
+<tr class="memdesc:a5271fb604008dfb6233c7fe4166f1798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcola l'hash SHA-256 di una password.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Membri privati</h2></td></tr>
+<tr class="memitem:a3b0290884041f2f0a16d869d9e8548da" id="r_a3b0290884041f2f0a16d869d9e8548da"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3b0290884041f2f0a16d869d9e8548da">GestoreDatabase</a> (String dbPath)</td></tr>
+<tr class="memdesc:a3b0290884041f2f0a16d869d9e8548da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Costruttore privato — pattern Singleton.  <br /></td></tr>
+<tr class="memitem:a2a6d1d92a8d91c33d8251a6a5af92710" id="r_a2a6d1d92a8d91c33d8251a6a5af92710"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2a6d1d92a8d91c33d8251a6a5af92710">initSchema</a> ()  throws SQLException </td></tr>
+<tr class="memdesc:a2a6d1d92a8d91c33d8251a6a5af92710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea le tabelle del database se non esistono già.  <br /></td></tr>
+<tr class="memitem:ad30405eb9d0f38cd630e09eec1d85427" id="r_ad30405eb9d0f38cd630e09eec1d85427"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad30405eb9d0f38cd630e09eec1d85427">insertChallenge</a> (String estrattoTesto, String encryptedWord, String originalWord, int spostamento)  throws SQLException </td></tr>
+<tr class="memdesc:ad30405eb9d0f38cd630e09eec1d85427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserisce una riga nella tabella challenges e restituisce il challenge_id generato.  <br /></td></tr>
+<tr class="memitem:a33d3cc33fa6e28143524f2c72b2deb10" id="r_a33d3cc33fa6e28143524f2c72b2deb10"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a33d3cc33fa6e28143524f2c72b2deb10">insertResult</a> (int idSfida, int userId, String esito, long tempoRispostaMs)  throws SQLException </td></tr>
+<tr class="memdesc:a33d3cc33fa6e28143524f2c72b2deb10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserisce un risultato per un singolo giocatore nella tabella results.  <br /></td></tr>
+<tr class="memitem:ac6b92cbce524b9e1cb7cdc6fd09f1c5b" id="r_ac6b92cbce524b9e1cb7cdc6fd09f1c5b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac6b92cbce524b9e1cb7cdc6fd09f1c5b">insertUserIfAbsent</a> (String nomeUtente, String password, String ruolo)  throws SQLException </td></tr>
+<tr class="memdesc:ac6b92cbce524b9e1cb7cdc6fd09f1c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserisce un utente solo se lo nomeUtente non è già presente.  <br /></td></tr>
+<tr class="memitem:a3fb8bfc652b8dece71f19f0490827858" id="r_a3fb8bfc652b8dece71f19f0490827858"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3fb8bfc652b8dece71f19f0490827858">seedAccounts</a> ()  throws SQLException </td></tr>
+<tr class="memdesc:a3fb8bfc652b8dece71f19f0490827858"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserisce gli account predefiniti se non sono già presenti nel database.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Attributi privati</h2></td></tr>
+<tr class="memitem:a417dc8364c118e248b89c4d5bc0d38bf" id="r_a417dc8364c118e248b89c4d5bc0d38bf"><td class="memItemLeft">Connection&#160;</td><td class="memItemRight"><a class="el" href="#a417dc8364c118e248b89c4d5bc0d38bf">connessione</a></td></tr>
+<tr class="memdesc:a417dc8364c118e248b89c4d5bc0d38bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connessione attiva al database SQLite.  <br /></td></tr>
+<tr class="memitem:a51f3f1e6e6971e65fd8dd32573726719" id="r_a51f3f1e6e6971e65fd8dd32573726719"><td class="memItemLeft">final String&#160;</td><td class="memItemRight"><a class="el" href="#a51f3f1e6e6971e65fd8dd32573726719">dbPath</a></td></tr>
+<tr class="memdesc:a51f3f1e6e6971e65fd8dd32573726719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Percorso locale del file SQLite.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-static-attribs" class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Attributi privati statici</h2></td></tr>
+<tr class="memitem:aacfafbaa34ff5a5de56b72110cedeba1" id="r_aacfafbaa34ff5a5de56b72110cedeba1"><td class="memItemLeft">static <a class="el" href="#a3b0290884041f2f0a16d869d9e8548da">GestoreDatabase</a>&#160;</td><td class="memItemRight"><a class="el" href="#aacfafbaa34ff5a5de56b72110cedeba1">instance</a></td></tr>
+<tr class="memdesc:aacfafbaa34ff5a5de56b72110cedeba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Istanza singleton del <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html" title="Gestore del database SQLite dell&#39;applicazione.">GestoreDatabase</a>.  <br /></td></tr>
+<tr class="memitem:a0b252f7f052eec223cc0a5069aa7d4a2" id="r_a0b252f7f052eec223cc0a5069aa7d4a2"><td class="memItemLeft">static final Logger&#160;</td><td class="memItemRight"><a class="el" href="#a0b252f7f052eec223cc0a5069aa7d4a2">LOGGER</a> = Logger.getLogger(GestoreDatabase.class.getName())</td></tr>
+<tr class="memdesc:a0b252f7f052eec223cc0a5069aa7d4a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logger della classe <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html" title="Gestore del database SQLite dell&#39;applicazione.">GestoreDatabase</a>.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>Gestore del database SQLite dell'applicazione. </p>
+<p>Implementa il pattern Singleton e il pattern DAO (Data Access Object).</p>
+<p>Tutte le query usano esclusivamente <code><a class="el" href="">PreparedStatement</a></code> per prevenire SQL injection. Le operazioni che coinvolgono più tabelle (es. salvataggio sfida</p><ul>
+<li>risultati) sono gestite in transazione esplicita. </li>
+</ul>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00034">34</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Documentazione dei costruttori e dei distruttori</h2>
+<a id="a3b0290884041f2f0a16d869d9e8548da" name="a3b0290884041f2f0a16d869d9e8548da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b0290884041f2f0a16d869d9e8548da">&#9670;&#160;</a></span>GestoreDatabase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">indovinaparola.server.db.GestoreDatabase.GestoreDatabase </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>dbPath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Costruttore privato — pattern Singleton. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dbPath</td><td>percorso relativo al file SQLite </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00047">47</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00040">dbPath</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00058">getInstance()</a>.</p>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a3b0290884041f2f0a16d869d9e8548da_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentazione delle funzioni membro</h2>
+<a id="ac548d429514b35d654f6c6ce7cbdac8e" name="ac548d429514b35d654f6c6ce7cbdac8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac548d429514b35d654f6c6ce7cbdac8e">&#9670;&#160;</a></span>autentica()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String indovinaparola.server.db.GestoreDatabase.autentica </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>nomeUtente</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>password</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Autentica un utente verificando nomeUtente e hash della password. </p>
+<dl class="section pre"><dt>Precondizione</dt><dd>nomeUtente e password non devono essere nulli o vuoti. </dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>Viene restituito il ruolo dell'utente se i dati sono corretti.</dd></dl>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nomeUtente</td><td>nomeUtente da verificare </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">password</td><td>password in chiaro </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>ruolo dell'utente ("admin" o "player"), oppure null se le credenziali non sono valide </dd></dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00193">193</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>, <a class="el" href="_gestore_database_8java_source.html#l00486">hashPassword()</a>, e <a class="el" href="_gestore_database_8java_source.html#l00036">LOGGER</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_ac548d429514b35d654f6c6ce7cbdac8e_cgraph.svg" width="452" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a10f430d6e63a1c4ea113339adac52c6d" name="a10f430d6e63a1c4ea113339adac52c6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10f430d6e63a1c4ea113339adac52c6d">&#9670;&#160;</a></span>connetti()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.db.GestoreDatabase.connetti </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> throws SQLException</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apre la connessione al database e inizializza schema e account predefiniti. </p>
+<p>Deve essere chiamato una sola volta all'avvio del server.</p>
+<dl class="section pre"><dt>Precondizione</dt><dd>Il percorso del database (dbPath) deve essere valido. </dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>La connessione al database è aperta e le tabelle sono inizializzate.</dd></dl>
+<dl class="exception"><dt>Eccezioni</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td>in caso di errore di connessione o inizializzazione </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00074">74</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>, <a class="el" href="_gestore_database_8java_source.html#l00040">dbPath</a>, <a class="el" href="_gestore_database_8java_source.html#l00105">initSchema()</a>, <a class="el" href="_gestore_database_8java_source.html#l00036">LOGGER</a>, e <a class="el" href="_gestore_database_8java_source.html#l00147">seedAccounts()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a10f430d6e63a1c4ea113339adac52c6d_cgraph.svg" width="100%" height="390"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="afd679d2742b1ce95e353cedb6f3c041d" name="afd679d2742b1ce95e353cedb6f3c041d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd679d2742b1ce95e353cedb6f3c041d">&#9670;&#160;</a></span>disconnetti()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.db.GestoreDatabase.disconnetti </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Chiude la connessione al database. </p>
+<dl class="section pre"><dt>Precondizione</dt><dd>La connessione al database deve essere attiva. </dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>La connessione al database viene chiusa in modo sicuro. </dd></dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00088">88</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>, e <a class="el" href="_gestore_database_8java_source.html#l00036">LOGGER</a>.</p>
+
+</div>
+</div>
+<a id="a3949b52a91e3c9775a7a6153cbc669a0" name="a3949b52a91e3c9775a7a6153cbc669a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3949b52a91e3c9775a7a6153cbc669a0">&#9670;&#160;</a></span>getAllStats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt; <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database_1_1_user_stats.html">UserStats</a> &gt; indovinaparola.server.db.GestoreDatabase.getAllStats </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Restituisce le statistiche aggregate di tutti i giocatori, ordinate per vittorie decrescenti. </p>
+<p>Usato per popolare la classifica nella GUI amministratore.</p>
+<dl class="section return"><dt>Restituisce</dt><dd>lista di <code><a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database_1_1_user_stats.html">UserStats</a></code>, vuota se nessun risultato presente </dd></dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00450">450</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>, e <a class="el" href="_gestore_database_8java_source.html#l00036">LOGGER</a>.</p>
+
+</div>
+</div>
+<a id="afa0a73021e0dfa0d59c2a8dc43f8a6ea" name="afa0a73021e0dfa0d59c2a8dc43f8a6ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa0a73021e0dfa0d59c2a8dc43f8a6ea">&#9670;&#160;</a></span>getHistory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt; <a class="el" href="classindovinaparola_1_1common_1_1_voce_storico.html">VoceStorico</a> &gt; indovinaparola.server.db.GestoreDatabase.getHistory </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>nomeUtente</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Restituisce lo storico delle sfide di un utente, ordinate dalla più recente. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nomeUtente</td><td>nomeUtente del giocatore </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>lista di <code><a class="el" href="classindovinaparola_1_1common_1_1_voce_storico.html">VoceStorico</a></code>, vuota se nessuna sfida trovata </dd></dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00381">381</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>, e <a class="el" href="_gestore_database_8java_source.html#l00036">LOGGER</a>.</p>
+
+</div>
+</div>
+<a id="a985bcb9d2127387591f1458b2ad868b7" name="a985bcb9d2127387591f1458b2ad868b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a985bcb9d2127387591f1458b2ad868b7">&#9670;&#160;</a></span>getInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized <a class="el" href="#a3b0290884041f2f0a16d869d9e8548da">GestoreDatabase</a> indovinaparola.server.db.GestoreDatabase.getInstance </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>dbPath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Restituisce l'istanza Singleton del <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html" title="Gestore del database SQLite dell&#39;applicazione.">GestoreDatabase</a>. </p>
+<p>Crea l'istanza al primo invocation (lazy initialization).</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dbPath</td><td>percorso relativo al file database SQLite </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>istanza singleton </dd></dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00058">58</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00040">dbPath</a>, <a class="el" href="_gestore_database_8java_source.html#l00047">GestoreDatabase()</a>, e <a class="el" href="_gestore_database_8java_source.html#l00038">instance</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_controller_server_8java_source.html#l00104">indovinaparola.server.controller.ControllerServer.initialize()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a985bcb9d2127387591f1458b2ad868b7_cgraph.svg" width="484" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a985bcb9d2127387591f1458b2ad868b7_icgraph.svg" width="460" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a54af98a435dbe9088bc41f01ff2b22c2" name="a54af98a435dbe9088bc41f01ff2b22c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54af98a435dbe9088bc41f01ff2b22c2">&#9670;&#160;</a></span>getUserId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int indovinaparola.server.db.GestoreDatabase.getUserId </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>nomeUtente</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Restituisce l'identificativo numerico di un utente dato il suo nomeUtente. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nomeUtente</td><td>nomeUtente da cercare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>user_id, oppure -1 se non trovato </dd></dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00241">241</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>, e <a class="el" href="_gestore_database_8java_source.html#l00036">LOGGER</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00270">saveChallengeWithResults()</a>.</p>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a54af98a435dbe9088bc41f01ff2b22c2_icgraph.svg" width="484" height="70"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a5271fb604008dfb6233c7fe4166f1798" name="a5271fb604008dfb6233c7fe4166f1798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5271fb604008dfb6233c7fe4166f1798">&#9670;&#160;</a></span>hashPassword()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String indovinaparola.server.db.GestoreDatabase.hashPassword </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>password</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calcola l'hash SHA-256 di una password. </p>
+<p>Le password non vengono mai salvate in chiaro nel database.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">password</td><td>password in chiaro </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>stringa esadecimale dell'hash SHA-256 </dd></dl>
+<dl class="exception"><dt>Eccezioni</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">RuntimeException</td><td>se l'algoritmo SHA-256 non è disponibile nella JVM </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00486">486</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00193">autentica()</a>, <a class="el" href="_gestore_database_8java_source.html#l00161">insertUserIfAbsent()</a>, e <a class="el" href="_gestore_database_8java_source.html#l00220">registraUtente()</a>.</p>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a5271fb604008dfb6233c7fe4166f1798_icgraph.svg" width="100%" height="440"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a2a6d1d92a8d91c33d8251a6a5af92710" name="a2a6d1d92a8d91c33d8251a6a5af92710"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a6d1d92a8d91c33d8251a6a5af92710">&#9670;&#160;</a></span>initSchema()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.db.GestoreDatabase.initSchema </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> throws SQLException</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Crea le tabelle del database se non esistono già. </p>
+<dl class="exception"><dt>Eccezioni</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td>in caso di errore DDL </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00105">105</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00074">connetti()</a>.</p>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a2a6d1d92a8d91c33d8251a6a5af92710_icgraph.svg" width="424" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ad30405eb9d0f38cd630e09eec1d85427" name="ad30405eb9d0f38cd630e09eec1d85427"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad30405eb9d0f38cd630e09eec1d85427">&#9670;&#160;</a></span>insertChallenge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int indovinaparola.server.db.GestoreDatabase.insertChallenge </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>estrattoTesto</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>encryptedWord</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>originalWord</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>spostamento</em></span>&#160;) throws SQLException</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserisce una riga nella tabella challenges e restituisce il challenge_id generato. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">estrattoTesto</td><td>estratto testuale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">encryptedWord</td><td>parola cifrata </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">originalWord</td><td>parola originale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">spostamento</td><td>spostamento del cifrario </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>challenge_id generato, oppure -1 in caso di errore </dd></dl>
+<dl class="exception"><dt>Eccezioni</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td>in caso di errore SQL </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00333">333</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00270">saveChallengeWithResults()</a>.</p>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_ad30405eb9d0f38cd630e09eec1d85427_icgraph.svg" width="516" height="70"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a33d3cc33fa6e28143524f2c72b2deb10" name="a33d3cc33fa6e28143524f2c72b2deb10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33d3cc33fa6e28143524f2c72b2deb10">&#9670;&#160;</a></span>insertResult()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.db.GestoreDatabase.insertResult </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idSfida</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>userId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>esito</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>tempoRispostaMs</em></span>&#160;) throws SQLException</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserisce un risultato per un singolo giocatore nella tabella results. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">idSfida</td><td>id della sfida </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">userId</td><td>id dell'utente </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">esito</td><td>esito: "win", "loss" o "draw" </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tempoRispostaMs</td><td>tempo di risposta in ms (-1 se timeout) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Eccezioni</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td>in caso di errore SQL </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00361">361</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00270">saveChallengeWithResults()</a>.</p>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a33d3cc33fa6e28143524f2c72b2deb10_icgraph.svg" width="496" height="70"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ac6b92cbce524b9e1cb7cdc6fd09f1c5b" name="ac6b92cbce524b9e1cb7cdc6fd09f1c5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6b92cbce524b9e1cb7cdc6fd09f1c5b">&#9670;&#160;</a></span>insertUserIfAbsent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.db.GestoreDatabase.insertUserIfAbsent </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>nomeUtente</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>password</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>ruolo</em></span>&#160;) throws SQLException</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserisce un utente solo se lo nomeUtente non è già presente. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nomeUtente</td><td>nomeUtente da inserire </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">password</td><td>password in chiaro (verrà hashata) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ruolo</td><td>ruolo: "admin" o "player" </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Eccezioni</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td>in caso di errore SQL </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00161">161</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>, <a class="el" href="_gestore_database_8java_source.html#l00486">hashPassword()</a>, e <a class="el" href="_gestore_database_8java_source.html#l00036">LOGGER</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00147">seedAccounts()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_ac6b92cbce524b9e1cb7cdc6fd09f1c5b_cgraph.svg" width="508" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_ac6b92cbce524b9e1cb7cdc6fd09f1c5b_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a79ffb8009804d43cc7f187844b45ee72" name="a79ffb8009804d43cc7f187844b45ee72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79ffb8009804d43cc7f187844b45ee72">&#9670;&#160;</a></span>registraUtente()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean indovinaparola.server.db.GestoreDatabase.registraUtente </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>nomeUtente</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>password</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Registra un nuovo utente con ruolo "player". </p>
+<dl class="section pre"><dt>Precondizione</dt><dd>L'utente non deve essere già presente nel database. </dd></dl>
+<dl class="section post"><dt>Postcondizione</dt><dd>Viene creato un nuovo record nel database per l'utente.</dd></dl>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nomeUtente</td><td>nomeUtente scelto dall'utente </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">password</td><td>password in chiaro (verrà hashata) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>true se la registrazione è avvenuta con successo,</dd></dl>
+<p>false se lo nomeUtente è già occupato </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00220">220</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>, <a class="el" href="_gestore_database_8java_source.html#l00486">hashPassword()</a>, e <a class="el" href="_gestore_database_8java_source.html#l00036">LOGGER</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a79ffb8009804d43cc7f187844b45ee72_cgraph.svg" width="482" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="acf55adc7c34f343e475b444c3e946f93" name="acf55adc7c34f343e475b444c3e946f93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf55adc7c34f343e475b444c3e946f93">&#9670;&#160;</a></span>saveChallengeWithResults()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.db.GestoreDatabase.saveChallengeWithResults </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>estrattoTesto</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>encryptedWord</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>originalWord</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>spostamento</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>winnerUser</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>loserUser</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean</td>          <td class="paramname"><span class="paramname"><em>draw</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>tempoRispostaMs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Salva una sfida e i risultati di entrambi i giocatori in un'unica transazione atomica. </p>
+<p>Se una delle operazioni fallisce, viene eseguito il rollback di tutta la transazione.</p>
+<p>Dimostrazione di transazione esplicita JDBC.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">estrattoTesto</td><td>estratto testuale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">encryptedWord</td><td>parola cifrata </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">originalWord</td><td>parola originale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">spostamento</td><td>spostamento del cifrario di Cesare </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">winnerUser</td><td>nomeUtente del vincitore (null se pareggio) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">loserUser</td><td>nomeUtente del perdente (null se pareggio) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">draw</td><td>true se la sfida è terminata in pareggio </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tempoRispostaMs</td><td>tempo di risposta del vincitore in ms (-1 se pareggio) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00270">270</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00039">connessione</a>, <a class="el" href="_gestore_database_8java_source.html#l00241">getUserId()</a>, <a class="el" href="_gestore_database_8java_source.html#l00333">insertChallenge()</a>, <a class="el" href="_gestore_database_8java_source.html#l00361">insertResult()</a>, e <a class="el" href="_gestore_database_8java_source.html#l00036">LOGGER</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_acf55adc7c34f343e475b444c3e946f93_cgraph.svg" width="516" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a3fb8bfc652b8dece71f19f0490827858" name="a3fb8bfc652b8dece71f19f0490827858"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fb8bfc652b8dece71f19f0490827858">&#9670;&#160;</a></span>seedAccounts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void indovinaparola.server.db.GestoreDatabase.seedAccounts </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> throws SQLException</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserisce gli account predefiniti se non sono già presenti nel database. </p>
+<p>Account creati: admin/admin123 (ruolo admin), giocatore1/pass1, giocatore2/pass2 (ruolo player).</p>
+<dl class="exception"><dt>Eccezioni</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td>in caso di errore di inserimento </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00147">147</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenzia <a class="el" href="_gestore_database_8java_source.html#l00161">insertUserIfAbsent()</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00074">connetti()</a>.</p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a3fb8bfc652b8dece71f19f0490827858_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classindovinaparola_1_1server_1_1db_1_1_gestore_database_a3fb8bfc652b8dece71f19f0490827858_icgraph.svg" width="443" height="54"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Documentazione dei membri dato</h2>
+<a id="a417dc8364c118e248b89c4d5bc0d38bf" name="a417dc8364c118e248b89c4d5bc0d38bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a417dc8364c118e248b89c4d5bc0d38bf">&#9670;&#160;</a></span>connessione</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Connection indovinaparola.server.db.GestoreDatabase.connessione</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Connessione attiva al database SQLite. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00039">39</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00193">autentica()</a>, <a class="el" href="_gestore_database_8java_source.html#l00074">connetti()</a>, <a class="el" href="_gestore_database_8java_source.html#l00088">disconnetti()</a>, <a class="el" href="_gestore_database_8java_source.html#l00450">getAllStats()</a>, <a class="el" href="_gestore_database_8java_source.html#l00381">getHistory()</a>, <a class="el" href="_gestore_database_8java_source.html#l00241">getUserId()</a>, <a class="el" href="_gestore_database_8java_source.html#l00105">initSchema()</a>, <a class="el" href="_gestore_database_8java_source.html#l00333">insertChallenge()</a>, <a class="el" href="_gestore_database_8java_source.html#l00361">insertResult()</a>, <a class="el" href="_gestore_database_8java_source.html#l00161">insertUserIfAbsent()</a>, <a class="el" href="_gestore_database_8java_source.html#l00220">registraUtente()</a>, e <a class="el" href="_gestore_database_8java_source.html#l00270">saveChallengeWithResults()</a>.</p>
+
+</div>
+</div>
+<a id="a51f3f1e6e6971e65fd8dd32573726719" name="a51f3f1e6e6971e65fd8dd32573726719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f3f1e6e6971e65fd8dd32573726719">&#9670;&#160;</a></span>dbPath</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String indovinaparola.server.db.GestoreDatabase.dbPath</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Percorso locale del file SQLite. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00040">40</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00074">connetti()</a>, <a class="el" href="_gestore_database_8java_source.html#l00047">GestoreDatabase()</a>, e <a class="el" href="_gestore_database_8java_source.html#l00058">getInstance()</a>.</p>
+
+</div>
+</div>
+<a id="aacfafbaa34ff5a5de56b72110cedeba1" name="aacfafbaa34ff5a5de56b72110cedeba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacfafbaa34ff5a5de56b72110cedeba1">&#9670;&#160;</a></span>instance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3b0290884041f2f0a16d869d9e8548da">GestoreDatabase</a> indovinaparola.server.db.GestoreDatabase.instance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Istanza singleton del <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html" title="Gestore del database SQLite dell&#39;applicazione.">GestoreDatabase</a>. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00038">38</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00058">getInstance()</a>.</p>
+
+</div>
+</div>
+<a id="a0b252f7f052eec223cc0a5069aa7d4a2" name="a0b252f7f052eec223cc0a5069aa7d4a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b252f7f052eec223cc0a5069aa7d4a2">&#9670;&#160;</a></span>LOGGER</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final Logger indovinaparola.server.db.GestoreDatabase.LOGGER = Logger.getLogger(GestoreDatabase.class.getName())</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logger della classe <a class="el" href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html" title="Gestore del database SQLite dell&#39;applicazione.">GestoreDatabase</a>. </p>
+
+<p class="definition">Definizione alla linea <a class="el" href="_gestore_database_8java_source.html#l00036">36</a> del file <a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a>.</p>
+
+<p class="reference">Referenziato da <a class="el" href="_gestore_database_8java_source.html#l00193">autentica()</a>, <a class="el" href="_gestore_database_8java_source.html#l00074">connetti()</a>, <a class="el" href="_gestore_database_8java_source.html#l00088">disconnetti()</a>, <a class="el" href="_gestore_database_8java_source.html#l00450">getAllStats()</a>, <a class="el" href="_gestore_database_8java_source.html#l00381">getHistory()</a>, <a class="el" href="_gestore_database_8java_source.html#l00241">getUserId()</a>, <a class="el" href="_gestore_database_8java_source.html#l00161">insertUserIfAbsent()</a>, <a class="el" href="_gestore_database_8java_source.html#l00220">registraUtente()</a>, e <a class="el" href="_gestore_database_8java_source.html#l00270">saveChallengeWithResults()</a>.</p>
+
+</div>
+</div>
+<hr/>La documentazione per questa classe è stata generata a partire dal seguente file:<ul>
+<li>server/src/main/java/indovinaparola/server/db/<a class="el" href="_gestore_database_8java_source.html">GestoreDatabase.java</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>indovinaparola</b></li><li class="navelem"><a href="namespaceindovinaparola_1_1server.html">server</a></li><li class="navelem"><a href="namespaceindovinaparola_1_1server_1_1db.html">db</a></li><li class="navelem"><a href="classindovinaparola_1_1server_1_1db_1_1_gestore_database.html">GestoreDatabase</a></li>
+    <li class="footer">Generato da <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

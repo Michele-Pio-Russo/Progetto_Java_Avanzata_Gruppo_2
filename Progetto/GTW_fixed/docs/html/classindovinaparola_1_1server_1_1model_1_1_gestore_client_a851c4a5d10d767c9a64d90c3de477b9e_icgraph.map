@@ -1,0 +1,5 @@
+<map id="indovinaparola.server.model.GestoreClient.smistaMessaggio" name="indovinaparola.server.model.GestoreClient.smistaMessaggio">
+<area shape="rect" id="Node000001" title="Smista il messaggio ricevuto al metodo appropriato del coordinatore,." alt="" coords="241,5,448,48"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1model_1_1_gestore_client.html#a57ac9adadba72412554e1f8c335a5d77" title="Loop di lettura messaggi dal client." alt="" coords="5,5,193,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,27,193,29,193,24,228,26"/>
+</map>

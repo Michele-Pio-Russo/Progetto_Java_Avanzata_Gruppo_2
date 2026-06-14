@@ -1,0 +1,15 @@
+<map id="indovinaparola.server.model.ReteServer" name="indovinaparola.server.model.ReteServer">
+<area shape="rect" id="Node000001" title="Gestisce il ServerSocket e accetta le connessioni in ingresso dai client." alt="" coords="52,1569,229,1783"/>
+<area shape="rect" id="Node000002" href="$classindovinaparola_1_1server_1_1model_1_1_coordinatore_gioco.html" title="Coordinatore centrale della logica di gioco lato server." alt="" coords="159,644,335,1348"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,1345,158,1372,148,1464,144,1553,138,1552,143,1463,152,1372,158,1351"/>
+<area shape="rect" id="Node000006" href="$classindovinaparola_1_1server_1_1model_1_1_gestore_client.html" title="Gestisce la connessione con un singolo client tramite socket TCP." alt="" coords="259,1441,435,1911"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="234,1345,246,1417,256,1462,251,1461,240,1418,233,1350"/>
+<area shape="rect" id="Node000003" href="$classindovinaparola_1_1server_1_1db_1_1_gestore_database.html" title="Gestore del database SQLite dell&#39;applicazione." alt="" coords="5,124,195,572"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="151,569,166,627,161,628,151,575"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="194,303,215,320,222,348,219,368,211,381,206,380,214,366,217,348,210,322,196,308"/>
+<area shape="rect" id="Node000004" href="$classindovinaparola_1_1server_1_1service_1_1_analizzatore_documenti.html" title="Analizzatore di documenti testuali." alt="" coords="304,199,488,497"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="363,494,335,628,329,626,362,500"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="358,5,435,75"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="397,87,399,199,394,199,396,92"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="330,1441,322,1372,323,1367,324,1362,327,1372,335,1442"/>
+</map>
