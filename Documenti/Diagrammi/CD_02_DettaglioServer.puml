@@ -1,4 +1,16 @@
 @startuml CD_02_DettaglioServer
+' Descrizione del diagramma:
+' Questo Diagramma delle Classi fornisce un dettaglio approfondito del modulo Server.
+' Mostra i pattern architetturali utilizzati e le relazioni tra interfaccia utente, logica e dati.
+'
+' Componenti principali:
+' - ApplicazioneServer: Punto di ingresso dell'app JavaFX.
+' - ControllerServer: Gestisce la UI del server (start, stop, classifiche, log).
+' - ReteServer: Accetta le connessioni in ingresso sui Socket.
+' - GestoreClient: Thread dedicato alla gestione di una singola connessione client.
+' - CoordinatoreGioco: Gestisce la logica del gioco in modo thread-safe (accoppiamento giocatori, fine sfida).
+' - ServizioAnalisi & AnalizzatoreDocumenti: Task asincrono per l'elaborazione dei testi in base al calcolo TF.
+' - GestoreDatabase: Singleton per l'accesso a SQLite (salvataggio storico, statistiche, utenti).
 skinparam classAttributeIconSize 0
 
 title CD_02 — Dettaglio Modulo Server (package reali da Doxygen)

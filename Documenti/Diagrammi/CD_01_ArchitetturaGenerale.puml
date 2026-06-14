@@ -1,4 +1,15 @@
 @startuml CD_01_ArchitetturaGenerale
+' Descrizione del diagramma:
+' Questo Diagramma delle Classi ad alto livello illustra l'architettura generale del sistema,
+' suddividendola in tre macro-package principali: common, server, client.
+'
+' Componenti principali:
+' - common: Package condiviso. Contiene i Messaggi e le Utility usate da entrambi i lati.
+' - server: Contiene la logica di business (Model), l'accesso ai dati (DB), i servizi in background (Service),
+'   i Controller dell'interfaccia e le classi di utilita'. Gestisce le connessioni multiple e le partite.
+' - client: Contiene l'interfaccia utente (Controller JavaFX), i servizi di rete (ConnessioneServer)
+'   e le configurazioni. Invia e riceve Messaggi al/dal Server.
+' - Le relazioni indicano l'uso delle classi e la comunicazione tramite Socket TCP.
 skinparam packageStyle rectangle
 skinparam classAttributeIconSize 0
 left to right direction

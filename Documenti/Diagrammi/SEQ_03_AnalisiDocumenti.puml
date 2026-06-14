@@ -1,4 +1,12 @@
 @startuml SEQ_03_AnalisiDocumenti
+' Descrizione del diagramma:
+' Diagramma di Sequenza relativo all'Amministratore che avvia l'Analisi dei Documenti.
+'
+' Componenti e flusso principale:
+' 1. L'Admin sceglie una cartella dalla GUI del Server (ControllerServer).
+' 2. Viene creato e avviato un ServizioAnalisi in background per non bloccare la UI.
+' 3. L'AnalizzatoreDocumenti esegue il parsing, filtra le stopwords e calcola la Term Frequency (TF).
+' 4. Il risultato (un file .dat) viene salvato ed e' pronto per essere utilizzato per creare le Sfide.
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 

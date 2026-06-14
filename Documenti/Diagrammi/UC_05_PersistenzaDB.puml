@@ -1,4 +1,11 @@
 @startuml UC_05_PersistenzaDB
+' Descrizione del diagramma:
+' Diagramma dei Casi d'Uso relativo alla Gestione dei Dati (Persistenza DB).
+'
+' Componenti principali:
+' - Mostra come il Database funge da "Attore Secondario" per salvare le informazioni critiche.
+' - Le operazioni che interagiscono col DB includono: Registrazione nuovi utenti, salvataggio
+'   dei risultati di una partita, caricamento delle classifiche e richieste di storico.
 left to right direction
 skinparam actorStyle awesome
 skinparam packageStyle rectangle

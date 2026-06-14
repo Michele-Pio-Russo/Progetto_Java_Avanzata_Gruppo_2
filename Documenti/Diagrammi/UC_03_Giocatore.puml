@@ -1,4 +1,11 @@
 @startuml UC_03_Giocatore
+' Descrizione del diagramma:
+' Diagramma dei Casi d'Uso focalizzato sul Giocatore (Client).
+'
+' Componenti principali:
+' - Giocatore (Attore): Interagisce con l'applicazione Client.
+' - Azioni: Effettua Login/Registrazione, partecipa alle Sfide (cercando di indovinare
+'   la parola cifrata per primo), e controlla il proprio Storico per vedere i propri risultati.
 left to right direction
 skinparam actorStyle awesome
 skinparam packageStyle rectangle

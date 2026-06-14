@@ -1,4 +1,12 @@
 @startuml SEQ_10_StopServer
+' Descrizione del diagramma:
+' Diagramma di Sequenza per l'arresto controllato del Server.
+'
+' Componenti e flusso principale:
+' 1. L'Admin clicca su 'Stop Server' nel ControllerServer.
+' 2. ReteServer viene chiuso (ServerSocket.close()), arrestando l'accettazione di nuovi client.
+' 3. Tutte le connessioni attive (GestoreClient) vengono interrotte con un messaggio DISCONNECT.
+' 4. I client gestiscono l'errore chiudendo a loro volta i socket e tornando alla schermata di Login.
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 

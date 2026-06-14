@@ -1,4 +1,12 @@
 @startuml UC_04_SfidaDettagliata
+' Descrizione del diagramma:
+' Diagramma dei Casi d'Uso che dettaglia il nucleo centrale del sistema: la Sfida.
+'
+' Componenti principali:
+' - Mostra le inclusioni ed estensioni della "Partecipazione alla Sfida".
+' - Include (<<include>>): Decodifica visiva dell'estratto, inserimento risposta entro il timer,
+'   comunicazione Client-Server, notifica di esito.
+' - Estende (<<extend>>): Disconnessioni improvvise, risposte errate, scadenze del timer (timeout).
 left to right direction
 skinparam actorStyle awesome
 skinparam packageStyle rectangle

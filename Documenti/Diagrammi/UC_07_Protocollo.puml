@@ -1,4 +1,11 @@
 @startuml UC_07_Protocollo
+' Descrizione del diagramma:
+' Diagramma che modella il comportamento del Protocollo di Rete e la gestione dei Messaggi.
+'
+' Componenti principali:
+' - Illustra come i payload Serializable (Richieste e Risposte) vengono scambiati tra Client e Server.
+' - Copre: Autenticazione (LOGIN/REGISTER), Sfida (CHALLENGE_START/ANSWER/RESULT), 
+'   Requeue (REQUEUE_REQUEST), e Storico (HISTORY_REQUEST/RESPONSE).
 left to right direction
 skinparam actorStyle awesome
 skinparam packageStyle rectangle

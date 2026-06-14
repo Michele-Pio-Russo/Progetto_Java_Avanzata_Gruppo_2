@@ -1,4 +1,12 @@
 @startuml SEQ_05_AvvioServer
+' Descrizione del diagramma:
+' Diagramma di Sequenza che mostra il processo di avvio e inizializzazione del Server.
+'
+' Componenti e flusso principale:
+' 1. L'Amministratore avvia il Server dalla GUI (ControllerServer).
+' 2. Vengono caricate le proprieta' e inizializzato il GestoreDatabase (creazione tabelle/admin se assenti).
+' 3. Viene avviato ReteServer in un Thread separato (ServerSocket.accept()), in ascolto di nuove connessioni.
+' 4. Viene inizializzato il CoordinatoreGioco.
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 

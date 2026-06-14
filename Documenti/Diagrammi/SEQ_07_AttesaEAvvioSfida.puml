@@ -1,4 +1,11 @@
 @startuml SEQ_07_AttesaEAvvioSfida
+' Descrizione del diagramma:
+' Diagramma di Sequenza focalizzato sulla fase di attesa (Waiting Room) e l'inizio di una sfida.
+'
+' Componenti e flusso principale:
+' 1. Il Giocatore effettua il Login e viene inserito nella coda di attesa del CoordinatoreGioco.
+' 2. Quando un secondo Giocatore si unisce, il CoordinatoreGioco rileva una coppia valida.
+' 3. Il Coordinatore estrae i dati dal file di analisi e invia il CHALLENGE_START contemporaneo.
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 

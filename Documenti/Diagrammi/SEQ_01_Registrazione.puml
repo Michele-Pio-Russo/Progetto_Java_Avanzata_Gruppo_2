@@ -1,4 +1,13 @@
 @startuml SEQ_01_Registrazione
+' Descrizione del diagramma:
+' Diagramma di Sequenza che descrive il flusso di Registrazione di un nuovo utente.
+'
+' Componenti e flusso principale:
+' 1. L'Utente inserisce credenziali valide nella GUI (ControllerAccesso).
+' 2. Il Client invia un REGISTER_REQUEST al Server.
+' 3. Il GestoreClient sul Server riceve la richiesta e interroga il GestoreDatabase.
+' 4. Se l'utente non esiste, viene inserito nel DB e viene restituito SUCCESS.
+' 5. Il Client notifica all'utente l'esito dell'operazione.
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 

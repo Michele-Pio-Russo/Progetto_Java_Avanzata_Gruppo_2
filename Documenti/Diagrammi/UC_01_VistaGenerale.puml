@@ -1,4 +1,12 @@
 @startuml UC_01_VistaGenerale
+' Descrizione del diagramma:
+' Diagramma dei Casi d'Uso (Use Case) - Vista Generale del Sistema.
+'
+' Componenti principali:
+' - Attori: Giocatore e Amministratore.
+' - Casi d'uso principali per il Giocatore: Registrazione, Login, Gioco, Visualizzazione Storico.
+' - Casi d'uso principali per l'Amministratore: Avvio/Arresto Server, Gestione Configurazione,
+'   Analisi Documenti, Visualizzazione Statistiche e Log.
 left to right direction
 skinparam actorStyle awesome
 skinparam packageStyle rectangle

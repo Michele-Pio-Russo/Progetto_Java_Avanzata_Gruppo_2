@@ -1,4 +1,11 @@
 @startuml SEQ_08_SfidaFlussiAlternativi
+' Descrizione del diagramma:
+' Diagramma di Sequenza che descrive i casi limite (Edge Cases) e le anomalie durante la partita.
+'
+' Componenti e flusso principale:
+' - Disconnessione: Se un giocatore si disconnette, l'altro vince per abbandono (forfait).
+' - Timeout: Se nessuno risponde entro i secondi limite, il risultato e' un pareggio (draw).
+' - Risposta Errata: Se un giocatore sbaglia, perde istantaneamente, consegnando la vittoria all'altro.
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 

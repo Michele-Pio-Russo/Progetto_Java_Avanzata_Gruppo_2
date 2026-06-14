@@ -1,70 +1,78 @@
 @startuml ER_SchemaDatabase
+' Descrizione del diagramma:
+' Diagramma Entità-Relazione (ER) del database.
+' Aggiornato per riflettere fedelmente la logica e la struttura concettuale
+' fornita, includendo tutte le nuove entità, i nuovi attributi e le 
+' relazioni (es. OPPONENT) con le cardinalità corrette secondo il pattern.
+'
+' Pattern applicati:
+' 1. Entità: USERS, CHALLENGES, RESULTS con i nuovi attributi strutturali.
+' 2. Relazioni e Cardinalità Esplicite (Min, Max): 
+'    - GETS: Un utente ottiene (0,N) risultati. Un risultato appartiene a (1,1) utente.
+'    - OPPONENT: Un utente fa da avversario in (0,N) risultati. Un risultato ha (0,1) avversario.
+'    - PRODUCE: Una sfida produce (0,N) risultati. Un risultato deriva da (1,1) sfida.
+
 skinparam linetype ortho
+skinparam classAttributeIconSize 0
 
-title ER — Schema Database SQLite (db/database.db)
+title ER — Schema Database (Logica e Struttura Aggiornata)
 
-entity "users" as USERS {
-  * user_id : INTEGER <<PK, AUTOINCREMENT>>
+entity "USERS" as Users {
+  * id : INTEGER <<PK>>
   --
-  * nomeUtente : TEXT <<UNIQUE, NOT NULL>>
-  * password_hash : TEXT <<NOT NULL>>
-  * ruolo : TEXT <<NOT NULL, DEFAULT 'player'>>
-  created_at : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
+  username : TEXT
+  password : TEXT
+  role : TEXT
+  registered_at : DATETIME
 }
 
-entity "challenges" as CHALLENGES {
-  * challenge_id : INTEGER <<PK, AUTOINCREMENT>>
+entity "CHALLENGES" as Challenges {
+  * id : INTEGER <<PK>>
   --
-  played_at : DATETIME <<DEFAULT CURRENT_TIMESTAMP>>
-  text_excerpt : TEXT
-  encrypted_word : TEXT
-  original_word : TEXT
-  caesar_shift : INTEGER
+  document_name : TEXT
+  extract_text : TEXT
+  secret_word : TEXT
+  cipher_shift : INTEGER
+  difficulty : INTEGER
+  timeout_seconds : INTEGER
+  max_shift : INTEGER
+  word_count : INTEGER
+  started_at : DATETIME
+  ended_at : DATETIME
 }
 
-entity "results" as RESULTS {
-  * result_id : INTEGER <<PK, AUTOINCREMENT>>
+entity "RESULTS" as Results {
+  * id : INTEGER <<PK>>
   --
-  * challenge_id : INTEGER <<FK -> challenges>>
-  * user_id : INTEGER <<FK -> users>>
-  * esito : TEXT <<NOT NULL>>\n('win' | 'loss' | 'draw')
-  response_time_ms : INTEGER
-  --
-  nota: -1 se l'utente non
-  ha risposto (timeout/sconfitta)
+  response : TEXT
+  response_ms : INTEGER
+  played_at : DATETIME
+  winner : TEXT
 }
 
-CHALLENGES ||--o{ RESULTS : "1 sfida -> 2 risultati\n(challenge_id)"
-USERS      ||--o{ RESULTS : "1 utente -> N risultati\n(user_id)"
+' === RELAZIONI CON CARDINALITÀ ===
 
-note bottom of USERS
-  seedAccounts() inserisce, se assenti:
-  admin / admin123 (ruolo admin)
-  giocatore1 / pass1 (ruolo player)
-  giocatore2 / pass2 (ruolo player)
-  Password hashate con SHA-256.
+' Relazione GETS
+Users " (0,N) " -- " (1,1) " Results : "GETS >"
+
+' Relazione OPPONENT (doppia relazione tra USERS e RESULTS)
+Users " (0,N) " -- " (0,1) " Results : "OPPONENT >"
+
+' Relazione PRODUCE
+Challenges " (0,N) " -- " (1,1) " Results : "PRODUCE >"
+
+' === NOTE (mantenute per logica implementativa) ===
+
+note bottom of Users
+  seedAccounts() inserisce i profili base.
+  Le password sono salvate come hash.
 end note
 
-note right of RESULTS
-  Query principali:
-  - getHistory(nomeUtente): join
-    results+challenges+users con
-    subquery per individuare
-    l'avversario, ORDER BY
-    played_at DESC
-  - getAllStats(): SUM(win),
-    COUNT(*), AVG(response_time_ms
-    WHERE >=0), GROUP BY user_id,
-    ORDER BY wins DESC
+note bottom of Results
+  La doppia relazione (GETS e OPPONENT)
+  permette concettualmente di individuare 
+  subito chi ha giocato e contro chi,
+  senza complesse subquery a livello logico.
 end note
 
-note left of CHALLENGES
-  Tutte le query usano
-  PreparedStatement.
-  saveChallengeWithResults()
-  inserisce challenge + 2 results
-  in un'unica transazione
-  (setAutoCommit(false) ->
-  commit()/rollback()).
-end note
 @enduml

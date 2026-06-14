@@ -1,4 +1,11 @@
 @startuml UC_02_Amministratore
+' Descrizione del diagramma:
+' Diagramma dei Casi d'Uso focalizzato sulle operazioni disponibili per l'Amministratore.
+'
+' Componenti principali:
+' - Amministratore (Attore): Interagisce unicamente con l'interfaccia Server.
+' - Azioni: Avvio/Stop, scelta del file di configurazione, avvio dell'analisi testo (TF-IDF),
+'   osservazione dei Log di rete ed esplorazione delle statistiche dei giocatori.
 left to right direction
 skinparam actorStyle awesome
 skinparam packageStyle rectangle

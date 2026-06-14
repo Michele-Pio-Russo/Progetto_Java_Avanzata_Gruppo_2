@@ -1,4 +1,13 @@
 @startuml SEQ_02_Login
+' Descrizione del diagramma:
+' Diagramma di Sequenza che illustra il processo di Login (Autenticazione).
+'
+' Componenti e flusso principale:
+' 1. L'Utente inserisce nome e password nel ControllerAccesso.
+' 2. Il Messaggio LOGIN_REQUEST viaggia attraverso il Socket al GestoreClient.
+' 3. Il Server verifica le credenziali con il GestoreDatabase (hash password).
+' 4. In caso di successo, il Client riceve LOGIN_RESPONSE positivo e carica
+'    il ControllerGioco, entrando nella fase di attesa (WAITING).
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 

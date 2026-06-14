@@ -1,4 +1,14 @@
 @startuml SEQ_04_SfidaCompleta
+' Descrizione del diagramma:
+' Diagramma di Sequenza completo che mostra il ciclo di vita di un'intera partita tra due giocatori.
+'
+' Componenti e flusso principale:
+' 1. Due giocatori sono in attesa (WAITING). Il CoordinatoreGioco li accoppia.
+' 2. Il Server genera il PayloadSfida e invia CHALLENGE_START.
+' 3. I Client mostrano il timer e l'estratto cifrato. I giocatori inviano le loro risposte (CHALLENGE_ANSWER).
+' 4. Il CoordinatoreGioco valuta chi ha risposto prima e correttamente.
+' 5. Il Server calcola i risultati, li salva nel DB tramite GestoreDatabase, e notifica
+'    l'esito a entrambi (CHALLENGE_RESULT).
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 

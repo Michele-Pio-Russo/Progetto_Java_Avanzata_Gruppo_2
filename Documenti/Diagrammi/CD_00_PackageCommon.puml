@@ -1,4 +1,15 @@
 @startuml CD_00_PackageCommon
+' Descrizione del diagramma:
+' Questo Diagramma delle Classi mostra la struttura del package 'common' (indovinaparola.common).
+' Definisce le classi condivise tra Client e Server, fondamentali per il protocollo di rete.
+'
+' Componenti principali:
+' - Messaggio: La classe base per tutti i messaggi scambiati. Contiene un enum 'Tipo' e un 'carico' (Object).
+' - Tipo (Enum): Definisce lo scopo del messaggio (LOGIN_REQUEST, CHALLENGE_START, ecc.).
+' - PayloadAutenticazione / RispostaAutenticazione: Classi che trasportano i dati di login e registrazione.
+' - PayloadSfida / RisultatoSfida: Classi che contengono i dati di una partita (parole cifrate, esito, ecc.).
+' - VoceStorico: DTO immutabile per trasferire i dati dello storico partite.
+' - CifrarioCesare: Utility class usata per cifrare e decifrare le parole della sfida.
 skinparam classAttributeIconSize 0
 left to right direction
 

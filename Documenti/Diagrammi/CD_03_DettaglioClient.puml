@@ -1,4 +1,15 @@
 @startuml CD_03_DettaglioClient
+' Descrizione del diagramma:
+' Questo Diagramma delle Classi descrive nel dettaglio il modulo Client e la sua architettura interna.
+'
+' Componenti principali:
+' - ApplicazioneClient: Punto di ingresso dell'interfaccia JavaFX.
+' - ConfigurazioneClient: Carica le impostazioni iniziali (IP, Porta).
+' - ControllerAccesso: Gestisce le viste di Login e Registrazione. 
+' - ControllerGioco: Gestisce l'interfaccia della partita, il timer, le parole cifrate e gli esiti.
+' - ControllerStorico: Visualizza in una tabella (TableView) le partite precedenti dell'utente.
+' - ConnessioneServer: Servizio che mantiene vivo il socket, inoltra i messaggi tramite invia() e 
+'   resta in ascolto di risposte dal server smistandole tramite callback (Consumer).
 skinparam classAttributeIconSize 0
 
 title CD_03 — Dettaglio Modulo Client (package reali da Doxygen)

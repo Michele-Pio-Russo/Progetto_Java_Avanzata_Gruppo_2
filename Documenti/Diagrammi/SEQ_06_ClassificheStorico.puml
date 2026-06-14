@@ -1,4 +1,12 @@
 @startuml SEQ_06_ClassificheStorico
+' Descrizione del diagramma:
+' Diagramma di Sequenza che gestisce il recupero delle Statistiche e dello Storico partite.
+'
+' Componenti e flusso principale:
+' - Lato Server (Admin): Il ControllerServer richiede le statistiche globali al GestoreDatabase e le mostra.
+' - Lato Client (Giocatore): L'Utente richiede lo Storico tramite ControllerGioco. 
+'   Viene inviato HISTORY_REQUEST. Il Server recupera dal DB le partite e risponde con HISTORY_RESPONSE,
+'   consentendo al ControllerStorico di popolare la sua tabella.
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 

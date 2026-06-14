@@ -1,4 +1,12 @@
 @startuml SEQ_09_NuovaPartita
+' Descrizione del diagramma:
+' Diagramma di Sequenza che mostra come i giocatori iniziano una nuova partita dopo la fine di un round.
+'
+' Componenti e flusso principale:
+' 1. Il Giocatore preme "Nuova Partita" al termine di un match.
+' 2. Il Client invia REQUEUE_REQUEST al Server.
+' 3. Il GestoreClient inoltra la richiesta al CoordinatoreGioco, che reinserisce il giocatore in coda.
+' 4. Il Client cambia stato e attende un nuovo CHALLENGE_START.
 skinparam actorStyle awesome
 skinparam sequenceMessageAlign center
 
